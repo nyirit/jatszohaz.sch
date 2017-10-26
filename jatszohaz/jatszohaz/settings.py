@@ -90,8 +90,13 @@ WSGI_APPLICATION = 'jatszohaz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(BASE_DIR, 'db.sqlite3'),
+	'ENGINE': 'django.db.backends.' +
+            get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
+        'NAME':  get_env_variable('DJANGO_DB_NAME'),
+        'USER':  get_env_variable('DJANGO_DB_USER'),
+        'PASSWORD':  get_env_variable('DJANGO_DB_PASSWORD'),
+        'HOST': get_env_variable('DJANGO_DB_HOST', ''),
+        'PORT': get_env_variable('DJANGO_DB_PORT', ''),
     }
 }
 
@@ -100,18 +105,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
 ]
 
 
