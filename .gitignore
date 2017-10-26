@@ -1,0 +1,31 @@
+# Python bytecode:
+*.py[co]
+
+# Packaging files:
+*.egg*
+
+# Editor temp files:
+*.swp
+*~
+
+# Sphinx docs:
+build
+
+# SQLite3 database files:
+*db.sqlite3
+
+# Logs:
+*.log
+
+.ropeproject
+
+#Backup files
+*.bak
+
+# gettext
+*.mo
+
+# static files
+static_collected
+
+**/__pycache__/
