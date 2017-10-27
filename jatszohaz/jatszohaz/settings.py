@@ -85,21 +85,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'jatszohaz.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-	'ENGINE': 'django.db.backends.' +
-            get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
-        'NAME':  get_env_variable('DJANGO_DB_NAME'),
-        'USER':  get_env_variable('DJANGO_DB_USER'),
-        'PASSWORD':  get_env_variable('DJANGO_DB_PASSWORD'),
-        'HOST': get_env_variable('DJANGO_DB_HOST', ''),
-        'PORT': get_env_variable('DJANGO_DB_PORT', ''),
-    }
-}
-
 # Travis setup
 if get_env_variable('TRAVIS') is not None:
     DATABASES = {
@@ -110,6 +95,20 @@ if get_env_variable('TRAVIS') is not None:
             'PASSWORD': '',
             'HOST':     'localhost',
             'PORT':     '',
+        }
+    }
+else:
+    # Database
+    # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.' +
+                get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
+            'NAME':  get_env_variable('DJANGO_DB_NAME'),
+            'USER':  get_env_variable('DJANGO_DB_USER'),
+            'PASSWORD':  get_env_variable('DJANGO_DB_PASSWORD'),
+            'HOST': get_env_variable('DJANGO_DB_HOST', ''),
+            'PORT': get_env_variable('DJANGO_DB_PORT', ''),
         }
     }
 
