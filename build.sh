@@ -8,10 +8,9 @@
 # If you have used Pony Forum before, make sure that there is no
 # forum/migrations/ folder, since that will break this script.
 set -e # stops execution on error
-rm -rf forum/migrations
-python jatszohaz/manage.py schemamigration forum --initial
-python jatszohaz/manage.py syncdb --noinput
-python jatszohaz/manage.py migrate jatszohaz
+rm -rf jatszohaz/migrations
+python jatszohaz/manage.py makemigrations
+python jatszohaz/manage.py migrate
 #python _postinstall/mkadmin.py
 #python _postinstall/definesite.py
 #python _postinstall/mkplaceholders.py
