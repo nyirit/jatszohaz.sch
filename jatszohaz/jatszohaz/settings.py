@@ -90,7 +90,7 @@ if get_env_variable('TRAVIS') is not None:
     DATABASES = {
         'default': {
             'ENGINE':   'django.db.backends.postgresql_psycopg2',
-            'NAME':     'travisci',
+            'NAME':     'travisdb',
             'USER':     'postgres',
             'PASSWORD': '',
             'HOST':     'localhost',
