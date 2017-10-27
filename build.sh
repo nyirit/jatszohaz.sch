@@ -9,10 +9,10 @@
 # forum/migrations/ folder, since that will break this script.
 set -e # stops execution on error
 rm -rf forum/migrations
-python manage.py schemamigration forum --initial
-python manage.py syncdb --noinput
-python manage.py migrate jatszohaz
-python _postinstall/mkadmin.py
-python _postinstall/definesite.py
-python _postinstall/mkplaceholders.py
-python manage.py test
+python jatszohaz/manage.py schemamigration forum --initial
+python jatszohaz/manage.py syncdb --noinput
+python jatszohaz/manage.py migrate jatszohaz
+#python _postinstall/mkadmin.py
+#python _postinstall/definesite.py
+#python _postinstall/mkplaceholders.py
+python jatszohaz/manage.py test
