@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 from os import environ
 from os.path import dirname, abspath, join
 
+# Normally you should not import ANYTHING from Django directly
+# into your settings, but ImproperlyConfigured is an exception.
+from django.core.exceptions import ImproperlyConfigured
+
 def get_env_variable(var_name, default=None):                                        
     """ Get the environment variable or return exception/default """                 
     try:                                                                             
