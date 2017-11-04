@@ -29,3 +29,5 @@ build
 static_collected
 
 **/__pycache__/
+
+.idea
