@@ -8,10 +8,16 @@ from model_utils.models import TimeStampedModel
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.user
+
 
 class GameGroup(TimeStampedModel):
     name = models.TextField(verbose_name=_("Name"), blank=False)
     description = models.TextField(verbose_name=_("Description"), blank=False)
+
+    def __str__(self):
+        return self.name
 
 
 class GamePiece(TimeStampedModel):
@@ -28,12 +34,18 @@ class GamePiece(TimeStampedModel):
     # Higher number will be rented first.
     priority = models.PositiveSmallIntegerField(verbose_name="Priority", default=0)
 
+    def __str__(self):
+        return self.game_group + self.notes
+
 
 class GamePack(TimeStampedModel):
     name = models.TextField(verbose_name=_("Name"))
     games = models.ManyToManyField(GameGroup, related_name="packs")
     creator = models.ForeignKey(Profile, on_delete=models.PROTECT)
     active = models.BooleanField(verbose_name=_("Active"), default=False)
+
+    def __str__(self):
+        return self.name
 
 
 class InventoryItem(TimeStampedModel):
