@@ -15,6 +15,7 @@ class Profile(models.Model):
 class GameGroup(TimeStampedModel):
     name = models.TextField(verbose_name=_("Name"), blank=False)
     description = models.TextField(verbose_name=_("Description"), blank=False)
+    image = models.ImageField(verbose_name=("Image"), default='/default.png')  # this doesn't work
 
     def __str__(self):
         return self.name

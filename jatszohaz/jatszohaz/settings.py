@@ -157,6 +157,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+#https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
+MEDIA_ROOT = normpath(join(SITE_ROOT, '../site-media/'))
+
+MEDIA_URL = '/media/'
+
 ########## END STATIC FILE CONFIGURATION
 
 
