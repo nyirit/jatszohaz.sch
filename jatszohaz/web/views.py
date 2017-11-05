@@ -7,7 +7,8 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
-        ctx['username'] = self.request.user.full_name2()
+        if not self.request.user.is_anonymous:
+            ctx['username'] = self.request.user.full_name2()
         return ctx
 
 class GamesView(ListView):
