@@ -1,15 +1,41 @@
-from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.PROTECT)
+class JhUser(AbstractUser):
+
+    def get_entitlements(self):
+        """
+        Gets all auth.sch group memberships.
+        Map keys:
+         - title (list): all titles in VIR
+         - status (str): öregtag tag or körvezető
+         - start (date): join date
+         - end (date): leave date
+        :return: data map of the specified group.
+        """
+        for i in self.social_auth.first().extra_data['eduPersonEntitlement']:
+            if i['name'] == settings.EDU_PERSON_ENTITLEMENT_NAMES:
+                return i
+
+    def full_name(self):
+        """
+        :return: First name + lLst name
+        """
+        return "%s %s" % (self.first_name, self.last_name)
+
+    def full_name2(self):
+        """
+        :return: Last name + First name
+        """
+        return "%s %s" % (self.last_name, self.first_name)
 
     def __str__(self):
-        return self.user
+        return "%s - %s" % (self.full_name2(), self.email)
 
 
 class GameGroup(TimeStampedModel):
@@ -23,7 +49,7 @@ class GameGroup(TimeStampedModel):
 
 class GamePiece(TimeStampedModel):
     owner = models.OneToOneField(
-        Profile,
+        JhUser,
         on_delete=models.PROTECT,  # do not delete users, who owns a game
         verbose_name=_("Owner"),
         null=True,
@@ -42,7 +68,7 @@ class GamePiece(TimeStampedModel):
 class GamePack(TimeStampedModel):
     name = models.TextField(verbose_name=_("Name"))
     games = models.ManyToManyField(GameGroup, related_name="packs")
-    creator = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    creator = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     active = models.BooleanField(verbose_name=_("Active"), default=False)
 
     def __str__(self):
@@ -50,7 +76,7 @@ class GamePack(TimeStampedModel):
 
 
 class InventoryItem(TimeStampedModel):
-    user = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     game = models.ForeignKey(GamePiece, on_delete=models.CASCADE)
     playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False)
     missing_items = models.TextField(verbose_name=_("Missing items"))
@@ -72,7 +98,7 @@ class Rent(TimeStampedModel):
         (STATUS_CANCELLED, _("Cancelled"))
     )
 
-    renter = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    renter = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     games = models.ManyToManyField(GamePiece, verbose_name=_("Games"), related_name=_("rents"))
     date_from = models.DateTimeField(verbose_name=_("From"), blank=False, null=False)
     date_to = models.DateTimeField(verbose_name=_("To"), blank=False, null=False)
@@ -81,12 +107,12 @@ class Rent(TimeStampedModel):
 
 
 class RentActions(TimeStampedModel):
-    user = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     new_status = models.IntegerField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, null=False)
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT)
 
 
 class Comment(TimeStampedModel):
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT)
-    user = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     message = models.TextField(verbose_name=_("Message"))

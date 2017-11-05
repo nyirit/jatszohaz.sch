@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'authsch',
     'web',
 ]
 
@@ -94,6 +96,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'web.context_processors.default_context_processor',
             ],
         },
     },
@@ -124,6 +127,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
 ]
 
+AUTH_USER_MODEL = 'web.JhUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -165,3 +169,17 @@ MEDIA_URL = '/media/'
 ########## END STATIC FILE CONFIGURATION
 
 
+########## AUTH.SCH CONFIGURATION
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+AUTHENTICATION_BACKENDS = [
+   'authsch.authentication.AuthSCHOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+]
+SOCIAL_AUTH_AUTHSCH_KEY = get_env_variable('AUTHSCH_KEY')
+SOCIAL_AUTH_AUTHSCH_SECRET = get_env_variable('AUTHSCH_SECRET')
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_BACKEND = 'authsch'
+LOGIN_URL = "login/%s/" % SOCIAL_AUTH_BACKEND
+########## END AUTH.SCH CONFIGURATION
+
+EDU_PERSON_ENTITLEMENT_NAMES = get_env_variable('DJANGO_ENTITLEMENT_NAME')

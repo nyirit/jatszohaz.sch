@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from web import views
@@ -15,5 +15,7 @@ urlpatterns = [
 
     # Games and renting related pages
     url(r'^games/$', views.GamesView.as_view(), name="games"),
+
+    url(r'', include('social_django.urls', namespace='social')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,16 +1,21 @@
-from django.views.generic import TemplateView, ListView, UpdateView
-from web.models import GameGroup, Profile
+from django.views.generic import TemplateView, ListView, UpdateView, RedirectView
+from web.models import GameGroup, JhUser
 
 
 class HomeView(TemplateView):
     template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data()
+        ctx['username'] = self.request.user.full_name2()
+        return ctx
 
 class GamesView(ListView):
     model = GameGroup
     template_name = "games.html"
 
 class MyProfileView(UpdateView):
-    model = Profile
+    model = JhUser
     template_name = "profile.html"
     fields = ["user", ]
 
@@ -18,5 +23,5 @@ class MyProfileView(UpdateView):
         return self.request.user;
 
 class ProfileView(UpdateView):
-    model = Profile
+    model = JhUser
     template_name = "profile.html"

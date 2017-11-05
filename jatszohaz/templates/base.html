@@ -41,6 +41,9 @@
             <li><a href="/">Home</a></li>
             <li><a href="/profile/">Profile</a></li>
             <li><a href="/games/">Games</a></li>
+            {% if not user.is_authenticated %}
+              <li><a href="{% url "social:begin" SOCIAL_AUTH_BACKEND %}">Login</a></li>
+            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
