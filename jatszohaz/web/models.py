@@ -4,7 +4,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
-
+from os.path import normpath, join
+from easy_thumbnails.files import get_thumbnailer
 
 class JhUser(AbstractUser):
 
@@ -41,10 +42,16 @@ class JhUser(AbstractUser):
 class GameGroup(TimeStampedModel):
     name = models.TextField(verbose_name=_("Name"), blank=False)
     description = models.TextField(verbose_name=_("Description"), blank=False)
-    image = models.ImageField(verbose_name=("Image"), default='/default.png')  # this doesn't work
+    short_description = models.TextField(verbose_name=_("Short Description"), blank=False)
+    image = models.ImageField(verbose_name="Image", default='../../site-media/neptun.png') # default image doesn't work
 
     def __str__(self):
         return self.name
+
+    def picture_link(self):
+        # options = {'size': (200, 200), 'crop': True}
+        # thumb_url = get_thumbnailer(picture).get_thumbnail(options).url
+        return normpath(join('../../', self.image.url))
 
 
 class GamePiece(TimeStampedModel):

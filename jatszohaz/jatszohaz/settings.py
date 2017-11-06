@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'social_django',
     'authsch',
     'web',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
