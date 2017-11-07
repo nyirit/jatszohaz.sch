@@ -6,10 +6,9 @@
     <h2>Games</h2>
     <ul>
         {% for game in object_list %}
-            <li>{{ game.name}}</li>
-            <li><img src={{ game.picture_link }} /></li>
-{#            <li><img src="{% thumbnail game.picture_link 50x50 crop %}" alt="" /></li>#}
-
+            <li>{{ game.name }}
+                <br>
+            <img src="{% thumbnail game.image 100x100 crop %}" alt="" /></li>
         {% endfor %}
     </ul>
 {% endblock %}

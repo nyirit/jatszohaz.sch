@@ -4,11 +4,9 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
-from os.path import normpath, join
-from easy_thumbnails.files import get_thumbnailer
+
 
 class JhUser(AbstractUser):
-
     def get_entitlements(self):
         """
         Gets all auth.sch group memberships.
@@ -43,15 +41,10 @@ class GameGroup(TimeStampedModel):
     name = models.TextField(verbose_name=_("Name"), blank=False)
     description = models.TextField(verbose_name=_("Description"), blank=False)
     short_description = models.TextField(verbose_name=_("Short Description"), blank=False)
-    image = models.ImageField(verbose_name="Image", default='../../site-media/neptun.png') # default image doesn't work
+    image = models.ImageField(verbose_name="Image")
 
     def __str__(self):
-        return self.name
-
-    def picture_link(self):
-        # options = {'size': (200, 200), 'crop': True}
-        # thumb_url = get_thumbnailer(picture).get_thumbnail(options).url
-        return normpath(join('../../', self.image.url))
+        return '%s' % (self.name)
 
 
 class GamePiece(TimeStampedModel):
@@ -69,7 +62,7 @@ class GamePiece(TimeStampedModel):
     priority = models.PositiveSmallIntegerField(verbose_name="Priority", default=0)
 
     def __str__(self):
-        return self.game_group + self.notes
+        return '%s - %s' % (self.game_group, self.notes)
 
 
 class GamePack(TimeStampedModel):
@@ -79,7 +72,7 @@ class GamePack(TimeStampedModel):
     active = models.BooleanField(verbose_name=_("Active"), default=False)
 
     def __str__(self):
-        return self.name
+        return '%s' % (self.name)
 
 
 class InventoryItem(TimeStampedModel):
