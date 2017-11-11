@@ -29,3 +29,6 @@ build
 static_collected
 
 **/__pycache__/
+
+# PyCharm files:
+.idea/*
