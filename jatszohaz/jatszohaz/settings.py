@@ -12,17 +12,23 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 from os import environ
 from os.path import dirname, abspath, join
+from django.core.exceptions import ImproperlyConfigured
 
-def get_env_variable(var_name, default=None):                                        
-    """ Get the environment variable or return exception/default """                 
-    try:                                                                             
-        return environ[var_name]                                                     
-    except KeyError:                                                                 
-        if default is None:                                                          
-            error_msg = "Set the %s environment variable" % var_name                 
-            raise ImproperlyConfigured(error_msg)                                    
-        else:                                                                        
+# Assert added to bypass Pyflakes unused import warning, to be removed after actual usage of import
+assert join
+
+
+def get_env_variable(var_name, default=None):
+    """ Get the environment variable or return exception/default """
+    try:
+        return environ[var_name]
+    except KeyError:
+        if default is None:
+            error_msg = "Set the %s environment variable" % var_name
+            raise ImproperlyConfigured(error_msg)
+        else:
             return default
+
 
 # Build paths inside the project like this: join(BASE_DIR, ...)
 BASE_DIR = dirname(dirname(abspath(__file__)))
@@ -37,10 +43,10 @@ SECRET_KEY = '^e&6xsn6awyd&xz6&gq47$e7lrum18hrlxjicb_!95ky*r*%o5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-########## HOST CONFIGURATION                                                     
+# HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = get_env_variable('DJANGO_ALLOWED_HOSTS', "*").split(',')          
-########## END HOST CONFIGURATION
+ALLOWED_HOSTS = get_env_variable('DJANGO_ALLOWED_HOSTS', "*").split(',')
+# END HOST CONFIGURATION
 
 
 # Application definition
@@ -103,7 +109,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.' +
-                get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
+                      get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
             'NAME':  get_env_variable('DJANGO_DB_NAME'),
             'USER':  get_env_variable('DJANGO_DB_USER'),
             'PASSWORD':  get_env_variable('DJANGO_DB_PASSWORD'),
