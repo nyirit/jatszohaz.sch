@@ -11,11 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 from os import environ
-from os.path import dirname, abspath, join
+from os.path import dirname, abspath
 from django.core.exceptions import ImproperlyConfigured
-
-# Assert added to bypass Pyflakes unused import warning, to be removed after actual usage of import
-assert join
 
 
 def get_env_variable(var_name, default=None):
@@ -41,7 +38,7 @@ BASE_DIR = dirname(dirname(abspath(__file__)))
 SECRET_KEY = '^e&6xsn6awyd&xz6&gq47$e7lrum18hrlxjicb_!95ky*r*%o5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
@@ -90,33 +87,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'jatszohaz.wsgi.application'
 
-
-# Travis setup
-if get_env_variable('TRAVIS') is not None:
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.db.backends.postgresql_psycopg2',
-            'NAME':     'travisdb',
-            'USER':     'postgres',
-            'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
-        }
+# Database
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.' + get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
+        'NAME':  get_env_variable('DJANGO_DB_NAME'),
+        'USER':  get_env_variable('DJANGO_DB_USER'),
+        'PASSWORD':  get_env_variable('DJANGO_DB_PASSWORD'),
+        'HOST': get_env_variable('DJANGO_DB_HOST', ''),
+        'PORT': get_env_variable('DJANGO_DB_PORT', ''),
     }
-else:
-    # Database
-    # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.' +
-                      get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
-            'NAME':  get_env_variable('DJANGO_DB_NAME'),
-            'USER':  get_env_variable('DJANGO_DB_USER'),
-            'PASSWORD':  get_env_variable('DJANGO_DB_PASSWORD'),
-            'HOST': get_env_variable('DJANGO_DB_HOST', ''),
-            'PORT': get_env_variable('DJANGO_DB_PORT', ''),
-        }
-    }
+}
 
 
 # Password validation

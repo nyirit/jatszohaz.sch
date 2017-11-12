@@ -8,9 +8,15 @@ services: postgresql
 env:
   global:
       - DJANGO="1.11.6"
-      - DJANGO_SETTINGS_MODULE="jatszohaz.settings"
+      - DJANGO_SETTINGS_MODULE="jatszohaz.settings.test"
       - PYTHONPATH="/home/travis/build/ndarville/pony-forum"
       - PIP_USE_MIRRORS=true
+      - DJANGO_DB_TYPE='postgresql_psycopg2'
+      - DJANGO_DB_NAME='travisdb'
+      - DJANGO_DB_USER='postgres'
+      - DJANGO_DB_PASSWORD=''
+      - DJANGO_DB_HOST='localhost'
+      - DJANGO_DB_PORT=''
 # Last two for OS X, courtesy of stackoverflow.com/a/22697917/419005
 # - CFLAGS=-Qunused-arguments
 # - CPPFLAGS=-Qunused-arguments
