@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import *
+from .models import (
+    JhUser, GameGroup, GamePiece, GamePack, InventoryItem, Rent, RentActions, Comment)
+
 
 class JhUserAdmin(admin.ModelAdmin):
     exclude = ('password', )
     readonly_fields = ('username', 'first_name', 'last_name', 'date_joined', 'last_login', )
+
 
 admin.site.register(JhUser, JhUserAdmin)
 admin.site.register(GameGroup)

@@ -11,16 +11,19 @@ class HomeView(TemplateView):
             ctx['username'] = self.request.user.full_name2()
         return ctx
 
+
 class GamesView(ListView):
     model = GameGroup
     template_name = "games.html"
+
 
 class MyProfileView(DetailView):
     model = JhUser
     template_name = "profile.html"
 
     def get_object(self, queryset=None):
-        return self.request.user;
+        return self.request.user
+
 
 class ProfileView(DetailView):
     model = JhUser

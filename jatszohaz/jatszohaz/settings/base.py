@@ -11,25 +11,27 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 from os import environ
+
 from os.path import dirname, abspath, join, basename, normpath
 
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
 from django.core.exceptions import ImproperlyConfigured
 
-def get_env_variable(var_name, default=None):                                        
-    """ Get the environment variable or return exception/default """                 
-    try:                                                                             
-        return environ[var_name]                                                     
-    except KeyError:                                                                 
-        if default is None:                                                          
-            error_msg = "Set the %s environment variable" % var_name                 
-            raise ImproperlyConfigured(error_msg)                                    
-        else:                                                                        
+
+def get_env_variable(var_name, default=None):
+    """ Get the environment variable or return exception/default """
+    try:
+        return environ[var_name]
+    except KeyError:
+        if default is None:
+            error_msg = "Set the %s environment variable" % var_name
+            raise ImproperlyConfigured(error_msg)
+        else:
             return default
 
 
-########## PATH CONFIGURATION
+# ####### PATH CONFIGURATION
 # Absolute filesystem path to the Django project directory:
 BASE_DIR = dirname(dirname(abspath(__file__)))
 
@@ -39,7 +41,7 @@ SITE_ROOT = dirname(BASE_DIR)
 # Site name:
 SITE_NAME = basename(BASE_DIR)
 
-########## END PATH CONFIGURATION
+# ####### END PATH CONFIGURATION
 
 
 # Quick-start development settings - unsuitable for production
@@ -49,12 +51,12 @@ SITE_NAME = basename(BASE_DIR)
 SECRET_KEY = '^e&6xsn6awyd&xz6&gq47$e7lrum18hrlxjicb_!95ky*r*%o5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-########## HOST CONFIGURATION                                                     
+# HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = get_env_variable('DJANGO_ALLOWED_HOSTS', "*").split(',')          
-########## END HOST CONFIGURATION
+ALLOWED_HOSTS = get_env_variable('DJANGO_ALLOWED_HOSTS', "*").split(',')
+# END HOST CONFIGURATION
 
 
 # Application definition
@@ -105,14 +107,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'jatszohaz.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
-	'ENGINE': 'django.db.backends.' +
-            get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
+        'ENGINE': 'django.db.backends.' + get_env_variable('DJANG_DB_TYPE', 'postgresql_psycopg2'),
         'NAME':  get_env_variable('DJANGO_DB_NAME'),
         'USER':  get_env_variable('DJANGO_DB_USER'),
         'PASSWORD':  get_env_variable('DJANGO_DB_PASSWORD'),
@@ -144,7 +143,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-########## STATIC FILE CONFIGURATION
+# ######### STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = normpath(join(SITE_ROOT, 'static_collected'))
 
@@ -162,15 +161,15 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-#https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
+# See: https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
 MEDIA_ROOT = normpath(join(SITE_ROOT, '../site-media/'))
 
 MEDIA_URL = '/media/'
 
-########## END STATIC FILE CONFIGURATION
+# ######### END STATIC FILE CONFIGURATION
 
 
-########## AUTH.SCH CONFIGURATION
+# ######### AUTH.SCH CONFIGURATION
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 AUTHENTICATION_BACKENDS = [
    'authsch.authentication.AuthSCHOAuth2',
@@ -181,6 +180,6 @@ SOCIAL_AUTH_AUTHSCH_SECRET = get_env_variable('AUTHSCH_SECRET')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_BACKEND = 'authsch'
 LOGIN_URL = "login/%s/" % SOCIAL_AUTH_BACKEND
-########## END AUTH.SCH CONFIGURATION
+# ######### END AUTH.SCH CONFIGURATION
 
 EDU_PERSON_ENTITLEMENT_NAMES = get_env_variable('DJANGO_ENTITLEMENT_NAME')
