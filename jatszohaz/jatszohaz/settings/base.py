@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 from os import environ
-from os.path import dirname, abspath
+
+from os.path import dirname, abspath, join, basename, normpath
+
+# Normally you should not import ANYTHING from Django directly
+# into your settings, but ImproperlyConfigured is an exception.
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -27,8 +31,17 @@ def get_env_variable(var_name, default=None):
             return default
 
 
-# Build paths inside the project like this: join(BASE_DIR, ...)
+# ####### PATH CONFIGURATION
+# Absolute filesystem path to the Django project directory:
 BASE_DIR = dirname(dirname(abspath(__file__)))
+
+# Absolute filesystem path to the top-level project folder:
+SITE_ROOT = dirname(BASE_DIR)
+
+# Site name:
+SITE_NAME = basename(BASE_DIR)
+
+# ####### END PATH CONFIGURATION
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,6 +68,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'authsch',
+    'web',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +89,9 @@ ROOT_URLCONF = 'jatszohaz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            normpath(join(BASE_DIR, 'templates')),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +99,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'web.context_processors.default_context_processor',
             ],
         },
     },
@@ -107,6 +127,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
 ]
 
+AUTH_USER_MODEL = 'web.JhUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -122,7 +143,43 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+# ######### STATIC FILE CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
+STATIC_ROOT = normpath(join(SITE_ROOT, 'static_collected'))
 
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = (
+    normpath(join(SITE_ROOT, 'static')),
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+# See: https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
+MEDIA_ROOT = normpath(join(SITE_ROOT, '../site-media/'))
+
+MEDIA_URL = '/media/'
+
+# ######### END STATIC FILE CONFIGURATION
+
+
+# ######### AUTH.SCH CONFIGURATION
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+AUTHENTICATION_BACKENDS = [
+   'authsch.authentication.AuthSCHOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+]
+SOCIAL_AUTH_AUTHSCH_KEY = get_env_variable('AUTHSCH_KEY')
+SOCIAL_AUTH_AUTHSCH_SECRET = get_env_variable('AUTHSCH_SECRET')
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_BACKEND = 'authsch'
+LOGIN_URL = "login/%s/" % SOCIAL_AUTH_BACKEND
+# ######### END AUTH.SCH CONFIGURATION
+
+EDU_PERSON_ENTITLEMENT_NAMES = get_env_variable('DJANGO_ENTITLEMENT_NAME')
