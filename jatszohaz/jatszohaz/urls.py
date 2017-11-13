@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^$', views.HomeView.as_view(), name="home"),
+    url(r'^calendar/$', views.CalendarView.as_view(), name="calendar"),
 
     # User management related pages
     url(r'^profile/$', views.MyProfileView.as_view(), name="my-profile"),

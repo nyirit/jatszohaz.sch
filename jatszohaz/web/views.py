@@ -12,6 +12,10 @@ class HomeView(TemplateView):
         return ctx
 
 
+class CalendarView(TemplateView):
+    template_name = "calendar.html"
+
+
 class GamesView(ListView):
     model = GameGroup
     template_name = "games.html"

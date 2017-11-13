@@ -41,6 +41,7 @@
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'my-profile' %}">Profile</a></li>
             <li><a href="{% url 'games' %}">Games</a></li>
+            <li><a href="{% url 'calendar' %}">Calendar</a></li>
             {% if not user.is_authenticated %}
               <li><a href="{% url "social:begin" SOCIAL_AUTH_BACKEND %}">Login</a></li>
             {% else %}
