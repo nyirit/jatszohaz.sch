@@ -86,6 +86,7 @@ class Rent(TimeStampedModel):
     STATUS_PENDING = "pending"
     STATUS_APPROVED = "approved"
     STATUS_GAVE_OUT = "gaveout"
+    STATUS_IN_MY_ROOM = "inmyroom"
     STATUS_BACK = "back"
     STATUS_DECLINED = "declined"
     STATUS_CANCELLED = "cancelled"
@@ -93,6 +94,7 @@ class Rent(TimeStampedModel):
         (STATUS_PENDING, _("Pending")),
         (STATUS_APPROVED, _("Approved")),
         (STATUS_GAVE_OUT, _("Gave out")),
+        (STATUS_IN_MY_ROOM, _("In my room")),
         (STATUS_BACK, _("Brought back")),
         (STATUS_DECLINED, _("Declined")),
         (STATUS_CANCELLED, _("Cancelled"))
@@ -102,13 +104,19 @@ class Rent(TimeStampedModel):
     games = models.ManyToManyField(GamePiece, verbose_name=_("Games"), related_name=_("rents"))
     date_from = models.DateTimeField(verbose_name=_("From"), blank=False, null=False)
     date_to = models.DateTimeField(verbose_name=_("To"), blank=False, null=False)
-    status = models.IntegerField(verbose_name=_("Status"), choices=STATUS_CHOICES, default=STATUS_PENDING)
+    status = models.TextField(verbose_name=_("Status"), choices=STATUS_CHOICES, default=STATUS_PENDING)
     bail = models.TextField(verbose_name=_("Bail"))
+
+    class Meta:
+        permissions = (
+            ('manage_rents', _('Manage rents')),
+            ('view_stat', _('View rent statistics')),
+        )
 
 
 class RentActions(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    new_status = models.IntegerField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, null=False)
+    new_status = models.TextField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, null=False)
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT)
 
 
