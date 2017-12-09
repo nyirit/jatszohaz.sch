@@ -24,7 +24,6 @@
   <![endif]-->
 </head>
 <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -49,6 +48,9 @@
               <li><a href="{% url "logout" %}">Logout</a></li>
             {% else %}
               <li><a href="{% url "social:begin" SOCIAL_AUTH_BACKEND %}">Login</a></li>
+              {% if DEBUG %}
+                <li><a href="{% url 'login2' %}">Login2</a></li>
+              {% endif %}
             {% endif %}
           </ul>
         </div><!--/.nav-collapse -->

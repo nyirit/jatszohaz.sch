@@ -176,8 +176,8 @@ MEDIA_URL = '/media/'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 AUTHENTICATION_BACKENDS = [
    'authsch.authentication.AuthSCHOAuth2',
-   'django.contrib.auth.backends.ModelBackend',
 ]
+
 SOCIAL_AUTH_AUTHSCH_KEY = get_env_variable('AUTHSCH_KEY', '')
 SOCIAL_AUTH_AUTHSCH_SECRET = get_env_variable('AUTHSCH_SECRET', '')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'

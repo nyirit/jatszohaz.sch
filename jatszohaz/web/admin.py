@@ -1,10 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import (
     JhUser, GameGroup, GamePiece, GamePack, InventoryItem, Rent, RentActions, Comment)
 
 
-class JhUserAdmin(admin.ModelAdmin):
-    exclude = ('password', )
+class JhUserAdmin(UserAdmin):
     readonly_fields = ('username', 'first_name', 'last_name', 'date_joined', 'last_login', )
 
 

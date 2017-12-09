@@ -35,9 +35,13 @@ class JhUser(AbstractUser):
          - end (date): leave date
         :return: data map of the specified group.
         """
-        for i in self.social_auth.first().extra_data['eduPersonEntitlement']:
-            if i['id'] == settings.EDU_PERSON_ENTITLEMENT_ID:
-                return i
+        if self.has_social_auth():
+            for i in self.social_auth.first().extra_data['eduPersonEntitlement']:
+                if i['id'] == settings.EDU_PERSON_ENTITLEMENT_ID:
+                    return i
+
+    def has_social_auth(self):
+        return self.social_auth.count() > 0
 
     @receiver(user_logged_in)
     def user_logged_in(sender, user, request, **kwargs):
