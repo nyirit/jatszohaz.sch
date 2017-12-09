@@ -9,12 +9,13 @@ class AuthSCHOAuth2(BaseOAuth2):
     ACCESS_TOKEN_URL = 'https://auth.sch.bme.hu/oauth2/token'
     ACCESS_TOKEN_METHOD = 'POST'
     REFRESH_TOKEN_URL = 'https://auth.sch.bme.hu/oauth2/token'
-    DEFAULT_SCOPE = ['basic', 'mail', 'givenName', 'sn', 'eduPersonEntitlement']
+    DEFAULT_SCOPE = ['basic', 'mail', 'givenName', 'sn', 'eduPersonEntitlement', 'mobile']
     EXTRA_DATA = [
         ('internal_id', 'id'),
         ('expires_in', 'expires'),
         ('refresh_token', 'refresh_token'),
-        ('eduPersonEntitlement', 'eduPersonEntitlement')
+        ('eduPersonEntitlement', 'eduPersonEntitlement'),
+        ('mobile', 'mobile')
     ]
 
     def get_user_details(self, response):
@@ -23,7 +24,8 @@ class AuthSCHOAuth2(BaseOAuth2):
             'username': response.get('internal_id'),
             'email': response.get('mail'),
             'first_name': response.get('givenName'),
-            'last_name': response.get('sn')
+            'last_name': response.get('sn'),
+            'mobile': response.get('mobile'),
         }
 
     def user_data(self, access_token, *args, **kwargs):

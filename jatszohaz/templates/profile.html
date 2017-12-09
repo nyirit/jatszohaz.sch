@@ -2,5 +2,9 @@
 {% load i18n %}
 
 {% block content %}
-    {{ object.full_name2 }} and other things..
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{% trans "Update" %}" />
+    </form>
 {% endblock %}

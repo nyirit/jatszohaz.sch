@@ -12,6 +12,19 @@ logger = logging.getLogger(__name__)
 
 
 class JhUser(AbstractUser):
+    mobile = models.CharField(
+        verbose_name=_('mobile'),
+        max_length=100,
+        help_text=_('Mobile number for helping communication if necessery.'),
+        blank=True
+    )
+    room = models.CharField(
+        verbose_name=_('room'),
+        max_length=100,
+        help_text=_('Room number.'),
+        blank=True
+    )
+
     def get_entitlements(self):
         """
         Gets all auth.sch group memberships.
@@ -136,7 +149,7 @@ class Rent(TimeStampedModel):
 
 class RentActions(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    new_status = models.TextField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, null=False)
+    new_status = models.TextField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES)
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT)
 
 

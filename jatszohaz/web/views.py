@@ -1,4 +1,9 @@
-from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView
+from web.forms import JhUserForm
 from web.models import GameGroup, JhUser
 
 
@@ -21,8 +26,11 @@ class GamesView(ListView):
     template_name = "games.html"
 
 
-class MyProfileView(DetailView):
+class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = JhUser
+    success_url = reverse_lazy('my-profile')
+    success_message = _("Successfully updated!")
+    form_class = JhUserForm
     template_name = "profile.html"
 
     def get_object(self, queryset=None):
