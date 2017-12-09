@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    Name: {{ object.full_name2 }}<br />
+    Email: {{ object.email }}<br />
+    Room: {{ object.room }}<br />
+    Mobile: {{ object.mobile }}<br />
+    Username: {{ object.username }}<br />
+    First login: {{ object.date_joined }}<br />
+    Last login: {{ object.last_login}}<br />
+{% endblock %}

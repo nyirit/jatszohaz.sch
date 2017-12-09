@@ -3,8 +3,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView
-from web.forms import JhUserForm
-from web.models import GameGroup, JhUser
+
+from braces.views import SuperuserRequiredMixin
+
+from .forms import JhUserForm
+from .models import GameGroup, JhUser
 
 
 class HomeView(TemplateView):
@@ -37,6 +40,7 @@ class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
-class ProfileView(DetailView):
+class ProfileView(SuperuserRequiredMixin, DetailView):
+    # TODO permission check
     model = JhUser
-    template_name = "profile.html"
+    template_name = "profile_detail.html"

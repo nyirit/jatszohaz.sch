@@ -4,3 +4,4 @@ django-model-utils==3.0.0
 Pillow==4.3.0
 social-auth-app-django==2.0.0
 easy-thumbnails==2.5
+django-braces==1.12.0
