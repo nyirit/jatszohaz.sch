@@ -1,9 +1,14 @@
+import logging
+from django.contrib.auth import user_logged_in
+from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
+
+logger = logging.getLogger(__name__)
 
 
 class JhUser(AbstractUser):
@@ -18,8 +23,23 @@ class JhUser(AbstractUser):
         :return: data map of the specified group.
         """
         for i in self.social_auth.first().extra_data['eduPersonEntitlement']:
-            if i['name'] == settings.EDU_PERSON_ENTITLEMENT_NAMES:
+            if i['id'] == settings.EDU_PERSON_ENTITLEMENT_ID:
                 return i
+
+    @receiver(user_logged_in)
+    def user_logged_in(sender, user, request, **kwargs):
+        user.update_permissions()
+
+    def update_permissions(self):
+        """
+        Update user rights according to its entitlements
+        """
+        if self.get_entitlements() is not None:
+            # TODO chage superuser status to actual permissions
+            self.is_staff = True
+            self.is_superuser = True
+            self.save()
+            logger.info("Updated permissions for user %d." % self.pk)
 
     def full_name(self):
         """
