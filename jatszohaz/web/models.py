@@ -75,9 +75,9 @@ class JhUser(AbstractUser):
 
 
 class GameGroup(TimeStampedModel):
-    name = models.TextField(verbose_name=_("Name"), blank=False)
+    name = models.CharField(verbose_name=_("Name"), blank=False, unique=True, max_length=100)
     description = models.TextField(verbose_name=_("Description"), blank=False)
-    short_description = models.TextField(verbose_name=_("Short Description"), blank=False)
+    short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
     image = models.ImageField(verbose_name="Image")
 
     def __str__(self):
@@ -93,7 +93,7 @@ class GamePiece(TimeStampedModel):
         blank=True
     )
     game_group = models.ForeignKey(GameGroup, on_delete=models.CASCADE)
-    notes = models.TextField(verbose_name=_("Notes"))
+    notes = models.CharField(verbose_name=_("Notes"), max_length=100)
     # Priority: which GamePiece should be rented first from same GameGroup.
     # Higher number will be rented first.
     priority = models.PositiveSmallIntegerField(verbose_name="Priority", default=0)
@@ -103,7 +103,7 @@ class GamePiece(TimeStampedModel):
 
 
 class GamePack(TimeStampedModel):
-    name = models.TextField(verbose_name=_("Name"))
+    name = models.CharField(verbose_name=_("Name"), max_length=100)
     games = models.ManyToManyField(GameGroup, related_name="packs")
     creator = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     active = models.BooleanField(verbose_name=_("Active"), default=False)
@@ -116,7 +116,7 @@ class InventoryItem(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     game = models.ForeignKey(GamePiece, on_delete=models.CASCADE)
     playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False)
-    missing_items = models.TextField(verbose_name=_("Missing items"))
+    missing_items = models.CharField(verbose_name=_("Missing items"), max_length=100)
 
 
 class Rent(TimeStampedModel):
@@ -141,8 +141,8 @@ class Rent(TimeStampedModel):
     games = models.ManyToManyField(GamePiece, verbose_name=_("Games"), related_name=_("rents"))
     date_from = models.DateTimeField(verbose_name=_("From"), blank=False, null=False)
     date_to = models.DateTimeField(verbose_name=_("To"), blank=False, null=False)
-    status = models.TextField(verbose_name=_("Status"), choices=STATUS_CHOICES, default=STATUS_PENDING)
-    bail = models.TextField(verbose_name=_("Bail"))
+    status = models.CharField(verbose_name=_("Status"), choices=STATUS_CHOICES, default=STATUS_PENDING, max_length=20)
+    bail = models.CharField(verbose_name=_("Bail"), max_length=30)
 
     class Meta:
         permissions = (
@@ -153,7 +153,7 @@ class Rent(TimeStampedModel):
 
 class RentActions(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    new_status = models.TextField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES)
+    new_status = models.CharField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, max_length=20)
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT)
 
 
