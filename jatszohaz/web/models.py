@@ -80,6 +80,10 @@ class GameGroup(TimeStampedModel):
     short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
     image = models.ImageField(verbose_name="Image")
 
+    def get_game_piece(self, date_from, date_to):
+        # TODO
+        return self.game_pieces.first()
+
     def __str__(self):
         return '%s' % (self.name)
 
@@ -92,7 +96,7 @@ class GamePiece(TimeStampedModel):
         null=True,
         blank=True
     )
-    game_group = models.ForeignKey(GameGroup, on_delete=models.CASCADE)
+    game_group = models.ForeignKey(GameGroup, on_delete=models.CASCADE, related_name='game_pieces')
     notes = models.CharField(verbose_name=_("Notes"), max_length=100)
     # Priority: which GamePiece should be rented first from same GameGroup.
     # Higher number will be rented first.

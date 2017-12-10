@@ -16,6 +16,7 @@
 
   <!-- styles -->
   <link rel="stylesheet" type="text/css" href="{% static 'web/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'web/css/jquery-ui.min.css' %}" />
   <link rel="stylesheet" type="text/css" href="{% static 'web/css/style.css' %}" />
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -39,6 +40,7 @@
           <ul class="nav navbar-nav">
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'my-profile' %}">Profile</a></li>
+            <li><a href="{% url 'rent' %}">Rent</a></li>
             <li><a href="{% url 'games' %}">Games</a></li>
             <li><a href="{% url 'calendar' %}">Calendar</a></li>
             {%  if user.is_superuser %}
@@ -82,7 +84,9 @@
 
     </div><!-- /.container -->
 
-    <script src="{% static "web/js/jquery-3.1.1.slim.min.js" %}"></script>
+    <script src="{% static "web/js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "web/js/jquery-ui.min.js" %}"></script>
     <script src="{% static "web/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "web/js/web.js" %}"></script>
 </body>
 </html>
