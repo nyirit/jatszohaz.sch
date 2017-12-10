@@ -85,7 +85,7 @@ class GameGroup(TimeStampedModel):
 
 
 class GamePiece(TimeStampedModel):
-    owner = models.OneToOneField(
+    owner = models.ForeignKey(
         JhUser,
         on_delete=models.PROTECT,  # do not delete users, who owns a game
         verbose_name=_("Owner"),
@@ -103,7 +103,7 @@ class GamePiece(TimeStampedModel):
 
 
 class GamePack(TimeStampedModel):
-    name = models.CharField(verbose_name=_("Name"), max_length=100)
+    name = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
     games = models.ManyToManyField(GameGroup, related_name="packs")
     creator = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     active = models.BooleanField(verbose_name=_("Active"), default=False)
