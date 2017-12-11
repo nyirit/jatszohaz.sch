@@ -53,6 +53,21 @@ class RentView(LoginRequiredMixin, SessionWizardView):
     template_name = "rent.html"
     form_list = [RentFormStep1, RentFormStep2, RentFormStep3]
 
+    # https://chriskief.com/2013/05/24/django-form-wizard-and-getting-data-from-previous-steps/
+    def get_form_initial(self, step):
+        data = {}
+
+        step0_data = self.storage.get_step_data('0')
+        if step0_data is not None:
+            data['date_from'] = step0_data['0-date_from']
+            data['date_to'] = step0_data['0-date_to']
+
+        step1_data = self.storage.get_step_data('1')
+        if step1_data is not None:
+            data['game_groups'] = step1_data['1-game_groups']
+
+        return self.initial_dict.get(step, data)
+
     def done(self, form_list, **kwargs):
         forms = list(form_list)
         step0_data = forms[0].cleaned_data
@@ -69,7 +84,8 @@ class RentView(LoginRequiredMixin, SessionWizardView):
             date_from=date_from,
             date_to=date_to
         )
-        for gg in game_groups:
+        for gg_id in game_groups:
+            gg = GameGroup.objects.get(id=gg_id)
             rent.games.add(gg.get_game_piece(date_from, date_to))
         rent.save()
         Comment.objects.create(

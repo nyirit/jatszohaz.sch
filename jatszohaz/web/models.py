@@ -81,8 +81,16 @@ class GameGroup(TimeStampedModel):
     image = models.ImageField(verbose_name="Image")
 
     def get_game_piece(self, date_from, date_to):
-        # TODO
-        return self.game_pieces.first()
+        for piece in self.game_pieces.order_by('-priority'):
+            if piece.is_free(date_from, date_to):
+                return piece
+        raise GameGroup.DoesNotExist("No free piece available!")
+
+    def has_free_piece(self, date_from, date_to):
+        for piece in self.game_pieces.order_by('-priority'):
+            if piece.is_free(date_from, date_to):
+                return True
+        return False
 
     def __str__(self):
         return '%s' % (self.name)
@@ -101,6 +109,12 @@ class GamePiece(TimeStampedModel):
     # Priority: which GamePiece should be rented first from same GameGroup.
     # Higher number will be rented first.
     priority = models.PositiveSmallIntegerField(verbose_name="Priority", default=0)
+
+    def is_free(self, date_from, date_to):
+        return self.rents\
+            .exclude(status__in=[Rent.STATUS_CANCELLED, Rent.STATUS_DECLINED])\
+            .filter(models.Q(date_from__range=(date_from, date_to)) | models.Q(date_to__range=(date_from, date_to)))\
+            .count() == 0
 
     def __str__(self):
         return '%s - %s' % (self.game_group, self.notes)
@@ -146,7 +160,7 @@ class Rent(TimeStampedModel):
     date_from = models.DateTimeField(verbose_name=_("From"), blank=False, null=False)
     date_to = models.DateTimeField(verbose_name=_("To"), blank=False, null=False)
     status = models.CharField(verbose_name=_("Status"), choices=STATUS_CHOICES, default=STATUS_PENDING, max_length=20)
-    bail = models.CharField(verbose_name=_("Bail"), max_length=30)
+    bail = models.CharField(verbose_name=_("Bail"), max_length=30, blank=True)
 
     class Meta:
         permissions = (

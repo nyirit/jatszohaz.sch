@@ -1,8 +1,8 @@
 from datetime import datetime
 from django import forms
-from django.forms import CheckboxSelectMultiple
 from django.utils.translation import ugettext_lazy as _
 from web.models import JhUser, GameGroup
+from web.widgets import GameSelectMultiple
 
 
 class JhUserForm(forms.ModelForm):
@@ -39,13 +39,16 @@ class RentFormStep1(forms.Form):
 
 
 class RentFormStep2(forms.Form):
-    game_groups = forms.ModelMultipleChoiceField(None,
-                                                 widget=CheckboxSelectMultiple,
-                                                 required=False)
+    game_groups = forms.MultipleChoiceField(widget=GameSelectMultiple,
+                                            required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['game_groups'].queryset = GameGroup.objects.all()
+        date_from = kwargs['initial']['date_from']
+        date_to = kwargs['initial']['date_to']
+
+        available_games = [(g.pk, g) for g in GameGroup.objects.all() if g.has_free_piece(date_from, date_to)]
+        self.fields['game_groups'].choices = available_games
 
 
 class RentFormStep3(forms.Form):
