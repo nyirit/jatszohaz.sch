@@ -17,7 +17,10 @@ urlpatterns = [
 
     # Games and renting related pages
     url(r'^games/$', views.GamesView.as_view(), name="games"),
-    url(r'^rent/$', views.RentView.as_view(), name="rent"),
+    url(r'^new-rent/$', views.NewRentView.as_view(), name="new-rent"),
+    url(r'^rent/(?P<pk>\d+)/$', views.RentView.as_view(), name="rent"),
+    url(r'^my-rents/$', views.MyRentsView.as_view(), name="my-rents"),
+    url(r'^rents/$', views.RentsView.as_view(), name="rents"),
 
     url(r'', include('social_django.urls', namespace='social')),
     url(r'^logout/', logout, {'next_page': '/'}, name='logout'),

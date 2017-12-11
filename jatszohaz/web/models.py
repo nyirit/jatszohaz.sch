@@ -155,12 +155,15 @@ class Rent(TimeStampedModel):
         (STATUS_CANCELLED, _("Cancelled"))
     )
 
-    renter = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    games = models.ManyToManyField(GamePiece, verbose_name=_("Games"), related_name=_("rents"))
+    renter = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name="rents")
+    games = models.ManyToManyField(GamePiece, verbose_name=_("Games"), related_name="rents")
     date_from = models.DateTimeField(verbose_name=_("From"), blank=False, null=False)
     date_to = models.DateTimeField(verbose_name=_("To"), blank=False, null=False)
     status = models.CharField(verbose_name=_("Status"), choices=STATUS_CHOICES, default=STATUS_PENDING, max_length=20)
     bail = models.CharField(verbose_name=_("Bail"), max_length=30, blank=True)
+
+    def __str__(self):
+        return "%s (%s - %s)" % (self.renter.full_name2(), self.date_from, self.date_to)
 
     class Meta:
         permissions = (

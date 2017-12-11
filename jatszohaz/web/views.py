@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -49,8 +49,8 @@ class ProfileView(SuperuserRequiredMixin, DetailView):
     template_name = "profile_detail.html"
 
 
-class RentView(LoginRequiredMixin, SessionWizardView):
-    template_name = "rent.html"
+class NewRentView(LoginRequiredMixin, SessionWizardView):
+    template_name = "new_rent.html"
     form_list = [RentFormStep1, RentFormStep2, RentFormStep3]
 
     # https://chriskief.com/2013/05/24/django-form-wizard-and-getting-data-from-previous-steps/
@@ -95,4 +95,23 @@ class RentView(LoginRequiredMixin, SessionWizardView):
         ).save()
 
         messages.success(self.request, _("Successfully rented!"))
-        return redirect(reverse_lazy('rent'))  # TODO open specific Rent instance
+        return redirect(reverse_lazy('rent', kwargs={"pk": rent.pk}))
+
+
+class MyRentsView(LoginRequiredMixin, ListView):
+    model = Rent
+    template_name = "my-rents.html"
+
+    def get_queryset(self):
+        return self.request.user.rents.all()
+
+
+class RentsView(PermissionRequiredMixin, ListView):
+    model = Rent
+    template_name = "rents.html"
+    permission_required = 'web.manage_rents'
+
+
+class RentView(LoginRequiredMixin, DetailView):
+    model = Rent
+    template_name = "rent_detail.html"
