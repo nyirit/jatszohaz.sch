@@ -105,6 +105,7 @@ class NewRentView(LoginRequiredMixin, SessionWizardView):
 class MyRentsView(LoginRequiredMixin, ListView):
     model = Rent
     template_name = "my-rents.html"
+    ordering = ['-created']
 
     def get_queryset(self):
         return self.request.user.rents.all()
@@ -114,6 +115,7 @@ class RentsView(PermissionRequiredMixin, ListView):
     model = Rent
     template_name = "rents.html"
     permission_required = 'web.manage_rents'
+    ordering = ['-created']
 
 
 class RentView(LoginRequiredMixin, DetailView):
