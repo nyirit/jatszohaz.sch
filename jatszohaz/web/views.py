@@ -1,16 +1,20 @@
+import logging
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import redirect
+from django.core.exceptions import SuspiciousOperation
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView, ListView, DetailView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, FormView, View
 
 from braces.views import SuperuserRequiredMixin
 from formtools.wizard.views import SessionWizardView
 
-from .forms import JhUserForm, RentFormStep1, RentFormStep2, RentFormStep3
-from .models import GameGroup, JhUser, Rent, Comment
+from .forms import JhUserForm, RentFormStep1, RentFormStep2, RentFormStep3, NewCommentForm, EditRentForm, AddGameForm
+from .models import GameGroup, JhUser, Rent, Comment, GamePiece
+
+logger = logging.getLogger(__name__)
 
 
 class HomeView(TemplateView):
@@ -115,3 +119,113 @@ class RentsView(PermissionRequiredMixin, ListView):
 class RentView(LoginRequiredMixin, DetailView):
     model = Rent
     template_name = "rent_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['comment_form'] = NewCommentForm()
+        context_data['rent_form'] = EditRentForm(instance=self.object)
+        context_data['add_game_form'] = AddGameForm(date_from=self.object.date_from, date_to=self.object.date_to)
+        return context_data
+
+
+class NewCommentView(LoginRequiredMixin, FormView):
+    form_class = NewCommentForm
+
+    def get_object(self):
+        return get_object_or_404(Rent, pk=self.kwargs['rent_pk'])
+
+    def get(self, request, *args, **kwargs):
+        return redirect(self.get_object().get_absolute_url())
+
+    def form_valid(self, form):
+        rent = self.get_object()
+        user = self.request.user
+        message = form.cleaned_data['comment']
+
+        if rent.renter == user or user.has_perm('web.manage_rents'):
+            Comment.objects.create(rent=rent, user=user, message=message).save()
+            # TODO email notification
+            messages.success(self.request, _("Successfully sent!"))
+        else:
+            raise SuspiciousOperation("No permissions for comment this rent!")
+
+        return redirect(rent.get_absolute_url())
+
+
+class EditRentView(PermissionRequiredMixin, UpdateView):
+    model = Rent
+    form_class = EditRentForm
+    permission_required = 'web.manage_rents'
+    raise_exception = True
+
+    def get(self, request, *args, **kwargs):
+        return redirect(self.get_object().get_absolute_url())
+
+    def form_valid(self, form):
+        # TODO email notification with form.changed_data
+        messages.success(self.request, _("Rent changed!"))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        # TODO show field errors in displayed page
+        messages.error(self.request, _("Invalid form."))
+        return redirect(self.get_object().get_absolute_url())
+
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()
+
+
+class ChangeRentStatusView(PermissionRequiredMixin, View):
+    http_method_names = ['get', ]
+    permission_required = 'web.manage_rents'
+    raise_exception = True
+
+    def get(self, request, *args, **kwargs):
+        rent = get_object_or_404(Rent, pk=kwargs.get('rent_pk'))
+        rent.status = kwargs.get('status')
+        print(rent.status)
+        rent.save()
+        return redirect(rent.get_absolute_url())
+
+
+class AddGameView(PermissionRequiredMixin, FormView):
+    permission_required = 'web.manage_rents'
+    raise_exception = True
+    form_class = AddGameForm
+
+    def get_rent(self):
+        return get_object_or_404(Rent, pk=self.kwargs.get('rent_pk'))
+
+    def form_valid(self, form):
+        rent = self.get_rent()
+        game = get_object_or_404(GamePiece, pk=form.cleaned_data['game'])
+        if game.is_free(rent.date_from, rent.date_to):
+            rent.games.add(game)
+            messages.success(self.request, _("Game added."))
+        else:
+            messages.error(self.request, _("Game is already rented for this time."))
+
+        return redirect(rent.get_absolute_url())
+
+    def form_invalid(self, form):
+        messages.error(self.request, _("Invalid form."))
+        return redirect(self.get_rent().get_absolute_url())
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        rent = self.get_rent()
+        kwargs.update({'date_from': rent.date_from, 'date_to': rent.date_to})
+        return kwargs
+
+
+class RemoveGameView(PermissionRequiredMixin, View):
+    http_method_names = ['get', ]
+    permission_required = 'web.manage_rents'
+    raise_exception = True
+
+    def get(self, request, *args, **kwargs):
+        rent = get_object_or_404(Rent, pk=kwargs.get('rent_pk'))
+        game_piece = get_object_or_404(GamePiece, pk=kwargs.get('game_pk'))
+        rent.games.remove(game_piece)
+        rent.save()
+        return redirect(rent.get_absolute_url())

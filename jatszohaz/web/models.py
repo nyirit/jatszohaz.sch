@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
@@ -171,6 +172,9 @@ class Rent(TimeStampedModel):
             ('view_stat', _('View rent statistics')),
         )
 
+    def get_absolute_url(self):
+        return reverse("rent", kwargs={'pk': self.pk})
+
 
 class RentActions(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
@@ -179,6 +183,6 @@ class RentActions(TimeStampedModel):
 
 
 class Comment(TimeStampedModel):
-    rent = models.ForeignKey(Rent, on_delete=models.PROTECT)
+    rent = models.ForeignKey(Rent, on_delete=models.PROTECT, related_name="comments")
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     message = models.TextField(verbose_name=_("Message"))

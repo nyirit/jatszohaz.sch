@@ -1,7 +1,7 @@
 from datetime import datetime
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from web.models import JhUser, GameGroup
+from web.models import JhUser, GameGroup, Rent, GamePiece
 from web.widgets import GameSelectMultiple
 
 
@@ -53,3 +53,24 @@ class RentFormStep2(forms.Form):
 
 class RentFormStep3(forms.Form):
     comment = forms.CharField(required=False)
+
+
+class NewCommentForm(forms.Form):
+    comment = forms.CharField()
+
+
+class EditRentForm(forms.ModelForm):
+    class Meta:
+        model = Rent
+        fields = ['date_from', 'date_to', 'bail', ]
+
+
+class AddGameForm(forms.Form):
+    game = forms.ChoiceField()
+
+    def __init__(self, *args, **kwargs):
+        date_from = kwargs.pop("date_from")
+        date_to = kwargs.pop("date_to")
+        super().__init__(*args, **kwargs)
+        available_games = [(g.pk, g) for g in GamePiece.objects.all() if g.is_free(date_from, date_to)]
+        self.fields['game'].choices = available_games
