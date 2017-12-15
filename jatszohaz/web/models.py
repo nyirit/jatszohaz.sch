@@ -175,11 +175,14 @@ class Rent(TimeStampedModel):
     def get_absolute_url(self):
         return reverse("rent", kwargs={'pk': self.pk})
 
+    def create_new_history(self, user):
+        RentHistory.objects.create(user=user, new_status=self.status, rent=self)
 
-class RentActions(TimeStampedModel):
+
+class RentHistory(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     new_status = models.CharField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, max_length=20)
-    rent = models.ForeignKey(Rent, on_delete=models.PROTECT)
+    rent = models.ForeignKey(Rent, on_delete=models.PROTECT, related_name='histories')
 
 
 class Comment(TimeStampedModel):

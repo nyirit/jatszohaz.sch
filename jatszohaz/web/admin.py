@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import (
-    JhUser, GameGroup, GamePiece, GamePack, InventoryItem, Rent, RentActions, Comment)
+    JhUser, GameGroup, GamePiece, GamePack, InventoryItem, Rent, RentHistory, Comment)
 
 
 class JhUserAdmin(UserAdmin):
@@ -14,5 +14,5 @@ admin.site.register(GamePiece)
 admin.site.register(GamePack)
 admin.site.register(InventoryItem)
 admin.site.register(Rent)
-admin.site.register(RentActions)
+admin.site.register(RentHistory)
 admin.site.register(Comment)

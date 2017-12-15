@@ -183,8 +183,8 @@ class ChangeRentStatusView(PermissionRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         rent = get_object_or_404(Rent, pk=kwargs.get('rent_pk'))
         rent.status = kwargs.get('status')
-        print(rent.status)
         rent.save()
+        rent.create_new_history(self.request.user)
         return redirect(rent.get_absolute_url())
 
 
