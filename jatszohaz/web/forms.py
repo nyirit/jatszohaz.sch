@@ -24,16 +24,17 @@ class RentFormStep1(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
 
-        date_from = cleaned_data['date_from']
-        date_to = cleaned_data['date_to']
+        date_from = cleaned_data.get('date_from', None)
+        date_to = cleaned_data.get('date_to', None)
 
-        if date_from < datetime.now().date():
-            self.add_error('date_from', _("Must be in the future!"))
+        if date_from is not None:
+            if date_from < datetime.now().date():
+                self.add_error('date_from', _("Must be in the future!"))
 
-        if date_from > date_to:
-            msg = _("Date from must be before date to!")
-            self.add_error('date_from', msg)
-            self.add_error('date_to', msg)
+            if date_to is not None and date_from > date_to:
+                msg = _("Date from must be before date to!")
+                self.add_error('date_from', msg)
+                self.add_error('date_to', msg)
 
         return cleaned_data
 
