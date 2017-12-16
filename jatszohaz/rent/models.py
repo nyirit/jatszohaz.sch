@@ -8,28 +8,29 @@ from jatszohaz.models import JhUser
 
 
 class Rent(TimeStampedModel):
-    STATUS_PENDING = "pending"
-    STATUS_APPROVED = "approved"
-    STATUS_GAVE_OUT = "gaveout"
-    STATUS_IN_MY_ROOM = "inmyroom"
-    STATUS_BACK = "back"
-    STATUS_DECLINED = "declined"
-    STATUS_CANCELLED = "cancelled"
+    STATUS_PENDING = ("pending", _("Pending"))
+    STATUS_APPROVED = ("approved", _("Approved"))
+    STATUS_GAVE_OUT = ("gaveout", _("Gave out"))
+    STATUS_IN_MY_ROOM = ("inmyroom", _("In my room"))
+    STATUS_BACK = ("back", _("Brought back"))
+    STATUS_DECLINED = ("declined", _("Declined"))
+    STATUS_CANCELLED = ("cancelled", _("Cancelled"))
     STATUS_CHOICES = (
-        (STATUS_PENDING, _("Pending")),
-        (STATUS_APPROVED, _("Approved")),
-        (STATUS_GAVE_OUT, _("Gave out")),
-        (STATUS_IN_MY_ROOM, _("In my room")),
-        (STATUS_BACK, _("Brought back")),
-        (STATUS_DECLINED, _("Declined")),
-        (STATUS_CANCELLED, _("Cancelled"))
+        STATUS_PENDING,
+        STATUS_APPROVED,
+        STATUS_GAVE_OUT,
+        STATUS_IN_MY_ROOM,
+        STATUS_BACK,
+        STATUS_DECLINED,
+        STATUS_CANCELLED
     )
 
     renter = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name="rents")
     games = models.ManyToManyField(GamePiece, verbose_name=_("Games"), related_name="rents")
     date_from = models.DateTimeField(verbose_name=_("From"), blank=False, null=False)
     date_to = models.DateTimeField(verbose_name=_("To"), blank=False, null=False)
-    status = models.CharField(verbose_name=_("Status"), choices=STATUS_CHOICES, default=STATUS_PENDING, max_length=20)
+    status = models.CharField(verbose_name=_("Status"), choices=STATUS_CHOICES,
+                              default=STATUS_PENDING[0], max_length=20)
     bail = models.CharField(verbose_name=_("Bail"), max_length=30, blank=True)
 
     def __str__(self):

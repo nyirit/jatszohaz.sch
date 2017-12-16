@@ -87,9 +87,27 @@ class DetailsView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
+
         context_data['comment_form'] = NewCommentForm()
         context_data['rent_form'] = EditRentForm(instance=self.object)
         context_data['add_game_form'] = AddGameForm(date_from=self.object.date_from, date_to=self.object.date_to)
+
+        # set available statuses based on current status
+        available_statuses = []
+        if self.object.status in (Rent.STATUS_DECLINED[0], Rent.STATUS_CANCELLED[0], Rent.STATUS_PENDING[0]):
+            available_statuses.append(Rent.STATUS_APPROVED)
+        if self.object.status == Rent.STATUS_APPROVED[0]:
+            available_statuses.append(Rent.STATUS_GAVE_OUT)
+        if self.object.status == Rent.STATUS_GAVE_OUT[0]:
+            available_statuses.append(Rent.STATUS_IN_MY_ROOM)
+        if self.object.status in (Rent.STATUS_IN_MY_ROOM[0], Rent.STATUS_GAVE_OUT[0]):
+            available_statuses.append(Rent.STATUS_BACK)
+        if self.object.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0]):
+            available_statuses.append(Rent.STATUS_DECLINED)
+        if self.object.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0]):
+            available_statuses.append(Rent.STATUS_CANCELLED)
+        context_data['available_statuses'] = available_statuses
+
         return context_data
 
 

@@ -20,11 +20,13 @@
         <input type="submit" value="{% trans "Add" %}" />
     </form>
 
-    <h3>New status:</h3>
-        {% for status in object.STATUS_CHOICES %}
-            <a href="{% url 'rent:change-status' object.pk status.0 %}">{{ status.1 }}</a><br/>
-        {% endfor %}
-    <h3>Other details</h3>
+    {% if available_statuses %}
+        <h3>New status:</h3>
+            {% for status in available_statuses %}
+                <a href="{% url 'rent:change-status' object.pk status.0 %}">{{ status.1 }}</a><br/>
+            {% endfor %}
+        <h3>Other details</h3>
+    {% endif %}
 
     Bail: {{ object.bail }}<br/>
     Status: {{ object.status }}
