@@ -42,13 +42,13 @@
 
             {% if user.is_authenticated %}
               <li><a href="{% url 'my-profile' %}">Profile</a></li>
-              <li><a href="{% url 'new-rent' %}">Rent</a></li>
-              <li><a href="{% url 'my-rents' %}">My rents</a></li>
+              <li><a href="{% url 'rent:new' %}">Rent</a></li>
+              <li><a href="{% url 'rent:my' %}">My rents</a></li>
             {% endif %}
 
             <li><a href="{% url 'games' %}">Games</a></li>
             {% if perms.web.manage_rents %}
-              <li><a href="{% url 'rents' %}">Rents</a></li>
+              <li><a href="{% url 'rent:rents' %}">Rents</a></li>
             {% endif %}
             {%  if user.is_superuser %}
               <li><a href="{% url 'calendar' %}">Calendar</a></li>

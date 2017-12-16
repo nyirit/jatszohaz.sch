@@ -1,15 +1,9 @@
 from datetime import datetime
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from web.models import JhUser, GameGroup, Rent, GamePiece
-from web.widgets import GameSelectMultiple
-
-
-class JhUserForm(forms.ModelForm):
-    class Meta:
-        model = JhUser
-        fields = ['mobile', 'room', 'email']
-    email = forms.CharField(disabled=True)
+from inventory.models import GameGroup, GamePiece
+from .models import Rent
+from .widgets import GameSelectMultiple
 
 
 class RentFormStep1(forms.Form):

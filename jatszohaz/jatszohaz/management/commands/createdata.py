@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from web.models import JhUser, GameGroup, GamePiece, GamePack
+from jatszohaz.models import JhUser
+from inventory.models import GameGroup, GamePiece, GamePack
 
 
 class Command(BaseCommand):

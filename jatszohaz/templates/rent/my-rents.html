@@ -2,16 +2,15 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>All rents</h1>
+    <h1>My rents</h1>
         {% for rent in object_list %}
             {{ rent.date_from|date }} - {{ rent.date_to|date }}<br/>
-            <a href="{% url "profile" rent.renter.pk %}">{{ rent.renter.full_name2 }}</a><br/>
             {% for game in rent.games.all %}
                 {{ game.game_group }},
             {% endfor %}
             <br/>
             {{ rent.status }}<br/>
-            <a href="{% url "rent" rent.pk %}">Details</a>
+            <a href="{% url "rent:details" rent.pk %}">Details</a>
             <hr/>
         {% empty %}
             No rents yet.

@@ -1,60 +1,23 @@
 import logging
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import SuspiciousOperation
 from django.shortcuts import redirect, get_object_or_404
-from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView, ListView, DetailView, UpdateView, FormView, View
-
-from braces.views import SuperuserRequiredMixin
+from django.views.generic import ListView, DetailView, UpdateView, FormView, View
 from formtools.wizard.views import SessionWizardView
 
-from .forms import JhUserForm, RentFormStep1, RentFormStep2, RentFormStep3, NewCommentForm, EditRentForm, AddGameForm
-from .models import GameGroup, JhUser, Rent, Comment, GamePiece
+from .forms import RentFormStep1, RentFormStep2, RentFormStep3, NewCommentForm, EditRentForm, AddGameForm
+from inventory.models import GameGroup
+from .models import Rent, Comment, GamePiece
+
 
 logger = logging.getLogger(__name__)
 
 
-class HomeView(TemplateView):
-    template_name = "home.html"
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data()
-        if not self.request.user.is_anonymous:
-            ctx['username'] = self.request.user.full_name2()
-        return ctx
-
-
-class CalendarView(TemplateView):
-    template_name = "calendar.html"
-
-
-class GamesView(ListView):
-    model = GameGroup
-    template_name = "games.html"
-
-
-class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    model = JhUser
-    success_url = reverse_lazy('my-profile')
-    success_message = _("Successfully updated!")
-    form_class = JhUserForm
-    template_name = "profile.html"
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
-class ProfileView(SuperuserRequiredMixin, DetailView):
-    # TODO permission check
-    model = JhUser
-    template_name = "profile_detail.html"
-
-
-class NewRentView(LoginRequiredMixin, SessionWizardView):
-    template_name = "new_rent.html"
+class NewView(LoginRequiredMixin, SessionWizardView):
+    template_name = "rent/new_rent.html"
     form_list = [RentFormStep1, RentFormStep2, RentFormStep3]
 
     # https://chriskief.com/2013/05/24/django-form-wizard-and-getting-data-from-previous-steps/
@@ -99,12 +62,12 @@ class NewRentView(LoginRequiredMixin, SessionWizardView):
         ).save()
 
         messages.success(self.request, _("Successfully rented!"))
-        return redirect(reverse_lazy('rent', kwargs={"pk": rent.pk}))
+        return redirect(rent.get_absolute_url())
 
 
-class MyRentsView(LoginRequiredMixin, ListView):
+class MyView(LoginRequiredMixin, ListView):
     model = Rent
-    template_name = "my-rents.html"
+    template_name = "rent/my-rents.html"
     ordering = ['-created']
 
     def get_queryset(self):
@@ -113,14 +76,14 @@ class MyRentsView(LoginRequiredMixin, ListView):
 
 class RentsView(PermissionRequiredMixin, ListView):
     model = Rent
-    template_name = "rents.html"
+    template_name = "rent/rents.html"
     permission_required = 'web.manage_rents'
     ordering = ['-created']
 
 
-class RentView(LoginRequiredMixin, DetailView):
+class DetailsView(LoginRequiredMixin, DetailView):
     model = Rent
-    template_name = "rent_detail.html"
+    template_name = "rent/rent_detail.html"
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -154,7 +117,7 @@ class NewCommentView(LoginRequiredMixin, FormView):
         return redirect(rent.get_absolute_url())
 
 
-class EditRentView(PermissionRequiredMixin, UpdateView):
+class EditView(PermissionRequiredMixin, UpdateView):
     model = Rent
     form_class = EditRentForm
     permission_required = 'web.manage_rents'
@@ -177,7 +140,7 @@ class EditRentView(PermissionRequiredMixin, UpdateView):
         return self.get_object().get_absolute_url()
 
 
-class ChangeRentStatusView(PermissionRequiredMixin, View):
+class ChangeStatusView(PermissionRequiredMixin, View):
     http_method_names = ['get', ]
     permission_required = 'web.manage_rents'
     raise_exception = True

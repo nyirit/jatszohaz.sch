@@ -77,7 +77,9 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'authsch',  # currently it's used as local app
-    'web',
+    'inventory',
+    'jatszohaz',
+    'rent',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -107,7 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'web.context_processors.default_context_processor',
+                'jatszohaz.context_processors.default_context_processor',
             ],
         },
     },
@@ -135,7 +137,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
 ]
 
-AUTH_USER_MODEL = 'web.JhUser'
+AUTH_USER_MODEL = 'jatszohaz.JhUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
