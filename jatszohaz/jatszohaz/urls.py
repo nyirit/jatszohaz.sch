@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^logout/', logout, {'next_page': '/'}, name='logout'),
 
     url(r'^rent/', include('rent.urls')),
+    url(r'^inventory/', include('inventory.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
@@ -43,7 +43,7 @@ class Rent(TimeStampedModel):
         )
 
     def get_absolute_url(self):
-        return reverse("rent:details", kwargs={'pk': self.pk})
+        return reverse_lazy("rent:details", kwargs={'pk': self.pk})
 
     def create_new_history(self, user):
         RentHistory.objects.create(user=user, new_status=self.status, rent=self)

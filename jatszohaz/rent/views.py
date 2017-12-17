@@ -2,7 +2,7 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.core.exceptions import SuspiciousOperation
+from django.core.exceptions import SuspiciousOperation, PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, UpdateView, FormView, View
@@ -31,7 +31,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
 
         step1_data = self.storage.get_step_data('1')
         if step1_data is not None:
-            data['game_groups'] = step1_data['1-game_groups']
+            data['game_groups'] = step1_data.get('1-game_groups', ())
 
         return self.initial_dict.get(step, data)
 
@@ -158,14 +158,22 @@ class EditView(PermissionRequiredMixin, UpdateView):
         return self.get_object().get_absolute_url()
 
 
-class ChangeStatusView(PermissionRequiredMixin, View):
+class ChangeStatusView(LoginRequiredMixin, View):
     http_method_names = ['get', ]
-    permission_required = 'web.manage_rents'
-    raise_exception = True
 
     def get(self, request, *args, **kwargs):
         rent = get_object_or_404(Rent, pk=kwargs.get('rent_pk'))
-        rent.status = kwargs.get('status')
+        status = kwargs.get('status')
+        user = self.request.user
+
+        # if has no permission, then can change only his own rent and only to cancelled
+        if not user.has_perm('web.manage_rents') and (
+                user != rent.renter or
+                status != Rent.STATUS_CANCELLED[0]):
+
+            raise PermissionDenied("No permission to change status of rent!")
+
+        rent.status = status
         rent.save()
         rent.create_new_history(self.request.user)
         return redirect(rent.get_absolute_url())

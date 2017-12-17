@@ -51,6 +51,9 @@ class GamePiece(TimeStampedModel):
             .filter(models.Q(date_from__range=(date_from, date_to)) | models.Q(date_to__range=(date_from, date_to)))\
             .count() == 0
 
+    def get_latest_inventory_item(self):
+        return self.inventories.last()
+
     def __str__(self):
         return '%s - %s' % (self.game_group, self.notes)
 
@@ -67,6 +70,11 @@ class GamePack(TimeStampedModel):
 
 class InventoryItem(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    game = models.ForeignKey(GamePiece, on_delete=models.CASCADE)
+    game = models.ForeignKey(GamePiece, on_delete=models.CASCADE, related_name="inventories")
     playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False)
-    missing_items = models.CharField(verbose_name=_("Missing items"), max_length=100)
+    missing_items = models.CharField(verbose_name=_("Missing items"), max_length=100, blank=True)
+
+    class Meta:
+        permissions = (
+            ('manage_inventory', _('Manage Inventory')),
+        )

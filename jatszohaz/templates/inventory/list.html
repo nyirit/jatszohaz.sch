@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+    <h1>Games</h1>
+    <ul>
+        {% for game in object_list %}
+            <h3>{{ game }}</h3>
+            {% with inv=game.get_latest_inventory_item %}
+                {% if inv %}
+                    Latest inventory:<br/>
+                    Date: {{ inv.created }}<br/>
+                    Playable: {{ inv.playable }}<br/>
+                    Missing items: {{ inv.missing_items }}<br/>
+                    <a href="{% url 'inventory:edit' inv.pk %}">Edit latest inventory</a><br/>
+                {% else %}
+                    No inventory.<br/>
+                {% endif %}
+                <a href="{% url 'inventory:new' game.pk %}">Create new inventory</a>
+            {% endwith %}
+            <hr/>
+        {% empty %}
+            <li>No games.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
