@@ -4,6 +4,10 @@
 {% block content %}
 
     <h1>Games</h1>
+
+    <a href="{% url 'inventory:new-game-with-group' %}" >Add new game with gamegroup</a><br/>
+    <a href="{% url 'inventory:new-game' %}" >Add new game for existing gamegroup</a><br/>
+
     <ul>
         {% for game in object_list %}
             <h3>{{ game }}</h3>

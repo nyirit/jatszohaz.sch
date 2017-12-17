@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+    <h1>Gamepacks</h1>
+
+    <a href="{% url 'inventory:new-gamepack' %}" >Add new gamepack</a><br/>
+
+    <ul>
+        {% for gamepack in object_list %}
+            <h3>{{ gamepack.name }}</h3>
+                Creator: {{ gamepack.creator }}<br/>
+                Games:
+                {% for game in gamepack.games.all %}
+                    {{ game }},
+                {% endfor %}
+                <br/>
+                Active: {{ gamepack.active }}<br/>
+                <a href="{% url 'inventory:edit-gamepack' gamepack.pk %}">Edit</a><br/>
+            <hr/>
+        {% empty %}
+            <li>No gamepacks.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

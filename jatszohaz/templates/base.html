@@ -52,6 +52,7 @@
             {% endif %}
             {% if perms.web.manage_inventory %}
               <li><a href="{% url 'inventory:list' %}">Inventory</a></li>
+              <li><a href="{% url 'inventory:gamepacks' %}">Game packs</a></li>
             {% endif %}
             {%  if user.is_superuser %}
               <li><a href="{% url 'calendar' %}">Calendar</a></li>

@@ -1,5 +1,6 @@
 import logging
 from django.db import models
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
@@ -42,7 +43,7 @@ class GamePiece(TimeStampedModel):
     notes = models.CharField(verbose_name=_("Notes"), max_length=100)
     # Priority: which GamePiece should be rented first from same GameGroup.
     # Higher number will be rented first.
-    priority = models.PositiveSmallIntegerField(verbose_name="Priority", default=0)
+    priority = models.PositiveSmallIntegerField(verbose_name=_("Priority"), default=0)
 
     def is_free(self, date_from, date_to):
         from rent.models import Rent
@@ -66,6 +67,9 @@ class GamePack(TimeStampedModel):
 
     def __str__(self):
         return '%s' % (self.name)
+
+    def get_absolute_url(self):
+        return reverse_lazy("inventory:edit-gamepack", kwargs={'pk': self.pk})
 
 
 class InventoryItem(TimeStampedModel):
