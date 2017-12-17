@@ -50,6 +50,9 @@
             {% if perms.web.manage_rents %}
               <li><a href="{% url 'rent:rents' %}">Rents</a></li>
             {% endif %}
+            {% if perms.web.manage_inventory %}
+              <li><a href="{% url 'inventory:list' %}">Inventory</a></li>
+            {% endif %}
             {%  if user.is_superuser %}
               <li><a href="{% url 'calendar' %}">Calendar</a></li>
               <li><a href="{% url 'admin:index' %}">Admin</a></li>
