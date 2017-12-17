@@ -9,7 +9,7 @@
                 {{ game.game_group }},
             {% endfor %}
             <br/>
-            {{ rent.status }}<br/>
+            {{ rent.get_status_display }}<br/>
             <a href="{% url "rent:details" rent.pk %}">Details</a>
             <hr/>
         {% empty %}
