@@ -1,6 +1,7 @@
 import logging
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, ListView, UpdateView
@@ -33,6 +34,22 @@ class NewInvView(SuccessMessageMixin, InventoryPermissionRequiredMixin, CreateVi
 class InvListView(InventoryPermissionRequiredMixin, ListView):
     model = GamePiece
     template_name = "inventory/list.html"
+
+
+class InvListGameView(InventoryPermissionRequiredMixin, ListView):
+    model = InventoryItem
+    template_name = "inventory/list_game.html"
+
+    def get_game(self):
+        return get_object_or_404(GamePiece, pk=self.kwargs['game_pk'])
+
+    def get_queryset(self):
+        return InventoryItem.objects.filter(game=self.get_game())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['game_piece'] = self.get_game()
+        return context
 
 
 class EditView(InventoryPermissionRequiredMixin, UpdateView):

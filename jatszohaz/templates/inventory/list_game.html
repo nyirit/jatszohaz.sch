@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+    <h1>{{ game_piece }}</h1>
+    {% for inv in object_list %}
+        <ul>
+            Date: {{ inv.created }}<br/>
+            Playable: {{ inv.playable }}<br/>
+            Missing items: {{ inv.missing_items }}<br/>
+            <a href="{% url 'inventory:edit' inv.pk %}">Edit</a><br/>
+            <hr/>
+        </ul>
+    {% empty %}
+        <li>No inventories.</li>
+    {% endfor %}
+
+{% endblock %}
