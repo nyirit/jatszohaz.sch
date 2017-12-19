@@ -5,28 +5,28 @@
 
     <h1>Games</h1>
 
-    <a href="{% url 'inventory:new-game-with-group' %}" >Add new game with gamegroup</a><br/>
-    <a href="{% url 'inventory:new-game' %}" >Add new game for existing gamegroup</a><br/>
+    <a href="{% url 'inventory:new-game-with-group' %}" >{% trans 'Add new game with gamegroup' %}</a><br/>
+    <a href="{% url 'inventory:new-game' %}" >{% trans 'Add new game for existing gamegroup' %}</a><br/>
 
     <ul>
         {% for game in object_list %}
             <h3>{{ game }}</h3>
             {% with inv=game.get_latest_inventory_item %}
                 {% if inv %}
-                    Latest inventory:<br/>
-                    Date: {{ inv.created }}<br/>
-                    Playable: {{ inv.playable }}<br/>
-                    Missing items: {{ inv.missing_items }}<br/>
-                    <a href="{% url 'inventory:edit' inv.pk %}">Edit latest inventory</a><br/>
+                    {% trans 'Latest inventory' %}:<br/>
+                    {% trans 'Date' %}: {{ inv.created }}<br/>
+                    {% trans 'Playable' %}: {{ inv.playable }}<br/>
+                    {% trans 'Missing items' %}: {{ inv.missing_items }}<br/>
+                    <a href="{% url 'inventory:edit' inv.pk %}">{% trans 'Edit latest inventory' %}</a><br/>
                 {% else %}
-                    No inventory.<br/>
+                    {% trans 'No inventory.' %}<br/>
                 {% endif %}
-                <a href="{% url 'inventory:gamepiece' game.pk %}">Details</a><br/>
-                <a href="{% url 'inventory:new' game.pk %}">Create new inventory</a><br/>
+                <a href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Details' %}</a><br/>
+                <a href="{% url 'inventory:new' game.pk %}">{% trans 'Create new inventory' %}</a><br/>
             {% endwith %}
             <hr/>
         {% empty %}
-            <li>No games.</li>
+            <li>{% trans 'No games.' %}</li>
         {% endfor %}
     </ul>
 

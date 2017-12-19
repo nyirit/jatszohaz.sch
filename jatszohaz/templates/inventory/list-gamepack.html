@@ -3,24 +3,24 @@
 
 {% block content %}
 
-    <h1>Gamepacks</h1>
+    <h1>{% trans 'Gamepacks' %}</h1>
 
-    <a href="{% url 'inventory:new-gamepack' %}" >Add new gamepack</a><br/>
+    <a href="{% url 'inventory:new-gamepack' %}" >{% trans 'Add new gamepack' %}</a><br/>
 
     <ul>
         {% for gamepack in object_list %}
             <h3>{{ gamepack.name }}</h3>
-                Creator: {{ gamepack.creator }}<br/>
-                Games:
+                {% trans 'Creator' %}: {{ gamepack.creator }}<br/>
+                {% trans 'Games' %}:
                 {% for game in gamepack.games.all %}
                     {{ game }},
                 {% endfor %}
                 <br/>
-                Active: {{ gamepack.active }}<br/>
-                <a href="{% url 'inventory:edit-gamepack' gamepack.pk %}">Edit</a><br/>
+                {% trans 'Active' %}: {{ gamepack.active }}<br/>
+                <a href="{% url 'inventory:edit-gamepack' gamepack.pk %}">{% trans 'Edit' %}</a><br/>
             <hr/>
         {% empty %}
-            <li>No gamepacks.</li>
+            <li>{% trans 'No gamepacks.' %}</li>
         {% endfor %}
     </ul>
 

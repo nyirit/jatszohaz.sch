@@ -3,10 +3,10 @@
 {% block title %}Login2{% endblock %}
 
 {% block content %}
-  <h2>Login2</h2>
+  <h2>{% trans 'Login2' %}</h2>
   <form method="post" action="?next={% url 'home' %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
+    <button type="submit">{% trans 'Login' %}</button>
   </form>
 {% endblock %}

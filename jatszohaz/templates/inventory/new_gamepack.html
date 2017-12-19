@@ -5,9 +5,9 @@
 
     <form action="" method="post">{% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create" />
+        <input type="submit" value="{% trans 'Create' %}" />
     </form>
 
-    <a href="{% url 'inventory:gamepacks' %}">Back</a>
+    <a href="{% url 'inventory:gamepacks' %}">{% trans 'Back' %}</a>
 
 {% endblock %}

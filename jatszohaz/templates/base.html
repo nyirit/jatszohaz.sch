@@ -29,42 +29,41 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">{% trans 'Toggle navigation' %}</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
 
             {% if user.is_authenticated %}
-              <li><a href="{% url 'my-profile' %}">Profile</a></li>
-              <li><a href="{% url 'rent:new' %}">Rent</a></li>
-              <li><a href="{% url 'rent:my' %}">My rents</a></li>
+              <li><a href="{% url 'my-profile' %}">{% trans 'Profile' %}</a></li>
+              <li><a href="{% url 'rent:new' %}">{% trans 'Rent' %}</a></li>
+              <li><a href="{% url 'rent:my' %}">{% trans 'My rents' %}</a></li>
             {% endif %}
 
-            <li><a href="{% url 'games' %}">Games</a></li>
+            <li><a href="{% url 'games' %}">{% trans 'Games' %}</a></li>
             {% if perms.web.manage_rents %}
-              <li><a href="{% url 'rent:rents' %}">Rents</a></li>
+              <li><a href="{% url 'rent:rents' %}">{% trans 'Rents' %}</a></li>
             {% endif %}
             {% if perms.web.manage_inventory %}
-              <li><a href="{% url 'inventory:list' %}">Inventory</a></li>
-              <li><a href="{% url 'inventory:gamepacks' %}">Game packs</a></li>
+              <li><a href="{% url 'inventory:list' %}">{% trans 'Inventory' %}</a></li>
+              <li><a href="{% url 'inventory:gamepacks' %}">{% trans 'Game packs' %}</a></li>
             {% endif %}
             {%  if user.is_superuser %}
-              <li><a href="{% url 'calendar' %}">Calendar</a></li>
-              <li><a href="{% url 'admin:index' %}">Admin</a></li>
+              <li><a href="{% url 'calendar' %}">{% trans 'Calendar' %}</a></li>
+              <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
             {% endif %}
 
             {% if user.is_authenticated %}
-              <li><a href="{% url "logout" %}">Logout</a></li>
+              <li><a href="{% url "logout" %}">{% trans 'Logout' %}</a></li>
             {% else %}
-              <li><a href="{% url "social:begin" SOCIAL_AUTH_BACKEND %}">Login</a></li>
+              <li><a href="{% url "social:begin" SOCIAL_AUTH_BACKEND %}">{% trans 'Login' %}</a></li>
               {% if DEBUG %}
-                <li><a href="{% url 'login2' %}">Login2</a></li>
+                <li><a href="{% url 'login2' %}">{% trans 'Login2' %}</a></li>
               {% endif %}
             {% endif %}
           </ul>

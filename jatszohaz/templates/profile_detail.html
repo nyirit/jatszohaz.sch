@@ -2,11 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-    Name: {{ object.full_name2 }}<br />
-    Email: {{ object.email }}<br />
-    Room: {{ object.room }}<br />
-    Mobile: {{ object.mobile }}<br />
-    Username: {{ object.username }}<br />
-    First login: {{ object.date_joined }}<br />
-    Last login: {{ object.last_login}}<br />
+    {% trans 'Name' %}: {{ object.full_name2 }}<br />
+    {% trans 'Email' %}: {{ object.email }}<br />
+    {% trans 'Room' %}: {{ object.room }}<br />
+    {% trans 'Mobile' %}: {{ object.mobile }}<br />
+    {% trans 'Username' %}: {{ object.username }}<br />
+    {% trans 'First login' %}: {{ object.date_joined }}<br />
+    {% trans 'Last login' %}: {{ object.last_login}}<br />
 {% endblock %}

@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>My rents</h1>
+    <h1>{% trans 'My rents' %}</h1>
         {% for rent in object_list %}
             {{ rent.date_from|date }} - {{ rent.date_to|date }}<br/>
             {% for game in rent.games.all %}
@@ -10,9 +10,9 @@
             {% endfor %}
             <br/>
             {{ rent.get_status_display }}<br/>
-            <a href="{% url "rent:details" rent.pk %}">Details</a>
+            <a href="{% url "rent:details" rent.pk %}">{% trans 'Details' %}</a>
             <hr/>
         {% empty %}
-            No rents yet.
+            {% trans 'No rents yet.' %}
         {% endfor %}
 {% endblock %}

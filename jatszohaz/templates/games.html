@@ -3,7 +3,7 @@
 {% load thumbnail %}
 
 {% block content %}
-    <h2>Games</h2>
+    <h2>{% trans 'Games' %}</h2>
     <ul>
         {% for game in object_list %}
             <li>{{ game.name }}

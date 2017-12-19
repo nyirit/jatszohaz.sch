@@ -3,13 +3,13 @@
 
 {% block content %}
 
-    <h1>Add new game</h1>
+    <h1>{% trans 'Add new game' %}</h1>
 
     <form action="" enctype="multipart/form-data" method="post">{% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create" />
+        <input type="submit" value="{% trans 'Create' %}" />
     </form>
 
-    <a href="{% url 'inventory:list' %}">Back</a>
+    <a href="{% url 'inventory:list' %}">{% trans 'Back' %}</a>
 
 {% endblock %}
