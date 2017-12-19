@@ -48,11 +48,13 @@ class InvListGameView(InventoryPermissionRequiredMixin, ListView):
         return get_object_or_404(GamePiece, pk=self.kwargs['game_pk'])
 
     def get_queryset(self):
-        return InventoryItem.objects.filter(game=self.get_game())
+        return InventoryItem.objects.filter(game=self.get_game()).order_by("-created")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['game_piece'] = self.get_game()
+        game = self.get_game()
+        context['game_piece'] = game
+        context['rent_history'] = game.rents.order_by("-date_from").all()
         return context
 
 

@@ -4,6 +4,19 @@
 {% block content %}
 
     <h1>{{ game_piece }}</h1>
+    <h2>Rent history</h2>
+    {% for r in rent_history %}
+        Renter: {{ r.renter }}<br/>
+        From: {{ r.date_from }}<br/>
+        To: {{ r.date_to }}<br/>
+        Status: {{ r.get_status_display }}<br/>
+        Last rent history: {{ r.histories.last.user }} - {{ r.histories.last.get_new_status_display }}
+        <hr/>
+    {% empty %}
+        No one rented this game.
+    {% endfor %}
+
+    <h2>Inventories</h2>
     {% for inv in object_list %}
         <ul>
             Date: {{ inv.created }}<br/>
@@ -15,5 +28,6 @@
     {% empty %}
         <li>No inventories.</li>
     {% endfor %}
+    <a href="{% url 'inventory:new' game_piece.pk %}">Create new inventory</a><br/>
 
 {% endblock %}

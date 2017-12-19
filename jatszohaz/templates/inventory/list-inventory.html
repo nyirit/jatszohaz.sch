@@ -18,10 +18,10 @@
                     Playable: {{ inv.playable }}<br/>
                     Missing items: {{ inv.missing_items }}<br/>
                     <a href="{% url 'inventory:edit' inv.pk %}">Edit latest inventory</a><br/>
-                    <a href="{% url 'inventory:list-game' game.pk %}">See all inventory</a><br/>
                 {% else %}
                     No inventory.<br/>
                 {% endif %}
+                <a href="{% url 'inventory:gamepiece' game.pk %}">Details</a><br/>
                 <a href="{% url 'inventory:new' game.pk %}">Create new inventory</a><br/>
             {% endwith %}
             <hr/>
