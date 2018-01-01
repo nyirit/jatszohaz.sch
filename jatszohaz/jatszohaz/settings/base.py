@@ -73,6 +73,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'social_django',
     'easy_thumbnails',
+    'crispy_forms',
 )
 
 LOCAL_APPS = (

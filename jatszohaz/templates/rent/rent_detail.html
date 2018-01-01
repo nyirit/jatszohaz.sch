@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <h2>{% trans 'Rent' %}:</h2>
@@ -11,12 +12,13 @@
         <li>
             {{ game.game_group }} - {{ game.notes }}
             <a href="{% url 'rent:remove-game' object.pk game.pk %}">{% trans 'Delete' %}</a>
+            <a href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Inventory' %}</a>
         </li>
     {% endfor %}
     </ul>
     <form action="{% url 'rent:add-game' object.pk %}" method="post">
         {% csrf_token %}
-        {{ add_game_form.as_p }}
+        {{ add_game_form|crispy }}
         <input type="submit" value="{% trans "Add" %}" />
     </form>
 
@@ -33,7 +35,7 @@
     <h3>{% trans 'Edit rent' %}:</h3>
     <form action="{% url 'rent:edit' object.pk %}" method="post">
         {% csrf_token %}
-        {{ rent_form.as_p }}
+        {{ rent_form|crispy }}
         <input type="submit" value="{% trans "Save" %}" />
     </form>
 
@@ -52,7 +54,7 @@
     <h3>{% trans 'New comment' %}:</h3>
     <form action="{% url 'rent:new-comment' object.pk %}" method="post">
         {% csrf_token %}
-        {{ comment_form.as_p }}
+        {{ comment_form|crispy }}
         <input type="submit" value="{% trans "Send" %}" />
     </form>
 
