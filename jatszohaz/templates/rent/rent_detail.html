@@ -4,45 +4,30 @@
 
 {% block content %}
     <h2>{% trans 'Rent' %}:</h2>
+
     {% trans 'Renter' %}: {{ object.renter.full_name2 }}<br/>
     {% trans 'Dates' %}: {{ object.date_from }} - {{ object.date_to }}<br/>
+    {% trans 'Status' %}: {{ object.get_status_display }}<br/>
     {% trans 'Games' %}:
-    <ul>
-    {% for game in object.games.all %}
-        <li>
-            {{ game.game_group }} - {{ game.notes }}
-            <a href="{% url 'rent:remove-game' object.pk game.pk %}">{% trans 'Delete' %}</a>
-            <a href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Inventory' %}</a>
-        </li>
-    {% endfor %}
-    </ul>
-    <form action="{% url 'rent:add-game' object.pk %}" method="post">
-        {% csrf_token %}
-        {{ add_game_form|crispy }}
-        <input type="submit" value="{% trans "Add" %}" />
-    </form>
-
-    {% if available_statuses %}
-        <h3>{% trans 'New status:' %}</h3>
-            {% for status in available_statuses %}
-                <a href="{% url 'rent:change-status' object.pk status.0 %}">{{ status.1 }}</a><br/>
-            {% endfor %}
-        <h3>{% trans 'Other details' %}</h3>
+    {% if object.games.all %}
+        <table class="table table-hover table-condensed">
+        {% for game in object.games.all %}
+            <tr>
+                <td>{{ game.game_group }}</td>
+                {% if perms.web.manage_rents %}
+                    {# TODO move to rent_detail_admin ? #}
+                    <td>{{ game.notes }}</td>
+                    <td><a class="btn btn-info" href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Inventory' %}</a></td>
+                    <td><a class="btn btn-danger" href="{% url 'rent:remove-game' object.pk game.pk %}">{% trans 'Delete' %}</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        {% trans 'No games rented.' %}
     {% endif %}
 
-    {% trans 'Bail' %}: {{ object.bail }}<br/>
-    {% trans 'Status' %}: {{ object.get_status_display }}
-    <h3>{% trans 'Edit rent' %}:</h3>
-    <form action="{% url 'rent:edit' object.pk %}" method="post">
-        {% csrf_token %}
-        {{ rent_form|crispy }}
-        <input type="submit" value="{% trans "Save" %}" />
-    </form>
-
-    <h3>{% trans 'History' %}</h3>
-    {% for a in object.histories.all %}
-        {{ a.created }} {{ a.user.full_name2 }} -> {{ a.new_status }}<br/>
-    {% endfor %}
+    {% include 'rent/rent_detail_admin.html' %}
 
     <hr/>
     <h2>{% trans 'Comments' %}:</h2>
@@ -55,7 +40,7 @@
     <form action="{% url 'rent:new-comment' object.pk %}" method="post">
         {% csrf_token %}
         {{ comment_form|crispy }}
-        <input type="submit" value="{% trans "Send" %}" />
+        <input type="submit" value="{% trans "Send" %}" class="btn btn-success" />
     </form>
 
 {% endblock %}

@@ -1,0 +1,28 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% if perms.web.manage_rents %}
+    <form action="{% url 'rent:add-game' object.pk %}" method="post">
+        {% csrf_token %}
+        {{ add_game_form|crispy }}
+        <input type="submit" value="{% trans "Add" %}" class="btn btn-primary" />
+    </form>
+
+    {% for status in available_statuses %}
+        <a class="btn btn-info" href="{% url 'rent:change-status' object.pk status.0 %}">{{ status.1 }}</a>
+    {% endfor %}
+
+    <h3>{% trans 'Edit rent' %}:</h3>
+    <form action="{% url 'rent:edit' object.pk %}" method="post">
+        {% csrf_token %}
+        {{ rent_form|crispy }}
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-success" />
+    </form>
+
+    <h3>{% trans 'History' %}</h3>
+    {% for a in object.histories.all %}
+        {{ a.created }} {{ a.user.full_name2 }} -> {{ a.new_status }}<br/>
+    {% empty %}
+        {% trans 'No histories.' %}
+    {% endfor %}
+{% endif %}

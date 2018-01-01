@@ -61,7 +61,7 @@ class EditRentForm(forms.ModelForm):
 
 
 class AddGameForm(forms.Form):
-    game = forms.ChoiceField()
+    game = forms.ChoiceField(label=_("New game"))
 
     def __init__(self, *args, **kwargs):
         date_from = kwargs.pop("date_from")
