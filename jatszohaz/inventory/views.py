@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, ListView, UpdateView, FormView
 from inventory.forms import GameForm
 
-from .models import InventoryItem, GamePiece, GamePack
+from .models import InventoryItem, GamePiece, GamePack, GameGroup
 
 logger = logging.getLogger(__name__)
 
@@ -110,3 +110,21 @@ class EditGamePackView(SuccessMessageMixin, InventoryPermissionRequiredMixin, Up
     template_name = "inventory/edit-gamepack.html"
     success_url = reverse_lazy("inventory:gamepacks")
     success_message = _("Game pack successfully edited.")
+
+
+class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
+    model = GameGroup
+    fields = ['name', 'description', 'short_description', ]
+    template_name = "default_update.html"
+    success_url = reverse_lazy("inventory:list")
+    success_message = _("Game group successfully edited.")
+    title = _("Edit game group")
+
+
+class EditGamePiece(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
+    model = GamePiece
+    fields = ['owner', 'game_group', 'priority', 'notes']
+    template_name = "default_update.html"
+    success_url = reverse_lazy("inventory:list")
+    success_message = _("Game group successfully edited.")
+    title = _("Edit game piece")

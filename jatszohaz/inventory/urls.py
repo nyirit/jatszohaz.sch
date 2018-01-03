@@ -13,6 +13,8 @@ urlpatterns = [
 
     url(r'^new-game-with-group/$', views.NewGameWithGroupView.as_view(), name="new-game-with-group"),
     url(r'^new-game/$', views.NewGameView.as_view(), name="new-game"),
+    url(r'^edit-gamegroup/(?P<pk>\d+)/$', views.EditGameGroup.as_view(), name="edit-gamegroup"),
+    url(r'^edit-gamepiece/(?P<pk>\d+)/$', views.EditGamePiece.as_view(), name="edit-gamepiece"),
 
     url(r'^gamepacks/$', views.GamePackView.as_view(), name="gamepacks"),
     url(r'^new-gamepack/$', views.NewGamePackView.as_view(), name="new-gamepack"),
