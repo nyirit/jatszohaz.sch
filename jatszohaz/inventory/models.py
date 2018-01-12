@@ -2,6 +2,7 @@ import logging
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from django_resized import ResizedImageField
 from model_utils.models import TimeStampedModel
 from jatszohaz.models import JhUser
 
@@ -12,7 +13,7 @@ class GameGroup(TimeStampedModel):
     name = models.CharField(verbose_name=_("Name"), blank=False, unique=True, max_length=100)
     description = models.TextField(verbose_name=_("Description"), blank=False)
     short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
-    image = models.ImageField(verbose_name="Image")
+    image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image")
 
     def get_game_piece(self, date_from, date_to):
         for piece in self.game_pieces.order_by('-priority'):
