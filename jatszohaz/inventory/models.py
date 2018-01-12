@@ -1,6 +1,5 @@
 import logging
 from django.db import models
-from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
@@ -57,19 +56,6 @@ class GamePiece(TimeStampedModel):
 
     def __str__(self):
         return '%s - %s' % (self.game_group, self.notes)
-
-
-class GamePack(TimeStampedModel):
-    name = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
-    games = models.ManyToManyField(GameGroup, related_name="packs")
-    creator = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    active = models.BooleanField(verbose_name=_("Active"), default=False)
-
-    def __str__(self):
-        return '%s' % (self.name)
-
-    def get_absolute_url(self):
-        return reverse_lazy("inventory:edit-gamepack", kwargs={'pk': self.pk})
 
 
 class InventoryItem(TimeStampedModel):

@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, ListView, UpdateView, FormView
 from inventory.forms import GameForm
 
-from .models import InventoryItem, GamePiece, GamePack, GameGroup
+from .models import InventoryItem, GamePiece, GameGroup
 
 logger = logging.getLogger(__name__)
 
@@ -85,31 +85,6 @@ class NewGameView(InventoryPermissionRequiredMixin, CreateView):
     template_name = "inventory/new_game.html"
     fields = ['owner', 'game_group', 'notes', 'priority']
     success_url = reverse_lazy('inventory:list')
-
-
-class GamePackView(InventoryPermissionRequiredMixin, ListView):
-    model = GamePack
-    template_name = "inventory/list-gamepack.html"
-
-
-class NewGamePackView(SuccessMessageMixin, InventoryPermissionRequiredMixin, CreateView):
-    model = GamePack
-    fields = ['name', 'games', 'active', ]
-    template_name = "inventory/new_gamepack.html"
-    success_url = reverse_lazy("inventory:gamepacks")
-    success_message = _("Game pack successfully created.")
-
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super().form_valid(form)
-
-
-class EditGamePackView(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
-    model = GamePack
-    fields = ['name', 'games', 'active', ]
-    template_name = "inventory/edit-gamepack.html"
-    success_url = reverse_lazy("inventory:gamepacks")
-    success_message = _("Game pack successfully edited.")
 
 
 class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):

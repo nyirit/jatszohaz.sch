@@ -1,11 +1,11 @@
 from django.core.management.base import BaseCommand
 from jatszohaz.models import JhUser
-from inventory.models import GameGroup, GamePiece, GamePack
+from inventory.models import GameGroup, GamePiece
 
 
 class Command(BaseCommand):
     help = "Create data for testing. It will PERMANENTLY " \
-           "delete test users and ALL EXISTING GameGroup, GamePiece and GamePack objects!"
+           "delete test users and ALL EXISTING GameGroup, GamePiece objects!"
 
     users = (
         {'username': "admin",
@@ -118,17 +118,8 @@ class Command(BaseCommand):
             priority=2
         ).save()
 
-        gp = GamePack.objects.create(name="Bang-Catan", creator=owner, active=True)
-        gp.games.add(gg1)
-        gp.games.add(gg2)
-        gp.save()
-        gp = GamePack.objects.create(name="Bang", creator=owner, active=True)
-        gp.games.add(gg1)
-        gp.save()
-        GamePack.objects.create(name="Empty", creator=owner, active=True).save()
-        self.stdout.write('GameGroups, GamePieces and GamePack created.')
+        self.stdout.write('GameGroups and GamePieces created.')
 
     def __delete_games(self):
         GamePiece.objects.all().delete()
         GameGroup.objects.all().delete()
-        GamePack.objects.all().delete()
