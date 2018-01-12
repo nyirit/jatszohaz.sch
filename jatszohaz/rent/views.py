@@ -67,7 +67,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
 
 class MyView(LoginRequiredMixin, ListView):
     model = Rent
-    template_name = "rent/my-rents.html"
+    template_name = "rent/my_rents.html"
     ordering = ['-created']
 
     def get_queryset(self):

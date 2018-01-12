@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<label class="game_container"
+        {% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>
+
+<img src="{{widget.label.image.url}}" alt="" />
+
+<input type="{{ widget.type }}"
+   name="{{ widget.name }}"
+    {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}
+    {% include "django/forms/widgets/attrs.html" %} />
+
+  <span class="checkmark"></span>
+  <a class="title"
+     href="#"
+     data-toggle="tooltip"
+     data-placement="bottom"
+     title="{{ widget.label.short_description }}">{{ widget.label }}
+  </a>
+</label>

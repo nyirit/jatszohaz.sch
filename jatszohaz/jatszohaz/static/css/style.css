@@ -6,3 +6,59 @@ body {
   padding: 3rem 1.5rem;
   text-align: center;
 }
+
+.game_container {
+  position: relative;
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.game_container input {
+  position: absolute;
+  opacity: 0;
+}
+
+.game_container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 130px;
+  width: 130px;
+  background-color: transparent;
+  border: 5px solid;
+  border-top-width: 30px;
+}
+
+.game_container:hover .checkmark {
+  border-color: #666;
+}
+
+.game_container input:checked ~ .checkmark {
+  border-color: #00AA00;
+}
+
+.game_container:hover input:checked ~ .checkmark {
+  border-color: #00BB00;
+}
+
+.game_container .title {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    color:white;
+    width: 130px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.game_container .title:hover{
+    text-decoration: none;
+}
+
+.game_container img {
+    margin-top: 30px;
+}

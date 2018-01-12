@@ -25,11 +25,11 @@
             {% endif %}
         </table>
         {% if wizard.steps.prev %}
-            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "Different date" %}</button>
+            <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.first }}">{% trans "Different date" %}</button>
         {% endif %}
         {% if wizard.steps.step1 == 3 %}
-            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "Different games" %}</button>
+            <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.prev }}">{% trans "Different games" %}</button>
         {% endif %}
-        <input type="submit" value="{% trans "Submit" %}"/>
+        <input type="submit" class="btn btn-primary" value="{% trans "Submit" %}"/>
     </form>
 {% endblock %}
