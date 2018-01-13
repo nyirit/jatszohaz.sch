@@ -6,6 +6,7 @@ DEBUG = True
 
 INSTALLED_APPS += (
     'django_extensions',
+    'rosetta',
 )
 
 AUTHENTICATION_BACKENDS += ['django.contrib.auth.backends.ModelBackend']

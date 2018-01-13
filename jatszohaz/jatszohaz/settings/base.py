@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 from os import environ
 
 from os.path import dirname, abspath, join, basename, normpath
+from django.utils.translation import ugettext_lazy as _
 
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
@@ -87,6 +88,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -142,13 +144,23 @@ AUTH_USER_MODEL = 'jatszohaz.JhUser'
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = False
+
+LOCALE_PATHS = (
+    join(SITE_ROOT, "locale"),
+)
+
+LANGUAGES = (
+    ('en', _("English")),
+    ('hu', _("Hungarian")),
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
+LANGUAGE_CODE = get_env_variable("DJANGO_LANGUAGE_CODE", "hu")
 
 
 # ######### STATIC FILE CONFIGURATION

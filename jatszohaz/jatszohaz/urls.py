@@ -25,6 +25,9 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^rosetta/', include('rosetta.urls'))]
+
 if settings.DEBUG:
     from django.contrib.auth import views as auth_views
     urlpatterns += [url(r'^login2/$', auth_views.LoginView.as_view(template_name='login2.html'), name='login2')]
