@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <h1>Games</h1>
+    <h1>{% trans 'Games' %}</h1>
 
     <a href="{% url 'inventory:new-game-with-group' %}" >{% trans 'Add new game with gamegroup' %}</a><br/>
     <a href="{% url 'inventory:new-game' %}" >{% trans 'Add new game for existing gamegroup' %}</a><br/>
