@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -47,6 +48,22 @@ class Rent(TimeStampedModel):
 
     def create_new_history(self, user):
         RentHistory.objects.create(user=user, new_status=self.status, rent=self)
+
+    def is_past_due(self):
+        return ((self.date_to < datetime.now() and self.status == Rent.STATUS_GAVE_OUT[0])
+                or (self.date_from < datetime.now() and self.status == Rent.STATUS_PENDING[0]))
+
+    def get_status_css(self):
+        if self.is_past_due():
+            return 'danger'
+
+        if self.status in (Rent.STATUS_APPROVED[0], Rent.STATUS_BACK[0], Rent.STATUS_GAVE_OUT[0]):
+            return 'success'
+
+        if self.status == Rent.STATUS_PENDING[0]:
+            return 'warning'
+
+        return 'info'
 
 
 class RentHistory(TimeStampedModel):

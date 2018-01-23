@@ -1,37 +1,30 @@
 {% load i18n %}
 
 <label class="game_container"
-        {% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>
-
-    <img src="{{widget.label.image.url}}" alt="" />
-
-    <input type="{{ widget.type }}"
-        name="{{ widget.name }}"
-        {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}
-        {% include "django/forms/widgets/attrs.html" %} />
-
-    <span class="checkmark"></span>
+       data-toggle="tooltip"
+       data-placement="top"
+       title="{{ game.short_description }} - {% trans "Click for details!" %}">
     <span data-toggle="modal"
-       data-target="#modal_{{ widget.attrs.id }}">
-        <a class="title"
-           href="#"
-           data-toggle="tooltip"
-           data-placement="bottom"
-           title="{{ widget.label.short_description }} - {% trans "Click for details!" %}">
+       data-target="#modal_{{ game.id }}">
 
-            {{ widget.label }}
-        </a>
+        <img src="{{game.image.url}}" alt="" />
+
+        <span class="checkmark"></span>
+
+        <span class="title">
+            {{ game.name }}
+        </span>
     </span>
 </label>
 
 {# Modal panel #}
-<div class="modal fade" id="modal_{{ widget.attrs.id }}"
+<div class="modal fade" id="modal_{{ game.id }}"
      tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title">
-            {{ widget.label }}
+            {{ game.name }}
             <button type="button" class="close" data-dismiss="modal" aria-label="{% trans "Close" %}">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -39,7 +32,7 @@
 
       </div>
       <div class="modal-body">
-        {% blocktrans with description=widget.label.description %}
+        {% blocktrans with description=game.description %}
           TODO<br/>
           Players:<br/>
           Gametime:<br/>

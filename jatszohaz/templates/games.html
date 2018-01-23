@@ -2,12 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-    <h2>{% trans 'Games' %}</h2>
-    <ul>
-        {% for game in object_list %}
-            <li>{{ game.name }}
-                <br>
-            <img src="{{ game.image.url }}" alt="" /></li>
-        {% endfor %}
-    </ul>
+    <h1>{% trans 'Games' %}</h1>
+
+    <p>{% trans 'Games page info' %}</p>
+
+    {% for game in object_list %}
+        {% include '_game.html' with game=game %}
+    {% endfor %}
 {% endblock %}

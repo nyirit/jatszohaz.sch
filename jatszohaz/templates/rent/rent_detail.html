@@ -29,14 +29,20 @@
 
     {% include 'rent/rent_detail_admin.html' %}
 
-    <hr/>
-    <h2>{% trans 'Comments' %}:</h2>
+    <h1>{% trans 'Comments' %}</h1>
     {% for comment in object.comments.all %}
-        {% trans 'User' %}: {{ comment.user }}<br/>
-        {% trans 'Date' %}: {{ comment.created }}<br/>
-        {% trans 'Message' %}: {{ comment.message }}<br/>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {% trans 'User' %}: {{ comment.user }}<br/>
+                {% trans 'Date' %}: {{ comment.created }}<br/>
+            </div>
+            <div class="panel-body">
+                {% trans 'Message' %}: {{ comment.message }}<br/>
+            </div>
+        </div>
     {% endfor %}
-    <h3>{% trans 'New comment' %}:</h3>
+
+    <h3>{% trans 'New comment' %}</h3>
     <form action="{% url 'rent:new-comment' object.pk %}" method="post">
         {% csrf_token %}
         {{ comment_form|crispy }}

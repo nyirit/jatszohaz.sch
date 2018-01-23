@@ -69,6 +69,7 @@ class MyView(LoginRequiredMixin, ListView):
     model = Rent
     template_name = "rent/my_rents.html"
     ordering = ['-created']
+    paginate_by = 5
 
     def get_queryset(self):
         return self.request.user.rents.all()
@@ -79,6 +80,7 @@ class RentsView(PermissionRequiredMixin, ListView):
     template_name = "rent/rents.html"
     permission_required = 'web.manage_rents'
     ordering = ['-created']
+    paginate_by = 5
 
 
 class DetailsView(LoginRequiredMixin, DetailView):

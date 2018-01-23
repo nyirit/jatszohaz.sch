@@ -3,17 +3,11 @@
 
 {% block content %}
     <h1>{% trans 'All rents' %}</h1>
-        {% for rent in object_list %}
-            {{ rent.date_from|date }} - {{ rent.date_to|date }}<br/>
-            <a href="{% url "profile" rent.renter.pk %}">{{ rent.renter.full_name2 }}</a><br/>
-            {% for game in rent.games.all %}
-                {{ game.game_group }},
-            {% endfor %}
-            <br/>
-            {{ rent.get_status_display }}<br/>
-            <a href="{% url "rent:details" rent.pk %}">{% trans 'Details' %}</a>
-            <hr/>
-        {% empty %}
-            {% trans 'No rents yet.' %}
-        {% endfor %}
+    {% for rent in object_list %}
+        {% include 'rent/_rent.html' with rent=rent admin=True %}
+    {% empty %}
+        {% trans 'No rents yet.' %}
+    {% endfor %}
+
+    {% include '_pagination.html' %}
 {% endblock %}

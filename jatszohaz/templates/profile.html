@@ -3,9 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+    <h1>{% trans 'Profil' %}</h1>
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="{% trans "Update" %}" />
+        <br/>
+        <input class="btn btn-success" type="submit" value="{% trans "Update" %}" />
     </form>
 {% endblock %}

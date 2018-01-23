@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-13 07:48-0600\n"
-"PO-Revision-Date: 2018-01-13 07:59-0551\n"
+"POT-Creation-Date: 2018-01-23 14:35-0600\n"
+"PO-Revision-Date: 2018-01-23 15:47-0551\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -101,29 +101,39 @@ msgstr "Magyar"
 msgid "Successfully updated!"
 msgstr "Sikeresen frissítve!"
 
-#: rent/forms.py:11 rent/models.py:30 templates/inventory/list_game.html:10
-msgid "From"
-msgstr ""
+#: rent/forms.py:11
+msgid "Rent from"
+msgstr "Kölcsönzés kezdete"
 
-#: rent/forms.py:15 rent/models.py:31 templates/inventory/list_game.html:11
-msgid "To"
-msgstr ""
+#: rent/forms.py:16
+msgid "Rent to"
+msgstr "Kölcsönzés vége"
 
-#: rent/forms.py:26
+#: rent/forms.py:28
 msgid "Must be in the future!"
 msgstr "Múltbéli dátum nem megadható!"
 
-#: rent/forms.py:29
+#: rent/forms.py:31
 msgid "Date from must be before date to!"
 msgstr "A kölcsönzés vége nem lehet korábban, mint az eleje."
 
-#: rent/forms.py:64
+#: rent/forms.py:55
+msgid "Rent comment"
+msgstr "Megjegyzés"
+
+#: rent/forms.py:56
+msgid "Rent comment help"
+msgstr ""
+"Kérlek add meg, hogy mikor tudnád átvenni a játékot és minden egyéb kérést, "
+"óhajt és/vagy a kedvenc viccedet."
+
+#: rent/forms.py:72
 msgid "New game"
 msgstr "Új játék"
 
 #: rent/models.py:11
 msgid "Pending"
-msgstr "Függő"
+msgstr "Függőben"
 
 #: rent/models.py:12
 msgid "Approved"
@@ -149,10 +159,19 @@ msgstr "Visszautasítva"
 msgid "Cancelled"
 msgstr "Visszamondva"
 
-#: rent/models.py:29 templates/base.html:48 templates/games.html:5
+#: rent/models.py:29 templates/games.html:5
+#: templates/inventory/list-inventory.html:6 templates/navbar.html:23
 #: templates/rent/rent_detail.html:11
 msgid "Games"
 msgstr "Játékok"
+
+#: rent/models.py:30 templates/inventory/list_game.html:10
+msgid "From"
+msgstr ""
+
+#: rent/models.py:31 templates/inventory/list_game.html:11
+msgid "To"
+msgstr ""
 
 #: rent/models.py:32 rent/models.py:54 templates/inventory/list_game.html:12
 #: templates/rent/rent_detail.html:10
@@ -175,47 +194,48 @@ msgstr "Kölcsönzés statisztika megtekintése"
 msgid "Message"
 msgstr "Üzenet"
 
-#: rent/templates/rent/game_option.html:20
+#: rent/templates/rent/game_option.html:20 templates/_game.html:6
 msgid "Click for details!"
-msgstr "Kattints ide a részletekért!"
+msgstr "Kattints a részletekért!"
 
-#: rent/templates/rent/game_option.html:34
-#: rent/templates/rent/game_option.html:49
+#: rent/templates/rent/game_option.html:35
+#: rent/templates/rent/game_option.html:50 templates/_game.html:28
+#: templates/_game.html:43
 msgid "Close"
 msgstr "Bezár"
 
-#: rent/templates/rent/game_option.html:41
+#: rent/templates/rent/game_option.html:42 templates/_game.html:35
 #, python-format
 msgid ""
 "\n"
-"                  TODO<br/>\n"
-"                  Players:<br/>\n"
-"                  Gametime:<br/>\n"
-"                  Description: %(description)s<br/>\n"
-"          "
+"          TODO<br/>\n"
+"          Players:<br/>\n"
+"          Gametime:<br/>\n"
+"          Description: %(description)s<br/>\n"
+"        "
 msgstr ""
 
-#: rent/views.py:75
+#: rent/views.py:64
 msgid "Successfully rented!"
 msgstr "Sikeresen kölcsönözve!"
 
-#: rent/views.py:142
+#: rent/views.py:131
 msgid "Successfully sent!"
 msgstr "Sikeresen elküldve!"
 
-#: rent/views.py:160
+#: rent/views.py:149
 msgid "Rent changed!"
 msgstr "Kölcsönzés megváltoztatva!"
 
-#: rent/views.py:165 rent/views.py:213
+#: rent/views.py:154 rent/views.py:202
 msgid "Invalid form."
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:206
+#: rent/views.py:195
 msgid "Game added."
 msgstr "Játék hozzáadva!"
 
-#: rent/views.py:208
+#: rent/views.py:197
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
 
@@ -223,62 +243,18 @@ msgstr "A játék erre az időre már ki van kölcsönözve."
 msgid "This is not the page you were looking for."
 msgstr ""
 
-#: templates/base.html:10
-msgid "Schönherz Játszóház"
-msgstr "Schönherz Játszóház"
-
-#: templates/base.html:32
-msgid "Toggle navigation"
-msgstr "Navigáció"
-
-#: templates/base.html:40 templates/home.html:4
-msgid "Home"
-msgstr ""
-
-#: templates/base.html:43
-msgid "Profile"
-msgstr "Profil"
-
-#: templates/base.html:44 templates/rent/rent_detail.html:6
-msgid "Rent"
-msgstr "Kölcsönzés"
-
-#: templates/base.html:45 templates/rent/my_rents.html:5
-msgid "My rents"
-msgstr "Kölcsönzéseim"
-
-#: templates/base.html:50
-msgid "Rents"
-msgstr "Kölcsönzések"
-
-#: templates/base.html:53 templates/rent/rent_detail.html:20
-msgid "Inventory"
-msgstr "Leltár"
-
-#: templates/base.html:56
-msgid "Calendar"
-msgstr "Naptár"
-
-#: templates/base.html:57
-msgid "Admin"
-msgstr "Admin"
-
-#: templates/base.html:61
-msgid "Logout"
-msgstr "Kijelentkezés"
-
-#: templates/base.html:63 templates/login2.html:12
-msgid "Login"
-msgstr "Bejelentkezés"
-
-#: templates/base.html:65 templates/login2.html:8
-msgid "Login2"
-msgstr ""
-
 #: templates/default_update.html:11 templates/inventory/edit-inventory.html:9
 #: templates/rent/rent_detail_admin.html:19
 msgid "Save"
 msgstr "Mentés"
+
+#: templates/games.html:7
+msgid "Games page info"
+msgstr "Itt megtalálod az összes játékunkat és leírásaikat."
+
+#: templates/home.html:4 templates/navbar.html:15
+msgid "Home"
+msgstr ""
 
 #: templates/inventory/list-inventory.html:8
 msgid "Add new game with gamegroup"
@@ -305,7 +281,7 @@ msgstr "Legutóbbi leltár módosítása"
 msgid "No inventory."
 msgstr "Nincs leltári bejegyzés."
 
-#: templates/inventory/list-inventory.html:24 templates/rent/my_rents.html:13
+#: templates/inventory/list-inventory.html:24 templates/rent/my_rents.html:15
 #: templates/rent/rents.html:14
 msgid "Details"
 msgstr "Részletek"
@@ -365,7 +341,57 @@ msgstr "Létrehozás"
 msgid "Back"
 msgstr "Vissza"
 
-#: templates/profile.html:9
+#: templates/login2.html:8 templates/navbar.html:30
+msgid "Login2"
+msgstr ""
+
+#: templates/login2.html:12 templates/navbar.html:28
+msgid "Login"
+msgstr "Bejelentkezés"
+
+#: templates/navbar.html:7
+msgid "Toggle navigation"
+msgstr "Navigáció"
+
+#: templates/navbar.html:18
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/navbar.html:19 templates/rent/rent_detail.html:6
+msgid "Rent"
+msgstr "Kölcsönzés"
+
+#: templates/navbar.html:20 templates/rent/my_rents.html:5
+msgid "My rents"
+msgstr "Kölcsönzéseim"
+
+#: templates/navbar.html:26
+msgid "Logout"
+msgstr "Kijelentkezés"
+
+#: templates/navbar.html:37
+msgid "Rents"
+msgstr "Kölcsönzések"
+
+#: templates/navbar.html:40 templates/rent/rent_detail.html:20
+msgid "Inventory"
+msgstr "Leltár"
+
+#: templates/navbar.html:43
+msgid "Calendar"
+msgstr "Naptár"
+
+#: templates/navbar.html:44
+msgid "Admin"
+msgstr "Admin"
+
+#: templates/profile.html:6
+#, fuzzy
+#| msgid "Profile"
+msgid "Profil"
+msgstr "Profil"
+
+#: templates/profile.html:11
 msgid "Update"
 msgstr "Frissítés"
 
@@ -393,29 +419,42 @@ msgstr "Első bejelentkezés"
 msgid "Last login"
 msgstr "Utolsó bejelentkezés"
 
-#: templates/rent/my_rents.html:16 templates/rent/rents.html:17
+#: templates/rent/my_rents.html:20 templates/rent/rents.html:17
 msgid "No rents yet."
 msgstr "Nincs kölcsönzés."
 
-#: templates/rent/new_rent.html:11
-msgid "Pick dates..."
-msgstr ""
+#: templates/rent/new_rent.html:10
+msgid "Renting"
+msgstr "Kölcsönzés"
 
 #: templates/rent/new_rent.html:13
+msgid "Pick dates..."
+msgstr ""
+"Válaszd ki a kölcsönzésed kezdetét és végét. Később csak azokat a játékokat "
+"fogod látni, amik ekkor elérhetőek."
+
+#: templates/rent/new_rent.html:15
 msgid "Pick games..."
 msgstr ""
+"Válaszd ki mely játékokat szeretnéd kölcsönözni.\n"
+"\n"
+"A játékok nevére kattintva részletesebb leírást kapsz róluk."
 
-#: templates/rent/new_rent.html:32
+#: templates/rent/new_rent.html:31
 msgid "Different date"
-msgstr "Másik dátum"
+msgstr "Más dátum"
+
+#: templates/rent/new_rent.html:34
+msgid "Different games"
+msgstr "Más játékok"
 
 #: templates/rent/new_rent.html:35
-msgid "Different games"
-msgstr "Másik játékok"
+msgid "Finish"
+msgstr "Küldés"
 
 #: templates/rent/new_rent.html:37
-msgid "Submit"
-msgstr "Küldés"
+msgid "Next"
+msgstr "Tovább"
 
 #: templates/rent/rent_detail.html:9
 msgid "Dates"
@@ -431,7 +470,7 @@ msgstr "Nincs kölcsönzött játék"
 
 #: templates/rent/rent_detail.html:33
 msgid "Comments"
-msgstr "Komment"
+msgstr "Kommentek"
 
 #: templates/rent/rent_detail.html:35
 msgid "User"
@@ -464,3 +503,9 @@ msgstr "Nincs előzmény"
 #: templates/rent/rents.html:5
 msgid "All rents"
 msgstr "Minden kölcsönzés"
+
+#~ msgid "Submit"
+#~ msgstr "Küldés"
+
+#~ msgid "Schönherz Játszóház"
+#~ msgstr "Schönherz Játszóház"

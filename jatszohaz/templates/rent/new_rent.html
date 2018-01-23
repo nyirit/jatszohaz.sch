@@ -7,10 +7,12 @@
 {% endblock %}
 
 {% block content %}
+    <h1>{% trans 'Renting' %}</h1>
+
     {% if wizard.steps.step1 == 1 %}
-        {% trans "Pick dates..." %}
+        <p>{% trans "Pick dates..." %}</p>
     {% elif wizard.steps.step1 == 2 %}
-        {% trans "Pick games..." %}
+        <p>{% trans "Pick games..." %}</p>
     {% endif %}
     <form action="" method="post">{% csrf_token %}
         <table>
@@ -23,13 +25,17 @@
             {% else %}
                 {{ wizard.form|crispy }}
             {% endif %}
+            <br/>
         </table>
         {% if wizard.steps.prev %}
             <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.first }}">{% trans "Different date" %}</button>
         {% endif %}
         {% if wizard.steps.step1 == 3 %}
             <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.prev }}">{% trans "Different games" %}</button>
+            <input type="submit" class="btn btn-primary" value="{% trans "Finish" %}"/>
+        {% else %}
+            <input type="submit" class="btn btn-primary" value="{% trans "Next" %}"/>
         {% endif %}
-        <input type="submit" class="btn btn-primary" value="{% trans "Submit" %}"/>
+
     </form>
 {% endblock %}

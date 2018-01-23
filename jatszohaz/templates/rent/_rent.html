@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<div class="panel panel-{{rent.get_status_css}}">
+    <div class="panel-heading">{{ rent.date_from|date }} - {{ rent.date_to|date }}</div>
+    <div class="panel-body">
+        {% if admin %}
+            {% trans 'Renter' %}:
+            <a href="{% url "profile" rent.renter.pk %}">{{ rent.renter.full_name2 }}</a><br/>
+        {% endif %}
+
+        {% trans 'Games' %}:
+        {% for game in rent.games.all %}
+            {{ game.game_group }},
+        {% endfor %}
+
+        <br/>
+
+        {% trans 'Status' %}: {{ rent.get_status_display }}<br/>
+    </div>
+    <div class="panel-footer">
+        <a href="{% url "rent:details" rent.pk %}" class="btn btn-info">{% trans 'Details' %}</a>
+    </div>
+</div>

@@ -4,15 +4,10 @@
 {% block content %}
     <h1>{% trans 'My rents' %}</h1>
         {% for rent in object_list %}
-            {{ rent.date_from|date }} - {{ rent.date_to|date }}<br/>
-            {% for game in rent.games.all %}
-                {{ game.game_group }},
-            {% endfor %}
-            <br/>
-            {{ rent.get_status_display }}<br/>
-            <a href="{% url "rent:details" rent.pk %}">{% trans 'Details' %}</a>
-            <hr/>
+            {% include 'rent/_rent.html' with rent=rent %}
         {% empty %}
             {% trans 'No rents yet.' %}
         {% endfor %}
+
+    {% include '_pagination.html' %}
 {% endblock %}

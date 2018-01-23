@@ -8,12 +8,14 @@ from .widgets import GameSelectMultiple
 
 class RentFormStep1(forms.Form):
     date_from = forms.DateField(
-        label=_("From"),
-        widget=forms.DateTimeInput(attrs={'class': "datetimepicker"}))
+        label=_("Rent from"),
+        widget=forms.DateTimeInput(attrs={'class': "datetimepicker"})
+    )
 
     date_to = forms.DateField(
-        label=_("To"),
-        widget=forms.DateTimeInput(attrs={'class': "datetimepicker"}))
+        label=_("Rent to"),
+        widget=forms.DateTimeInput(attrs={'class': "datetimepicker"})
+    )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -35,7 +37,8 @@ class RentFormStep1(forms.Form):
 
 class RentFormStep2(forms.Form):
     game_groups = forms.MultipleChoiceField(widget=GameSelectMultiple,
-                                            required=False)
+                                            required=False,
+                                            label="")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -47,11 +50,16 @@ class RentFormStep2(forms.Form):
 
 
 class RentFormStep3(forms.Form):
-    comment = forms.CharField(required=False)
+    comment = forms.CharField(
+        required=False,
+        label=_("Rent comment"),
+        help_text=_("Rent comment help"),
+        widget=forms.Textarea
+    )
 
 
 class NewCommentForm(forms.Form):
-    comment = forms.CharField()
+    comment = forms.CharField(label="", widget=forms.Textarea)
 
 
 class EditRentForm(forms.ModelForm):
