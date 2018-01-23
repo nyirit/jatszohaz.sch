@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>{% block title %}{% block title-page %}{% endblock %} | {% block title-site %}{% trans "Schönherz Játszóház" %}{% endblock %}{% endblock %}</title>
+  <title>{% block title %}{% block title-page %}{% endblock %} | {% block title-site %}Schönherz Játszóház{% endblock %}{% endblock %}</title>
 
   <meta name="description" content="">
   <meta name="author" content="">
@@ -25,53 +25,17 @@
   <![endif]-->
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">{% trans 'Toggle navigation' %}</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
-
-            {% if user.is_authenticated %}
-              <li><a href="{% url 'my-profile' %}">{% trans 'Profile' %}</a></li>
-              <li><a href="{% url 'rent:new' %}">{% trans 'Rent' %}</a></li>
-              <li><a href="{% url 'rent:my' %}">{% trans 'My rents' %}</a></li>
-            {% endif %}
-
-            <li><a href="{% url 'games' %}">{% trans 'Games' %}</a></li>
-            {% if perms.web.manage_rents %}
-              <li><a href="{% url 'rent:rents' %}">{% trans 'Rents' %}</a></li>
-            {% endif %}
-            {% if perms.web.manage_inventory %}
-              <li><a href="{% url 'inventory:list' %}">{% trans 'Inventory' %}</a></li>
-            {% endif %}
-            {%  if user.is_superuser %}
-              <li><a href="{% url 'calendar' %}">{% trans 'Calendar' %}</a></li>
-              <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
-            {% endif %}
-
-            {% if user.is_authenticated %}
-              <li><a href="{% url "logout" %}">{% trans 'Logout' %}</a></li>
-            {% else %}
-              <li><a href="{% url "social:begin" SOCIAL_AUTH_BACKEND %}">{% trans 'Login' %}</a></li>
-              {% if DEBUG %}
-                <li><a href="{% url 'login2' %}">{% trans 'Login2' %}</a></li>
-              {% endif %}
-            {% endif %}
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
     <div class="container">
-      <div class="content">
+
+      {% include 'navbar.html' %}
+
+      <div class="header">
+        <h1 class="page-name">Schönherz Játszóház</h1>
+        <h2 class="page-slogen hidden-xs">„Mert játszani öröm”</h2>
+        <a class="logo hidden-xs" href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" /></a>
+      </div>
+
+      <div class="content img-rounded">
           {% block messages %}
           <div class="messagelist">
           {% if messages %}
