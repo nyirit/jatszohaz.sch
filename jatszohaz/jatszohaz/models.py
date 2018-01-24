@@ -1,7 +1,7 @@
 import logging
 from django.conf import settings
 from django.contrib.auth import user_logged_in
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
@@ -22,6 +22,11 @@ class JhUser(AbstractUser):
         help_text=_('Room number.'),
         blank=True
     )
+
+    class Meta:
+        permissions = (
+            ('view_all', _('View all')),
+        )
 
     def get_entitlements(self):
         """
@@ -50,10 +55,8 @@ class JhUser(AbstractUser):
         Update user rights according to its entitlements
         """
         if self.get_entitlements() is not None:
-            # TODO chage superuser status to actual permissions
-            self.is_staff = True
-            self.is_superuser = True
-            self.save()
+            group, created = Group.objects.get_or_create(name='kortag')
+            group.user_set.add(self)
             logger.info("Updated permissions for user %d." % self.pk)
 
     def full_name(self):

@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView
 
-from braces.views import SuperuserRequiredMixin
+from braces.views import PermissionRequiredMixin
 
 from .forms import JhUserForm
 from inventory.models import GameGroup
@@ -44,7 +44,7 @@ class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
-class ProfileView(SuperuserRequiredMixin, DetailView):
-    # TODO permission check
+class ProfileView(PermissionRequiredMixin, DetailView):
     model = JhUser
     template_name = "profile_detail.html"
+    permission_required = 'jatszohaz.view_all'

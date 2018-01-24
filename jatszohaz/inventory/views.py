@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class InventoryPermissionRequiredMixin(PermissionRequiredMixin):
-    permission_required = 'manage_inventory'
+    permission_required = 'inventory.manage_inventory'
 
 
 class NewInvView(SuccessMessageMixin, InventoryPermissionRequiredMixin, CreateView):
