@@ -156,7 +156,6 @@ LOCALE_PATHS = (
 )
 
 LANGUAGES = (
-    ('en', _("English")),
     ('hu', _("Hungarian")),
 )
 
