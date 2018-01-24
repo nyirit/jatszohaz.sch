@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from django.db.models import Count
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
@@ -64,6 +65,15 @@ class Rent(TimeStampedModel):
             return 'warning'
 
         return 'info'
+
+    @staticmethod
+    def get_count_by_status():
+        status_counts = dict()
+
+        for x in Rent.objects.all().values('status').annotate(total=Count('status')):
+            status_counts[x['status']] = x['total']
+
+        return status_counts
 
 
 class RentHistory(TimeStampedModel):

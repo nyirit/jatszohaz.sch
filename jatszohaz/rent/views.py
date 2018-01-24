@@ -79,8 +79,32 @@ class RentsView(PermissionRequiredMixin, ListView):
     model = Rent
     template_name = "rent/rents.html"
     permission_required = 'web.manage_rents'
-    ordering = ['-created']
     paginate_by = 5
+
+    def get_queryset(self):
+        status = self.kwargs.get('status')
+
+        result = Rent.objects.all().order_by('-created')
+        if status is not None:
+            result = result.filter(status=status)
+
+        return result
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        context['active_status'] = self.kwargs.get('status')
+        context['statuses'] = list()
+        status_count = Rent.get_count_by_status()
+        sum_count = 0
+        for status in Rent.STATUS_CHOICES:
+            count = status_count[status[0]] if status_count.get(status[0]) is not None else 0
+            context['statuses'].append(status + (count, ))
+            sum_count += count
+
+        context['sum_count'] = sum_count
+
+        return context
 
 
 class DetailsView(LoginRequiredMixin, DetailView):

@@ -50,6 +50,17 @@ body>.container>.content {
   padding: 30px;
 }
 
+.filter-bar {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.filter-bar>a.btn {
+    min-width: 120px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
 .game_container {
   position: relative;
   cursor: pointer;

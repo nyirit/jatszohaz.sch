@@ -3,6 +3,26 @@
 
 {% block content %}
     <h1>{% trans 'All rents' %}</h1>
+
+    {# Filter bar #}
+    <div class="text-center">
+        <div class="btn-group filter-bar" role="group">
+            {# Clear filter button #}
+            <a href="{% url 'rent:rents' %}"
+               class="btn btn-default{% if active_status == None %} active{% endif %}">
+                {% trans 'All' %} ({{ sum_count }})
+            </a>
+
+            {# Filter buttons for each status #}
+            {% for key, value, count in statuses %}
+                <a href="{% url 'rent:rents' key %}"
+                   class="btn btn-default{% if active_status == key %} active{% endif %}">
+                    {{ value }} ({{ count }})
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
     {% for rent in object_list %}
         {% include 'rent/_rent.html' with rent=rent admin=True %}
     {% empty %}
