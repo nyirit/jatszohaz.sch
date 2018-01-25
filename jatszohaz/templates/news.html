@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'News' %}</h1>
+
+    <ul>
+    {% for news in object_list reversed %}
+        <h2>{{ news.name }}</h2>
+        <p>Created on {{ news.pub_date|date:'Y-m-d H:i' }} by {{ news.creator }}</p>
+        <p align="justify">{{ news.content }}</p>
+        <br>
+    {% endfor %}
+    </ul>
+{% endblock %}
