@@ -33,10 +33,10 @@
 
         <br/>
 
-        {% if perms.web.manage_rents %}
+        {% if perms.rent.manage_rents %}
           <li><a href="{% url 'rent:rents' %}">{% trans 'Rents' %}</a></li>
         {% endif %}
-        {% if perms.web.manage_inventory %}
+        {% if perms.inventory.manage_inventory %}
           <li><a href="{% url 'inventory:list' %}">{% trans 'Inventory' %}</a></li>
         {% endif %}
         {%  if user.is_superuser %}

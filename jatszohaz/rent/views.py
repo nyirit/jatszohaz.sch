@@ -78,7 +78,7 @@ class MyView(LoginRequiredMixin, ListView):
 class RentsView(PermissionRequiredMixin, ListView):
     model = Rent
     template_name = "rent/rents.html"
-    permission_required = 'web.manage_rents'
+    permission_required = 'rent.manage_rents'
     paginate_by = 5
 
     def get_queryset(self):
@@ -151,7 +151,7 @@ class NewCommentView(LoginRequiredMixin, FormView):
         user = self.request.user
         message = form.cleaned_data['comment']
 
-        if rent.renter == user or user.has_perm('web.manage_rents'):
+        if rent.renter == user or user.has_perm('rent.manage_rents'):
             Comment.objects.create(rent=rent, user=user, message=message).save()
             # TODO email notification
             messages.success(self.request, _("Successfully sent!"))
@@ -164,7 +164,7 @@ class NewCommentView(LoginRequiredMixin, FormView):
 class EditView(PermissionRequiredMixin, UpdateView):
     model = Rent
     form_class = EditRentForm
-    permission_required = 'web.manage_rents'
+    permission_required = 'rent.manage_rents'
     raise_exception = True
 
     def get(self, request, *args, **kwargs):
@@ -193,7 +193,7 @@ class ChangeStatusView(LoginRequiredMixin, View):
         user = self.request.user
 
         # if has no permission, then can change only his own rent and only to cancelled
-        if not user.has_perm('web.manage_rents') and (
+        if not user.has_perm('rent.manage_rents') and (
                 user != rent.renter or
                 status != Rent.STATUS_CANCELLED[0]):
 
@@ -206,7 +206,7 @@ class ChangeStatusView(LoginRequiredMixin, View):
 
 
 class AddGameView(PermissionRequiredMixin, FormView):
-    permission_required = 'web.manage_rents'
+    permission_required = 'rent.manage_rents'
     raise_exception = True
     form_class = AddGameForm
 
@@ -237,7 +237,7 @@ class AddGameView(PermissionRequiredMixin, FormView):
 
 class RemoveGameView(PermissionRequiredMixin, View):
     http_method_names = ['get', ]
-    permission_required = 'web.manage_rents'
+    permission_required = 'rent.manage_rents'
     raise_exception = True
 
     def get(self, request, *args, **kwargs):
