@@ -83,7 +83,7 @@ class NewGameWithGroupView(InventoryPermissionRequiredMixin, FormView):
 class NewGameView(InventoryPermissionRequiredMixin, CreateView):
     model = GamePiece
     template_name = "inventory/new_game.html"
-    fields = ['owner', 'game_group', 'notes', 'priority']
+    fields = ['owner', 'game_group', 'notes', 'priority', 'rentable']
     success_url = reverse_lazy('inventory:list')
 
 
@@ -98,7 +98,7 @@ class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, Updat
 
 class EditGamePiece(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
     model = GamePiece
-    fields = ['owner', 'game_group', 'priority', 'notes']
+    fields = ['owner', 'game_group', 'priority', 'notes', 'rentable']
     template_name = "default_update.html"
     success_url = reverse_lazy("inventory:list")
     success_message = _("Game group successfully edited.")

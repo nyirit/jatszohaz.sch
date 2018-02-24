@@ -44,6 +44,7 @@ class GamePiece(TimeStampedModel):
     # Priority: which GamePiece should be rented first from same GameGroup.
     # Higher number will be rented first.
     priority = models.PositiveSmallIntegerField(verbose_name=_("Priority"), default=0)
+    rentable = models.BooleanField(verbose_name=_("Rentable"), null=False, blank=False, default=True)
 
     def is_free(self, date_from, date_to):
         from rent.models import Rent

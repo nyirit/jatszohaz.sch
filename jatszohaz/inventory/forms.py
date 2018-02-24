@@ -12,3 +12,4 @@ class GameForm(forms.ModelForm):
     owner = forms.ModelChoiceField(label=_("Owner"), queryset=JhUser.objects.all(), required=False)
     notes = forms.CharField(label=_("Notes"), max_length=100, required=False)
     priority = forms.IntegerField(label=_("Priority"), initial=0)
+    rentable = forms.BooleanField(label=_("Rentable"), initial=True)
