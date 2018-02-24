@@ -48,7 +48,8 @@ class GamePiece(TimeStampedModel):
 
     def is_free(self, date_from, date_to):
         from rent.models import Rent
-        return self.rents\
+
+        return self.rentable and self.rents\
             .exclude(status__in=[Rent.STATUS_CANCELLED, Rent.STATUS_DECLINED])\
             .filter(models.Q(date_from__range=(date_from, date_to)) | models.Q(date_to__range=(date_from, date_to)))\
             .count() == 0
