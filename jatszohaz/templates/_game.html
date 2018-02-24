@@ -32,12 +32,9 @@
 
       </div>
       <div class="modal-body">
-        {% blocktrans with description=game.description %}
-          TODO<br/>
-          Players:<br/>
-          Gametime:<br/>
-          Description: {{ description }}<br/>
-        {% endblocktrans %}
+          <p>{% trans 'Players' %}: {{ game.players }}</p>
+          <p>{% trans 'Playtime' %}: {{ game.playtime }}</p>
+          <p>{% trans 'Description' %}: {{ game.description }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>

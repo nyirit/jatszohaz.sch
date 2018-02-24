@@ -45,7 +45,8 @@ class RentFormStep2(forms.Form):
         date_from = kwargs['initial']['date_from']
         date_to = kwargs['initial']['date_to']
 
-        available_games = [(g.pk, g) for g in GameGroup.objects.all() if g.has_free_piece(date_from, date_to)]
+        available_games = [(g.pk, g) for g
+                           in GameGroup.objects.all().order_by('name') if g.has_free_piece(date_from, date_to)]
         self.fields['game_groups'].choices = available_games
 
 

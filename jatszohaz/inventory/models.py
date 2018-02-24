@@ -14,6 +14,8 @@ class GameGroup(TimeStampedModel):
     description = models.TextField(verbose_name=_("Description"), blank=False)
     short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
     image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image")
+    players = models.CharField(verbose_name=_("Players"), max_length=100)
+    playtime = models.CharField(verbose_name=_("Playing time"), max_length=100)
 
     def get_game_piece(self, date_from, date_to):
         for piece in self.game_pieces.order_by('-priority'):
@@ -66,6 +68,7 @@ class InventoryItem(TimeStampedModel):
     game = models.ForeignKey(GamePiece, on_delete=models.CASCADE, related_name="inventories")
     playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False)
     missing_items = models.CharField(verbose_name=_("Missing items"), max_length=100, blank=True)
+    rules = models.CharField(verbose_name=_("Rules"), max_length=100, default='-')
 
     class Meta:
         permissions = (
