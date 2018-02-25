@@ -177,7 +177,11 @@ class EditView(PermissionRequiredMixin, UpdateView):
 
     def form_invalid(self, form):
         # TODO show field errors in displayed page
-        messages.error(self.request, _("Invalid form."))
+        if form.error_text:
+            messages.error(self.request, form.error_text)
+        else:
+            messages.error(self.request, _("Invalid form."))
+
         return redirect(self.get_object().get_absolute_url())
 
     def get_success_url(self):

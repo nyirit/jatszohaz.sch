@@ -64,9 +64,26 @@ class NewCommentForm(forms.Form):
 
 
 class EditRentForm(forms.ModelForm):
+    error_text = ""  # bit of a hack, because BaseFrom has no useful list/dict of errors
+
     class Meta:
         model = Rent
         fields = ['date_from', 'date_to', 'bail', ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # check game availability in new dates
+        not_available_games = []
+        if 'date_from' in cleaned_data and 'date_to' in cleaned_data:
+            for game in self.instance.games.all():
+                if not game.is_free(cleaned_data['date_from'], cleaned_data['date_to']):
+                    not_available_games.append(str(game))
+        if not_available_games:
+            self.error_text = _("Failed to change date. Not available: %s" % ', '.join(not_available_games))
+            self.add_error('date_from', self.error_text)
+
+        return cleaned_data
 
 
 class AddGameForm(forms.Form):
