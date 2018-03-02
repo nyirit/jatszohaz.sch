@@ -31,6 +31,7 @@ class CalendarView(TemplateView):
 class GamesView(ListView):
     model = GameGroup
     template_name = "games.html"
+    ordering = "name"
 
 
 class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
