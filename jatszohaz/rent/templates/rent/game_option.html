@@ -13,14 +13,14 @@
     <span class="checkmark"></span>
     <span data-toggle="modal"
        data-target="#modal_{{ widget.attrs.id }}">
-        <a class="title"
-           href="#"
+        <span class="title"
+           onclick="return false"  {# Little hack. Without it when modal shows selection toggles. #}
            data-toggle="tooltip"
            data-placement="bottom"
            title="{{ widget.label.short_description }} - {% trans "Click for details!" %}">
 
             {{ widget.label }}
-        </a>
+        </span>
     </span>
 </label>
 
