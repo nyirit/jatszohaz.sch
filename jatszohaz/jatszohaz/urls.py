@@ -23,6 +23,9 @@ urlpatterns = [
     url(r'^rent/', include('rent.urls')),
     url(r'^inventory/', include('inventory.urls')),
 
+    url(r'^about-us/$', views.AboutUsView.as_view(), name="about-us"),
+    url(r'^faq/$', views.FaqView.as_view(), name="faq"),
+
     url(r'^news/', include('news.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

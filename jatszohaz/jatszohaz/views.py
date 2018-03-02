@@ -49,3 +49,11 @@ class ProfileView(PermissionRequiredMixin, DetailView):
     model = JhUser
     template_name = "profile_detail.html"
     permission_required = 'jatszohaz.view_all'
+
+
+class AboutUsView(TemplateView):
+    template_name = "static_pages/about_us.html"
+
+
+class FaqView(TemplateView):
+    template_name = "static_pages/faq.html"
