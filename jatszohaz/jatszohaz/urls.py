@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^after-login/', views.AfterLoginView.as_view()),
 
     url(r'^$', views.HomeView.as_view(), name="home"),
     url(r'^calendar/$', views.CalendarView.as_view(), name="calendar"),

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-03 12:15-0600\n"
-"PO-Revision-Date: 2018-03-03 12:19-0551\n"
+"POT-Creation-Date: 2018-03-03 13:21-0600\n"
+"PO-Revision-Date: 2018-03-03 13:20-0551\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -100,7 +100,9 @@ msgid "mobile"
 msgstr "mobil"
 
 #: jatszohaz/models.py:16
-msgid "Mobile number for helping communication if necessery."
+#, fuzzy
+#| msgid "Mobile number for helping communication if necessery."
+msgid "Mobile number for helping communication if necessary."
 msgstr "Telefonszám a kommunikációhoz, ha szükséges."
 
 #: jatszohaz/models.py:20
@@ -111,7 +113,15 @@ msgstr "szoba"
 msgid "Room number."
 msgstr "Szobaszám."
 
-#: jatszohaz/models.py:28
+#: jatszohaz/models.py:26
+msgid "Checked profile"
+msgstr ""
+
+#: jatszohaz/models.py:27
+msgid "From time to time everyone is required to check his profile."
+msgstr ""
+
+#: jatszohaz/models.py:33
 msgid "View all"
 msgstr "Mind megtekintése"
 
@@ -119,9 +129,13 @@ msgstr "Mind megtekintése"
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: jatszohaz/views.py:40
+#: jatszohaz/views.py:41
 msgid "Successfully updated!"
 msgstr "Sikeresen frissítve!"
+
+#: jatszohaz/views.py:72
+msgid "Please check your profile data and click the Update button!"
+msgstr "Kérlek ellenőrizd az adataidat, majd kattints a Frissítés gombra!"
 
 #: rent/forms.py:11
 msgid "Rent from"
@@ -155,12 +169,12 @@ msgstr ""
 "Kérlek add meg, hogy mikor tudnád átvenni a játékot és minden egyéb kérést, "
 "óhajt és/vagy a kedvenc viccedet."
 
-#: rent/forms.py:85
+#: rent/forms.py:87
 #, python-format
 msgid "Failed to change date. Not available: %s"
 msgstr "Sikertelen dátummódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/forms.py:92
+#: rent/forms.py:94
 msgid "New game"
 msgstr "Új játék"
 
@@ -296,7 +310,6 @@ msgid "My rents"
 msgstr "Kölcsönzéseim"
 
 #: templates/_navbar.html:23
-#| msgid "No games."
 msgid "Our games"
 msgstr "Játékaink"
 
@@ -305,9 +318,10 @@ msgstr "Játékaink"
 msgid "About us"
 msgstr "Rólunk"
 
-#: templates/_navbar.html:26
-msgid "Faq"
-msgstr ""
+#: templates/_navbar.html:26 templates/static_pages/faq.html:4
+#: templates/static_pages/faq.html:7
+msgid "FAQ"
+msgstr "GYIK"
 
 #: templates/_navbar.html:29
 msgid "Logout"
@@ -441,7 +455,7 @@ msgstr "Hírek"
 msgid "Profil"
 msgstr "Profil"
 
-#: templates/profile.html:11
+#: templates/profile.html:12
 msgid "Update"
 msgstr "Frissítés"
 
@@ -561,10 +575,6 @@ msgstr "Mind"
 #: templates/static_pages/about_us.html:9
 msgid "About us text"
 msgstr ""
-
-#: templates/static_pages/faq.html:4 templates/static_pages/faq.html:7
-msgid "FAQ"
-msgstr "GYIK"
 
 #: templates/static_pages/faq.html:9
 msgid "FAQ text"

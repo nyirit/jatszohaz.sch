@@ -1,9 +1,10 @@
 import logging
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView, ListView, DetailView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, RedirectView
 
 from braces.views import PermissionRequiredMixin
 
@@ -44,6 +45,13 @@ class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    def form_valid(self, form):
+        user = self.request.user
+        user.checked_profile = True
+        user.save()
+
+        return super().form_valid(form)
+
 
 class ProfileView(PermissionRequiredMixin, DetailView):
     model = JhUser
@@ -57,3 +65,12 @@ class AboutUsView(TemplateView):
 
 class FaqView(TemplateView):
     template_name = "static_pages/faq.html"
+
+
+class AfterLoginView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        if not self.request.user.checked_profile:
+            messages.info(self.request, _("Please check your profile data and click the Update button!"))
+            return reverse_lazy('my-profile')
+
+        return reverse_lazy('home')

@@ -13,7 +13,7 @@ class JhUser(AbstractUser):
     mobile = models.CharField(
         verbose_name=_('mobile'),
         max_length=100,
-        help_text=_('Mobile number for helping communication if necessery.'),
+        help_text=_('Mobile number for helping communication if necessary.'),
         blank=True
     )
     room = models.CharField(
@@ -21,6 +21,11 @@ class JhUser(AbstractUser):
         max_length=100,
         help_text=_('Room number.'),
         blank=True
+    )
+    checked_profile = models.BooleanField(
+        verbose_name=_("Checked profile"),
+        help_text=_("From time to time everyone is required to check his profile."),
+        default=False
     )
 
     class Meta:
