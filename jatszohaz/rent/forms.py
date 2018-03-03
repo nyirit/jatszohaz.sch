@@ -71,6 +71,8 @@ class EditRentForm(forms.ModelForm):
     class Meta:
         model = Rent
         fields = ['date_from', 'date_to', 'bail', ]
+        widgets = {'date_from': forms.DateTimeInput(attrs={'class': "datetimepicker"}),
+                   'date_to': forms.DateTimeInput(attrs={'class': "datetimepicker"})}
 
     def clean(self):
         cleaned_data = super().clean()
