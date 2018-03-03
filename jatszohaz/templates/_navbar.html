@@ -20,10 +20,10 @@
           <li><a href="{% url 'rent:my' %}">{% trans 'My rents' %}</a></li>
         {% endif %}
 
-        <li><a href="{% url 'games' %}">{% trans 'Games' %}</a></li>
+        <li><a href="{% url 'games' %}">{% trans 'Our games' %}</a></li>
 
         <li><a href="{% url 'about-us' %}">{% trans 'About us' %}</a></li>
-        <li><a href="{% url 'faq' %}">{% trans 'Faq' %}</a></li>
+        <li><a href="{% url 'faq' %}">{% trans 'FAQ' %}</a></li>
 
         {% if user.is_authenticated %}
           <li><a href="{% url "logout" %}">{% trans 'Logout' %}</a></li>
