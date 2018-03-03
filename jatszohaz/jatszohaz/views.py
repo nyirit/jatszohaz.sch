@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 class HomeView(TemplateView):
-    template_name = "home.html"
+    template_name = "jatszohaz/home.html"
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
@@ -26,12 +26,12 @@ class HomeView(TemplateView):
 
 
 class CalendarView(TemplateView):
-    template_name = "calendar.html"
+    template_name = "jatszohaz/calendar.html"
 
 
 class GamesView(ListView):
     model = GameGroup
-    template_name = "games.html"
+    template_name = "jatszohaz/games.html"
     ordering = "name"
 
 
@@ -40,7 +40,7 @@ class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('my-profile')
     success_message = _("Successfully updated!")
     form_class = JhUserForm
-    template_name = "profile.html"
+    template_name = "jatszohaz/profile.html"
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -55,7 +55,7 @@ class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 class ProfileView(PermissionRequiredMixin, DetailView):
     model = JhUser
-    template_name = "profile_detail.html"
+    template_name = "jatszohaz/profile_detail.html"
     permission_required = 'jatszohaz.view_all'
 
 
@@ -74,3 +74,11 @@ class AfterLoginView(RedirectView):
             return reverse_lazy('my-profile')
 
         return reverse_lazy('home')
+
+
+class UsersView(PermissionRequiredMixin, ListView):
+    model = JhUser
+    permission_required = 'jatszohaz.view_all'
+    template_name = "jatszohaz/user_list.html"
+    ordering = "first_name"
+    paginate_by = 50

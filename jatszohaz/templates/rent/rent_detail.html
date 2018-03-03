@@ -5,7 +5,7 @@
 {% block content %}
     <h2>{% trans 'Rent' %}:</h2>
 
-    {% trans 'Renter' %}: {{ object.renter.full_name2 }}<br/>
+    {% trans 'Renter' %}: <a href="{% url "profile" rent.renter.pk %}">{{ object.renter.full_name2 }}</a><br/>
     {% trans 'Dates' %}: {{ object.date_from }} - {{ object.date_to }}<br/>
     {% trans 'Status' %}: {{ object.get_status_display }}<br/>
     {% trans 'Games' %}:

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+    <h1>{% trans 'Users' %}</h1>
+    {% if object_list.is_empty %}
+        {% trans 'No users.' %}
+    {% else %}
+         <table class="table table-responsive">
+            <tr>
+                <th>{% trans 'Name' %}</th>
+                <th>{% trans 'Email' %}</th>
+                <th>{% trans 'Room' %}</th>
+                <th>{% trans 'Mobile' %}</th>
+                <th>{% trans 'Last login' %}</th>
+            </tr>
+            {% for user in object_list %}
+                <tr>
+                    <td><a href="{% url "profile" user.pk %}">{{ user.full_name2 }}</a></td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.room }}</td>
+                    <td>{{ user.mobile }}</td>
+                    <td>{{ user.last_login }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% include '_pagination.html' %}
+{% endblock %}
