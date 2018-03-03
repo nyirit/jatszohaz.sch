@@ -36,9 +36,11 @@ class RentFormStep1(forms.Form):
 
 
 class RentFormStep2(forms.Form):
-    game_groups = forms.MultipleChoiceField(widget=GameSelectMultiple,
-                                            required=False,
-                                            label="")
+    game_groups = forms.MultipleChoiceField(
+        widget=GameSelectMultiple,
+        required=False,
+        label="",
+        error_messages={'invalid_choice': _('Some selected games are not available due to concurrent user rent.')})
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

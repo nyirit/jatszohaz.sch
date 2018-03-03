@@ -51,7 +51,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
             date_from=date_from,
             date_to=date_to
         )
-        for gg_id in game_groups:
+        for gg_id in game_groups or ():
             gg = GameGroup.objects.get(id=gg_id)
             rent.games.add(gg.get_game_piece(date_from, date_to))
         rent.save()
