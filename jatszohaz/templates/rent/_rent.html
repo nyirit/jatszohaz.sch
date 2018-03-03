@@ -5,7 +5,7 @@
     <div class="panel-body">
         {% if admin %}
             {% trans 'Renter' %}:
-            <a href="{% url "profile" rent.renter.pk %}">{{ rent.renter.full_name2 }}</a><br/>
+            <a href="{{ rent.renter.get_absolute_url }}">{{ rent.renter.full_name2 }}</a><br/>
         {% endif %}
 
         {% trans 'Games' %}:

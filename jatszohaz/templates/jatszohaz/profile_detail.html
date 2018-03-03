@@ -2,11 +2,39 @@
 {% load i18n %}
 
 {% block content %}
-    {% trans 'Name' %}: {{ object.full_name2 }}<br />
-    {% trans 'Email' %}: {{ object.email }}<br />
-    {% trans 'Room' %}: {{ object.room }}<br />
-    {% trans 'Mobile' %}: {{ object.mobile }}<br />
-    {% trans 'Username' %}: {{ object.username }}<br />
-    {% trans 'First login' %}: {{ object.date_joined }}<br />
-    {% trans 'Last login' %}: {{ object.last_login}}<br />
+
+    <h1>{% trans 'Profile details' %}</h1>
+
+    <h2>{% trans 'Basic info' %}</h2>
+    <table>
+        <tr><td>{% trans 'Name' %}:         </td><td>{{ object.full_name2 }}</td></tr>
+        <tr><td>{% trans 'Email' %}:        </td><td>{{ object.email }}</td></tr>
+        <tr><td>{% trans 'Room' %}:         </td><td>{{ object.room }}</td></tr>
+        <tr><td>{% trans 'Mobile' %}:       </td><td>{{ object.mobile }}</td></tr>
+        <tr><td>{% trans 'First login' %}:  </td><td>{{ object.date_joined }}</td></tr>
+        <tr><td>{% trans 'Last login' %}:   </td><td>{{ object.last_login}}</td></tr>
+    </table>
+
+    <h3>{% trans 'Rents' %}</h3>
+    {% if rents %}
+        <table class="table">
+        <tr>
+            <th>{% trans "From" %}</th>
+            <th>{% trans "To" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th>&nbsp;</th>
+        </tr>
+        {% for rent in rents %}
+            <tr>
+                <td>{{ rent.date_from|date }}</td>
+                <td>{{ rent.date_to|date }}</td>
+                <td>{{ rent.get_status_display }}</td>
+                <td><a href="{{ rent.get_absolute_url }}">{% trans 'Details' %}</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        {% trans "No rents yet." %}
+    {% endif %}
+
 {% endblock %}

@@ -17,7 +17,7 @@
             </tr>
             {% for user in object_list %}
                 <tr>
-                    <td><a href="{% url "profile" user.pk %}">{{ user.full_name2 }}</a></td>
+                    <td><a href="{{ user.get_absolute_url }}">{{ user.full_name2 }}</a></td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.room }}</td>
                     <td>{{ user.mobile }}</td>

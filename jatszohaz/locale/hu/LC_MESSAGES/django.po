@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-03 13:21-0600\n"
-"PO-Revision-Date: 2018-03-03 13:20-0551\n"
+"POT-Creation-Date: 2018-03-03 14:14-0600\n"
+"PO-Revision-Date: 2018-03-03 14:20-0551\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -32,12 +32,12 @@ msgid "Priority"
 msgstr "Prioritás"
 
 #: inventory/forms.py:15 inventory/models.py:49
-#, fuzzy
 #| msgid "Renter"
 msgid "Rentable"
-msgstr "Kölcsönző"
+msgstr "Kölcsönözhető"
 
-#: inventory/models.py:13 templates/profile_detail.html:5
+#: inventory/models.py:13 templates/jatszohaz/profile_detail.html:10
+#: templates/jatszohaz/user_list.html:12
 msgid "Name"
 msgstr "Név"
 
@@ -52,10 +52,9 @@ msgstr "Rövid leírás"
 
 #: inventory/models.py:17 rent/templates/rent/game_option.html:42
 #: templates/_game.html:35
-#, fuzzy
 #| msgid "Playable"
 msgid "Players"
-msgstr "Játszható"
+msgstr "Játékosok"
 
 #: inventory/models.py:18
 msgid "Playing time"
@@ -95,33 +94,32 @@ msgstr "Játék módosítása"
 msgid "Edit game piece"
 msgstr "Játék elem módosítása"
 
-#: jatszohaz/models.py:14
+#: jatszohaz/models.py:15
 msgid "mobile"
 msgstr "mobil"
 
-#: jatszohaz/models.py:16
-#, fuzzy
+#: jatszohaz/models.py:17
 #| msgid "Mobile number for helping communication if necessery."
 msgid "Mobile number for helping communication if necessary."
-msgstr "Telefonszám a kommunikációhoz, ha szükséges."
+msgstr "Telefonszám a kommunikációhoz szükség esetére."
 
-#: jatszohaz/models.py:20
+#: jatszohaz/models.py:21
 msgid "room"
 msgstr "szoba"
 
-#: jatszohaz/models.py:22
+#: jatszohaz/models.py:23
 msgid "Room number."
 msgstr "Szobaszám."
 
-#: jatszohaz/models.py:26
+#: jatszohaz/models.py:27
 msgid "Checked profile"
 msgstr ""
 
-#: jatszohaz/models.py:27
+#: jatszohaz/models.py:28
 msgid "From time to time everyone is required to check his profile."
 msgstr ""
 
-#: jatszohaz/models.py:33
+#: jatszohaz/models.py:34
 msgid "View all"
 msgstr "Mind megtekintése"
 
@@ -133,7 +131,7 @@ msgstr "Magyar"
 msgid "Successfully updated!"
 msgstr "Sikeresen frissítve!"
 
-#: jatszohaz/views.py:72
+#: jatszohaz/views.py:78
 msgid "Please check your profile data and click the Update button!"
 msgstr "Kérlek ellenőrizd az adataidat, majd kattints a Frissítés gombra!"
 
@@ -206,22 +204,25 @@ msgstr "Visszautasítva"
 msgid "Cancelled"
 msgstr "Visszamondva"
 
-#: rent/models.py:31 templates/games.html:5
-#: templates/inventory/list-inventory.html:6 templates/rent/_rent.html:11
+#: rent/models.py:31 templates/inventory/list-inventory.html:6
+#: templates/jatszohaz/games.html:5 templates/rent/_rent.html:11
 #: templates/rent/rent_detail.html:11
 msgid "Games"
 msgstr "Játékok"
 
 #: rent/models.py:32 templates/inventory/list_game.html:10
+#: templates/jatszohaz/profile_detail.html:24
 msgid "From"
 msgstr "Dátum kezdete"
 
 #: rent/models.py:33 templates/inventory/list_game.html:11
+#: templates/jatszohaz/profile_detail.html:25
 msgid "To"
 msgstr "Dátum vége"
 
 #: rent/models.py:34 rent/models.py:81 templates/inventory/list_game.html:12
-#: templates/rent/_rent.html:18 templates/rent/rent_detail.html:10
+#: templates/jatszohaz/profile_detail.html:26 templates/rent/_rent.html:18
+#: templates/rent/rent_detail.html:10
 msgid "Status"
 msgstr "Státusz"
 
@@ -252,10 +253,9 @@ msgid "Close"
 msgstr "Bezár"
 
 #: rent/templates/rent/game_option.html:43 templates/_game.html:36
-#, fuzzy
 #| msgid "Playable"
 msgid "Playtime"
-msgstr "Játszható"
+msgstr "Játékidő"
 
 #: rent/templates/rent/game_select.html:13
 msgid "We have no available games for this time interval, sorry."
@@ -293,7 +293,7 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr "Navigáció"
 
-#: templates/_navbar.html:15 templates/home.html:4
+#: templates/_navbar.html:15 templates/jatszohaz/home.html:4
 msgid "Home"
 msgstr ""
 
@@ -343,11 +343,16 @@ msgstr "Kölcsönzések"
 msgid "Inventory"
 msgstr "Leltár"
 
-#: templates/_navbar.html:46
+#: templates/_navbar.html:46 templates/jatszohaz/user_list.html:6
+#| msgid "User"
+msgid "Users"
+msgstr "Felhasználók"
+
+#: templates/_navbar.html:49
 msgid "Calendar"
 msgstr "Naptár"
 
-#: templates/_navbar.html:47
+#: templates/_navbar.html:50
 msgid "Admin"
 msgstr "Admin"
 
@@ -355,10 +360,6 @@ msgstr "Admin"
 #: templates/rent/rent_detail_admin.html:22
 msgid "Save"
 msgstr "Mentés"
-
-#: templates/games.html:7
-msgid "Games page info"
-msgstr "Itt megtalálod az összes játékunkat és leírásaikat."
 
 #: templates/inventory/list-inventory.html:8
 msgid "Add new game with gamegroup"
@@ -385,7 +386,8 @@ msgstr "Legutóbbi leltár módosítása"
 msgid "No inventory."
 msgstr "Nincs leltári bejegyzés."
 
-#: templates/inventory/list-inventory.html:24 templates/rent/_rent.html:21
+#: templates/inventory/list-inventory.html:24
+#: templates/jatszohaz/profile_detail.html:34 templates/rent/_rent.html:21
 msgid "Details"
 msgstr "Részletek"
 
@@ -407,6 +409,7 @@ msgid "No games."
 msgstr "Nincsenek játékok."
 
 #: templates/inventory/list_game.html:7
+#: templates/jatszohaz/profile_detail.html:18
 msgid "Rent history"
 msgstr "Előzmények"
 
@@ -445,43 +448,64 @@ msgstr "Létrehozás"
 msgid "Back"
 msgstr "Vissza"
 
-#: templates/news.html:5
-msgid "News"
-msgstr "Hírek"
+#: templates/jatszohaz/games.html:7
+msgid "Games page info"
+msgstr "Itt megtalálod az összes játékunkat és leírásaikat."
 
-#: templates/profile.html:6
-#, fuzzy
+#: templates/jatszohaz/profile.html:6
 #| msgid "Profile"
 msgid "Profil"
 msgstr "Profil"
 
-#: templates/profile.html:12
+#: templates/jatszohaz/profile.html:12
 msgid "Update"
 msgstr "Frissítés"
 
-#: templates/profile_detail.html:6
+#: templates/jatszohaz/profile_detail.html:6
+#| msgid "Profile"
+msgid "Profile details"
+msgstr "Profil részletek"
+
+#: templates/jatszohaz/profile_detail.html:8
+msgid "Basic info"
+msgstr "Alap információk"
+
+#: templates/jatszohaz/profile_detail.html:11
+#: templates/jatszohaz/user_list.html:13
 msgid "Email"
 msgstr "Email"
 
-#: templates/profile_detail.html:7
+#: templates/jatszohaz/profile_detail.html:12
+#: templates/jatszohaz/user_list.html:14
 msgid "Room"
 msgstr "Szoba"
 
-#: templates/profile_detail.html:8
+#: templates/jatszohaz/profile_detail.html:13
+#: templates/jatszohaz/user_list.html:15
 msgid "Mobile"
 msgstr "Telefon"
 
-#: templates/profile_detail.html:9
-msgid "Username"
-msgstr "Felhasználói név"
-
-#: templates/profile_detail.html:10
+#: templates/jatszohaz/profile_detail.html:14
 msgid "First login"
 msgstr "Első bejelentkezés"
 
-#: templates/profile_detail.html:11
+#: templates/jatszohaz/profile_detail.html:15
+#: templates/jatszohaz/user_list.html:16
 msgid "Last login"
 msgstr "Utolsó bejelentkezés"
+
+#: templates/jatszohaz/profile_detail.html:20
+#| msgid "No rents yet."
+msgid "No rents."
+msgstr "Nincs kölcsönzés."
+
+#: templates/jatszohaz/user_list.html:8
+msgid "No users."
+msgstr "Nincs felhasználó."
+
+#: templates/news.html:5
+msgid "News"
+msgstr "Hírek"
 
 #: templates/rent/my_rents.html:9 templates/rent/rents.html:29
 msgid "No rents yet."
@@ -579,6 +603,9 @@ msgstr ""
 #: templates/static_pages/faq.html:9
 msgid "FAQ text"
 msgstr ""
+
+#~ msgid "Username"
+#~ msgstr "Felhasználói név"
 
 #~ msgid "English"
 #~ msgstr "Angol"

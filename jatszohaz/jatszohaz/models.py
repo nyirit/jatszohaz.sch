@@ -4,6 +4,7 @@ from django.contrib.auth import user_logged_in
 from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.dispatch import receiver
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 logger = logging.getLogger(__name__)
@@ -75,6 +76,9 @@ class JhUser(AbstractUser):
         :return: Last name + First name
         """
         return "%s %s" % (self.last_name, self.first_name)
+
+    def get_absolute_url(self):
+        return reverse_lazy('profile', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "%s - %s" % (self.full_name2(), self.email)

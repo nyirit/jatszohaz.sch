@@ -58,6 +58,11 @@ class ProfileView(PermissionRequiredMixin, DetailView):
     template_name = "jatszohaz/profile_detail.html"
     permission_required = 'jatszohaz.view_all'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rents'] = self.get_object().rents.all()
+        return context
+
 
 class AboutUsView(TemplateView):
     template_name = "static_pages/about_us.html"

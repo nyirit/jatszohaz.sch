@@ -42,6 +42,9 @@
         {% if perms.inventory.manage_inventory %}
           <li><a href="{% url 'inventory:list' %}">{% trans 'Inventory' %}</a></li>
         {% endif %}
+        {% if perms.jatszohaz.view_all %}
+            <li><a href="{% url 'users' %}">{% trans 'Users' %}</a></li>
+        {% endif %}
         {%  if user.is_superuser %}
           <li><a href="{% url 'calendar' %}">{% trans 'Calendar' %}</a></li>
           <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
