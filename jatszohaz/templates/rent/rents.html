@@ -13,6 +13,15 @@
                 {% trans 'All' %} ({{ sum_count }})
             </a>
 
+            {# ToDo filter button #}
+            <a href="{% url 'rent:rents' 'ToDo' %}"
+               data-toggle="tooltip"
+               data-placement="top"
+               title="{% trans "Rents, those status you changed." %}"
+               class="btn btn-default">
+                {% trans 'ToDo' %} ({{ todo_count }})
+            </a>
+
             {# Filter buttons for each status #}
             {% for key, value, count in statuses %}
                 <a href="{% url 'rent:rents' key %}"

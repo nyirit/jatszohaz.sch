@@ -82,11 +82,17 @@ class RentsView(PermissionRequiredMixin, ListView):
     paginate_by = 5
 
     def get_queryset(self):
+        self.my_todo = Rent.objects.filter(histories__user=self.request.user).distinct().order_by('-created')\
+                    .exclude(status__in=(Rent.STATUS_CANCELLED[0], Rent.STATUS_DECLINED[0], Rent.STATUS_BACK[0]))
+
         status = self.kwargs.get('status')
 
         result = Rent.objects.all().order_by('-created')
         if status is not None:
-            result = result.filter(status=status)
+            if status == 'ToDo':
+                result = self.my_todo
+            else:
+                result = result.filter(status=status)
 
         return result
 
@@ -103,6 +109,7 @@ class RentsView(PermissionRequiredMixin, ListView):
             sum_count += count
 
         context['sum_count'] = sum_count
+        context['todo_count'] = self.my_todo.count()
 
         return context
 
