@@ -59,6 +59,7 @@ class RentFormStep3(forms.Form):
         help_text=_("Rent comment help"),
         widget=forms.Textarea
     )
+    responsibility = forms.BooleanField(label=_("Responsibility text."), required=True)
 
 
 class NewCommentForm(forms.Form):

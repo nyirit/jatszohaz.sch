@@ -36,6 +36,9 @@
         {% else %}
             <input type="submit" class="btn btn-primary" value="{% trans "Next" %}"/>
         {% endif %}
-
     </form>
+
+    {% if wizard.steps.step1 == 3 %}
+        <br/><a target="_blank" href="{% url 'rent:rules' %}">{% trans "Rent rules" %}</a>
+    {% endif %}
 {% endblock %}

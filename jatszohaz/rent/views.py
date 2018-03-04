@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.exceptions import SuspiciousOperation, PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView, UpdateView, FormView, View
+from django.views.generic import ListView, DetailView, UpdateView, FormView, View, TemplateView
 from formtools.wizard.views import SessionWizardView
 
 from .forms import RentFormStep1, RentFormStep2, RentFormStep3, NewCommentForm, EditRentForm, AddGameForm
@@ -257,3 +257,7 @@ class RemoveGameView(PermissionRequiredMixin, View):
         rent.games.remove(game_piece)
         rent.save()
         return redirect(rent.get_absolute_url())
+
+
+class RentRules(TemplateView):
+    template_name = "static_pages/rent_rules.html"

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title-page %}{% trans "Rent rules" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Rent rules" %}</h1>
+
+    {# TODO language... #}
+    <p>Kölcsönzéskor kérünk tartsd be ezeket a szabályokat, így mindenki boldog lesz.</p>
+
+    <ol>
+        <li>Vigyázz a játékokra, hogy más is tudjon velük játszani. A szándékos károkozásért és eltűnt játékokért minden esetben anyagi felelősséggel tartozik a kölcsönző.</li>
+        <li>Ha bármi megsérül egy játékban vagy hiányzó lapot észleltetek, szólj nekünk a visszaadásakor. Nem fogunk rád megharagudni, ha nem direkt volt, de ha csak mi vesszük észre, akkor lehet.</li>
+        <li>Kölcsönzésedet legalább 24 órával korábban add le, különben nem garantáljuk a kiadását.</li>
+        <li>Mindig hozd vissza a játékokat a kölcsönzés lejártakor. Más is szeretné kölcsönözni őket.</li>
+    </ol>
+{% endblock %}

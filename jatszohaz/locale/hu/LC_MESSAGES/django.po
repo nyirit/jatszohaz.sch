@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-03 15:33-0600\n"
-"PO-Revision-Date: 2018-03-03 15:33-0551\n"
+"POT-Creation-Date: 2018-03-04 11:32-0600\n"
+"PO-Revision-Date: 2018-03-04 11:53-0551\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -164,12 +164,19 @@ msgstr ""
 "Kérlek add meg, hogy mikor tudnád átvenni a játékot és minden egyéb kérést, "
 "óhajt és/vagy a kedvenc viccedet."
 
-#: rent/forms.py:87
+#: rent/forms.py:62
+msgid "Responsibility text."
+msgstr ""
+"A kölcsönzés leadásával elfogadom a Kölcsönzési szabályzatot, illetve hogy "
+"az esetlegesen eltűnt és/vagy megrongált játékokért anyagi felelősséggel "
+"tartozok."
+
+#: rent/forms.py:88
 #, python-format
 msgid "Failed to change date. Not available: %s"
 msgstr "Sikertelen dátummódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/forms.py:94
+#: rent/forms.py:95
 msgid "New game"
 msgstr "Új játék"
 
@@ -261,23 +268,23 @@ msgstr "Sajnos nincs egy elérhető játékunk sem erre az időpontra."
 msgid "Successfully rented!"
 msgstr "Sikeresen kölcsönözve!"
 
-#: rent/views.py:166
+#: rent/views.py:164
 msgid "Successfully sent!"
 msgstr "Sikeresen elküldve!"
 
-#: rent/views.py:184
+#: rent/views.py:182
 msgid "Rent changed!"
 msgstr "Kölcsönzés megváltoztatva!"
 
-#: rent/views.py:192 rent/views.py:241
+#: rent/views.py:190 rent/views.py:239
 msgid "Invalid form."
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:234
+#: rent/views.py:232
 msgid "Game added."
 msgstr "Játék hozzáadva!"
 
-#: rent/views.py:236
+#: rent/views.py:234
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
 
@@ -531,6 +538,12 @@ msgstr "Küldés"
 #: templates/rent/new_rent.html:37
 msgid "Next"
 msgstr "Tovább"
+
+#: templates/rent/new_rent.html:42 templates/static_pages/rent_rules.html:4
+#: templates/static_pages/rent_rules.html:7
+#| msgid "Rentable"
+msgid "Rent rules"
+msgstr "Kölcsönzési szabályzat"
 
 #: templates/rent/rent_detail.html:9
 msgid "Dates"
