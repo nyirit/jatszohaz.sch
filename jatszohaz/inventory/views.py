@@ -38,6 +38,7 @@ class NewInvView(SuccessMessageMixin, InventoryPermissionRequiredMixin, CreateVi
 class InvListView(InventoryPermissionRequiredMixin, ListView):
     model = GamePiece
     template_name = "inventory/list-inventory.html"
+    ordering = "game_group__name"
 
 
 class InvListGameView(InventoryPermissionRequiredMixin, ListView):
