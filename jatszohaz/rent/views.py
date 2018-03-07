@@ -183,7 +183,6 @@ class EditView(PermissionRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        # TODO show field errors in displayed page
         if form.error_text:
             messages.error(self.request, form.error_text)
         else:
