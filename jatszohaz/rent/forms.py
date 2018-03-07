@@ -75,8 +75,23 @@ class EditRentForm(forms.ModelForm):
         widgets = {'date_from': forms.DateTimeInput(attrs={'class': "datetimepicker"}),
                    'date_to': forms.DateTimeInput(attrs={'class': "datetimepicker"})}
 
+    def add_error(self, field, error):
+        super().add_error(field, error)
+        self.error_text += str(error)
+
     def clean(self):
         cleaned_data = super().clean()
+
+        # check dates
+        date_from = cleaned_data.get('date_from', None)
+        date_to = cleaned_data.get('date_to', None)
+
+        if date_from is not None:
+            if date_from < datetime.now():
+                self.add_error('date_from', _("Must be in the future!"))
+
+            if date_to is not None and date_from > date_to:
+                self.add_error('date_from', _("Date from must be before date to!"))
 
         # check game availability in new dates
         not_available_games = []
@@ -85,8 +100,7 @@ class EditRentForm(forms.ModelForm):
                 if not game.is_free(cleaned_data['date_from'], cleaned_data['date_to']):
                     not_available_games.append(str(game))
         if not_available_games:
-            self.error_text = _("Failed to change date. Not available: %s" % ', '.join(not_available_games))
-            self.add_error('date_from', self.error_text)
+            self.add_error('date_from', _("Failed to change date. Not available: %s" % ', '.join(not_available_games)))
 
         return cleaned_data
 
