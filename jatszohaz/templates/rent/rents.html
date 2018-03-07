@@ -18,7 +18,7 @@
                data-toggle="tooltip"
                data-placement="top"
                title="{% trans "Rents, those status you changed." %}"
-               class="btn btn-default">
+               class="btn btn-default{% if active_status == 'ToDo' %} active{% endif %}">
                 {% trans 'ToDo' %} ({{ todo_count }})
             </a>
 

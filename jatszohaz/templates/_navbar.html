@@ -37,7 +37,7 @@
         <br/>
 
         {% if perms.rent.manage_rents %}
-          <li><a href="{% url 'rent:rents' %}">{% trans 'Rents' %}</a></li>
+          <li><a href="{% url 'rent:rents' 'pending' %}">{% trans 'Rents' %}</a></li>
         {% endif %}
         {% if perms.inventory.manage_inventory %}
           <li><a href="{% url 'inventory:list' %}">{% trans 'Inventory' %}</a></li>
