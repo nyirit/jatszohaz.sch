@@ -6,6 +6,10 @@
 
 {% block content %}
   <h2>{% trans 'Login2' %}</h2>
+
+  <p class="text-danger">{% trans "Only for debug purposes. In final version this login will be removed." %}</p>
+
+
   <form method="post" action="?next={% url 'home' %}">
     {% csrf_token %}
     {{ form|crispy }}

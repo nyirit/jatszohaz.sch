@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 08:28-0600\n"
-"PO-Revision-Date: 2018-03-09 08:41-0551\n"
+"POT-Creation-Date: 2018-03-09 08:55-0600\n"
+"PO-Revision-Date: 2018-03-09 08:55-0551\n"
 "Last-Translator: b'Tamas Nyiri <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -35,7 +35,8 @@ msgstr "Prioritás"
 msgid "Rentable"
 msgstr "Kölcsönözhető"
 
-#: inventory/models.py:13 templates/jatszohaz/profile_detail.html:10
+#: inventory/models.py:13 templates/jatszohaz/profile.html:8
+#: templates/jatszohaz/profile_detail.html:10
 #: templates/jatszohaz/user_list.html:12
 msgid "Name"
 msgstr "Név"
@@ -141,7 +142,6 @@ msgid "Content"
 msgstr "Tartalom"
 
 #: news/models.py:12
-#| msgid "Create"
 msgid "Creator"
 msgstr "Létrehozó"
 
@@ -160,12 +160,10 @@ msgstr ""
 "akkor csak adminok láthatják."
 
 #: news/views.py:33
-#| msgid "Inventory created"
 msgid "News created!"
 msgstr "Bejegyzés létrehozva"
 
 #: news/views.py:37
-#| msgid "Create"
 msgid "Create news"
 msgstr "Bejegyzés létrehozása"
 
@@ -174,7 +172,6 @@ msgid "Entry edited!"
 msgstr "Bejegyzés módosítva!"
 
 #: news/views.py:54 templates/news.html:44
-#| msgid "Edit rent"
 msgid "Edit entry"
 msgstr "Bejegyzés módosítása"
 
@@ -376,7 +373,7 @@ msgstr "GYIK"
 msgid "Logout"
 msgstr "Kijelentkezés"
 
-#: templates/_navbar.html:31 templates/login2.html:12
+#: templates/_navbar.html:31 templates/login2.html:16
 msgid "Login"
 msgstr "Bejelentkezés"
 
@@ -507,7 +504,7 @@ msgstr ""
 msgid "Profil"
 msgstr "Profil"
 
-#: templates/jatszohaz/profile.html:12
+#: templates/jatszohaz/profile.html:15
 msgid "Update"
 msgstr "Frissítés"
 
@@ -552,8 +549,13 @@ msgstr "Nincs kölcsönzés."
 msgid "No users."
 msgstr "Nincs felhasználó."
 
+#: templates/login2.html:10
+msgid "Only for debug purposes. In final version this login will be removed."
+msgstr ""
+"Csak tesztelési céllal! Végleges oldalon ez a bejelentkezési mód nem lesz "
+"elérhető!"
+
 #: templates/news.html:9
-#| msgid "Create new inventory"
 msgid "Create new entry"
 msgstr "Új bejegyzés"
 
@@ -562,7 +564,6 @@ msgid "This entry is not published. Only admins can see it."
 msgstr "Ez a bejegyzés nincs publikálva! Csak adminok számára látható!"
 
 #: templates/news.html:40
-#| msgid "Last login"
 msgid "Last edit:"
 msgstr "Utolsó módosítás:"
 

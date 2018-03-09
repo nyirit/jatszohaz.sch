@@ -22,7 +22,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-{% if news.image %}8{% else %}12{% endif %}">
-                        <p align="justify">{{ news.content }}</p>
+                        <p align="justify">{{ news.content|linebreaks }}</p>
                     </div>
                     {% if news.image %}
                         <div class="col-xs-4">

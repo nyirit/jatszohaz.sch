@@ -111,3 +111,7 @@ body>.container>.content {
 .game_container img {
     margin-top: 30px;
 }
+
+.comment-message p {
+    white-space: pre;
+}
