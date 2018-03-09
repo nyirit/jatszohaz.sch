@@ -5,6 +5,9 @@
 {% block content %}
     <h1>{% trans 'Profil' %}</h1>
 
+    <label>{% trans 'Name' %}</label><br/>
+    <input type="textinput" readonly="readonly" value="{{ user.full_name2 }}" /><br/><br/>
+
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
