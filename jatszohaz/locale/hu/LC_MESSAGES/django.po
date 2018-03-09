@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-04 11:32-0600\n"
-"PO-Revision-Date: 2018-03-05 03:53-0551\n"
+"POT-Creation-Date: 2018-03-09 08:28-0600\n"
+"PO-Revision-Date: 2018-03-09 08:41-0551\n"
 "Last-Translator: b'Tamas Nyiri <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -80,15 +80,15 @@ msgstr "Leltár kezelés"
 msgid "Inventory created"
 msgstr "Bejegyzés létrehova"
 
-#: inventory/views.py:95 inventory/views.py:104
+#: inventory/views.py:96 inventory/views.py:105
 msgid "Game group successfully edited."
 msgstr "Játék sikeresen létrehozva!"
 
-#: inventory/views.py:96
+#: inventory/views.py:97
 msgid "Edit game group"
 msgstr "Játék módosítása"
 
-#: inventory/views.py:105
+#: inventory/views.py:106
 msgid "Edit game piece"
 msgstr "Játék elem módosítása"
 
@@ -132,6 +132,52 @@ msgstr "Sikeresen frissítve!"
 msgid "Please check your profile data and click the Update button!"
 msgstr "Kérlek ellenőrizd az adataidat, majd kattints a Frissítés gombra!"
 
+#: news/models.py:10
+msgid "Title"
+msgstr "Cím"
+
+#: news/models.py:11
+msgid "Content"
+msgstr "Tartalom"
+
+#: news/models.py:12
+#| msgid "Create"
+msgid "Creator"
+msgstr "Létrehozó"
+
+#: news/models.py:16
+msgid "Image"
+msgstr "Kép"
+
+#: news/models.py:21
+msgid "Published"
+msgstr "Publikálva"
+
+#: news/models.py:22
+msgid "Determines whether everyone sees the post. False: only admins."
+msgstr ""
+"Meghatározza, hogy a hírt minden látogató láthatja-e. Ha nincs kipipálva, "
+"akkor csak adminok láthatják."
+
+#: news/views.py:33
+#| msgid "Inventory created"
+msgid "News created!"
+msgstr "Bejegyzés létrehozva"
+
+#: news/views.py:37
+#| msgid "Create"
+msgid "Create news"
+msgstr "Bejegyzés létrehozása"
+
+#: news/views.py:50
+msgid "Entry edited!"
+msgstr "Bejegyzés módosítva!"
+
+#: news/views.py:54 templates/news.html:44
+#| msgid "Edit rent"
+msgid "Edit entry"
+msgstr "Bejegyzés módosítása"
+
 #: rent/forms.py:11
 msgid "Rent from"
 msgstr "Kölcsönzés kezdete"
@@ -140,11 +186,11 @@ msgstr "Kölcsönzés kezdete"
 msgid "Rent to"
 msgstr "Kölcsönzés vége"
 
-#: rent/forms.py:28
+#: rent/forms.py:28 rent/forms.py:91
 msgid "Must be in the future!"
 msgstr "Múltbéli dátum nem megadható!"
 
-#: rent/forms.py:31
+#: rent/forms.py:31 rent/forms.py:94
 msgid "Date from must be before date to!"
 msgstr "A kölcsönzés vége nem lehet korábban, mint az eleje."
 
@@ -171,12 +217,12 @@ msgstr ""
 "az esetlegesen eltűnt és/vagy megrongált játékokért anyagi felelősséggel "
 "tartozok."
 
-#: rent/forms.py:88
+#: rent/forms.py:103
 #, python-format
 msgid "Failed to change date. Not available: %s"
 msgstr "Sikertelen dátummódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/forms.py:95
+#: rent/forms.py:109
 msgid "New game"
 msgstr "Új játék"
 
@@ -276,15 +322,15 @@ msgstr "Sikeresen elküldve!"
 msgid "Rent changed!"
 msgstr "Kölcsönzés megváltoztatva!"
 
-#: rent/views.py:190 rent/views.py:239
+#: rent/views.py:189 rent/views.py:238
 msgid "Invalid form."
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:232
+#: rent/views.py:231
 msgid "Game added."
 msgstr "Játék hozzáadva!"
 
-#: rent/views.py:234
+#: rent/views.py:233
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
 
@@ -296,9 +342,9 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr "Navigáció"
 
-#: templates/_navbar.html:15 templates/jatszohaz/home.html:4
-msgid "Home"
-msgstr ""
+#: templates/_navbar.html:15 templates/news.html:5
+msgid "News"
+msgstr "Hírek"
 
 #: templates/_navbar.html:16 templates/rent/rent_detail.html:6
 msgid "Rent"
@@ -453,6 +499,10 @@ msgstr "Vissza"
 msgid "Games page info"
 msgstr "Itt megtalálod az összes játékunkat és leírásaikat."
 
+#: templates/jatszohaz/home.html:4
+msgid "Home"
+msgstr ""
+
 #: templates/jatszohaz/profile.html:6
 msgid "Profil"
 msgstr "Profil"
@@ -502,9 +552,19 @@ msgstr "Nincs kölcsönzés."
 msgid "No users."
 msgstr "Nincs felhasználó."
 
-#: templates/news.html:5
-msgid "News"
-msgstr "Hírek"
+#: templates/news.html:9
+#| msgid "Create new inventory"
+msgid "Create new entry"
+msgstr "Új bejegyzés"
+
+#: templates/news.html:18
+msgid "This entry is not published. Only admins can see it."
+msgstr "Ez a bejegyzés nincs publikálva! Csak adminok számára látható!"
+
+#: templates/news.html:40
+#| msgid "Last login"
+msgid "Last edit:"
+msgstr "Utolsó módosítás:"
 
 #: templates/rent/new_rent.html:10
 msgid "Renting"
@@ -541,7 +601,6 @@ msgstr "Tovább"
 
 #: templates/rent/new_rent.html:42 templates/static_pages/rent_rules.html:4
 #: templates/static_pages/rent_rules.html:7
-#| msgid "Rentable"
 msgid "Rent rules"
 msgstr "Kölcsönzési szabályzat"
 
