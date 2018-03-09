@@ -4,12 +4,53 @@
 {% block content %}
     <h1>{% trans 'News' %}</h1>
 
-    <ul>
-    {% for news in object_list reversed %}
-        <h2>{{ news.name }}</h2>
-        <p>Created on {{ news.pub_date|date:'Y-m-d H:i' }} by {{ news.creator }}</p>
-        <p align="justify">{{ news.content }}</p>
-        <br>
+    {% if perms.news.manage_news %}
+        <a class="btn btn-info" href="{% url 'news:create' %}">
+            {% trans "Create new entry" %}
+        </a><br/><br/>
+    {% endif %}
+
+    {% for news in object_list %}
+         <div class="panel panel-default {% if not news.published %}panel-danger{% endif %}">
+            <div class="panel-heading">
+                <h3>{{ news.title }}</h3>
+                {% if not news.published %}
+                    <span>{% trans 'This entry is not published. Only admins can see it.' %}</span>
+                {% endif %}
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-{% if news.image %}8{% else %}12{% endif %}">
+                        <p align="justify">{{ news.content }}</p>
+                    </div>
+                    {% if news.image %}
+                        <div class="col-xs-4">
+                            <img class="img-responsive" src="{{ news.image.url }}" />
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{ news.created }}<br/>
+                    {% if perms.news.manage_news %}
+                        {% trans "Last edit:" %} {{ news.modified }}<br/>
+                        <a href="{{ news.creator.get_absolute_url }}">{{ news.creator.full_name2 }}</a><br/>
+                    </div>
+                        <div class="col-xs-6">
+                            <a class="btn btn-warning" href="{{ news.get_absolute_url }}">{% trans 'Edit entry' %}</a>
+                        </div>
+                    {% else %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     {% endfor %}
-    </ul>
+
+    {% include "_pagination.html" %}
+
 {% endblock %}

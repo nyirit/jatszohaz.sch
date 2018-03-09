@@ -4,13 +4,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import logout
 from . import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^users/$', views.UsersView.as_view(), name="users"),
     url(r'^after-login/', views.AfterLoginView.as_view()),
 
-    url(r'^$', views.HomeView.as_view(), name="home"),
+    url(r'^$', RedirectView.as_view(pattern_name="news:news"), name="home"),
     url(r'^calendar/$', views.CalendarView.as_view(), name="calendar"),
 
     # User management related pages
