@@ -87,7 +87,7 @@ class EditRentForm(forms.ModelForm):
         date_to = cleaned_data.get('date_to', None)
 
         if date_from is not None:
-            if date_from < datetime.now():
+            if 'date_from' in self.changed_data and date_from < datetime.now():
                 self.add_error('date_from', _("Must be in the future!"))
 
             if date_to is not None and date_from > date_to:

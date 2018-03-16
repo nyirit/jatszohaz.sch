@@ -1,6 +1,6 @@
 from .base import *  # noqa
-from .base import INSTALLED_APPS
-from .base import AUTHENTICATION_BACKENDS
+
+from .base import AUTHENTICATION_BACKENDS, INSTALLED_APPS
 
 DEBUG = True
 

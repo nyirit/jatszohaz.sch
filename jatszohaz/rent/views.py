@@ -159,9 +159,11 @@ class NewCommentView(LoginRequiredMixin, FormView):
         message = form.cleaned_data['comment']
 
         if rent.renter == user or user.has_perm('rent.manage_rents'):
-            Comment.objects.create(rent=rent, user=user, message=message).save()
-            # TODO email notification
-            messages.success(self.request, _("Successfully sent!"))
+            comment = Comment.objects.create(rent=rent, user=user, message=message)
+            if rent.notify_new_comment(comment):
+                messages.success(self.request, _("Successfully sent!"))
+            else:
+                messages.warning(self.request, _("Comment successfully sent, but failed to send notification emails!"))
         else:
             raise SuspiciousOperation("No permissions for comment this rent!")
 
@@ -178,9 +180,14 @@ class EditView(PermissionRequiredMixin, UpdateView):
         return redirect(self.get_object().get_absolute_url())
 
     def form_valid(self, form):
-        # TODO email notification with form.changed_data
         messages.success(self.request, _("Rent changed!"))
-        return super().form_valid(form)
+        r = super().form_valid(form)
+
+        if 'date_to' in form.changed_data or 'date_from' in form.changed_data:
+            if not self.get_object().notify_changed_date(self.request.user):
+                messages.error(self.request, _("Failed to send notification emails!"))
+
+        return r
 
     def form_invalid(self, form):
         if form.error_text:
@@ -212,6 +219,10 @@ class ChangeStatusView(LoginRequiredMixin, View):
         rent.status = status
         rent.save()
         rent.create_new_history(self.request.user)
+
+        if not rent.notify_new_status(self.request.user):
+            messages.error(self.request, _("Failed to send notification email!"))
+
         return redirect(rent.get_absolute_url())
 
 

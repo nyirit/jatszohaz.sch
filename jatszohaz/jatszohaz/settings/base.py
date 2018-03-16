@@ -184,6 +184,16 @@ MEDIA_URL = '/media/'
 
 # ######### END STATIC FILE CONFIGURATION
 
+# ######### EMAIL CONFIGURATION
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#server-email
+DEFAULT_FROM_EMAIL = get_env_variable('DEFAULT_FROM_EMAIL', '')
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
+EMAIL_SUBJECT_PREFIX = get_env_variable("EMAIL_SUBJECT_PREFIX",
+                                        '[%s] ' % SITE_NAME)
+# ######### END EMAIL CONFIGURATION
 
 # ######### AUTH.SCH CONFIGURATION
 SOCIAL_AUTH_URL_NAMESPACE = 'social'

@@ -1,4 +1,7 @@
 from datetime import datetime
+import logging
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db import models
 from django.db.models import Count
 from django.urls import reverse_lazy
@@ -7,6 +10,9 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 from inventory.models import GamePiece
 from jatszohaz.models import JhUser
+
+
+logger = logging.getLogger(__name__)
 
 
 class Rent(TimeStampedModel):
@@ -53,6 +59,44 @@ class Rent(TimeStampedModel):
     def is_past_due(self):
         return ((self.date_to < datetime.now() and self.status == Rent.STATUS_GAVE_OUT[0])
                 or (self.date_from < datetime.now() and self.status == Rent.STATUS_PENDING[0]))
+
+    def notify_users(self, subject, message, user_exclude):
+        recipient_list = set([c.user.email for c in self.comments.all()] +
+                             [self.renter.email, ] +
+                             [h.user.email for h in self.histories.all()])
+        recipient_list.discard(user_exclude.email)
+
+        message += _("You can check your rent here: <a href=\"%s\">%s<a><br/><br/>"
+                     "Best wishes,<br/>Játszóház") % (self.get_absolute_url(), self.get_absolute_url())
+
+        if recipient_list:
+            try:
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, fail_silently=False)
+            except Exception as e:
+                logger.error("Failed to send email! %s" % e)
+                return False
+
+        return True
+
+    def notify_new_status(self, user):
+        subject = _("%s new status") % settings.EMAIL_SUBJECT_PREFIX
+        message = _("Hi!<br/>Status of your rent was changed to %s.<br/><br/>") % self.get_status_display()
+
+        return self.notify_users(subject, message, user)
+
+    def notify_new_comment(self, comment):
+        subject = _("%s new comment") % settings.EMAIL_SUBJECT_PREFIX
+        message = _("Hi!<br/>There is a new comment to your rent.<br/><br/>"
+                    "User: %s<br/>Message:<br/>%s<br/>") % (comment.user.full_name2(), comment.message)
+
+        return self.notify_users(subject, message, comment.user)
+
+    def notify_changed_date(self, user):
+        subject = _("%s date changed") % settings.EMAIL_SUBJECT_PREFIX
+        message = _("Hi!<br/>Your rent date changed.<br/><br/>"
+                    "New dates: %s - %s<br/>") % (self.date_from, self.date_to)
+
+        return self.notify_users(subject, message, user)
 
     def get_status_css(self):
         if self.is_past_due():
