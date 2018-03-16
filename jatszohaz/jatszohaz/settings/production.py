@@ -1,8 +1,16 @@
+import os
 from .base import *  # noqa
+from .base import INSTALLED_APPS
 from .base import get_env_variable
 
-# TODO
-DEBUG = True
+INSTALLED_APPS += (
+    'raven.contrib.django.raven_compat',
+)
+
+if 'SENTRY_DSN' in os.environ:
+    RAVEN_CONFIG = {
+        'dsn': get_env_variable('SENTRY_DSN'),
+    }
 
 # ######### SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
