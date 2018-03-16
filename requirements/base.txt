@@ -7,3 +7,4 @@ django-model-utils==3.0.0
 django-resized==0.3.8
 Pillow==4.3.0
 social-auth-app-django==2.0.0
+whitenoise==3.3.1
