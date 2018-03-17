@@ -190,6 +190,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 DEFAULT_FROM_EMAIL = get_env_variable('DEFAULT_FROM_EMAIL', '')
 
+# email address used by new rent notification.
+NOTIFICATION_EMAIL_TO = get_env_variable('NOTIFICATION_EMAIL_TO', '')
+
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = get_env_variable("EMAIL_SUBJECT_PREFIX",
                                         '[%s] ' % SITE_NAME)

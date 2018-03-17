@@ -1,8 +1,10 @@
 import logging
+from django.conf import settings
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import SuspiciousOperation, PermissionDenied
+from django.core.mail import send_mail
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, UpdateView, FormView, View, TemplateView
@@ -35,6 +37,34 @@ class NewView(LoginRequiredMixin, SessionWizardView):
 
         return self.initial_dict.get(step, data)
 
+    def send_email(self, rent, comment):
+        """Sends notification email to mailing list"""
+
+        recipient = settings.NOTIFICATION_EMAIL_TO
+        if recipient:
+            data = {
+                'url': rent.get_absolute_url(),
+                'renter': rent.renter.full_name2(),
+                'date_from': rent.date_from,
+                'date_to': rent.date_to,
+                'games': ', '.join([gp.game_group.name for gp in rent.games.all()]),
+                'comment': comment.message
+            }
+            subject = _("%s new rent") % settings.EMAIL_SUBJECT_PREFIX
+            message = _("Hi!<br/>New rent created!<br/><br/>"
+                        "Renter: %(renter)s<br/>"
+                        "Dates: %(date_from)s - %(date_to)s<br/>"
+                        "Games: %(games)s<br/>"
+                        "Comment: %(comment)s<br/>"
+                        "Details: <a href=\"%(url)s\">%(url)s<a><br/><br/>"
+                        "Best wishes,<br/>Játszóház") % data
+
+            try:
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient, ], fail_silently=False)
+            except Exception as e:
+                logger.error("Failed to send email! %s" % e)
+                return False
+
     def done(self, form_list, **kwargs):
         forms = list(form_list)
         step0_data = forms[0].cleaned_data
@@ -55,11 +85,13 @@ class NewView(LoginRequiredMixin, SessionWizardView):
             gg = GameGroup.objects.get(id=gg_id)
             rent.games.add(gg.get_game_piece(date_from, date_to))
         rent.save()
-        Comment.objects.create(
+        comment = Comment.objects.create(
             rent=rent,
             user=user,
             message=comment
-        ).save()
+        )
+
+        self.send_email(rent, comment)
 
         messages.success(self.request, _("Successfully rented!"))
         return redirect(rent.get_absolute_url())

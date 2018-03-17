@@ -66,10 +66,10 @@ class Rent(TimeStampedModel):
                              [h.user.email for h in self.histories.all()])
         recipient_list.discard(user_exclude.email)
 
-        message += _("You can check your rent here: <a href=\"%s\">%s<a><br/><br/>"
-                     "Best wishes,<br/>Játszóház") % (self.get_absolute_url(), self.get_absolute_url())
-
         if recipient_list:
+            subject = settings.EMAIL_SUBJECT_PREFIX + str(subject)
+            message += _("You can check your rent here: <a href=\"%s\">%s<a><br/><br/>"
+                         "Best wishes,<br/>Játszóház") % (self.get_absolute_url(), self.get_absolute_url())
             try:
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, fail_silently=False)
             except Exception as e:
@@ -79,20 +79,20 @@ class Rent(TimeStampedModel):
         return True
 
     def notify_new_status(self, user):
-        subject = _("%s new status") % settings.EMAIL_SUBJECT_PREFIX
+        subject = _("new status")
         message = _("Hi!<br/>Status of your rent was changed to %s.<br/><br/>") % self.get_status_display()
 
         return self.notify_users(subject, message, user)
 
     def notify_new_comment(self, comment):
-        subject = _("%s new comment") % settings.EMAIL_SUBJECT_PREFIX
+        subject = _("new comment")
         message = _("Hi!<br/>There is a new comment to your rent.<br/><br/>"
                     "User: %s<br/>Message:<br/>%s<br/>") % (comment.user.full_name2(), comment.message)
 
         return self.notify_users(subject, message, comment.user)
 
     def notify_changed_date(self, user):
-        subject = _("%s date changed") % settings.EMAIL_SUBJECT_PREFIX
+        subject = _("date changed")
         message = _("Hi!<br/>Your rent date changed.<br/><br/>"
                     "New dates: %s - %s<br/>") % (self.date_from, self.date_to)
 
