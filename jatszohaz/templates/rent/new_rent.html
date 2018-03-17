@@ -15,6 +15,11 @@
         <p>{% trans "Pick games..." %}</p>
     {% endif %}
     <form action="" method="post">{% csrf_token %}
+        {% if wizard.steps.step1 == 2 %}
+            <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.first }}">{% trans "Different date" %}</button>
+            <input type="submit" class="btn btn-primary" value="{% trans "Next" %}"/>
+            <br/><br/>
+        {% endif %}
         <table>
             {{ wizard.management_form }}
             {% if wizard.form.forms %}
