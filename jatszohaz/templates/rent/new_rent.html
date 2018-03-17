@@ -13,6 +13,17 @@
         <p>{% trans "Pick dates..." %}</p>
     {% elif wizard.steps.step1 == 2 %}
         <p>{% trans "Pick games..." %}</p>
+    {% else %}
+        <h3>{% trans 'Rented games' %}:</h3>
+        {% if form.game_groups.value %}
+            <ul>
+            {% for gg in form.game_groups.value  %}
+                <li>{{ gg.name }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            {% trans 'No games rented.' %}
+        {% endif %}
     {% endif %}
     <form action="" method="post">{% csrf_token %}
         {% if wizard.steps.step1 == 2 %}

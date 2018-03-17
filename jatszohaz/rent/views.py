@@ -33,7 +33,8 @@ class NewView(LoginRequiredMixin, SessionWizardView):
 
         step1_data = self.storage.get_step_data('1')
         if step1_data is not None:
-            data['game_groups'] = step1_data.get('1-game_groups', ())
+            ids = dict(step1_data).get('1-game_groups', ())
+            data['game_groups'] = GameGroup.objects.filter(id__in=ids).order_by("name").all()
 
         return self.initial_dict.get(step, data)
 

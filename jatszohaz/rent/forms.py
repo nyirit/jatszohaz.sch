@@ -53,13 +53,18 @@ class RentFormStep2(forms.Form):
 
 
 class RentFormStep3(forms.Form):
+    # fields to display previously given data
+    date_from = forms.CharField(label=_("Rent from"), required=False, disabled=True)
+    date_to = forms.CharField(label=_("Rent to"), required=False, disabled=True)
+    game_groups = forms.CharField(required=False, disabled=True, show_hidden_initial=True, widget=forms.HiddenInput())
+
     comment = forms.CharField(
         required=False,
         label=_("Rent comment"),
         help_text=_("Rent comment help"),
         widget=forms.Textarea
     )
-    responsibility = forms.BooleanField(label=_("Responsibility text."), required=True)
+    responsibility = forms.BooleanField(label=_("Responsibility text."))
 
 
 class NewCommentForm(forms.Form):
