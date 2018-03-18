@@ -15,6 +15,13 @@
         <tr><td>{% trans 'Last login' %}:   </td><td>{{ object.last_login}}</td></tr>
     </table>
 
+    {% if token_login %}
+        <br/>
+        <a class="btn btn-danger btn-xs" href="{{ token_login }}">
+            {% trans 'Sign in as this user.' %}
+        </a>
+    {% endif %}
+
     <h3>{% trans 'Rents' %}</h3>
     {% if rents %}
         <table class="table">

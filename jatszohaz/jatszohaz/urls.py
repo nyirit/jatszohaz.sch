@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.views import logout
 from . import views
 from django.views.generic import RedirectView
+from jatszohaz.views import TokenLogin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,6 +31,8 @@ urlpatterns = [
     url(r'^faq/$', views.FaqView.as_view(), name="faq"),
 
     url(r'^news/', include('news.urls')),
+
+    url(r'^token-login/(?P<token>.*)/$', TokenLogin.as_view(), name="token-login"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
