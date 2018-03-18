@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-17 12:55-0500\n"
-"PO-Revision-Date: 2018-03-17 12:59-0551\n"
+"POT-Creation-Date: 2018-03-18 05:29-0500\n"
+"PO-Revision-Date: 2018-03-18 05:33-0551\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -125,13 +125,18 @@ msgstr "Mind megtekintése"
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: jatszohaz/views.py:41
+#: jatszohaz/views.py:46
 msgid "Successfully updated!"
 msgstr "Sikeresen frissítve!"
 
-#: jatszohaz/views.py:78
+#: jatszohaz/views.py:86
 msgid "Please check your profile data and click the Update button!"
 msgstr "Kérlek ellenőrizd az adataidat, majd kattints a Frissítés gombra!"
+
+#: jatszohaz/views.py:134
+#, python-format
+msgid "Logged in as user %s."
+msgstr "Bejelentkezve, mint %s."
 
 #: news/models.py:10
 msgid "Title"
@@ -183,11 +188,11 @@ msgstr "Kölcsönzés kezdete"
 msgid "Rent to"
 msgstr "Kölcsönzés vége"
 
-#: rent/forms.py:28 rent/forms.py:95
+#: rent/forms.py:28 rent/forms.py:96
 msgid "Must be in the future!"
 msgstr "Múltbéli dátum nem megadható!"
 
-#: rent/forms.py:31 rent/forms.py:98
+#: rent/forms.py:31 rent/forms.py:99
 msgid "Date from must be before date to!"
 msgstr "A kölcsönzés vége nem lehet korábban, mint az eleje."
 
@@ -197,29 +202,29 @@ msgstr ""
 "Néhány kiválasztott játék sajnos nem elérhető. Valószínűleg épp most "
 "kölcsönözte ki valaki más."
 
-#: rent/forms.py:62
+#: rent/forms.py:63
 msgid "Rent comment"
 msgstr "Megjegyzés"
 
-#: rent/forms.py:63
+#: rent/forms.py:64
 msgid "Rent comment help"
 msgstr ""
 "Kérlek add meg, hogy mikor tudnád átvenni a játékot és minden egyéb kérést, "
 "óhajt és/vagy a kedvenc viccedet."
 
-#: rent/forms.py:66
+#: rent/forms.py:67
 msgid "Responsibility text."
 msgstr ""
 "A kölcsönzés leadásával elfogadom a Kölcsönzési szabályzatot, illetve hogy "
 "az esetlegesen eltűnt és/vagy megrongált játékokért anyagi felelősséggel "
 "tartozok."
 
-#: rent/forms.py:107
+#: rent/forms.py:108
 #, python-format
 msgid "Failed to change date. Not available: %s"
 msgstr "Sikertelen dátummódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/forms.py:113
+#: rent/forms.py:114
 msgid "New game"
 msgstr "Új játék"
 
@@ -258,17 +263,17 @@ msgid "Games"
 msgstr "Játékok"
 
 #: rent/models.py:38 templates/inventory/list_game.html:10
-#: templates/jatszohaz/profile_detail.html:22
+#: templates/jatszohaz/profile_detail.html:30
 msgid "From"
 msgstr "Dátum kezdete"
 
 #: rent/models.py:39 templates/inventory/list_game.html:11
-#: templates/jatszohaz/profile_detail.html:23
+#: templates/jatszohaz/profile_detail.html:31
 msgid "To"
 msgstr "Dátum vége"
 
 #: rent/models.py:40 rent/models.py:125 templates/inventory/list_game.html:12
-#: templates/jatszohaz/profile_detail.html:24 templates/rent/_rent.html:18
+#: templates/jatszohaz/profile_detail.html:32 templates/rent/_rent.html:18
 #: templates/rent/rent_detail.html:10
 msgid "Status"
 msgstr "Státusz"
@@ -295,7 +300,6 @@ msgstr ""
 "wishes,<br/>Játszóház"
 
 #: rent/models.py:82
-#| msgid "%s new status"
 msgid "new status"
 msgstr "új státusz"
 
@@ -306,7 +310,6 @@ msgstr ""
 "Szia!<br/>Kölcsönzésed státusza megváltozott. Új státusz: %s.<br/><br/>"
 
 #: rent/models.py:88
-#| msgid "New comment"
 msgid "new comment"
 msgstr "új komment"
 
@@ -320,7 +323,6 @@ msgstr ""
 "%s<br/>Üzenet:<br/>%s<br/>"
 
 #: rent/models.py:95
-#| msgid "Rent changed!"
 msgid "date changed"
 msgstr "dátum módosult"
 
@@ -355,7 +357,6 @@ msgstr "Sajnos nincs egy elérhető játékunk sem erre az időpontra."
 
 #: rent/views.py:54
 #, python-format
-#| msgid "New comment"
 msgid "%s new rent"
 msgstr "%s új kölcsönzés"
 
@@ -459,7 +460,7 @@ msgstr "Bejelentkezés"
 msgid "Login2"
 msgstr ""
 
-#: templates/_navbar.html:40 templates/jatszohaz/profile_detail.html:18
+#: templates/_navbar.html:40 templates/jatszohaz/profile_detail.html:26
 msgid "Rents"
 msgstr "Kölcsönzések"
 
@@ -510,7 +511,7 @@ msgid "No inventory."
 msgstr "Nincs leltári bejegyzés."
 
 #: templates/inventory/list-inventory.html:24
-#: templates/jatszohaz/profile_detail.html:32 templates/rent/_rent.html:21
+#: templates/jatszohaz/profile_detail.html:40 templates/rent/_rent.html:21
 msgid "Details"
 msgstr "Részletek"
 
@@ -618,7 +619,15 @@ msgstr "Első bejelentkezés"
 msgid "Last login"
 msgstr "Utolsó bejelentkezés"
 
-#: templates/jatszohaz/profile_detail.html:37 templates/rent/my_rents.html:9
+#: templates/jatszohaz/profile_detail.html:16
+msgid "Groups"
+msgstr "Csoportok"
+
+#: templates/jatszohaz/profile_detail.html:22
+msgid "Sign in as this user."
+msgstr "Bejelentkezés ezen felhasználóval."
+
+#: templates/jatszohaz/profile_detail.html:45 templates/rent/my_rents.html:9
 #: templates/rent/rents.html:38
 msgid "No rents yet."
 msgstr "Nincs kölcsönzés."
@@ -652,9 +661,10 @@ msgstr "Kölcsönzés"
 #: templates/rent/new_rent.html:13
 msgid "Pick dates..."
 msgstr ""
-"Válaszd ki a kölcsönzésed kezdetét és végét. Figyelj arra, hogy legkésőbb a "
-"kölcsönzés vége napon a játékoknak vissza kell hozzánk kerülnie. Később csak"
-" azokat a játékokat fogod látni, amik ekkor elérhetőek."
+"Válaszd ki a kölcsönzésed kezdetét és végét. Figyelj arra, hogy <b>legkésőbb"
+" a kölcsönzés vége nap 23:59-ig a játékoknak vissza kell hozzánk "
+"kerülnie.</b><br/>Később csak azokat a játékokat fogod látni, amik ekkor "
+"elérhetőek."
 
 #: templates/rent/new_rent.html:15
 msgid "Pick games..."
@@ -664,7 +674,6 @@ msgstr ""
 "A játékok nevére kattintva részletesebb leírást kapsz róluk."
 
 #: templates/rent/new_rent.html:17
-#| msgid "Different games"
 msgid "Rented games"
 msgstr "Kölcsönzött játékok"
 

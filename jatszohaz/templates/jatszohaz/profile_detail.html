@@ -13,6 +13,7 @@
         <tr><td>{% trans 'Mobile' %}:       </td><td>{{ object.mobile }}</td></tr>
         <tr><td>{% trans 'First login' %}:  </td><td>{{ object.date_joined }}</td></tr>
         <tr><td>{% trans 'Last login' %}:   </td><td>{{ object.last_login}}</td></tr>
+        <tr><td>{% trans 'Groups' %}:   </td><td>{{ user_groups }}</td></tr>
     </table>
 
     {% if token_login %}

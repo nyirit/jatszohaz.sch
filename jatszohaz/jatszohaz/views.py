@@ -66,6 +66,7 @@ class ProfileView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['rents'] = self.object.rents.all()
+        context['user_groups'] = ','.join([g.name for g in self.object.groups.all()])
         if self.request.user.is_superuser:
             context['token_login'] = TokenLogin.get_token_url(self.object, self.request.user)
         return context
