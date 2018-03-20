@@ -115,3 +115,9 @@ body>.container>.content {
 .comment-message p {
     white-space: pre;
 }
+
+ol.about-us>li {
+    margin-top: 10px;
+    margin-bottom:5px;
+    font-weight: bold;
+}
