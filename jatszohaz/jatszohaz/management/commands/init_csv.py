@@ -30,17 +30,18 @@ class Command(BaseCommand):
         # get columns
         game_group = row[0]
         game_piece_note = row[1]
-        priority = row[2]
-        image_url = row[3]
-        short_desc = row[4]
-        long_desc = row[5]
-        player_number = row[6]
-        playtime = row[7]
-        rules = row[8]
-        missing = row[9]
-        damage = row[10]
-        playable = row[11]
-        rentable = row[12]
+        # extension = row[2] TODO
+        priority = row[3] or '0'
+        image_url = row[4] or 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'
+        short_desc = row[5]
+        long_desc = row[6]
+        player_number = row[7]
+        playtime = row[8]
+        rules = row[9]
+        missing = row[10]
+        damage = row[11]
+        playable = row[12]
+        rentable = row[13]
 
         gg, created = GameGroup.objects.get_or_create(name=game_group)
 
@@ -90,6 +91,10 @@ class Command(BaseCommand):
                 reader = csv.reader(csvfile, delimiter=",")
                 reader.__next__()  # skip first line
                 for row in reader:
-                    self.__handle_row(row)
+                    try:
+                        self.__handle_row(row)
+                    except Exception as e:
+                        self.write(self.style.ERROR("%s\nSomething bad happend at row %s" % (e, row)))
+                        return
         except FileNotFoundError:
             self.write(self.style.ERROR("No such file: %s" % options['file']))
