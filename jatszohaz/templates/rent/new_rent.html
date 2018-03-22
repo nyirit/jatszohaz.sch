@@ -18,7 +18,12 @@
         {% if form.game_groups.value %}
             <ul>
             {% for gg in form.game_groups.value  %}
-                <li>{{ gg.name }}</li>
+                <li>
+                    {{ gg.name }}
+                    {%  if gg.base_game and not gg.base_game in form.game_groups.value %}
+                        <span class="text-danger">{% trans "Can't be palyed without" %} {{ gg.base_game }}</span>
+                    {% endif %}
+                </li>
             {% endfor %}
             </ul>
         {% else %}

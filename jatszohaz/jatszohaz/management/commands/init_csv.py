@@ -30,7 +30,14 @@ class Command(BaseCommand):
         # get columns
         game_group = row[0]
         game_piece_note = row[1]
-        # extension = row[2] TODO
+        base_game_name = row[2]
+        base_game = None
+        try:
+            if base_game_name:
+                base_game = GameGroup.objects.get(name=base_game_name)
+        except GameGroup.DoesNotExist:
+            self.write(self.style.ERROR("base_game (%s) does not exists for %s!" % (base_game_name, game_group)))
+
         priority = row[3] or '0'
         image_url = row[4] or 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'
         short_desc = row[5]
@@ -50,6 +57,7 @@ class Command(BaseCommand):
             gg.short_description = short_desc[:100]
             gg.players = player_number
             gg.playtime = playtime
+            gg.base_game = base_game
 
             image_url = image_url
             img_temp = NamedTemporaryFile(delete=True)

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-18 05:29-0500\n"
-"PO-Revision-Date: 2018-03-20 07:16-0551\n"
+"POT-Creation-Date: 2018-03-22 17:53-0500\n"
+"PO-Revision-Date: 2018-03-22 17:53-0551\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: inventory/forms.py:12 inventory/models.py:40
+#: inventory/forms.py:12 inventory/models.py:46
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: inventory/forms.py:13 inventory/models.py:45
+#: inventory/forms.py:13 inventory/models.py:51
 msgid "Notes"
 msgstr "Megjegyzés"
 
-#: inventory/forms.py:14 inventory/models.py:48
+#: inventory/forms.py:14 inventory/models.py:54
 msgid "Priority"
 msgstr "Prioritás"
 
-#: inventory/forms.py:15 inventory/models.py:49
+#: inventory/forms.py:15 inventory/models.py:55
 msgid "Rentable"
 msgstr "Kölcsönözhető"
 
@@ -59,21 +59,30 @@ msgstr "Játékosok"
 msgid "Playing time"
 msgstr "Játékidő"
 
-#: inventory/models.py:69 templates/inventory/list-inventory.html:18
+#: inventory/models.py:21
+#| msgid "New game"
+msgid "Base game"
+msgstr "Alapjáték"
+
+#: inventory/models.py:22
+msgid "Game needed to play this one."
+msgstr "Az a játék ami nélkül ez nem játszható"
+
+#: inventory/models.py:75 templates/inventory/list-inventory.html:18
 #: templates/inventory/list_game.html:23
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:70 templates/inventory/list-inventory.html:19
+#: inventory/models.py:76 templates/inventory/list-inventory.html:19
 #: templates/inventory/list_game.html:24
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:71
+#: inventory/models.py:77
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:75
+#: inventory/models.py:81
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
@@ -677,27 +686,31 @@ msgstr ""
 msgid "Rented games"
 msgstr "Kölcsönzött játékok"
 
-#: templates/rent/new_rent.html:25 templates/rent/rent_detail.html:27
+#: templates/rent/new_rent.html:24
+msgid "Can't be palyed without"
+msgstr "Nem játszható az alábbi nélkül:"
+
+#: templates/rent/new_rent.html:30 templates/rent/rent_detail.html:27
 msgid "No games rented."
 msgstr "Nincs kölcsönzött játék."
 
-#: templates/rent/new_rent.html:30 templates/rent/new_rent.html:47
+#: templates/rent/new_rent.html:35 templates/rent/new_rent.html:52
 msgid "Different date"
 msgstr "Más dátum"
 
-#: templates/rent/new_rent.html:31 templates/rent/new_rent.html:53
+#: templates/rent/new_rent.html:36 templates/rent/new_rent.html:58
 msgid "Next"
 msgstr "Tovább"
 
-#: templates/rent/new_rent.html:50
+#: templates/rent/new_rent.html:55
 msgid "Different games"
 msgstr "Más játékok"
 
-#: templates/rent/new_rent.html:51
+#: templates/rent/new_rent.html:56
 msgid "Finish"
 msgstr "Küldés"
 
-#: templates/rent/new_rent.html:58 templates/static_pages/rent_rules.html:4
+#: templates/rent/new_rent.html:63 templates/static_pages/rent_rules.html:4
 #: templates/static_pages/rent_rules.html:7
 msgid "Rent rules"
 msgstr "Kölcsönzési szabályzat"

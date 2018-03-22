@@ -16,6 +16,12 @@ class GameGroup(TimeStampedModel):
     image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image")
     players = models.CharField(verbose_name=_("Players"), max_length=100)
     playtime = models.CharField(verbose_name=_("Playing time"), max_length=100)
+    base_game = models.ForeignKey("self",
+                                  on_delete=models.SET_NULL,
+                                  verbose_name=_("Base game"),
+                                  help_text=_("Game needed to play this one."),
+                                  blank=True,
+                                  null=True)
 
     def get_game_piece(self, date_from, date_to):
         for piece in self.game_pieces.order_by('-priority'):
