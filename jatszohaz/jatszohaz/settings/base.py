@@ -166,7 +166,7 @@ LANGUAGE_CODE = get_env_variable("DJANGO_LANGUAGE_CODE", "hu")
 
 # ######### STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = normpath(join(SITE_ROOT, 'static_collected'))
+STATIC_ROOT = normpath(join(SITE_ROOT, '../../static_collected'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
