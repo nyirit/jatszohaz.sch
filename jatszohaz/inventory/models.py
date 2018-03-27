@@ -24,6 +24,9 @@ class GameGroup(TimeStampedModel):
                                   blank=True,
                                   null=True)
 
+    class Meta:
+        ordering = ['name', ]
+
     def get_game_piece(self, date_from, date_to):
         for piece in self.game_pieces.order_by('-priority'):
             if piece.is_free(date_from, date_to):
@@ -58,6 +61,9 @@ class GamePiece(TimeStampedModel):
     place = models.CharField(verbose_name=_("Place"), max_length=20, blank=True)
     price = models.IntegerField(verbose_name=_("Price (Ft)"), validators=[MinValueValidator(0)], default=0)
 
+    class Meta:
+        ordering = ['game_group__name', ]
+
     def is_free(self, date_from, date_to):
         from rent.models import Rent
 
@@ -84,6 +90,7 @@ class InventoryItem(TimeStampedModel):
     rules = models.CharField(verbose_name=_("Rules"), max_length=100, default='-')
 
     class Meta:
+        ordering = ['created', ]
         permissions = (
             ('manage_inventory', _('Manage Inventory')),
         )
