@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-22 17:53-0500\n"
-"PO-Revision-Date: 2018-03-22 17:53-0551\n"
+"POT-Creation-Date: 2018-03-27 14:09-0500\n"
+"PO-Revision-Date: 2018-03-27 14:10-0551\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,70 +19,82 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: inventory/forms.py:12 inventory/models.py:46
+#: inventory/forms.py:12 inventory/models.py:50
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: inventory/forms.py:13 inventory/models.py:51
+#: inventory/forms.py:13 inventory/models.py:55
 msgid "Notes"
 msgstr "Megjegyzés"
 
-#: inventory/forms.py:14 inventory/models.py:54
+#: inventory/forms.py:14 inventory/models.py:58
 msgid "Priority"
 msgstr "Prioritás"
 
-#: inventory/forms.py:15 inventory/models.py:55
+#: inventory/forms.py:15 inventory/models.py:59
 msgid "Rentable"
 msgstr "Kölcsönözhető"
 
-#: inventory/models.py:13 templates/jatszohaz/profile.html:8
+#: inventory/forms.py:17 inventory/models.py:60
+#| msgid "Playing time"
+msgid "Buying date"
+msgstr "Vásárlás ideje"
+
+#: inventory/forms.py:20 inventory/models.py:61
+msgid "Place"
+msgstr "Helye"
+
+#: inventory/forms.py:21 inventory/models.py:62
+msgid "Price (Ft)"
+msgstr "Vételár (Ft)"
+
+#: inventory/models.py:14 templates/jatszohaz/profile.html:8
 #: templates/jatszohaz/profile_detail.html:10
 #: templates/jatszohaz/user_list.html:12
 msgid "Name"
 msgstr "Név"
 
-#: inventory/models.py:14 rent/templates/rent/game_option.html:44
+#: inventory/models.py:15 rent/templates/rent/game_option.html:44
 #: templates/_game.html:37
 msgid "Description"
 msgstr "Leírás"
 
-#: inventory/models.py:15
+#: inventory/models.py:16
 msgid "Short Description"
 msgstr "Rövid leírás"
 
-#: inventory/models.py:17 rent/templates/rent/game_option.html:42
+#: inventory/models.py:18 rent/templates/rent/game_option.html:42
 #: templates/_game.html:35
 msgid "Players"
 msgstr "Játékosok"
 
-#: inventory/models.py:18
+#: inventory/models.py:19
 msgid "Playing time"
 msgstr "Játékidő"
 
-#: inventory/models.py:21
-#| msgid "New game"
+#: inventory/models.py:22
 msgid "Base game"
 msgstr "Alapjáték"
 
-#: inventory/models.py:22
+#: inventory/models.py:23
 msgid "Game needed to play this one."
 msgstr "Az a játék ami nélkül ez nem játszható"
 
-#: inventory/models.py:75 templates/inventory/list-inventory.html:18
+#: inventory/models.py:88 templates/inventory/list-inventory.html:18
 #: templates/inventory/list_game.html:23
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:76 templates/inventory/list-inventory.html:19
+#: inventory/models.py:89 templates/inventory/list-inventory.html:19
 #: templates/inventory/list_game.html:24
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:77
+#: inventory/models.py:90
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:81
+#: inventory/models.py:95
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
