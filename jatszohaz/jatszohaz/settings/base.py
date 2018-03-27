@@ -59,9 +59,7 @@ DEBUG = False
 ALLOWED_HOSTS = get_env_variable('DJANGO_ALLOWED_HOSTS', "*").split(',')
 # END HOST CONFIGURATION
 
-
 # Application definition
-
 DJANGO_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -151,6 +149,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
+
+TIME_ZONE = 'Europe/Budapest'
 
 LOCALE_PATHS = (
     join(SITE_ROOT, "locale"),
