@@ -110,6 +110,8 @@ body>.container>.content {
 
 .game_container img {
     margin-top: 30px;
+    min-width: 130px;
+    min-height: 100px;
 }
 
 .comment-message p {
