@@ -23,7 +23,7 @@
                 {% endif %}
                 <a href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Details' %}</a><br/>
                 <a href="{% url 'inventory:new' game.pk %}">{% trans 'Create new inventory' %}</a><br/>
-                <a href="{% url 'inventory:edit-gamegroup' game.pk %}">{% trans 'Edit gamegroup' %}</a><br/>
+                <a href="{% url 'inventory:edit-gamegroup' game.game_group.pk %}">{% trans 'Edit gamegroup' %}</a><br/>
                 <a href="{% url 'inventory:edit-gamepiece' game.pk %}">{% trans 'Edit gamepiece' %}</a><br/>
             {% endwith %}
             <hr/>

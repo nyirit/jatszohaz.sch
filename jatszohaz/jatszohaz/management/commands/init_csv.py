@@ -39,16 +39,22 @@ class Command(BaseCommand):
             self.write(self.style.ERROR("base_game (%s) does not exists for %s!" % (base_game_name, game_group)))
 
         priority = row[3] or '0'
-        image_url = row[4] or 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'
-        short_desc = row[5]
-        long_desc = row[6]
-        player_number = row[7]
-        playtime = row[8]
-        rules = row[9]
-        missing = row[10]
-        damage = row[11]
-        playable = row[12]
-        rentable = row[13]
+        buying_date = row[4]
+        owner = row[5]
+        if owner:
+            self.write(self.style.WARNING("Owner of game will be ignored, must be recorded manually!"))
+        place = row[6]
+        price = row[7]
+        image_url = row[8] or 'http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg'
+        short_desc = row[9]
+        long_desc = row[10]
+        player_number = row[11]
+        playtime = row[12]
+        rules = row[13]
+        missing = row[14]
+        damage = row[15]
+        playable = row[16]
+        rentable = row[17]
 
         gg, created = GameGroup.objects.get_or_create(name=game_group)
 
@@ -72,7 +78,12 @@ class Command(BaseCommand):
             notes=game_piece_note,
             priority=priority,
             rentable=rentable,
+            place=place,
         )
+        if buying_date:
+            gp.buying_date = buying_date
+        if price:
+            gp.price = price
         gp.save()
 
         InventoryItem.objects.create(

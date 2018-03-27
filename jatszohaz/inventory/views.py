@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, ListView, UpdateView, FormView
-from inventory.forms import GameForm
+from inventory.forms import GameForm, GamePieceForm
 
 from .models import InventoryItem, GamePiece, GameGroup
 
@@ -83,8 +83,8 @@ class NewGameWithGroupView(InventoryPermissionRequiredMixin, FormView):
 
 class NewGameView(InventoryPermissionRequiredMixin, CreateView):
     model = GamePiece
+    form_class = GamePieceForm
     template_name = "inventory/new_game.html"
-    fields = ['owner', 'game_group', 'notes', 'priority', 'rentable']
     success_url = reverse_lazy('inventory:list')
 
 
@@ -99,7 +99,7 @@ class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, Updat
 
 class EditGamePiece(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
     model = GamePiece
-    fields = ['owner', 'game_group', 'priority', 'notes', 'rentable']
+    form_class = GamePieceForm
     template_name = "default_update.html"
     success_url = reverse_lazy("inventory:list")
     success_message = _("Game group successfully edited.")

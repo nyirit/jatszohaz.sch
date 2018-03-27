@@ -1,4 +1,5 @@
 import logging
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -48,19 +49,25 @@ class GamePiece(TimeStampedModel):
         blank=True
     )
     game_group = models.ForeignKey(GameGroup, on_delete=models.CASCADE, related_name='game_pieces')
-    notes = models.CharField(verbose_name=_("Notes"), max_length=100)
+    notes = models.CharField(verbose_name=_("Notes"), max_length=100, blank=True)
     # Priority: which GamePiece should be rented first from same GameGroup.
     # Higher number will be rented first.
     priority = models.PositiveSmallIntegerField(verbose_name=_("Priority"), default=0)
     rentable = models.BooleanField(verbose_name=_("Rentable"), null=False, blank=False, default=True)
+    buying_date = models.DateField(verbose_name=_("Buying date"), null=True, blank=True)
+    place = models.CharField(verbose_name=_("Place"), max_length=20, blank=True)
+    price = models.IntegerField(verbose_name=_("Price (Ft)"), validators=[MinValueValidator(0)], default=0)
 
     def is_free(self, date_from, date_to):
         from rent.models import Rent
 
-        return self.rentable and self.rents\
-            .exclude(status__in=[Rent.STATUS_CANCELLED, Rent.STATUS_DECLINED])\
-            .filter(models.Q(date_from__range=(date_from, date_to)) | models.Q(date_to__range=(date_from, date_to)))\
-            .count() == 0
+        last_inv = self.get_latest_inventory_item()
+
+        return (self.rentable and (last_inv is None or last_inv.playable) and
+                self.rents
+                .exclude(status__in=[Rent.STATUS_CANCELLED, Rent.STATUS_DECLINED])
+                .filter(models.Q(date_from__range=(date_from, date_to)) | models.Q(date_to__range=(date_from, date_to)))
+                .count() == 0)
 
     def get_latest_inventory_item(self):
         return self.inventories.last()
