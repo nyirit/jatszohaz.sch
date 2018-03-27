@@ -58,10 +58,15 @@ class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class ProfileView(PermissionRequiredMixin, DetailView):
+class ProfileView(LoginRequiredMixin, DetailView):
     model = JhUser
     template_name = "jatszohaz/profile_detail.html"
     permission_required = 'jatszohaz.view_all'
+
+    def get(self, request, *args, **kwargs):
+        if request.user == self.get_object():
+            return redirect(reverse_lazy("my-profile"))
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
