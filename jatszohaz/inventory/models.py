@@ -40,7 +40,7 @@ class GameGroup(TimeStampedModel):
         return False
 
     def __str__(self):
-        return '%s' % (self.name)
+        return self.name
 
 
 class GamePiece(TimeStampedModel):
