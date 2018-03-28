@@ -4,7 +4,6 @@ set -o xtrace
 
 git clone https://github.com/bubi24/jatszohaz.sch.git
 
-virtualenv jh
 source jh/bin/activate
 
 cd jatszohaz.sch
@@ -12,7 +11,7 @@ pip install -r requirements.txt
 
 cd jatszohaz
 python3 manage.py migrate
-python3 manage.py collectstatic
+python3 manage.py collectstatic --no-input --clear
 python3 manage.py compilemessages
 
 gunicorn \

@@ -1,6 +1,7 @@
 FROM python:3
 
 RUN apt-get update && apt-get install -y --no-install-recommends gettext
+RUN pip install --upgrade pip
 RUN pip install virtualenv
 
 # Create the home directory for the new app user.
@@ -18,6 +19,10 @@ RUN chown -R app:app .
 
 # Change to the app user.
 USER app
+
+COPY base_7df49a6.txt base_req.txt
+RUN virtualenv jh
+RUN /bin/bash -c "source jh/bin/activate; pip install -r base_req.txt"
 
 # Start init script
 EXPOSE 8000
