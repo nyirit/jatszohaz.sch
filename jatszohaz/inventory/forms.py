@@ -7,7 +7,7 @@ from jatszohaz.models import JhUser
 class GameForm(forms.ModelForm):
     class Meta:
         model = GameGroup
-        fields = ['name', 'description', 'short_description', 'image', ]
+        fields = ['name', 'description', 'short_description', 'image', 'base_game', 'players', 'playtime']
 
     owner = forms.ModelChoiceField(label=_("Owner"), queryset=JhUser.objects.all(), required=False)
     notes = forms.CharField(label=_("Notes"), max_length=100, required=False)

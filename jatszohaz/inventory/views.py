@@ -20,7 +20,7 @@ class InventoryPermissionRequiredMixin(PermissionRequiredMixin):
 
 class NewInvView(SuccessMessageMixin, InventoryPermissionRequiredMixin, CreateView):
     model = InventoryItem
-    fields = ['game', 'playable', 'missing_items', ]
+    fields = ['game', 'playable', 'missing_items', 'rules', ]
     template_name = "inventory/new_inventory.html"
     success_url = reverse_lazy('inventory:list')
     success_message = _("Inventory created")
@@ -90,7 +90,7 @@ class NewGameView(InventoryPermissionRequiredMixin, CreateView):
 
 class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
     model = GameGroup
-    fields = ['name', 'description', 'short_description', ]
+    fields = ['name', 'description', 'short_description', 'base_game', 'players', 'playtime']
     template_name = "default_update.html"
     success_url = reverse_lazy("inventory:list")
     success_message = _("Game group successfully edited.")

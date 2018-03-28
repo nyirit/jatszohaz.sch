@@ -15,8 +15,8 @@ class GameGroup(TimeStampedModel):
     description = models.TextField(verbose_name=_("Description"), blank=False)
     short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
     image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image")
-    players = models.CharField(verbose_name=_("Players"), max_length=100)
-    playtime = models.CharField(verbose_name=_("Playing time"), max_length=100)
+    players = models.CharField(verbose_name=_("Players"), help_text=_("Example: 2 - 6"), max_length=100)
+    playtime = models.CharField(verbose_name=_("Playing time"), help_text=_("Example: 20 mins"), max_length=100)
     base_game = models.ForeignKey("self",
                                   on_delete=models.SET_NULL,
                                   verbose_name=_("Base game"),
