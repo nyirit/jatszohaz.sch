@@ -201,6 +201,7 @@ EMAIL_SUBJECT_PREFIX = get_env_variable("EMAIL_SUBJECT_PREFIX",
 # ######### AUTH.SCH CONFIGURATION
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 AUTHENTICATION_BACKENDS = [
+   'django.contrib.auth.backends.ModelBackend',
    'authsch.authentication.AuthSCHOAuth2',
 ]
 
