@@ -23,6 +23,12 @@ class GameGroup(TimeStampedModel):
                                   help_text=_("Game needed to play this one."),
                                   blank=True,
                                   null=True)
+    hide = models.BooleanField(
+        verbose_name=_("Hide from users"),
+        help_text=_("If true isn't shown in Our games page."),
+        blank=True,
+        default=False
+    )
 
     class Meta:
         ordering = ['name', ]

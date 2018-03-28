@@ -38,6 +38,7 @@ class GamesView(ListView):
     model = GameGroup
     template_name = "jatszohaz/games.html"
     ordering = "name"
+    queryset = GameGroup.objects.filter(hide=False)
 
 
 class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):

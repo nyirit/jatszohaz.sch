@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-28 15:36+0200\n"
-"PO-Revision-Date: 2018-03-28 15:37+0116\n"
+"POT-Creation-Date: 2018-03-28 18:57+0200\n"
+"PO-Revision-Date: 2018-03-28 18:58+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,31 +19,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: inventory/forms.py:12 inventory/models.py:50
+#: inventory/forms.py:12 inventory/models.py:56
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: inventory/forms.py:13 inventory/models.py:55
+#: inventory/forms.py:13 inventory/models.py:61
 msgid "Notes"
 msgstr "Megjegyzés"
 
-#: inventory/forms.py:14 inventory/models.py:58
+#: inventory/forms.py:14 inventory/models.py:64
 msgid "Priority"
 msgstr "Prioritás"
 
-#: inventory/forms.py:15 inventory/models.py:59
+#: inventory/forms.py:15 inventory/models.py:65
 msgid "Rentable"
 msgstr "Kölcsönözhető"
 
-#: inventory/forms.py:17 inventory/models.py:60
+#: inventory/forms.py:17 inventory/models.py:66
 msgid "Buying date"
 msgstr "Vásárlás ideje"
 
-#: inventory/forms.py:20 inventory/models.py:61
+#: inventory/forms.py:20 inventory/models.py:67
 msgid "Place"
 msgstr "Helye"
 
-#: inventory/forms.py:21 inventory/models.py:62
+#: inventory/forms.py:21 inventory/models.py:68
 msgid "Price (Ft)"
 msgstr "Vételár (Ft)"
 
@@ -87,21 +87,29 @@ msgstr "Alapjáték"
 msgid "Game needed to play this one."
 msgstr "Az a játék ami nélkül ez nem játszható"
 
-#: inventory/models.py:88 templates/inventory/list-inventory.html:18
+#: inventory/models.py:27
+msgid "Hide from users"
+msgstr "Felhasználók elől elrejtés"
+
+#: inventory/models.py:28
+msgid "If true isn't shown in Our games page."
+msgstr "Kipipált esetben nem látják a felhasználók a Játékaink menüpontban"
+
+#: inventory/models.py:94 templates/inventory/list-inventory.html:18
 #: templates/inventory/list_game.html:23
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:89 templates/inventory/list-inventory.html:19
+#: inventory/models.py:95 templates/inventory/list-inventory.html:19
 #: templates/inventory/list_game.html:24
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:90
+#: inventory/models.py:96
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:95
+#: inventory/models.py:101
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
@@ -153,15 +161,15 @@ msgstr "Mind megtekintése"
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: jatszohaz/views.py:46
+#: jatszohaz/views.py:47
 msgid "Successfully updated!"
 msgstr "Sikeresen frissítve!"
 
-#: jatszohaz/views.py:91
+#: jatszohaz/views.py:92
 msgid "Please check your profile data and click the Update button!"
 msgstr "Kérlek ellenőrizd az adataidat, majd kattints a Frissítés gombra!"
 
-#: jatszohaz/views.py:139
+#: jatszohaz/views.py:140
 #, python-format
 msgid "Logged in as user %s."
 msgstr "Bejelentkezve, mint %s."
@@ -422,19 +430,25 @@ msgstr "Kölcsönzés megváltoztatva!"
 msgid "Failed to send notification emails!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:229 rent/views.py:282
+#: rent/views.py:229 rent/views.py:296
 msgid "Invalid form."
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:257
+#: rent/views.py:261
+#, python-format
+#| msgid "Failed to change date. Not available: %s"
+msgid "Failed to change status! Following games are not available anymore: %s"
+msgstr "Sikertelen státuszmódosítás. Nem elérhető játék(ok): %s"
+
+#: rent/views.py:271
 msgid "Failed to send notification email!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:275
+#: rent/views.py:289
 msgid "Game added."
 msgstr "Játék hozzáadva!"
 
-#: rent/views.py:277
+#: rent/views.py:291
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
 
