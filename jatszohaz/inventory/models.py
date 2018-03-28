@@ -71,7 +71,7 @@ class GamePiece(TimeStampedModel):
 
         return (self.rentable and (last_inv is None or last_inv.playable) and
                 self.rents
-                .exclude(status__in=[Rent.STATUS_CANCELLED, Rent.STATUS_DECLINED])
+                .exclude(status__in=[Rent.STATUS_CANCELLED[0], Rent.STATUS_DECLINED[0]])
                 .filter(models.Q(date_from__range=(date_from, date_to)) | models.Q(date_to__range=(date_from, date_to)))
                 .count() == 0)
 

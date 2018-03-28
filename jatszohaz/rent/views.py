@@ -249,6 +249,20 @@ class ChangeStatusView(LoginRequiredMixin, View):
 
             raise PermissionDenied("No permission to change status of rent!")
 
+        # check game availability if rent was cancelled or declined
+        if rent.status in (Rent.STATUS_CANCELLED[0], Rent.STATUS_DECLINED[0]):
+            not_free = []
+            for game in rent.games.all():
+                if not game.is_free(rent.date_from, rent.date_to):
+                    not_free.append(str(game))
+            if not_free:
+                messages.error(
+                    self.request,
+                    _("Failed to change status! Following games are not available anymore: %s") % ','.join(not_free)
+                )
+                return redirect(rent.get_absolute_url())
+
+        # save new status
         rent.status = status
         rent.save()
         rent.create_new_history(self.request.user)
