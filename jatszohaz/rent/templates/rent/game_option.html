@@ -19,7 +19,7 @@
            data-placement="bottom"
            title="{{ widget.label.short_description }} - {% trans "Click for details!" %}">
 
-            {{ widget.label }}
+            {{ widget.label|truncatechars:20 }}
         </span>
     </span>
 </label>
