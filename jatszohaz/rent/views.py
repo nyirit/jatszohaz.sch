@@ -41,30 +41,31 @@ class NewView(LoginRequiredMixin, SessionWizardView):
     def send_email(self, rent, comment):
         """Sends notification email to mailing list"""
 
-        recipient = settings.NOTIFICATION_EMAIL_TO
-        if recipient:
-            data = {
-                'url': rent.get_absolute_url(),
-                'renter': rent.renter.full_name2(),
-                'date_from': rent.date_from,
-                'date_to': rent.date_to,
-                'games': ', '.join([gp.game_group.name for gp in rent.games.all()]),
-                'comment': comment.message
-            }
-            subject = _("%s new rent") % settings.EMAIL_SUBJECT_PREFIX
-            message = _("Hi!<br/>New rent created!<br/><br/>"
-                        "Renter: %(renter)s<br/>"
-                        "Dates: %(date_from)s - %(date_to)s<br/>"
-                        "Games: %(games)s<br/>"
-                        "Comment: %(comment)s<br/>"
-                        "Details: <a href=\"%(url)s\">%(url)s<a><br/><br/>"
-                        "Best wishes,<br/>Játszóház") % data
+        if not rent.renter.has_perms('rent.manage_rents'):
+            recipient = settings.NOTIFICATION_EMAIL_TO
+            if recipient:
+                data = {
+                    'url': rent.get_absolute_url(),
+                    'renter': rent.renter.full_name2(),
+                    'date_from': rent.date_from,
+                    'date_to': rent.date_to,
+                    'games': ', '.join([gp.game_group.name for gp in rent.games.all()]),
+                    'comment': comment.message
+                }
+                subject = _("%s new rent") % settings.EMAIL_SUBJECT_PREFIX
+                message = _("Hi!<br/>New rent created!<br/><br/>"
+                            "Renter: %(renter)s<br/>"
+                            "Dates: %(date_from)s - %(date_to)s<br/>"
+                            "Games: %(games)s<br/>"
+                            "Comment: %(comment)s<br/>"
+                            "Details: <a href=\"%(url)s\">%(url)s<a><br/><br/>"
+                            "Best wishes,<br/>Játszóház") % data
 
-            try:
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient, ], fail_silently=False)
-            except Exception as e:
-                logger.error("Failed to send email! %s" % e)
-                return False
+                try:
+                    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient, ], fail_silently=False)
+                except Exception as e:
+                    logger.error("Failed to send email! %s" % e)
+                    return False
 
     def done(self, form_list, **kwargs):
         forms = list(form_list)

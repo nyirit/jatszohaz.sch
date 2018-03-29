@@ -46,8 +46,13 @@
             {% else %}
                 {{ wizard.form|crispy }}
             {% endif %}
-            <br/>
         </table>
+        {% if wizard.steps.step1 == 3 %}
+            {% if perms.rent.manage_rents %}
+                <p class="text-success">{% trans "Email notification won't be sent." %}</p>
+            {% endif %}
+            <a target="_blank" href="{% url 'rent:rules' %}">{% trans "Rent rules" %}</a><br/><br/>
+        {% endif %}
         {% if wizard.steps.prev %}
             <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.first }}">{% trans "Different date" %}</button>
         {% endif %}
@@ -58,8 +63,4 @@
             <input type="submit" class="btn btn-primary" value="{% trans "Next" %}"/>
         {% endif %}
     </form>
-
-    {% if wizard.steps.step1 == 3 %}
-        <br/><a target="_blank" href="{% url 'rent:rules' %}">{% trans "Rent rules" %}</a>
-    {% endif %}
 {% endblock %}
