@@ -1,4 +1,5 @@
 import logging
+from urllib.parse import urljoin
 from django.conf import settings
 
 from django.contrib import messages
@@ -45,7 +46,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
             recipient = settings.NOTIFICATION_EMAIL_TO
             if recipient:
                 data = {
-                    'url': rent.get_absolute_url(),
+                    'url': urljoin(settings.SITE_DOMAIN, str(rent.get_absolute_url())),
                     'renter': rent.renter.full_name2(),
                     'date_from': rent.date_from,
                     'date_to': rent.date_to,

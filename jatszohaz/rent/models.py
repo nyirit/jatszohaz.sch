@@ -1,5 +1,6 @@
 from datetime import datetime
 import logging
+from urllib.parse import urljoin
 from django.conf import settings
 from django.db import models
 from django.db.models import Count
@@ -67,9 +68,10 @@ class Rent(TimeStampedModel):
         recipient_list.discard(user_exclude.email)
 
         if recipient_list:
+            url = urljoin(settings.SITE_DOMAIN, str(self.get_absolute_url()))
             subject = settings.EMAIL_SUBJECT_PREFIX + str(subject)
             message += _("You can check your rent here: <a href=\"%s\">%s<a><br/><br/>"
-                         "Best wishes,<br/>Játszóház") % (self.get_absolute_url(), self.get_absolute_url())
+                         "Best wishes,<br/>Játszóház") % (url, url)
             try:
                 jh_send_mail(subject, message, recipient_list)
             except Exception as e:

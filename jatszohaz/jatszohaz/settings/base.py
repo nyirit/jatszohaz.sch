@@ -42,6 +42,8 @@ SITE_ROOT = dirname(BASE_DIR)
 # Site name:
 SITE_NAME = basename(BASE_DIR)
 
+SITE_DOMAIN = get_env_variable('DJANGO_SITE_DOMAIN')
+
 # ####### END PATH CONFIGURATION
 
 
