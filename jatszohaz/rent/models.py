@@ -1,7 +1,6 @@
 from datetime import datetime
 import logging
 from django.conf import settings
-from django.core.mail import send_mail
 from django.db import models
 from django.db.models import Count
 from django.urls import reverse_lazy
@@ -10,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 from inventory.models import GamePiece
 from jatszohaz.models import JhUser
+from jatszohaz.utils import jh_send_mail
 
 
 logger = logging.getLogger(__name__)
@@ -71,7 +71,7 @@ class Rent(TimeStampedModel):
             message += _("You can check your rent here: <a href=\"%s\">%s<a><br/><br/>"
                          "Best wishes,<br/>Játszóház") % (self.get_absolute_url(), self.get_absolute_url())
             try:
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list, fail_silently=False)
+                jh_send_mail(subject, message, recipient_list)
             except Exception as e:
                 logger.error("Failed to send email! %s" % e)
                 return False

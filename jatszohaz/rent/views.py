@@ -4,7 +4,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import SuspiciousOperation, PermissionDenied
-from django.core.mail import send_mail
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, UpdateView, FormView, View, TemplateView
@@ -12,6 +11,7 @@ from formtools.wizard.views import SessionWizardView
 
 from .forms import RentFormStep1, RentFormStep2, RentFormStep3, NewCommentForm, EditRentForm, AddGameForm
 from inventory.models import GameGroup
+from jatszohaz.utils import jh_send_mail
 from .models import Rent, Comment, GamePiece
 
 
@@ -62,7 +62,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
                             "Best wishes,<br/>Játszóház") % data
 
                 try:
-                    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient, ], fail_silently=False)
+                    jh_send_mail(subject, message, [recipient, ])
                 except Exception as e:
                     logger.error("Failed to send email! %s" % e)
                     return False
