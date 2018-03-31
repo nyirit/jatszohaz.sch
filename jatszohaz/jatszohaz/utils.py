@@ -1,6 +1,10 @@
+import logging
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
+
+
+logger = logging.getLogger(__name__)
 
 
 def jh_send_mail(subject, html_message, recipient_list, fail_silently=False):
@@ -8,3 +12,4 @@ def jh_send_mail(subject, html_message, recipient_list, fail_silently=False):
     msg = EmailMultiAlternatives(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list)
     msg.attach_alternative(html_message, "text/html")
     msg.send(fail_silently=fail_silently)
+    logger.info("Email sent to: %s" % recipient_list)
