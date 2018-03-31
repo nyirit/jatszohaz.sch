@@ -29,6 +29,11 @@
 
     {% include 'rent/rent_detail_admin.html' %}
 
+    <br/>
+    {% for status in available_statuses %}
+        <a class="btn btn-info" href="{% url 'rent:change-status' object.pk status.0 %}">{{ status.1 }}</a>
+    {% endfor %}
+
     <h1>{% trans 'Comments' %}</h1>
     {% for comment in object.comments.all %}
         <div class="panel panel-default">

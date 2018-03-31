@@ -24,6 +24,15 @@ class Rent(TimeStampedModel):
     STATUS_BACK = ("back", _("Brought back"))
     STATUS_DECLINED = ("declined", _("Declined"))
     STATUS_CANCELLED = ("cancelled", _("Cancelled"))
+    STATUS_CHANGE_VERB = {
+        "pending": _("Pending"),
+        "approved": _("Approve"),
+        "gaveout": _("Give out"),
+        "inmyroom": _("In my room"),
+        "back": _("Bring back"),
+        "declined": _("Decline"),
+        "cancelled": _("Cancel")
+    }
     STATUS_CHOICES = (
         STATUS_PENDING,
         STATUS_APPROVED,

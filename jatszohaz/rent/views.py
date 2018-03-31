@@ -162,18 +162,31 @@ class DetailsView(LoginRequiredMixin, DetailView):
 
         # set available statuses based on current status
         available_statuses = []
-        if self.object.status in (Rent.STATUS_DECLINED[0], Rent.STATUS_CANCELLED[0], Rent.STATUS_PENDING[0]):
-            available_statuses.append(Rent.STATUS_APPROVED)
-        if self.object.status == Rent.STATUS_APPROVED[0]:
-            available_statuses.append(Rent.STATUS_GAVE_OUT)
-        if self.object.status == Rent.STATUS_GAVE_OUT[0]:
-            available_statuses.append(Rent.STATUS_IN_MY_ROOM)
-        if self.object.status in (Rent.STATUS_IN_MY_ROOM[0], Rent.STATUS_GAVE_OUT[0]):
-            available_statuses.append(Rent.STATUS_BACK)
+        if self.request.user.has_perms('rent.manage_rents'):
+            if self.object.status in (Rent.STATUS_DECLINED[0], Rent.STATUS_CANCELLED[0], Rent.STATUS_PENDING[0]):
+                s = Rent.STATUS_APPROVED[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.object.status == Rent.STATUS_APPROVED[0]:
+                s = Rent.STATUS_GAVE_OUT[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.object.status == Rent.STATUS_GAVE_OUT[0]:
+                s = Rent.STATUS_IN_MY_ROOM[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.object.status in (Rent.STATUS_IN_MY_ROOM[0], Rent.STATUS_GAVE_OUT[0]):
+                s = Rent.STATUS_BACK[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.object.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0]):
+                s = Rent.STATUS_DECLINED[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
         if self.object.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0]):
-            available_statuses.append(Rent.STATUS_DECLINED)
-        if self.object.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0]):
-            available_statuses.append(Rent.STATUS_CANCELLED)
+            s = Rent.STATUS_CANCELLED[0]
+            available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
         context_data['available_statuses'] = available_statuses
 
         return context_data

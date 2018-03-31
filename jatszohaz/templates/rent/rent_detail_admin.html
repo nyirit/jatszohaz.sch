@@ -1,6 +1,8 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
+
+
 {% if perms.rent.manage_rents %}
     <form action="{% url 'rent:add-game' object.pk %}" method="post">
         {% csrf_token %}
@@ -10,9 +12,6 @@
     </form>
 
     <br/>
-    {% for status in available_statuses %}
-        <a class="btn btn-info" href="{% url 'rent:change-status' object.pk status.0 %}">{{ status.1 }}</a>
-    {% endfor %}
 
     <h3>{% trans 'Edit rent' %}:</h3>
     <form action="{% url 'rent:edit' object.pk %}" method="post">
