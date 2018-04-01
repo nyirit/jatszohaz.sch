@@ -162,7 +162,7 @@ class DetailsView(LoginRequiredMixin, DetailView):
 
         # set available statuses based on current status
         available_statuses = []
-        if self.request.user.has_perms('rent.manage_rents'):
+        if self.request.user.has_perm('rent.manage_rents'):
             if self.object.status in (Rent.STATUS_DECLINED[0], Rent.STATUS_CANCELLED[0], Rent.STATUS_PENDING[0]):
                 s = Rent.STATUS_APPROVED[0]
                 available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
