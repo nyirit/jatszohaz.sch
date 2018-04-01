@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-01 23:53+0200\n"
-"PO-Revision-Date: 2018-04-01 23:54+0116\n"
+"PO-Revision-Date: 2018-04-02 00:03+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -366,7 +366,8 @@ msgstr "új státusz"
 #, python-format
 msgid "Hi!<br/><br/>Status of your rent was changed to %s.<br/><br/>"
 msgstr ""
-"Szia!<br/><br/>Kölcsönzésed státusza megváltozott. Új státusz: %s.<br/><br/>"
+"Szia!<br/><br/>Kölcsönzésed státusza megváltozott.<br/>Új státusz: "
+"%s.<br/><br/>"
 
 #: rent/models.py:100
 msgid "new comment"
@@ -382,7 +383,7 @@ msgid ""
 "%s<br/>Message:<br/>%s<br/>"
 msgstr ""
 "Szia!<br/><br/>Új komment érkezett a kölcsönzésedhez.<br/><br/>Felhasználó: "
-"%s<br/>Üzenet:<br/>%s<br/>"
+"%s<br/>Üzenet:<br/>%s<br/><br/>"
 
 #: rent/models.py:107
 msgid "date changed"
