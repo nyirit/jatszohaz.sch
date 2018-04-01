@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 23:05+0200\n"
-"PO-Revision-Date: 2018-03-31 23:06+0116\n"
+"POT-Creation-Date: 2018-04-01 23:53+0200\n"
+"PO-Revision-Date: 2018-04-01 23:54+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -157,7 +157,7 @@ msgstr ""
 msgid "View all"
 msgstr "Mind megtekintése"
 
-#: jatszohaz/settings/base.py:162
+#: jatszohaz/settings/base.py:194
 msgid "Hungarian"
 msgstr "Magyar"
 
@@ -293,27 +293,22 @@ msgid "Cancelled"
 msgstr "Visszamondva"
 
 #: rent/models.py:29
-#| msgid "Approved"
 msgid "Approve"
 msgstr "Elfogad"
 
 #: rent/models.py:30
-#| msgid "Gave out"
 msgid "Give out"
 msgstr "Kiad"
 
 #: rent/models.py:32
-#| msgid "Brought back"
 msgid "Bring back"
 msgstr "Visszahoz"
 
 #: rent/models.py:33
-#| msgid "Declined"
 msgid "Decline"
 msgstr "Elutasít"
 
 #: rent/models.py:34
-#| msgid "Cancelled"
 msgid "Cancel"
 msgstr "Visszamond"
 
@@ -333,7 +328,7 @@ msgstr "Dátum kezdete"
 msgid "To"
 msgstr "Dátum vége"
 
-#: rent/models.py:50 rent/models.py:136 templates/inventory/list_game.html:12
+#: rent/models.py:50 rent/models.py:137 templates/inventory/list_game.html:12
 #: templates/jatszohaz/profile_detail.html:36 templates/rent/_rent.html:18
 #: templates/rent/rent_detail.html:10
 msgid "Status"
@@ -353,48 +348,56 @@ msgstr "Kölcsönzés statisztika megtekintése"
 
 #: rent/models.py:82
 #, python-format
+#| msgid ""
+#| "You can check your rent here: <a href=\"%s\">%s<a><br/><br/>Best "
+#| "wishes,<br/>Játszóház"
 msgid ""
-"You can check your rent here: <a href=\"%s\">%s<a><br/><br/>Best "
-"wishes,<br/>Játszóház"
+"You can check your rent here: <a href=\"%s\">%s<a><br/>Please do not reply "
+"to this email.<br/><br/>Best wishes,<br/>Játszóház"
 msgstr ""
-"Kölcsönzésed megtekintéséhez katt ide: <a href=\"%s\">%s<a><br/><br/>Best "
-"wishes,<br/>Játszóház"
+"Kölcsönzésed megtekintéséhez katt ide: <a href=\"%s\">%s<a><br/><br/>Kérlek "
+"ne válaszolj erre a levélre!<br/><br/>Üdv,<br/>Játszóház"
 
-#: rent/models.py:93
+#: rent/models.py:94
 msgid "new status"
 msgstr "új státusz"
 
-#: rent/models.py:94
+#: rent/models.py:95
 #, python-format
-msgid "Hi!<br/>Status of your rent was changed to %s.<br/><br/>"
+msgid "Hi!<br/><br/>Status of your rent was changed to %s.<br/><br/>"
 msgstr ""
-"Szia!<br/>Kölcsönzésed státusza megváltozott. Új státusz: %s.<br/><br/>"
+"Szia!<br/><br/>Kölcsönzésed státusza megváltozott. Új státusz: %s.<br/><br/>"
 
-#: rent/models.py:99
+#: rent/models.py:100
 msgid "new comment"
 msgstr "új komment"
 
-#: rent/models.py:100
+#: rent/models.py:101
 #, python-format
+#| msgid ""
+#| "Hi!<br/>There is a new comment to your rent.<br/><br/>User: "
+#| "%s<br/>Message:<br/>%s<br/>"
 msgid ""
-"Hi!<br/>There is a new comment to your rent.<br/><br/>User: "
+"Hi!<br/><br/>There is a new comment to your rent.<br/><br/>User: "
 "%s<br/>Message:<br/>%s<br/>"
 msgstr ""
-"Szia!<br/>Új komment érkezett a kölcsönzésedhez.<br/><br/>Felhasználó: "
+"Szia!<br/><br/>Új komment érkezett a kölcsönzésedhez.<br/><br/>Felhasználó: "
 "%s<br/>Üzenet:<br/>%s<br/>"
 
-#: rent/models.py:106
+#: rent/models.py:107
 msgid "date changed"
 msgstr "dátum módosult"
 
-#: rent/models.py:107
+#: rent/models.py:108
 #, python-format
-msgid "Hi!<br/>Your rent date changed.<br/><br/>New dates: %s - %s<br/>"
+#| msgid ""
+#| "Hi!<br/>Your rent date changed.<br/><br/>New dates: %s - %s<br/>"
+msgid "Hi!<br/><br/>Your rent date changed.<br/><br/>New dates: %s - %s<br/>"
 msgstr ""
-"Szia!<br/>Megváltozott a kölcsönzésed időpontja!<br/><br/>Új dátumok: %s - "
-"%s<br/>"
+"Szia!<br/><br/>Megváltozott a kölcsönzésed időpontja!<br/><br/>Új dátumok: "
+"%s - %s<br/>"
 
-#: rent/models.py:143
+#: rent/models.py:144
 msgid "Message"
 msgstr "Üzenet"
 
@@ -423,13 +426,18 @@ msgstr "%s új kölcsönzés"
 
 #: rent/views.py:57
 #, python-format
+#| msgid ""
+#| "Hi!<br/>New rent created!<br/><br/>Renter: %(renter)s<br/>Dates: "
+#| "%(date_from)s - %(date_to)s<br/>Games: %(games)s<br/>Comment: "
+#| "%(comment)s<br/>Details: <a href=\"%(url)s\">%(url)s<a><br/><br/>Best "
+#| "wishes,<br/>Játszóház"
 msgid ""
-"Hi!<br/>New rent created!<br/><br/>Renter: %(renter)s<br/>Dates: "
+"Hi!<br/><br/>New rent created!<br/><br/>Renter: %(renter)s<br/>Dates: "
 "%(date_from)s - %(date_to)s<br/>Games: %(games)s<br/>Comment: "
 "%(comment)s<br/>Details: <a href=\"%(url)s\">%(url)s<a><br/><br/>Best "
 "wishes,<br/>Játszóház"
 msgstr ""
-"Szia!<br/>Új kölcsönzés érkezett!<br/><br/>Kölcsönző: "
+"Szia!<br/><br/>Új kölcsönzés érkezett!<br/><br/>Kölcsönző: "
 "%(renter)s<br/>Dátumok: %(date_from)s - %(date_to)s<br/>Játékok: "
 "%(games)s<br/>Megjegyzés: %(comment)s<br/>Részletek: <a "
 "href=\"%(url)s\">%(url)s<a><br/><br/>Üdv,<br/>Játszóház"

@@ -54,7 +54,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
                     'comment': comment.message
                 }
                 subject = _("%s new rent") % settings.EMAIL_SUBJECT_PREFIX
-                message = _("Hi!<br/>New rent created!<br/><br/>"
+                message = _("Hi!<br/><br/>New rent created!<br/><br/>"
                             "Renter: %(renter)s<br/>"
                             "Dates: %(date_from)s - %(date_to)s<br/>"
                             "Games: %(games)s<br/>"

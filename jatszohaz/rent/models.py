@@ -79,7 +79,8 @@ class Rent(TimeStampedModel):
         if recipient_list:
             url = urljoin(settings.SITE_DOMAIN, str(self.get_absolute_url()))
             subject = settings.EMAIL_SUBJECT_PREFIX + str(subject)
-            message += _("You can check your rent here: <a href=\"%s\">%s<a><br/><br/>"
+            message += _("You can check your rent here: <a href=\"%s\">%s<a><br/>"
+                         "Please do not reply to this email.<br/><br/>"
                          "Best wishes,<br/>Játszóház") % (url, url)
             try:
                 jh_send_mail(subject, message, recipient_list)
@@ -91,20 +92,20 @@ class Rent(TimeStampedModel):
 
     def notify_new_status(self, user):
         subject = _("new status")
-        message = _("Hi!<br/>Status of your rent was changed to %s.<br/><br/>") % self.get_status_display()
+        message = _("Hi!<br/><br/>Status of your rent was changed to %s.<br/><br/>") % self.get_status_display()
 
         return self.notify_users(subject, message, user)
 
     def notify_new_comment(self, comment):
         subject = _("new comment")
-        message = _("Hi!<br/>There is a new comment to your rent.<br/><br/>"
+        message = _("Hi!<br/><br/>There is a new comment to your rent.<br/><br/>"
                     "User: %s<br/>Message:<br/>%s<br/>") % (comment.user.full_name2(), comment.message)
 
         return self.notify_users(subject, message, comment.user)
 
     def notify_changed_date(self, user):
         subject = _("date changed")
-        message = _("Hi!<br/>Your rent date changed.<br/><br/>"
+        message = _("Hi!<br/><br/>Your rent date changed.<br/><br/>"
                     "New dates: %s - %s<br/>") % (self.date_from, self.date_to)
 
         return self.notify_users(subject, message, user)
