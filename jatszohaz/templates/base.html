@@ -26,14 +26,13 @@
 </head>
 <body>
     <div class="container">
+      <div class="header hidden-xs">
+        <h1 class="page-name">Schönherz Játszóház</h1>
+        <h2 class="page-slogen">„Mert játszani öröm”</h2>
+        <a class="logo" href="{% url 'about-us' %}"><img src="{% static 'img/logo.png' %}" /></a>
+      </div>
 
       {% include '_navbar.html' %}
-
-      <div class="header">
-        <h1 class="page-name">Schönherz Játszóház</h1>
-        <h2 class="page-slogen hidden-xs">„Mert játszani öröm”</h2>
-        <a class="logo hidden-xs" href="{% url 'about-us' %}"><img src="{% static 'img/logo.png' %}" /></a>
-      </div>
 
       <div class="content img-rounded">
           {% block messages %}
