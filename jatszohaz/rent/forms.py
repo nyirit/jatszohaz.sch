@@ -92,7 +92,7 @@ class EditRentForm(forms.ModelForm):
         date_to = cleaned_data.get('date_to', None)
 
         if date_from is not None:
-            if 'date_from' in self.changed_data and date_from < datetime.now():
+            if 'date_from' in self.changed_data and date_from.date() < datetime.now().date():
                 self.add_error('date_from', _("Must be in the future!"))
 
             if date_to is not None and date_from > date_to:
@@ -102,7 +102,7 @@ class EditRentForm(forms.ModelForm):
         not_available_games = []
         if 'date_from' in cleaned_data and 'date_to' in cleaned_data:
             for game in self.instance.games.all():
-                if not game.is_free(cleaned_data['date_from'], cleaned_data['date_to']):
+                if not game.is_free(cleaned_data['date_from'], cleaned_data['date_to'], self.instance.pk):
                     not_available_games.append(str(game))
         if not_available_games:
             self.add_error('date_from', _("Failed to change date. Not available: %s" % ', '.join(not_available_games)))
