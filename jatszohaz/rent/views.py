@@ -1,3 +1,4 @@
+from datetime import datetime
 import logging
 from urllib.parse import urljoin
 from django.conf import settings
@@ -278,6 +279,12 @@ class ChangeStatusView(LoginRequiredMixin, View):
                 return redirect(rent.get_absolute_url())
 
         # save new status
+        if status == Rent.STATUS_GAVE_OUT[0]:
+            rent.date_from = datetime.now()
+            if rent.date_to < rent.date_from:
+                rent.date_to = rent.date_from
+                messages.warning(self.request, _("End date is in the past! Please set a correct end date!"))
+
         rent.status = status
         rent.save()
         rent.create_new_history(self.request.user)
