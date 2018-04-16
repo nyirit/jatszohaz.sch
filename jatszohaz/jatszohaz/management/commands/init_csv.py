@@ -89,7 +89,7 @@ class Command(BaseCommand):
         InventoryItem.objects.create(
             user=JhUser.objects.first(),
             game=gp, playable=playable,
-            missing_items=missing + damage,
+            missing_items="%s %s" % (missing, damage),
             rules=rules
         ).save()
 
