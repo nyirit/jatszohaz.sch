@@ -14,7 +14,7 @@
         {% for game in object.games.all %}
             <tr>
                 <td>{{ game.game_group }}</td>
-                {% if perms.web.manage_rents %}
+                {% if perms.rent.manage_rents %}
                     {# TODO move to rent_detail_admin ? #}
                     <td>{{ game.notes }}</td>
                     <td><a class="btn btn-info" href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Inventory' %}</a></td>
