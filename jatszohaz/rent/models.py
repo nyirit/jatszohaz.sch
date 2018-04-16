@@ -68,7 +68,8 @@ class Rent(TimeStampedModel):
 
     def is_past_due(self):
         return ((self.date_to < datetime.now() and self.status == Rent.STATUS_GAVE_OUT[0])
-                or (self.date_from < datetime.now() and self.status == Rent.STATUS_PENDING[0]))
+                or (self.date_from < datetime.now() and
+                    self.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0])))
 
     def notify_users(self, subject, message, user_exclude):
         recipient_list = set([c.user.email for c in self.comments.all()] +
