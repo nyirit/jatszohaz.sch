@@ -46,8 +46,10 @@
         {% if perms.jatszohaz.view_all %}
             <li><a href="{% url 'users' %}">{% trans 'Users' %}</a></li>
         {% endif %}
-        {%  if user.is_superuser %}
+        {% if perms.jatszohaz.basic_admin %}
           <li><a href="{% url 'calendar' %}">{% trans 'Calendar' %}</a></li>
+        {% endif %}
+        {% if user.is_superuser %}
           <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
         {% endif %}
       </ul>

@@ -32,6 +32,7 @@ class JhUser(AbstractUser):
     class Meta:
         permissions = (
             ('view_all', _('View all')),
+            ('basic_admin', _('Basic admin rights')),
         )
 
     def get_entitlements(self):
