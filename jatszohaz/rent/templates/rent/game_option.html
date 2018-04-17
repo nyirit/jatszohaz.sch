@@ -11,15 +11,17 @@
         {% include "django/forms/widgets/attrs.html" %} />
 
     <span class="checkmark"></span>
+    <span class="title">{{ widget.label|truncatechars:20 }}</span>
+
     <span data-toggle="modal"
        data-target="#modal_{{ widget.attrs.id }}">
-        <span class="title"
+
+        <span class="glyphicon glyphicon-question-sign info"
            onclick="return false"  {# Little hack. Without it when modal shows selection toggles. #}
            data-toggle="tooltip"
-           data-placement="bottom"
+           data-placement="top"
            title="{{ widget.label.short_description }} - {% trans "Click for details!" %}">
 
-            {{ widget.label|truncatechars:20 }}
         </span>
     </span>
 </label>

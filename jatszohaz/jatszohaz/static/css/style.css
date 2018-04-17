@@ -124,6 +124,21 @@ body>.container>.content {
     min-height: 100px;
 }
 
+.game_container span.info {
+    position: absolute;
+    top: 102px;
+    right: 3px;
+    padding: 4px;
+
+    color: white;
+    font-size: 17px;
+    background-color: #1a355d;
+}
+
+.game_container div.tooltip {
+    min-width: 200px;
+}
+
 .comment-message p {
     white-space: pre;
 }
