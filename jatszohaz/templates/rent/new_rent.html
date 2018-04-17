@@ -10,9 +10,9 @@
     <h1>{% trans 'Renting' %}</h1>
 
     {% if wizard.steps.step1 == 1 %}
-        <p>{% trans "Pick dates..." %}</p>
+        <p>{% trans "Pick dates..."|linebreaks %}</p>
     {% elif wizard.steps.step1 == 2 %}
-        <p>{% trans "Pick games..." %}</p>
+        <p>{% trans "Pick games..."|linebreaks %}</p>
     {% else %}
         <h3>{% trans 'Rented games' %}:</h3>
         {% if form.game_groups.value %}
