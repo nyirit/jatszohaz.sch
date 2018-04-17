@@ -47,6 +47,7 @@
                 {{ wizard.form|crispy }}
             {% endif %}
         </table>
+        <br/>
         {% if wizard.steps.step1 == 3 %}
             {% if perms.rent.manage_rents %}
                 <p class="text-success">{% trans "Email notification won't be sent." %}</p>
