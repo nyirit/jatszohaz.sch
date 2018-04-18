@@ -6,27 +6,31 @@
 {% block content %}
     <h2>{% trans 'Rent' %}:</h2>
 
-    {% trans 'Renter' %}: <a href="{{ rent.renter.get_absolute_url }}">{{ object.renter.full_name2 }}</a><br/>
-    {% trans 'Dates' %}: {{ object.date_from|date }} - {{ object.date_to|date }}<br/>
-    {% trans 'Status' %}: {{ object.get_status_display }}<br/>
-    {% trans 'Games' %}:
-    {% if object.games.all %}
-        <table class="table table-hover table-condensed">
-        {% for game in object.games.all %}
-            <tr>
-                <td>{{ game.game_group }}</td>
-                {% if perms.rent.manage_rents %}
-                    {# TODO move to rent_detail_admin ? #}
-                    <td>{{ game.notes }}</td>
-                    <td><a class="btn btn-info" href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Inventory' %}</a></td>
-                    <td><a class="btn btn-danger" href="{% url 'rent:remove-game' object.pk game.pk %}">{% trans 'Delete' %}</a></td>
+    <table>
+        <tr>
+            <td>{% trans 'Renter' %}:</td><td><a href="{{ rent.renter.get_absolute_url }}">{{ object.renter.full_name2 }}</a></td>
+        </tr>
+        <tr>
+            <td>{% trans 'Dates' %}:</td><td>{{ object.date_from|date }} - {{ object.date_to|date }}<br/></td>
+        </tr>
+        <tr>
+            <td>{% trans 'Status' %}:</td><td> {{ object.get_status_display }}<br/></td>
+        <tr>
+            <td>
+                {% if not perms.rent.manage_rents %}
+                {% trans 'Games' %}:
+            </td><td>
+                    {% if object.games.all %}
+                        {% for game in object.games.all %}
+                            {{ game.game_group }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% trans 'No games rented.' %}
+                    {% endif %}
                 {% endif %}
-            </tr>
-        {% endfor %}
-        </table>
-    {% else %}
-        {% trans 'No games rented.' %}
-    {% endif %}
+            </td>
+        </tr>
+    </table>
 
     {% include 'rent/rent_detail_admin.html' %}
 
