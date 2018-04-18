@@ -73,7 +73,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['rents'] = self.object.rents.all()
         context['user_groups'] = ','.join([g.name for g in self.object.groups.all()])
-        if self.request.user.is_superuser:
+        if self.request.user.has_perm('jatszohaz.leader_admin'):
             context['token_login'] = TokenLogin.get_token_url(self.object, self.request.user)
         return context
 
@@ -130,7 +130,7 @@ class TokenLogin(View):
                            token, str(self.request.user), str(e))
             raise SuspiciousOperation
         sudoer = get_user_model().objects.get(pk=sudoer)
-        if not sudoer.is_superuser:
+        if not sudoer.has_perm('jatszohaz.leader_admin'):
             raise PermissionDenied
         user = get_user_model().objects.get(pk=user)
         user.backend = 'django.contrib.auth.backends.ModelBackend'

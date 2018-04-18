@@ -31,8 +31,9 @@ class JhUser(AbstractUser):
 
     class Meta:
         permissions = (
-            ('view_all', _('View all')),
+            ('view_all', _('View all user details')),
             ('basic_admin', _('Basic admin rights')),
+            ('leader_admin', _('Group leader rights')),
         )
 
     def get_entitlements(self):
@@ -49,6 +50,7 @@ class JhUser(AbstractUser):
             for i in self.social_auth.first().extra_data['eduPersonEntitlement']:
                 if i['id'] == settings.EDU_PERSON_ENTITLEMENT_ID:
                     return i
+        return None
 
     def has_social_auth(self):
         return self.social_auth.count() > 0
