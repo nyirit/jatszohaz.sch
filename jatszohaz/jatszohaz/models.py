@@ -63,10 +63,16 @@ class JhUser(AbstractUser):
         """
         Update user rights according to its entitlements
         """
-        if self.get_entitlements() is not None:
+        entls = self.get_entitlements()
+        if entls:
+            if settings.EDU_PERSON_ENTITLEMENT_IGNORE_STATUS == entls['title']:
+                logger.warning("Permission update for user with pk %d aborted, because has '%s' title." % (
+                    self.pk, settings.EDU_PERSON_ENTITLEMENT_IGNORE_STATUS))
+                return
+
             group, created = Group.objects.get_or_create(name='kortag')
             group.user_set.add(self)
-            logger.info("Updated permissions for user %d." % self.pk)
+            logger.info("Updated permissions for user with pk %d." % self.pk)
 
     def full_name(self):
         """

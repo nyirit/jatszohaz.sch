@@ -247,3 +247,6 @@ LOGIN_URL = "/login/%s/" % SOCIAL_AUTH_BACKEND
 # ######### END AUTH.SCH CONFIGURATION
 
 EDU_PERSON_ENTITLEMENT_ID = int(get_env_variable('DJANGO_ENTITLEMENT_ID', '-1'))
+
+# specifies a title string, which will not be given admin rights
+EDU_PERSON_ENTITLEMENT_IGNORE_STATUS = get_env_variable('EDU_PERSON_ENTITLEMENT_IGNORE_STATUS', '')
