@@ -1,0 +1,3 @@
+{% for status in statuses %}
+    <a class="btn btn-info" href="{% url 'rent:change-status' rent_pk status.0 %}">{{ status.1 }}</a>
+{% endfor %}

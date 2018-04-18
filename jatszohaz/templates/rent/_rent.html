@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load rent_extras %}
 
 <div class="panel panel-{{rent.get_status_css}}">
     <div class="panel-heading">{{ rent.date_from|date }} - {{ rent.date_to|date }}</div>
@@ -18,6 +19,9 @@
         {% trans 'Status' %}: {{ rent.get_status_display }}<br/>
     </div>
     <div class="panel-footer">
-        <a href="{% url "rent:details" rent.pk %}" class="btn btn-info">{% trans 'Details' %}</a>
+        <a href="{% url "rent:details" rent.pk %}" class="btn btn-warning">{% trans 'Details' %}</a>
+        <span class="pull-right">
+            {% show_rent_available_statuses rent user %}
+        </span>
     </div>
 </div>

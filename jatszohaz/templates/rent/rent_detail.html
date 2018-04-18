@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load rent_extras %}
 
 {% block content %}
     <h2>{% trans 'Rent' %}:</h2>
@@ -30,9 +31,7 @@
     {% include 'rent/rent_detail_admin.html' %}
 
     <br/>
-    {% for status in available_statuses %}
-        <a class="btn btn-info" href="{% url 'rent:change-status' object.pk status.0 %}">{{ status.1 }}</a>
-    {% endfor %}
+    {% show_rent_available_statuses rent user %}
 
     <h1>{% trans 'Comments' %}</h1>
     {% for comment in object.comments.all %}

@@ -132,6 +132,37 @@ class Rent(TimeStampedModel):
 
         return status_counts
 
+    def get_available_statuses(self, user):
+        """get available statuses based on current status, i.e. what can be next."""
+
+        available_statuses = []
+        if user.has_perm('rent.manage_rents'):
+            if self.status in (Rent.STATUS_DECLINED[0], Rent.STATUS_CANCELLED[0], Rent.STATUS_PENDING[0]):
+                s = Rent.STATUS_APPROVED[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.status == Rent.STATUS_APPROVED[0]:
+                s = Rent.STATUS_GAVE_OUT[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.status == Rent.STATUS_GAVE_OUT[0]:
+                s = Rent.STATUS_IN_MY_ROOM[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.status in (Rent.STATUS_IN_MY_ROOM[0], Rent.STATUS_GAVE_OUT[0]):
+                s = Rent.STATUS_BACK[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+            if self.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0]):
+                s = Rent.STATUS_DECLINED[0]
+                available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+        if self.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0]):
+            s = Rent.STATUS_CANCELLED[0]
+            available_statuses.append((s, Rent.STATUS_CHANGE_VERB[s]))
+
+        return available_statuses
+
 
 class RentHistory(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
