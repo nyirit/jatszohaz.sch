@@ -45,7 +45,7 @@ class JhUser(AbstractUser):
          - end (date): leave date
         :return: data map of the specified group.
         """
-        if self.has_social_auth():
+        if self.has_social_auth() and self.social_auth.first().extra_data['eduPersonEntitlement']:
             for i in self.social_auth.first().extra_data['eduPersonEntitlement']:
                 if i['id'] == settings.EDU_PERSON_ENTITLEMENT_ID:
                     return i
