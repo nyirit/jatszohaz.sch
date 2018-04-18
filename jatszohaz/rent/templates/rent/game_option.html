@@ -11,7 +11,7 @@
         {% include "django/forms/widgets/attrs.html" %} />
 
     <span class="checkmark"></span>
-    <span class="title">{{ widget.label|truncatechars:20 }}</span>
+    <span class="title">{{ widget.label|truncatechars:18 }}</span>
 
     <span data-toggle="modal"
        data-target="#modal_{{ widget.attrs.id }}">
