@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-18 18:31+0200\n"
-"PO-Revision-Date: 2018-04-18 18:42+0116\n"
+"POT-Creation-Date: 2018-04-19 23:25+0200\n"
+"PO-Revision-Date: 2018-04-19 23:25+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -158,7 +158,6 @@ msgid "From time to time everyone is required to check his profile."
 msgstr ""
 
 #: jatszohaz/models.py:34
-#| msgid "Profile details"
 msgid "View all user details"
 msgstr "Minden felhasználó részleteinek megnézése"
 
@@ -489,6 +488,10 @@ msgstr "Játék hozzáadva!"
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
 
+#: templates/_game.html:35 templates/_game.html:36 templates/_game.html:37
+msgid "data not available."
+msgstr "ez az információ nem áll rendelkezésre."
+
 #: templates/_navbar.html:8
 msgid "Toggle navigation"
 msgstr "Navigáció"
@@ -816,7 +819,6 @@ msgid "Send"
 msgstr "Küldés"
 
 #: templates/rent/rent_detail_admin.html:9
-#| msgid "Games"
 msgid "Game"
 msgstr "Játék"
 

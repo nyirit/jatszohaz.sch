@@ -32,9 +32,9 @@
 
       </div>
       <div class="modal-body">
-          <p>{% trans 'Players' %}: {{ game.players }}</p>
-          <p>{% trans 'Playtime' %}: {{ game.playtime }}</p>
-          <p>{% trans 'Description' %}: {{ game.description }}</p>
+          <p>{% trans 'Players' %}: {{ game.players|default:_("data not available.") }}</p>
+          <p>{% trans 'Playtime' %}: {{ game.playtime|default:_("data not available.") }}</p>
+          <p>{% trans 'Description' %}: {{ game.description|default:_("data not available.") }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
