@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^faq/$', views.FaqView.as_view(), name="faq"),
 
     url(r'^news/', include('news.urls')),
+    url(r'^cron/', include('cron.urls')),
 
     url(r'^token-login/(?P<token>.*)/$', TokenLogin.as_view(), name="token-login"),
 

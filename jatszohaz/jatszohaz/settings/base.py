@@ -251,3 +251,5 @@ EDU_PERSON_ENTITLEMENT_ID = int(get_env_variable('DJANGO_ENTITLEMENT_ID', '-1'))
 
 # specifies a title string, which will not be given admin rights
 EDU_PERSON_ENTITLEMENT_IGNORE_STATUS = get_env_variable('EDU_PERSON_ENTITLEMENT_IGNORE_STATUS', '')
+
+CRON_TOKEN = get_env_variable('CRON_TOKEN', '')
