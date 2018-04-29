@@ -107,6 +107,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'social_django',
     'crispy_forms',
+    'django_slack',
 )
 
 LOCAL_APPS = (
@@ -246,6 +247,14 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/after-login/'
 SOCIAL_AUTH_BACKEND = 'authsch'
 LOGIN_URL = "/login/%s/" % SOCIAL_AUTH_BACKEND
 # ######### END AUTH.SCH CONFIGURATION
+
+# ######## SLACK CONFIGURATION
+# See: https://django-slack.readthedocs.io/#configuration
+SLACK_TOKEN = get_env_variable("SLACK_TOKEN", "")
+SLACK_CHANNEL = get_env_variable("SLACK_CHANNEL", "")
+SLACK_AS_USER = True
+
+# ######## END SLACK CONFIGURATION
 
 EDU_PERSON_ENTITLEMENT_ID = int(get_env_variable('DJANGO_ENTITLEMENT_ID', '-1'))
 

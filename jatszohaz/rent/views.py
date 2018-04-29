@@ -13,7 +13,7 @@ from formtools.wizard.views import SessionWizardView
 
 from .forms import RentFormStep1, RentFormStep2, RentFormStep3, NewCommentForm, EditRentForm, AddGameForm
 from inventory.models import GameGroup
-from jatszohaz.utils import jh_send_mail
+from jatszohaz.utils import jh_send_mail, send_slack_message
 from .models import Rent, Comment, GamePiece
 
 
@@ -40,34 +40,25 @@ class NewView(LoginRequiredMixin, SessionWizardView):
 
         return self.initial_dict.get(step, data)
 
-    def send_email(self, rent, comment):
+    def send_email(self, context):
         """Sends notification email to mailing list"""
 
-        if not rent.renter.has_perms('rent.manage_rents'):
-            recipient = settings.NOTIFICATION_EMAIL_TO
-            if recipient:
-                data = {
-                    'url': urljoin(settings.SITE_DOMAIN, str(rent.get_absolute_url())),
-                    'renter': rent.renter.full_name2(),
-                    'date_from': rent.date_from,
-                    'date_to': rent.date_to,
-                    'games': ', '.join([gp.game_group.name for gp in rent.games.all()]),
-                    'comment': comment.message
-                }
-                subject = _("%s new rent") % settings.EMAIL_SUBJECT_PREFIX
-                message = _("Hi!<br/><br/>New rent created!<br/><br/>"
-                            "Renter: %(renter)s<br/>"
-                            "Dates: %(date_from)s - %(date_to)s<br/>"
-                            "Games: %(games)s<br/>"
-                            "Comment: %(comment)s<br/>"
-                            "Details: <a href=\"%(url)s\">%(url)s<a><br/><br/>"
-                            "Best wishes,<br/>Játszóház") % data
+        recipient = settings.NOTIFICATION_EMAIL_TO
+        if recipient:
+            subject = _("%s new rent") % settings.EMAIL_SUBJECT_PREFIX
+            message = _("Hi!<br/><br/>New rent created!<br/><br/>"
+                        "Renter: %(renter)s<br/>"
+                        "Dates: %(date_from)s - %(date_to)s<br/>"
+                        "Games: %(games)s<br/>"
+                        "Comment: %(comment)s<br/>"
+                        "Details: <a href=\"%(url)s\">%(url)s<a><br/><br/>"
+                        "Best wishes,<br/>Játszóház") % context
 
-                try:
-                    jh_send_mail(subject, message, [recipient, ])
-                except Exception as e:
-                    logger.error("Failed to send email! %s" % e)
-                    return False
+            try:
+                jh_send_mail(subject, message, [recipient, ])
+            except Exception as e:
+                logger.error("Failed to send email! %s" % e)
+                return False
 
     def done(self, form_list, **kwargs):
         forms = list(form_list)
@@ -95,7 +86,17 @@ class NewView(LoginRequiredMixin, SessionWizardView):
             message=comment
         )
 
-        self.send_email(rent, comment)
+        if not rent.renter.has_perms('rent.manage_rents'):
+            context = {
+                'url': urljoin(settings.SITE_DOMAIN, str(rent.get_absolute_url())),
+                'renter': rent.renter.full_name2(),
+                'date_from': rent.date_from,
+                'date_to': rent.date_to,
+                'games': ', '.join([gp.game_group.name for gp in rent.games.all()]),
+                'comment': comment.message
+            }
+            self.send_email(context)
+            send_slack_message('slack/new_rent.html', context)
 
         messages.success(self.request, _("Successfully rented!"))
         return redirect(rent.get_absolute_url())

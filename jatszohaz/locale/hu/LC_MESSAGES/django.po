@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-19 23:25+0200\n"
-"PO-Revision-Date: 2018-04-19 23:25+0116\n"
+"POT-Creation-Date: 2018-04-29 21:48+0200\n"
+"PO-Revision-Date: 2018-04-29 21:48+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -169,7 +169,7 @@ msgstr ""
 msgid "Group leader rights"
 msgstr ""
 
-#: jatszohaz/settings/base.py:195
+#: jatszohaz/settings/base.py:196
 msgid "Hungarian"
 msgstr "Magyar"
 
@@ -326,7 +326,7 @@ msgstr "Visszamond"
 
 #: rent/models.py:47 templates/inventory/list-inventory.html:6
 #: templates/jatszohaz/games.html:5 templates/rent/_rent.html:12
-#: templates/rent/rent_detail.html:21
+#: templates/rent/rent_detail.html:21 templates/slack/new_rent.html:9
 msgid "Games"
 msgstr "Játékok"
 
@@ -416,6 +416,13 @@ msgstr "Kattints a részletekért!"
 msgid "Close"
 msgstr "Bezár"
 
+#: rent/templates/rent/game_option.html:44
+#: rent/templates/rent/game_option.html:45
+#: rent/templates/rent/game_option.html:46 templates/_game.html:35
+#: templates/_game.html:36 templates/_game.html:37
+msgid "data not available."
+msgstr "ez az információ nem áll rendelkezésre."
+
 #: rent/templates/rent/game_option.html:45 templates/_game.html:36
 msgid "Playtime"
 msgstr "Játékidő"
@@ -424,12 +431,12 @@ msgstr "Játékidő"
 msgid "We have no available games for this time interval, sorry."
 msgstr "Sajnos nincs egy elérhető játékunk sem erre az időpontra."
 
-#: rent/views.py:57
+#: rent/views.py:48
 #, python-format
 msgid "%s new rent"
 msgstr "%s új kölcsönzés"
 
-#: rent/views.py:58
+#: rent/views.py:49
 #, python-format
 msgid ""
 "Hi!<br/><br/>New rent created!<br/><br/>Renter: %(renter)s<br/>Dates: "
@@ -442,55 +449,51 @@ msgstr ""
 "%(games)s<br/>Megjegyzés: %(comment)s<br/>Részletek: <a "
 "href=\"%(url)s\">%(url)s<a><br/><br/>Üdv,<br/>Játszóház"
 
-#: rent/views.py:100
+#: rent/views.py:103
 msgid "Successfully rented!"
 msgstr "Sikeresen kölcsönözve!"
 
-#: rent/views.py:184
+#: rent/views.py:187
 msgid "Successfully sent!"
 msgstr "Sikeresen elküldve!"
 
-#: rent/views.py:186
+#: rent/views.py:189
 msgid "Comment successfully sent, but failed to send notification emails!"
 msgstr ""
 "Komment sikeresen elküldve, de az értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:203
+#: rent/views.py:206
 msgid "Rent changed!"
 msgstr "Kölcsönzés megváltoztatva!"
 
-#: rent/views.py:208
+#: rent/views.py:211
 msgid "Failed to send notification emails!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:216 rent/views.py:289
+#: rent/views.py:219 rent/views.py:292
 msgid "Invalid form."
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:248
+#: rent/views.py:251
 #, python-format
 msgid "Failed to change status! Following games are not available anymore: %s"
 msgstr "Sikertelen státuszmódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/views.py:257
+#: rent/views.py:260
 msgid "End date is in the past! Please set a correct end date!"
 msgstr "Múltbeli a kölcsönzés vége időpont, korrigáld!"
 
-#: rent/views.py:264
+#: rent/views.py:267
 msgid "Failed to send notification email!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:282
+#: rent/views.py:285
 msgid "Game added."
 msgstr "Játék hozzáadva!"
 
-#: rent/views.py:284
+#: rent/views.py:287
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
-
-#: templates/_game.html:35 templates/_game.html:36 templates/_game.html:37
-msgid "data not available."
-msgstr "ez az információ nem áll rendelkezésre."
 
 #: templates/_navbar.html:8
 msgid "Toggle navigation"
@@ -620,7 +623,7 @@ msgid "Rent history"
 msgstr "Előzmények"
 
 #: templates/inventory/list_game.html:16 templates/rent/_rent.html:8
-#: templates/rent/rent_detail.html:11
+#: templates/rent/rent_detail.html:11 templates/slack/new_rent.html:7
 msgid "Renter"
 msgstr "Kölcsönző"
 
@@ -798,7 +801,7 @@ msgstr "Más játékok"
 msgid "Finish"
 msgstr "Küldés"
 
-#: templates/rent/rent_detail.html:14
+#: templates/rent/rent_detail.html:14 templates/slack/new_rent.html:8
 msgid "Dates"
 msgstr "Dátumok"
 
@@ -862,6 +865,15 @@ msgstr "Azon kölcsönzések, melyek státuszát változtattad."
 msgid "ToDo"
 msgstr ""
 
+#: templates/slack/new_rent.html:6
+msgid "New rent created!"
+msgstr "Új kölcsönzés!"
+
+#: templates/slack/new_rent.html:10
+#| msgid "Comments"
+msgid "Comment"
+msgstr "Komment"
+
 #: templates/static_pages/about_us.html:9
 msgid "About us text"
 msgstr ""
@@ -918,6 +930,24 @@ msgstr ""
 "<ul><li>Mindig szólj a kölcsönzés visszaadásakor, vagy még előtte írj kommentet a kölcsönzésedhez, segítünk megoldani a problémát.</li></ul>\n"
 "\n"
 "</ol>"
+
+#~ msgid ""
+#~ "\n"
+#~ "        New rent created!\n"
+#~ "        Renter: %(renter)s\n"
+#~ "        Dates: %(date_from)s - %(date_to)s\n"
+#~ "        Games: %(games)s\n"
+#~ "        Comment: %(comment)s\n"
+#~ "    %(url)s\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "Új kölcsönzés érkezett!\n"
+#~ "Kölcsönző: %(renter)s\n"
+#~ "Dátum: %(date_from)s - %(date_to)s\n"
+#~ "Játékok: %(games)s\n"
+#~ "Komment: %(comment)s\n"
+#~ "%(url)s"
 
 #, fuzzy
 #~ msgid "Buying_date"
