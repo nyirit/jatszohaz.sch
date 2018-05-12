@@ -1,14 +1,16 @@
 import os
+import raven
+from os.path import abspath, pardir
 from .base import *  # noqa
 from .base import INSTALLED_APPS, get_env_variable, DEFAULT_FROM_EMAIL
 
-INSTALLED_APPS += (
-    'raven.contrib.django.raven_compat',
-)
-
 if 'SENTRY_DSN' in os.environ:
+    INSTALLED_APPS += (
+        'raven.contrib.django.raven_compat',
+    )
     RAVEN_CONFIG = {
         'dsn': get_env_variable('SENTRY_DSN'),
+        'release': raven.fetch_git_sha(abspath(pardir)),
     }
 
 # ######### EMAIL CONFIGURATION
