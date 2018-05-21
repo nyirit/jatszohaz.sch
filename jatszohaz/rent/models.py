@@ -43,7 +43,7 @@ class Rent(TimeStampedModel):
         STATUS_CANCELLED
     )
 
-    renter = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name="rents")
+    renter = models.ForeignKey(JhUser, on_delete=models.PROTECT, verbose_name=_("Renter"), related_name="rents")
     games = models.ManyToManyField(GamePiece, verbose_name=_("Games"), related_name="rents")
     date_from = models.DateTimeField(verbose_name=_("From"), blank=False, null=False)
     date_to = models.DateTimeField(verbose_name=_("To"), blank=False, null=False)

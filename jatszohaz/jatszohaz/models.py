@@ -35,6 +35,7 @@ class JhUser(AbstractUser):
             ('basic_admin', _('Basic admin rights')),
             ('leader_admin', _('Group leader rights')),
         )
+        ordering = ('last_name', 'first_name', )
 
     def get_entitlements(self):
         """
