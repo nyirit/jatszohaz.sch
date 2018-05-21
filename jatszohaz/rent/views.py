@@ -76,6 +76,10 @@ class NewView(LoginRequiredMixin, SessionWizardView):
             date_from=date_from,
             date_to=date_to
         )
+
+        if user.has_perms('rent.manage_rents'):
+            rent.status = Rent.STATUS_APPROVED[0]
+
         for gg_id in game_groups or ():
             gg = GameGroup.objects.get(id=gg_id)
             rent.games.add(gg.get_game_piece(date_from, date_to))
