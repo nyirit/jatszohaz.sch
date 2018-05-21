@@ -99,7 +99,6 @@ class UsersView(PermissionRequiredMixin, ListView):
     model = JhUser
     permission_required = 'jatszohaz.view_all'
     template_name = "jatszohaz/user_list.html"
-    ordering = "last_name"
     paginate_by = 50
 
 
