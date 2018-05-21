@@ -68,7 +68,7 @@ class RentFormStep3(forms.Form):
 
 
 class NewCommentForm(forms.Form):
-    comment = forms.CharField(label="", widget=forms.Textarea)
+    comment = forms.CharField(label="", widget=forms.Textarea(attrs={'class': 'w-100'}))
 
 
 class EditRentForm(forms.ModelForm):

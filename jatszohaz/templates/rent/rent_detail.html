@@ -45,7 +45,7 @@
                 {% trans 'Date' %}: {{ comment.created }}<br/>
             </div>
             <div class="panel-body">
-                <span class="comment-message">{{ comment.message|linebreaks }}</span>
+                <p class="comment-message">{{ comment.message|linebreaks }}</p>
             </div>
         </div>
     {% endfor %}
