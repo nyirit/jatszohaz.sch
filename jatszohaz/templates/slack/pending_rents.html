@@ -1,0 +1,10 @@
+{% extends django_slack %}
+
+{% load i18n %}
+
+{% block text %}
+    {% trans 'There are pending rents! Please check them!' %}
+    {% for rent in rents %}
+        {{ rent }}
+    {% endfor %}
+{% endblock %}
