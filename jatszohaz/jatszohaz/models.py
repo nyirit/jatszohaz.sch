@@ -33,6 +33,7 @@ class JhUser(AbstractUser):
         permissions = (
             ('view_all', _('View all user details')),
             ('basic_admin', _('Basic admin rights')),
+            ('view_user_stat', _('View statistics for users')),
             ('leader_admin', _('Group leader rights')),
         )
         ordering = ('last_name', 'first_name', )

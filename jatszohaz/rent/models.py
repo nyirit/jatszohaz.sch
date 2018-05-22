@@ -63,8 +63,8 @@ class Rent(TimeStampedModel):
     def get_absolute_url(self):
         return reverse_lazy("rent:details", kwargs={'pk': self.pk})
 
-    def create_new_history(self, user):
-        RentHistory.objects.create(user=user, new_status=self.status, rent=self)
+    def create_new_history(self, user, new_status=None, new_renter=None):
+        RentHistory.objects.create(user=user, new_status=new_status, rent=self, new_renter=new_renter)
 
     def is_past_due(self):
         return ((self.date_to < datetime.now() and self.status == Rent.STATUS_GAVE_OUT[0])
@@ -166,7 +166,12 @@ class Rent(TimeStampedModel):
 
 class RentHistory(TimeStampedModel):
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    new_status = models.CharField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, max_length=20)
+    new_status = models.CharField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, max_length=20, null=True)
+    new_renter = models.ForeignKey(JhUser,
+                                   on_delete=models.PROTECT,
+                                   related_name="+",
+                                   verbose_name=_("New renter"),
+                                   null=True)
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT, related_name='histories')
 
 

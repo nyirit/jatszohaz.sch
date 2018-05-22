@@ -207,10 +207,15 @@ class EditView(PermissionRequiredMixin, UpdateView):
     def form_valid(self, form):
         messages.success(self.request, _("Rent changed!"))
         r = super().form_valid(form)
+        user = self.request.user
+        object = self.get_object()
 
         if 'date_to' in form.changed_data or 'date_from' in form.changed_data:
-            if not self.get_object().notify_changed_date(self.request.user):
+            if not object.notify_changed_date(user):
                 messages.error(self.request, _("Failed to send notification emails!"))
+
+        if 'renter' in form.cleaned_data:
+            object.create_new_history(user, new_renter=form.cleaned_data['renter'])
 
         return r
 
@@ -263,7 +268,7 @@ class ChangeStatusView(LoginRequiredMixin, View):
 
         rent.status = status
         rent.save()
-        rent.create_new_history(self.request.user)
+        rent.create_new_history(self.request.user, new_status=status)
 
         if not rent.notify_new_status(self.request.user):
             messages.error(self.request, _("Failed to send notification email!"))
