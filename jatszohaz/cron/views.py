@@ -21,8 +21,17 @@ class Run(View):
             return HttpResponse("Invalid token.")
 
         # send notification about pending rents
-        from_date = datetime.now() - timedelta(1)
-        rents = Rent.objects.filter(created__lte=from_date).filter(status=Rent.STATUS_PENDING[0])
+        now = datetime.now()
+        from_date = now - timedelta(1)
+        rents = (
+            Rent.objects.filter(created__lte=from_date).filter(status=Rent.STATUS_PENDING[0]) |
+            Rent.objects.filter(date_to__gte=now).filter(
+                status__in=(
+                    Rent.STATUS_PENDING[0],
+                    Rent.STATUS_APPROVED[0],
+                    Rent.STATUS_GAVE_OUT[0])
+                )
+            ).distinct()
         if rents:
             context = {'rents':  [urljoin(settings.SITE_DOMAIN, str(r.get_absolute_url()))
                                   for r in rents.all()]}
