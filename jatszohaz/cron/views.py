@@ -20,6 +20,10 @@ class Run(View):
             logger.error("Invalid cron token!")
             return HttpResponse("Invalid token.")
 
+        debug = kwargs.get('arg') == 'debug'
+        if debug:
+            logger.info("Running in debug mode")
+
         # send notification about pending rents
         now = datetime.now()
         yesterday = now - timedelta(1)
@@ -43,8 +47,11 @@ class Run(View):
         if rents:
             context = {'rents': [urljoin(settings.SITE_DOMAIN, str(r.get_absolute_url()))
                                  for r in rents.all()]}
-            send_slack_message('slack/pending_rents.html', context)
+            if debug:
+                logger.info("Slack message context: %s" % context)
+            else:
+                send_slack_message('slack/pending_rents.html', context)
             logger.info("Pending rents processed.")
 
-        logger.info("Cron finished.")
+        logger.info("Finished.")
         return HttpResponse("OK")
