@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-22 19:01+0200\n"
-"PO-Revision-Date: 2018-05-22 19:01+0116\n"
+"PO-Revision-Date: 2018-05-23 14:56+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -884,7 +884,7 @@ msgstr "Komment"
 
 #: templates/slack/pending_rents.html:6
 msgid "There are pending rents! Please check them!"
-msgstr "Kezeletlen kölcsönzés(ek) vannak! Nézzetek rájuk pls!"
+msgstr "Vannak kezeletlen vagy nem adminisztrált kölcsönzések!"
 
 #: templates/static_pages/about_us.html:9
 msgid "About us text"

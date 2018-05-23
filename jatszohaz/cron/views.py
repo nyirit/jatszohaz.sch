@@ -22,19 +22,27 @@ class Run(View):
 
         # send notification about pending rents
         now = datetime.now()
-        from_date = now - timedelta(1)
+        yesterday = now - timedelta(1)
         rents = (
-            Rent.objects.filter(created__lte=from_date).filter(status=Rent.STATUS_PENDING[0]) |
-            Rent.objects.filter(date_to__gte=now).filter(
+            # created 24h+ ago, but still pending
+            Rent.objects.filter(created__lte=yesterday).filter(status=Rent.STATUS_PENDING[0]) |
+            # date_to passed, but still not closed
+            Rent.objects.filter(date_to__lte=yesterday).filter(
                 status__in=(
                     Rent.STATUS_PENDING[0],
                     Rent.STATUS_APPROVED[0],
                     Rent.STATUS_GAVE_OUT[0])
+                ) |
+            # date_from passed but not gave out
+            Rent.objects.filter(date_from__lte=yesterday).filter(
+                status__in=(
+                    Rent.STATUS_PENDING[0],
+                    Rent.STATUS_APPROVED[0])
                 )
             ).distinct()
         if rents:
-            context = {'rents':  [urljoin(settings.SITE_DOMAIN, str(r.get_absolute_url()))
-                                  for r in rents.all()]}
+            context = {'rents': [urljoin(settings.SITE_DOMAIN, str(r.get_absolute_url()))
+                                 for r in rents.all()]}
             send_slack_message('slack/pending_rents.html', context)
             logger.info("Pending rents processed.")
 
