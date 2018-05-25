@@ -77,7 +77,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
             date_to=date_to
         )
 
-        if user.has_perms('rent.manage_rents'):
+        if user.has_perm('rent.manage_rents'):
             rent.status = Rent.STATUS_APPROVED[0]
 
         for gg_id in game_groups or ():
@@ -90,7 +90,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
             message=comment
         )
 
-        if not rent.renter.has_perms('rent.manage_rents'):
+        if not rent.renter.has_perm('rent.manage_rents'):
             context = {
                 'url': urljoin(settings.SITE_DOMAIN, str(rent.get_absolute_url())),
                 'renter': rent.renter.full_name2(),
