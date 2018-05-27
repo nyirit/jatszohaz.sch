@@ -246,6 +246,10 @@ class ChangeStatusView(LoginRequiredMixin, View):
 
             raise PermissionDenied("No permission to change status of rent!")
 
+        if status == rent.status:
+            messages.error(self.request, _("Cannot change rent status to the same!"))
+            return redirect(rent.get_absolute_url())
+
         # check game availability if rent was cancelled or declined
         if rent.status in (Rent.STATUS_CANCELLED[0], Rent.STATUS_DECLINED[0]):
             not_free = []

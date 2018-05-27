@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 19:01+0200\n"
-"PO-Revision-Date: 2018-05-23 14:56+0116\n"
+"POT-Creation-Date: 2018-05-27 16:12+0200\n"
+"PO-Revision-Date: 2018-05-27 16:12+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -99,21 +99,21 @@ msgstr "Felhasználók elől elrejtés"
 msgid "If true isn't shown in Our games page."
 msgstr "Kipipált esetben nem látják a felhasználók a Játékaink menüpontban"
 
-#: inventory/models.py:95 templates/inventory/list-inventory.html:18
+#: inventory/models.py:96 templates/inventory/list-inventory.html:18
 #: templates/inventory/list_game.html:30
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:96 templates/inventory/list-inventory.html:19
+#: inventory/models.py:97 templates/inventory/list-inventory.html:19
 #: templates/inventory/list_game.html:31
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:97
+#: inventory/models.py:98
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:102
+#: inventory/models.py:103
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
@@ -484,28 +484,32 @@ msgstr "Kölcsönzés megváltoztatva!"
 msgid "Failed to send notification emails!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:226 rent/views.py:299
+#: rent/views.py:226 rent/views.py:303
 msgid "Invalid form."
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:258
+#: rent/views.py:250
+msgid "Cannot change rent status to the same!"
+msgstr "Nem módosítható ugyan arra a státusz!"
+
+#: rent/views.py:262
 #, python-format
 msgid "Failed to change status! Following games are not available anymore: %s"
 msgstr "Sikertelen státuszmódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/views.py:267
+#: rent/views.py:271
 msgid "End date is in the past! Please set a correct end date!"
 msgstr "Múltbeli a kölcsönzés vége időpont, korrigáld!"
 
-#: rent/views.py:274
+#: rent/views.py:278
 msgid "Failed to send notification email!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:292
+#: rent/views.py:296
 msgid "Game added."
 msgstr "Játék hozzáadva!"
 
-#: rent/views.py:294
+#: rent/views.py:298
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
 
