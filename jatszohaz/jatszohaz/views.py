@@ -102,6 +102,11 @@ class UsersView(PermissionRequiredMixin, ListView):
     paginate_by = 50
 
 
+class AdminRules(PermissionRequiredMixin, TemplateView):
+    template_name = "static_pages/admin_rules.html"
+    permission_required = 'jatszohaz.basic_admin'
+
+
 class TokenLogin(View):
     token_max_age = 120  # seconds
 

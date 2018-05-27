@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-27 16:24+0200\n"
-"PO-Revision-Date: 2018-05-27 16:25+0116\n"
+"POT-Creation-Date: 2018-05-27 16:35+0200\n"
+"PO-Revision-Date: 2018-05-27 18:20+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -185,7 +185,7 @@ msgstr "Sikeresen frissítve!"
 msgid "Please check your profile data and click the Update button!"
 msgstr "Kérlek ellenőrizd az adataidat, majd kattints a Frissítés gombra!"
 
-#: jatszohaz/views.py:139
+#: jatszohaz/views.py:143
 #, python-format
 msgid "Logged in as user %s."
 msgstr "Bejelentkezve, mint %s."
@@ -417,12 +417,10 @@ msgid "New renter"
 msgstr "Új kölcsönző"
 
 #: rent/models.py:183
-#| msgid "Edit game piece"
 msgid "New game piece"
 msgstr "Hozzáadott játék"
 
 #: rent/models.py:188
-#| msgid "Edit game piece"
 msgid "Deleted game piece"
 msgstr "Törölt játék"
 
@@ -589,7 +587,11 @@ msgstr "Felhasználók"
 msgid "Calendar"
 msgstr "Naptár"
 
-#: templates/_navbar.html:53
+#: templates/_navbar.html:51
+msgid "Admin rules"
+msgstr "Admin szabályok"
+
+#: templates/_navbar.html:54
 msgid "Admin"
 msgstr "Admin"
 
@@ -872,8 +874,11 @@ msgstr "Kölcsönzés módosítása"
 msgid "History"
 msgstr "Előzmények"
 
+#: templates/rent/rent_detail_admin.html:50
+msgid "New status"
+msgstr "Új státusz"
+
 #: templates/rent/rent_detail_admin.html:53
-#| msgid "Rented games"
 msgid "Deleted game"
 msgstr "Törölt játék"
 
@@ -919,6 +924,11 @@ msgstr ""
 "<p>Továbbá, körünk lehetőséget biztosít társasjátékok kölcsönzésére mind baráti társaságok, mind rendezvények számára.</p>\n"
 "\n"
 "<p>Körünk egy vidám és sok taggal büszkélkedhető csapat. Bárkit szívesen látunk, aki csatlakozna hozzánk a játékasztal mellett, hiszen Játszani öröm.</p>"
+
+#: templates/static_pages/admin_rent_rules.html:4
+#| msgid "Admin rules"
+msgid "Administration rules"
+msgstr "Adminisztrációs szabályok"
 
 #: templates/static_pages/faq.html:9
 msgid "FAQ text"

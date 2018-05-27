@@ -29,6 +29,7 @@ urlpatterns = [
 
     url(r'^about-us/$', views.AboutUsView.as_view(), name="about-us"),
     url(r'^faq/$', views.FaqView.as_view(), name="faq"),
+    url(r'^admin-rules/$', views.AdminRules.as_view(), name="admin-rules"),
 
     url(r'^news/', include('news.urls')),
     url(r'^cron/', include('cron.urls')),

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title-page %}{% trans "Administration rules" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Administration rules" %}</h1>
+
+    {# TODO language... #}
+    <b>Az itt leírt szabályok vonatkoznak minden körtagra. Mint mindig, azok nem ismerete nem mentesít a felelősség alól.</b>
+
+    <h1 id="basics">Alap dolgok</h1>
+    <ol>
+        <li>A játékok sajnos nem ingyen vannak, így nagyon vigyázz rájuk. Ha bármi problémát észlelsz azokkal vagy a kör bármely tulajdonával, akkor azonnal értesítsd az aktuális körvezetőt.</li>
+        <li>A körünknek két raktára van. 725-ben tároljuk a gyakran használt játékainkat, 1825-ben a ritkábban használtakat. Weblapon minden játékról megtalálod, hol a helye.</li>
+        <li>725-ös raktárunkban fel van címkézve minden játék helye, ezt figyelembe véve rakd vissza a játékokat!</li>
+        <li>Raktárkulcsot minden körtag jogosult használni, de a kulcs felelősének (alapvetően az aktuális körvezető) előzetes engedélye nélkül csak a szükséges ideig tarthatja magánál. Azaz játék kiadás esetén csak ameddig elviszi a játékokat, nyitás esetén a nyitás időtartama alatt.</li>
+        <li>Kulcs aktuális helye: Sch 1513, bal hátsó asztal.</li>
+    </ol>
+
+    <h1 id="rent-rules">Kölcsönzés</h1>
+    <ol>
+        <li>Mivel a kölcsönzések kezelése a körünk egyik fő tevékenysége kérlek segíts ezek kezelésében!</li>
+        <li><b>Minden kölcsönzésnek szerepelnie kell a honlapon!</b> Ha szobatárs/haver megkér, hogy adj oda neki valamit, akkor is először adjon le kölcsönzést és csak utána adj oda neki bármilyen játékot.</li>
+        <li>Bárki kölcsönözhet, aki rendelkezik Auth.sch felhasználóval. Ha ilyennel nem rendelkezik, kérj segítséget az aktuális körvezetőtől.</li>
+        <li>Kölcsönzés időtartamára és játékszámra nincs közvetlen korlát, de szükség esetén felülbírálható.</li>
+        <li>Minden kölcsönzésre <b>max. 24 órán belül</b> reagáljunk valamit. Ha csak később lesz esedékes (értsd. 2 hónap múlva), akkor is fogadjuk el és írjunk egy kommentet, hogy pár nappal előtte még kérdezzen az átvételről.</li>
+        <li>Kölcsönzés  menete:</li>
+            <ul>
+                <li>Új kölcsönzés érkezik...</li>
+                <li>Ha ki tudod adni, először <b>hagyd jóvá</b>! Így látják a többiek, hogy már te intézed. Ekkor mindig a te felelősséged, hogy az adott kölcsönzés teljesen legyen kezelve. Ha a visszavétel idejében nem érsz rá, írj Slack-en a #kölcsönzés csatornára.</li>
+                <li>Ezután <b>írj kommentet</b> az átvétel pontos idejével és helyével, pl. átveheti aznap déltől a szobádban. Ha épp nem vagy ott, készítsd ki neki és ezt is írd meg.</li>
+                <li>Figyelj arra, hogy pontosan azokat a játékokat add ki, amiket a weblap ír, ezt tudod módosítani és szükség esetén tedd is meg. Elvileg az oldalt nem lehet inkonzisztens állapotba hozni (prove me wrong ;)), úgyhogy ha megengedi, hogy hozzáadd, akkor másnak nem kellhet épp a játék.</li>
+                <li>A kölcsönzésnek vissza kell érkeznie a vége dátum 23:59-ig, ez mindig a kiadó körtag felelőssége. Ha a kölcsönző nem keres aznap, akkor neked kell kommentben keresni őt és sürgetni.</li>
+                <li>Amikor visszakerülnek a játékok ellenőrizd őket: megvan-e minden kiadott játék, jó állapotban vannak-e. Nem kell minden kártyalapot megszámolni ilyenkor, de azért próbáljunk alaposak lenni.</li>
+            </ul>
+        <li>Sajnos tűntek már el játékaink, ami 1-1 játék esetében is közel 10.000 Ft kárt jelent. Ha továbbra is lesznek ilyen esetek, akkor szigorodni fog a rendszer.</li>
+        <li>A weblap automatikus értesítést küld Slack-re, ha valamelyik kölcsönzést nem kezeltük, azaz az alábbiak valamelyike fennáll:</li>
+        <ol>
+            <li>legalább 24 órája lett létrehozva, de még mindig pending állapotú (azaz senki sem foglalkozott vele)</li>
+            <li>a kezdő dátuma már elmúlt, de még nincs kiadva (=pending vagy approved státuszú)</li>
+            <li>a végdátum már elmúlt, de még nem lett lezárva a kölcsönzés (= pending, approved, gave_out státuszok valamelyike)</li>
+        </ol>
+        <li><b>Bármi kérdés, probléma esetén keresd az aktuális kölcsönzés felelőst vagy a körvezetőt!</b></li>
+    </ol>
+
+    <h1 id="events">Nyitások</h1>
+    <ol>
+        <li>Körtagként nem a játék az elsődleges feladatunk. Mindig figyelj az újonnan érkezőkre és kérdezd meg tudsz-e segíteni. Mindig a mi feladatunk játékot ajánlani, illetve elmondani a szabályokat. Beülhetünk játszani is, <b>de csak akkor</b> ha továbbra is van, aki figyeljen az új vendégekre.</li>
+        <li>Ha egy vendég tanácstalanul áll a játékok előtt és minden körtag játszik, akkor valakinek ott kell hagynia a játékot a segítés idejére. Elsődlegesen mindenki figyeljen arra, hogy ne legyen olyan, hogy a vendégek nem tudnak mit játszani, mert nem ismerik a játékokat: lássuk meg ezeket a helyzeteket.</li>
+        <li>Nyitás közben random ne adjuk oda valakinek több napra 1-1 játékot. Adjon le kölcsönzést és annak megfelelően kezeljük, ld. Kölcsönzések pont.</li>
+    </ol>
+
+{% endblock %}
