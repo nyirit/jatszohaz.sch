@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, time
 import logging
 from urllib.parse import urljoin
 from django.conf import settings
@@ -74,7 +74,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
         rent = Rent.objects.create(
             renter=user,
             date_from=date_from,
-            date_to=date_to
+            date_to=datetime.combine(date_to, time(23, 59, 59))
         )
 
         if user.has_perm('rent.manage_rents'):
