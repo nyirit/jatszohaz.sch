@@ -63,8 +63,13 @@ class Rent(TimeStampedModel):
     def get_absolute_url(self):
         return reverse_lazy("rent:details", kwargs={'pk': self.pk})
 
-    def create_new_history(self, user, new_status=None, new_renter=None):
-        RentHistory.objects.create(user=user, new_status=new_status, rent=self, new_renter=new_renter)
+    def create_new_history(self, user, new_status=None, new_renter=None, added_game=None, deleted_game=None):
+        RentHistory.objects.create(user=user,
+                                   new_status=new_status,
+                                   rent=self,
+                                   new_renter=new_renter,
+                                   added_game=added_game,
+                                   deleted_game=deleted_game)
 
     def is_past_due(self):
         return ((self.date_to < datetime.now() and self.status == Rent.STATUS_GAVE_OUT[0])
@@ -172,6 +177,16 @@ class RentHistory(TimeStampedModel):
                                    related_name="+",
                                    verbose_name=_("New renter"),
                                    null=True)
+    added_game = models.ForeignKey(GamePiece,
+                                   on_delete=models.PROTECT,
+                                   related_name="+",
+                                   verbose_name=_("New game piece"),
+                                   null=True)
+    deleted_game = models.ForeignKey(GamePiece,
+                                     on_delete=models.PROTECT,
+                                     related_name="+",
+                                     verbose_name=_("Deleted game piece"),
+                                     null=True)
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT, related_name='histories')
 
 

@@ -46,9 +46,11 @@
 
     <h3>{% trans 'History' %}</h3>
     {% for a in object.histories.all %}
-        {{ a.created }}. {{ a.user.full_name2 }} ->
-        {% if a.new_status %}{{ a.get_new_status_display }}{% endif %}
-        {% if a.new_renter %}{% trans 'New renter' %}: {{ a.new_renter }}{% endif %}
+        {{ a.created }}. <a href="{{ a.user.get_absolute_url }}">{{ a.user.full_name2 }}</a> ->
+        {% if a.new_status %}{% trans 'New status' %}: <b>{{ a.get_new_status_display }}</b>{% endif %}
+        {% if a.new_renter %}{% trans 'New renter' %}: <b>{{ a.new_renter }}</b>{% endif %}
+        {% if a.added_game %}{% trans 'New game' %}: <b>{{ a.added_game }}</b>{% endif %}
+        {% if a.deleted_game %}{% trans 'Deleted game' %}: <b>{{ a.deleted_game }}</b>{% endif %}
         <br/>
     {% empty %}
         {% trans 'No histories.' %}

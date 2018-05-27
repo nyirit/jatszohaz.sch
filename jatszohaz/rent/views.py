@@ -293,6 +293,7 @@ class AddGameView(PermissionRequiredMixin, FormView):
         game = get_object_or_404(GamePiece, pk=form.cleaned_data['game'])
         if game.is_free(rent.date_from, rent.date_to):
             rent.games.add(game)
+            rent.create_new_history(self.request.user, added_game=game)
             messages.success(self.request, _("Game added."))
         else:
             messages.error(self.request, _("Game is already rented for this time."))
@@ -318,8 +319,15 @@ class RemoveGameView(PermissionRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         rent = get_object_or_404(Rent, pk=kwargs.get('rent_pk'))
         game_piece = get_object_or_404(GamePiece, pk=kwargs.get('game_pk'))
-        rent.games.remove(game_piece)
-        rent.save()
+
+        if game_piece in rent.games.all():
+            rent.games.remove(game_piece)
+            rent.create_new_history(self.request.user, deleted_game=game_piece)
+            rent.save()
+        else:
+            messages.error(self.request, _("Given game is not in the rent!"))
+            logger.error("Given game is not in the rent!")
+
         return redirect(rent.get_absolute_url())
 
 
