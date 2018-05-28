@@ -207,15 +207,23 @@ class EditView(PermissionRequiredMixin, UpdateView):
     def form_valid(self, form):
         messages.success(self.request, _("Rent changed!"))
         r = super().form_valid(form)
+        cleaned_data = form.cleaned_data
+        changed_data = form.changed_data
         user = self.request.user
         object = self.get_object()
 
-        if 'date_to' in form.changed_data or 'date_from' in form.changed_data:
+        if 'date_to' in changed_data or 'date_from' in changed_data:
             if not object.notify_changed_date(user):
                 messages.error(self.request, _("Failed to send notification emails!"))
 
-        if 'renter' in form.cleaned_data:
-            object.create_new_history(user, new_renter=form.cleaned_data['renter'])
+        new_renter = cleaned_data.get('renter') if 'renter' in changed_data else None
+        new_date_to = cleaned_data.get('date_to') if 'date_to' in changed_data else None
+        new_date_from = cleaned_data.get('date_from') if 'date_from' in changed_data else None
+        if new_renter or new_date_from or new_date_to:
+            object.create_new_history(user,
+                                      new_renter=new_renter,
+                                      edited_date_from=new_date_from,
+                                      edited_date_to=new_date_to)
 
         return r
 

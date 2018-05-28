@@ -51,6 +51,8 @@
         {% if a.new_renter %}{% trans 'New renter' %}: <b>{{ a.new_renter }}</b>{% endif %}
         {% if a.added_game %}{% trans 'New game' %}: <b>{{ a.added_game }}</b>{% endif %}
         {% if a.deleted_game %}{% trans 'Deleted game' %}: <b>{{ a.deleted_game }}</b>{% endif %}
+        {% if a.edited_date_from %}{% trans 'New date from' %}: <b>{{ a.edited_date_from }}</b>{% endif %}
+        {% if a.edited_date_to %}{% trans 'New date to' %}: <b>{{ a.edited_date_to }}</b>{% endif %}
         <br/>
     {% empty %}
         {% trans 'No histories.' %}
