@@ -60,7 +60,7 @@ class GamePiece(TimeStampedModel):
     game_group = models.ForeignKey(GameGroup, on_delete=models.CASCADE, related_name='game_pieces')
     notes = models.CharField(verbose_name=_("Notes"), max_length=100, blank=True)
     # Priority: which GamePiece should be rented first from same GameGroup.
-    # Higher number will be rented first.
+    # Lower number will be rented first.
     priority = models.PositiveSmallIntegerField(verbose_name=_("Priority"), default=0)
     rentable = models.BooleanField(verbose_name=_("Rentable"), null=False, blank=False, default=True)
     buying_date = models.DateField(verbose_name=_("Buying date"), null=True, blank=True)
