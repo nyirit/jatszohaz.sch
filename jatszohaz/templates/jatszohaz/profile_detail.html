@@ -26,6 +26,16 @@
         </a>
     {% endif %}
 
+    {% if perms.jatszohaz.leader_admin %}
+        <h2>{% trans 'Groups' %}</h2>
+        {% trans 'Click on the buttons to add or remove user to or from the group.' %}<br/>
+        {% for group in allowed_groups %}
+            <a class="btn btn-warning btn-xs" href="{% url 'toggle-user-group' object.pk group %}">
+                {{ group }}
+            </a>
+        {% endfor %}
+    {% endif %}
+
     {% if perms.jatszohaz.view_all %}
         <h3>{% trans 'Rents' %}</h3>
         {% if rents %}

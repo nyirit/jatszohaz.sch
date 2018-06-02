@@ -3,10 +3,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import signing
 from django.core.exceptions import SuspiciousOperation, PermissionDenied
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView, RedirectView, View
@@ -64,18 +65,37 @@ class ProfileView(LoginRequiredMixin, DetailView):
     template_name = "jatszohaz/profile_detail.html"
     permission_required = 'jatszohaz.view_all'
 
-    def get(self, request, *args, **kwargs):
-        if request.user == self.get_object():
-            return redirect(reverse_lazy("my-profile"))
-        return super().get(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['rents'] = self.object.rents.all()
         context['user_groups'] = ','.join([g.name for g in self.object.groups.all()])
-        if self.request.user.has_perm('jatszohaz.leader_admin'):
+        context['allowed_groups'] = ProfileAddRemoveGroups.allowed_groups
+        if self.request.user.has_perm('jatszohaz.leader_admin') and not self.request.user == self.get_object():
             context['token_login'] = TokenLogin.get_token_url(self.object, self.request.user)
         return context
+
+
+class ProfileAddRemoveGroups(PermissionRequiredMixin, View):
+    http_method_names = ['get', ]
+    permission_required = 'jatszohaz.leader_admin'
+    raise_exception = True
+    allowed_groups = ('kortag', 'leader', )
+
+    def get(self, request, *args, **kwargs):
+        user = get_object_or_404(JhUser, pk=kwargs.get('user_pk'))
+        group = get_object_or_404(Group, name=kwargs.get('group_name'))
+
+        if group.name not in self.allowed_groups:
+            raise PermissionDenied("Group not in allowed groups.")
+
+        if user in group.user_set.all():
+            group.user_set.remove(user)
+            messages.success(request, _("%s removed from group %s") % (user.full_name2(), group.name))
+        else:
+            group.user_set.add(user)
+            messages.success(request, _("%s added to group %s") % (user.full_name2(), group.name))
+
+        return redirect(user.get_absolute_url())
 
 
 class AboutUsView(TemplateView):
