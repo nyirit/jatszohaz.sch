@@ -48,7 +48,7 @@
         {% endif %}
         {% if perms.jatszohaz.basic_admin %}
           <li><a href="{% url 'calendar' %}">{% trans 'Calendar' %}</a></li>
-          {# <li><a href="{% url 'admin-rules' %}">{% trans 'Admin rules' %}</a></li>  #}
+          <li><a href="{% url 'admin-rules' %}">{% trans 'Admin rules' %}</a></li>
         {% endif %}
         {% if user.is_superuser %}
           <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>

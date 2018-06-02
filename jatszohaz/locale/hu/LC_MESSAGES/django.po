@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-28 16:25+0200\n"
-"PO-Revision-Date: 2018-05-28 16:26+0116\n"
+"POT-Creation-Date: 2018-06-02 15:07+0200\n"
+"PO-Revision-Date: 2018-06-02 15:09+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -425,12 +425,10 @@ msgid "Deleted game piece"
 msgstr "Törölt játék"
 
 #: rent/models.py:193
-#| msgid "Edit game group"
 msgid "Edited from"
 msgstr "Módosított kezdődátum"
 
 #: rent/models.py:194
-#| msgid "Edit rent"
 msgid "Edited to"
 msgstr "Módosított végdátum"
 
@@ -596,6 +594,10 @@ msgstr "Felhasználók"
 #: templates/_navbar.html:50
 msgid "Calendar"
 msgstr "Naptár"
+
+#: templates/_navbar.html:51
+msgid "Admin rules"
+msgstr "Admin szabályok"
 
 #: templates/_navbar.html:54
 msgid "Admin"
@@ -889,12 +891,10 @@ msgid "Deleted game"
 msgstr "Törölt játék"
 
 #: templates/rent/rent_detail_admin.html:54
-#| msgid "Rent from"
 msgid "New date from"
 msgstr "Új kezdődátum"
 
 #: templates/rent/rent_detail_admin.html:55
-#| msgid "New game"
 msgid "New date to"
 msgstr "Új végdátum"
 
@@ -991,9 +991,6 @@ msgstr ""
 "<ul><li>Mindig szólj a kölcsönzés visszaadásakor, vagy még előtte írj kommentet a kölcsönzésedhez, segítünk megoldani a problémát.</li></ul>\n"
 "\n"
 "</ol>"
-
-#~ msgid "Admin rules"
-#~ msgstr "Admin szabályok"
 
 #~ msgid ""
 #~ "\n"
