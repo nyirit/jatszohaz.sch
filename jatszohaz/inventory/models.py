@@ -34,13 +34,13 @@ class GameGroup(TimeStampedModel):
         ordering = ['name', ]
 
     def get_game_piece(self, date_from, date_to):
-        for piece in self.game_pieces.order_by('-priority'):
+        for piece in self.game_pieces.order_by('priority'):
             if piece.is_free(date_from, date_to):
                 return piece
         raise GameGroup.DoesNotExist("No free piece available!")
 
     def has_free_piece(self, date_from, date_to):
-        for piece in self.game_pieces.order_by('-priority'):
+        for piece in self.game_pieces.all():
             if piece.is_free(date_from, date_to):
                 return True
         return False
