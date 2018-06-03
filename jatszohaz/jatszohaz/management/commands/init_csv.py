@@ -64,7 +64,7 @@ class Command(BaseCommand):
 
             # parse player numbers. Format must be "min_player - max_player"
             if player_number:
-                values = gg.players.split('-')
+                values = player_number.split('-')
                 length = len(values)
 
                 gg.min_players = values[0].strip()
