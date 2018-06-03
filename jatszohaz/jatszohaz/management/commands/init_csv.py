@@ -61,7 +61,18 @@ class Command(BaseCommand):
         if created:
             gg.description = long_desc
             gg.short_description = short_desc[:100]
-            gg.players = player_number
+
+            # parse player numbers. Format must be "min_player - max_player"
+            if player_number:
+                values = gg.players.split('-')
+                length = len(values)
+
+                gg.min_players = values[0].strip()
+                if length == 2:
+                    gg.max_players = values[1].strip()
+                else:
+                    gg.max_players = gg.min_players
+
             gg.playtime = playtime
             gg.base_game = base_game
 

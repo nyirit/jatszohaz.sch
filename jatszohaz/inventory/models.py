@@ -15,7 +15,13 @@ class GameGroup(TimeStampedModel):
     description = models.TextField(verbose_name=_("Description"), blank=False)
     short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
     image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image")
-    players = models.CharField(verbose_name=_("Players"), help_text=_("Example: 2 - 6"), max_length=100)
+    min_players = models.IntegerField(verbose_name=_("Min. players"),
+                                      help_text=_("How many players are needed to play"),
+                                      validators=[MinValueValidator(1)],
+                                      null=True)
+    max_players = models.IntegerField(verbose_name=_("Max. players"), help_text=_("How many players can play at most"),
+                                      validators=[MinValueValidator(1)],
+                                      null=True)
     playtime = models.CharField(verbose_name=_("Playing time"), help_text=_("Example: 20 mins"), max_length=100)
     base_game = models.ForeignKey("self",
                                   on_delete=models.SET_NULL,
@@ -44,6 +50,12 @@ class GameGroup(TimeStampedModel):
             if piece.is_free(date_from, date_to):
                 return True
         return False
+
+    @property
+    def players(self):
+        if self.min_players and self.max_players:
+            return "%d - %d" % (self.min_players, self.max_players)
+        return None
 
     def __str__(self):
         return self.name

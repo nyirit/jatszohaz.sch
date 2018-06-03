@@ -90,7 +90,7 @@ class NewGameView(InventoryPermissionRequiredMixin, CreateView):
 
 class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
     model = GameGroup
-    fields = ['name', 'description', 'short_description', 'base_game', 'players', 'playtime', 'hide']
+    fields = ['name', 'description', 'short_description', 'base_game', 'min_players', 'max_players', 'playtime', 'hide']
     template_name = "default_update.html"
     success_url = reverse_lazy("inventory:list")
     success_message = _("Game group successfully edited.")
