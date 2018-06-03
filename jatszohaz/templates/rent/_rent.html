@@ -11,7 +11,7 @@
 
         {% trans 'Games' %}:
         {% for game in rent.games.all %}
-            {{ game.game_group }},
+            {{ game.game_group }}{% if not forloop.last %},{% endif %}
         {% endfor %}
 
         <br/>
