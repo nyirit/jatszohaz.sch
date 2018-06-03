@@ -1,16 +1,43 @@
 {% load i18n %}
 
 <div class="panel">
-    <div class="collapse" id="game-filter">
-      <div class="panel-body">
+    <div class="collapse in" id="game-filter">
+      <div class="panel-heading">
           <h2>{% trans 'Filters' %}</h2>
-          <h4>{% trans 'Players' %}:</h4>
-          <b>1</b>&nbsp;&nbsp; <input type="text" class="slider" id="slider-player-filter" value="" data-slider-min="1" data-slider-max="15" data-slider-step="1" data-slider-value="[1,15]"/> &nbsp; <b>15</b>
+      </div>
+      <div class="panel-body">
+          <div class="row">
+              <div class="col-xs-12 col-sm-4">
+                  <h4>{% trans 'Name' %}:</h4>
+                  <input type="text" id="game-name-filter" value="" />
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                  <h4>{% trans 'Players' %}:</h4>
+                  <div class="slider-player-filter">
+                      <b>1</b>&nbsp;&nbsp;&nbsp;<input type="text" class="slider" id="slider-player-filter" value=""
+                             data-slider-min="1" data-slider-max="15" data-slider-step="1" data-slider-value="[1,15]"/>&nbsp;&nbsp;&nbsp;<b>15</b>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                  <h4>{% trans 'Playtime' %}:</h4>
+                  <p class="slider-playtime-filter">
+                      <input id="slider-playtime-filter" class="slider" type="text"
+                          data-provider="slider"
+                          data-slider-ticks="[0, 1, 2, 3]"
+                          data-slider-ticks-labels='["Mind", "Rövid<br/><20 perc", "Közepes<br/>20-60 perc", "Hosszú<br/>>60 perc"]'
+                          data-slider-min="0"
+                          data-slider-max="3"
+                          data-slider-step="1"
+                          data-slider-value="0"
+                          data-slider-tooltip="hide" />
+                  </p>
+              </div>
+          </div>
       </div>
     </div>
     <div class="panel-footer">
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#game-filter" aria-expanded="true" aria-controls="game-filter">
-        {% trans 'Filters' %}
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#game-filter" aria-expanded="false" aria-controls="game-filter">
+        {% trans 'Show/hide filters' %}
         </button>
     </div>
 </div>

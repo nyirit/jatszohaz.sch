@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-03 19:12+0200\n"
-"PO-Revision-Date: 2018-06-03 19:14+0116\n"
+"POT-Creation-Date: 2018-06-04 00:31+0200\n"
+"PO-Revision-Date: 2018-06-04 00:31+0116\n"
 "Last-Translator: b'Tamas Nyiri <info@nyiritamas.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,110 +19,124 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: inventory/forms.py:13 inventory/models.py:68
+#: inventory/forms.py:13 inventory/models.py:80
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: inventory/forms.py:14 inventory/models.py:73
+#: inventory/forms.py:14 inventory/models.py:85
 #: templates/rent/rent_detail_admin.html:10
 msgid "Notes"
 msgstr "Megjegyzés"
 
-#: inventory/forms.py:15 inventory/models.py:76
+#: inventory/forms.py:15 inventory/models.py:88
 msgid "Priority"
 msgstr "Prioritás"
 
-#: inventory/forms.py:16 inventory/models.py:77
+#: inventory/forms.py:16 inventory/models.py:89
 msgid "Rentable"
 msgstr "Kölcsönözhető"
 
-#: inventory/forms.py:18 inventory/models.py:78
+#: inventory/forms.py:18 inventory/models.py:90
 #: templates/inventory/list_game.html:9
 msgid "Buying date"
 msgstr "Vásárlás ideje"
 
-#: inventory/forms.py:21 inventory/models.py:79
+#: inventory/forms.py:21 inventory/models.py:91
 #: templates/inventory/list_game.html:10
 #: templates/rent/rent_detail_admin.html:11
 msgid "Place"
 msgstr "Helye"
 
-#: inventory/forms.py:22 inventory/models.py:80
+#: inventory/forms.py:22 inventory/models.py:92
 msgid "Price (Ft)"
 msgstr "Vételár (Ft)"
 
-#: inventory/models.py:14 templates/jatszohaz/profile.html:8
+#: inventory/models.py:14
+msgid "short (20 mins)"
+msgstr "rövid (20 perc)"
+
+#: inventory/models.py:15
+msgid "medium (20-60 mins)"
+msgstr "közepes (20-60 perc)"
+
+#: inventory/models.py:16
+msgid "long (60+ mins)"
+msgstr "hosszú (60+ perc)"
+
+#: inventory/models.py:22 templates/jatszohaz/profile.html:8
 #: templates/jatszohaz/profile_detail.html:10
 #: templates/jatszohaz/user_list.html:12
 msgid "Name"
 msgstr "Név"
 
-#: inventory/models.py:15 rent/templates/rent/game_option.html:46
-#: templates/_game.html:40
+#: inventory/models.py:23 rent/templates/rent/game_option.html:49
+#: templates/_game.html:41
 msgid "Description"
 msgstr "Leírás"
 
-#: inventory/models.py:16
+#: inventory/models.py:24
 msgid "Short Description"
 msgstr "Rövid leírás"
 
-#: inventory/models.py:18
-#| msgid "Players"
+#: inventory/models.py:26
 msgid "Min. players"
 msgstr "Min. játékosok"
 
-#: inventory/models.py:19
+#: inventory/models.py:27
 msgid "How many players are needed to play"
 msgstr "Legalább hány játékos szükséges "
 
-#: inventory/models.py:22
-#| msgid "Players"
+#: inventory/models.py:30
 msgid "Max. players"
 msgstr "Max. játékosok"
 
-#: inventory/models.py:22
+#: inventory/models.py:30
 msgid "How many players can play at most"
 msgstr "Legfeljebb hány játékos játszhat"
 
-#: inventory/models.py:25
+#: inventory/models.py:33
 msgid "Playing time"
 msgstr "Játékidő"
 
-#: inventory/models.py:25
+#: inventory/models.py:33
 msgid "Example: 20 mins"
 msgstr "Példa: 20 perc"
 
-#: inventory/models.py:28 templates/inventory/list_game.html:12
+#: inventory/models.py:34
+msgid "Playtime category"
+msgstr "Játékidő kategória"
+
+#: inventory/models.py:37 templates/inventory/list_game.html:12
 msgid "Base game"
 msgstr "Alapjáték"
 
-#: inventory/models.py:29
+#: inventory/models.py:38
 msgid "Game needed to play this one."
 msgstr "Az a játék ami nélkül ez nem játszható"
 
-#: inventory/models.py:33
+#: inventory/models.py:42
 msgid "Hide from users"
 msgstr "Felhasználók elől elrejtés"
 
-#: inventory/models.py:34
+#: inventory/models.py:43
 msgid "If true isn't shown in Our games page."
 msgstr "Kipipált esetben nem látják a felhasználók a Játékaink menüpontban"
 
-#: inventory/models.py:108 templates/inventory/list-inventory.html:18
+#: inventory/models.py:120 templates/inventory/list-inventory.html:18
 #: templates/inventory/list_game.html:30
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:109 templates/inventory/list-inventory.html:19
+#: inventory/models.py:121 templates/inventory/list-inventory.html:19
 #: templates/inventory/list_game.html:31
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:110
+#: inventory/models.py:122
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:115
+#: inventory/models.py:127
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
@@ -130,15 +144,15 @@ msgstr "Leltár kezelés"
 msgid "Inventory created"
 msgstr "Bejegyzés létrehova"
 
-#: inventory/views.py:96 inventory/views.py:105
+#: inventory/views.py:97 inventory/views.py:106
 msgid "Game group successfully edited."
 msgstr "Játék sikeresen létrehozva!"
 
-#: inventory/views.py:97
+#: inventory/views.py:98
 msgid "Edit game group"
 msgstr "Játék módosítása"
 
-#: inventory/views.py:106
+#: inventory/views.py:107
 msgid "Edit game piece"
 msgstr "Játék elem módosítása"
 
@@ -455,29 +469,30 @@ msgstr "Módosított végdátum"
 msgid "Message"
 msgstr "Üzenet"
 
-#: rent/templates/rent/game_option.html:23 templates/_game.html:6
+#: rent/templates/rent/game_option.html:26 templates/_game.html:6
 msgid "Click for details!"
 msgstr "Kattints a részletekért!"
 
-#: rent/templates/rent/game_option.html:37
-#: rent/templates/rent/game_option.html:49 templates/_game.html:31
-#: templates/_game.html:43
+#: rent/templates/rent/game_option.html:40
+#: rent/templates/rent/game_option.html:52 templates/_game.html:32
+#: templates/_game.html:44
 msgid "Close"
 msgstr "Bezár"
 
-#: rent/templates/rent/game_option.html:44 templates/_game.html:38
-#: templates/_game_filter.html:7
+#: rent/templates/rent/game_option.html:47 templates/_game.html:39
+#: templates/_game_filter.html:11
 msgid "Players"
 msgstr "Játékosok"
 
-#: rent/templates/rent/game_option.html:44
-#: rent/templates/rent/game_option.html:45
-#: rent/templates/rent/game_option.html:46 templates/_game.html:38
-#: templates/_game.html:39 templates/_game.html:40
+#: rent/templates/rent/game_option.html:47
+#: rent/templates/rent/game_option.html:48
+#: rent/templates/rent/game_option.html:49 templates/_game.html:39
+#: templates/_game.html:40 templates/_game.html:41
 msgid "data not available."
 msgstr "ez az információ nem áll rendelkezésre."
 
-#: rent/templates/rent/game_option.html:45 templates/_game.html:39
+#: rent/templates/rent/game_option.html:48 templates/_game.html:40
+#: templates/_game_filter.html:20
 msgid "Playtime"
 msgstr "Játékidő"
 
@@ -557,9 +572,13 @@ msgstr "A játék erre az időre már ki van kölcsönözve."
 msgid "Given game is not in the rent!"
 msgstr "A játék nincs benne a kölcsönzésben!"
 
-#: templates/_game_filter.html:6 templates/_game_filter.html:13
+#: templates/_game_filter.html:6
 msgid "Filters"
 msgstr "Szűrők"
+
+#: templates/_game_filter.html:38
+msgid "Show/hide filters"
+msgstr "Szűrők elrejtése/megjelenítése"
 
 #: templates/_navbar.html:8
 msgid "Toggle navigation"
@@ -785,7 +804,7 @@ msgstr "Bejelentkezés ezen felhasználóval."
 
 #: templates/jatszohaz/profile_detail.html:31
 msgid "Click on the buttons to add or remove user to or from the group."
-msgstr ""
+msgstr "Kattints a gombra a felhasználó csoporthoz adásához/törléséhez."
 
 #: templates/jatszohaz/profile_detail.html:59 templates/rent/my_rents.html:9
 #: templates/rent/rents.html:38
@@ -833,41 +852,41 @@ msgstr ""
 "\n"
 "Itt már csak azokat a játékainkat látod, amelyek elérhetőek az általad adott időtartamra."
 
-#: templates/rent/new_rent.html:17
+#: templates/rent/new_rent.html:18
 msgid "Rented games"
 msgstr "Kölcsönzött játékok"
 
-#: templates/rent/new_rent.html:24
+#: templates/rent/new_rent.html:25
 msgid "Can't be palyed without"
 msgstr "Nem játszható az alábbi nélkül:"
 
-#: templates/rent/new_rent.html:30 templates/rent/rent_detail.html:28
+#: templates/rent/new_rent.html:31 templates/rent/rent_detail.html:28
 #: templates/rent/rent_detail_admin.html:27
 msgid "No games rented."
 msgstr "Nincs kölcsönzött játék."
 
-#: templates/rent/new_rent.html:35 templates/rent/new_rent.html:58
+#: templates/rent/new_rent.html:36 templates/rent/new_rent.html:59
 msgid "Different date"
 msgstr "Más dátum"
 
-#: templates/rent/new_rent.html:36 templates/rent/new_rent.html:64
+#: templates/rent/new_rent.html:37 templates/rent/new_rent.html:65
 msgid "Next"
 msgstr "Tovább"
 
-#: templates/rent/new_rent.html:53
+#: templates/rent/new_rent.html:54
 msgid "Email notification won't be sent."
 msgstr "Email értesítés mellőzése, mert körtag vagy."
 
-#: templates/rent/new_rent.html:55 templates/static_pages/rent_rules.html:4
+#: templates/rent/new_rent.html:56 templates/static_pages/rent_rules.html:4
 #: templates/static_pages/rent_rules.html:7
 msgid "Rent rules"
 msgstr "Kölcsönzési szabályzat"
 
-#: templates/rent/new_rent.html:61
+#: templates/rent/new_rent.html:62
 msgid "Different games"
 msgstr "Más játékok"
 
-#: templates/rent/new_rent.html:62
+#: templates/rent/new_rent.html:63
 msgid "Finish"
 msgstr "Küldés"
 

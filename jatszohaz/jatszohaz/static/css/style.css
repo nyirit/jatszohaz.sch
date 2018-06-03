@@ -153,6 +153,19 @@ ol.about-us>li {
     width: 100%;
 }
 
-.slider .slider-selection {
+.slider-player-filter .slider-selection {
 	background: yellow;
+}
+
+.slider-playtime-filter
+{
+    margin-left: 20px;
+}
+
+.slider-playtime-filter .slider-selection {
+	background: transparent;
+}
+
+.slider-playtime-filter .slider-tick {
+    background: lightgray;
 }

@@ -5,7 +5,9 @@
        data-placement="top"
        title="{{ game.short_description }} - {% trans "Click for details!" %}"
        data-min-players="{{ game.min_players }}"
-       data-max-players="{{ game.max_players }}">
+       data-max-players="{{ game.max_players }}"
+       data-playtime-category="{{ game.playtime_category }}"
+       data-game-name="{{ game.name|lower }}">
 
     <span data-toggle="modal"
        data-target="#modal_{{ game.id }}">

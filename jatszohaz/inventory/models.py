@@ -11,6 +11,14 @@ logger = logging.getLogger(__name__)
 
 
 class GameGroup(TimeStampedModel):
+    LENGTH_SHORT = ("short", _("short (20 mins)"))
+    LENGTH_MEDIUM = ("medium", _("medium (20-60 mins)"))
+    LENGTH_LONG = ("long", _("long (60+ mins)"))
+    LENGTH_CHOICES = (
+        LENGTH_SHORT,
+        LENGTH_MEDIUM,
+        LENGTH_LONG
+    )
     name = models.CharField(verbose_name=_("Name"), blank=False, unique=True, max_length=100)
     description = models.TextField(verbose_name=_("Description"), blank=False)
     short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
@@ -22,7 +30,10 @@ class GameGroup(TimeStampedModel):
     max_players = models.IntegerField(verbose_name=_("Max. players"), help_text=_("How many players can play at most"),
                                       validators=[MinValueValidator(1)],
                                       null=True)
-    playtime = models.CharField(verbose_name=_("Playing time"), help_text=_("Example: 20 mins"), max_length=100)
+    playtime = models.CharField(verbose_name=_("Playing time"),
+                                help_text=_("Example: 20 mins (this is directly displayed to the user)"),
+                                max_length=100)
+    playtime_category = models.CharField(verbose_name=_("Playtime category"), choices=LENGTH_CHOICES, max_length=20)
     base_game = models.ForeignKey("self",
                                   on_delete=models.SET_NULL,
                                   verbose_name=_("Base game"),
@@ -54,7 +65,10 @@ class GameGroup(TimeStampedModel):
     @property
     def players(self):
         if self.min_players and self.max_players:
-            return "%d - %d" % (self.min_players, self.max_players)
+            if self.min_players == self.max_players:
+                return self.min_players
+            else:
+                return "%d - %d" % (self.min_players, self.max_players)
         return None
 
     def __str__(self):

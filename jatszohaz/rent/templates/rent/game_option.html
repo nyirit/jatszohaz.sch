@@ -3,6 +3,8 @@
 <label class="game_container"
        data-min-players="{{ widget.label.min_players }}"
        data-max-players="{{ widget.label.max_players }}"
+       data-playtime-category="{{ widget.label.playtime_category }}"
+       data-game-name="{{ widget.label.name|lower }}"
        {% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>
 
     <img src="{{widget.label.image.url}}" alt="" />

@@ -8,7 +8,7 @@ class GameForm(forms.ModelForm):
     class Meta:
         model = GameGroup
         fields = ['name', 'description', 'short_description', 'image', 'base_game', 'min_players',
-                  'max_players', 'playtime', 'hide']
+                  'max_players', 'playtime', 'playtime_category', 'hide']
 
     owner = forms.ModelChoiceField(label=_("Owner"), queryset=JhUser.objects.all(), required=False)
     notes = forms.CharField(label=_("Notes"), max_length=100, required=False)
