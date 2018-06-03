@@ -12,14 +12,17 @@ def calc_min_max_players(apps, schema_editor):
     for g in GameGroup.objects.all():
         # if players are not given leave it null
         if g.players:
-            values = g.players.split('-')
-            length = len(values)
+            try:
+                values = g.players.split('-')
+                length = len(values)
 
-            g.min_players = values[0].strip()
-            if length == 2:
-                g.max_players = values[1].strip()
-            else:
-                g.max_players = g.min_players
+                g.min_players = int(values[0].strip())
+                if length == 2:
+                    g.max_players = int(values[1].strip())
+                else:
+                    g.max_players = g.min_players
+            except ValueError:
+                print("ValueError in game: %s" % g.name)
             g.save()
         else:
             print("%s skipped due to empty players." % g.name)
