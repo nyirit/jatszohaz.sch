@@ -3,7 +3,10 @@
 <label class="game_container"
        data-toggle="tooltip"
        data-placement="top"
-       title="{{ game.short_description }} - {% trans "Click for details!" %}">
+       title="{{ game.short_description }} - {% trans "Click for details!" %}"
+       data-min-players="{{ game.min_players }}"
+       data-max-players="{{ game.max_players }}">
+
     <span data-toggle="modal"
        data-target="#modal_{{ game.id }}">
 

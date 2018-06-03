@@ -152,3 +152,7 @@ ol.about-us>li {
 .w-100 {
     width: 100%;
 }
+
+.slider .slider-selection {
+	background: yellow;
+}

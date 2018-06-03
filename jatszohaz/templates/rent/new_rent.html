@@ -13,6 +13,7 @@
         <p>{% trans "Pick dates..."|linebreaks %}</p>
     {% elif wizard.steps.step1 == 2 %}
         <p>{% trans "Pick games..."|linebreaks %}</p>
+        {% include "_game_filter.html" %}
     {% else %}
         <h3>{% trans 'Rented games' %}:</h3>
         {% if form.game_groups.value %}

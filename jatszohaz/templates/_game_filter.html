@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<div class="panel">
+    <div class="collapse" id="game-filter">
+      <div class="panel-body">
+          <h2>{% trans 'Filters' %}</h2>
+          <h4>{% trans 'Players' %}:</h4>
+          <b>1</b>&nbsp;&nbsp; <input type="text" class="slider" id="slider-player-filter" value="" data-slider-min="1" data-slider-max="15" data-slider-step="1" data-slider-value="[1,15]"/> &nbsp; <b>15</b>
+      </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#game-filter" aria-expanded="true" aria-controls="game-filter">
+        {% trans 'Filters' %}
+        </button>
+    </div>
+</div>

@@ -1,7 +1,9 @@
 {% load i18n %}
 
 <label class="game_container"
-        {% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>
+       data-min-players="{{ widget.label.min_players }}"
+       data-max-players="{{ widget.label.max_players }}"
+       {% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>
 
     <img src="{{widget.label.image.url}}" alt="" />
 
