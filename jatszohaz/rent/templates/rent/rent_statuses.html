@@ -1,3 +1,9 @@
+{% load i18n %}
+
 {% for status in statuses %}
-    <a class="btn btn-info" href="{% url 'rent:change-status' rent_pk status.0 %}">{{ status.1 }}</a>
+        <a class="btn btn-info" href="{% url 'rent:change-status' rent_pk status.0 %}"
+        {% if status.0 in confirm_statuses %}
+            onclick="return confirm('{% trans 'Are you sure? ' %}');"
+        {% endif %}
+        >{{ status.1 }}</a>
 {% endfor %}
