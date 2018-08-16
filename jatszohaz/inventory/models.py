@@ -106,7 +106,10 @@ class GamePiece(TimeStampedModel):
                 .exclude(status__in=[Rent.STATUS_CANCELLED[0],
                                      Rent.STATUS_DECLINED[0], Rent.STATUS_BACK[0]])
                 .exclude(pk=ignored_rent_pk)
-                .filter(models.Q(date_from__range=(date_from, date_to)) | models.Q(date_to__range=(date_from, date_to)))
+                .filter(
+                    models.Q(date_from__range=(date_from, date_to)) |
+                    models.Q(date_from__lte=date_from, date_to__gte=date_from)
+                )
                 .count() == 0)
 
     def get_latest_inventory_item(self):
