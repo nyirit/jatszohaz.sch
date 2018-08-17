@@ -160,10 +160,13 @@ class DetailsView(LoginRequiredMixin, DetailView):
     template_name = "rent/rent_detail.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if not (request.user.has_perm('rent.manage_rents') or request.user == self.get_object().renter):
+        result = super().dispatch(request, *args, **kwargs)
+
+        user = request.user
+        if user.is_authenticated and not (user.has_perm('rent.manage_rents') or user == self.get_object().renter):
             raise PermissionDenied()
 
-        return super().dispatch(request, *args, **kwargs)
+        return result
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
