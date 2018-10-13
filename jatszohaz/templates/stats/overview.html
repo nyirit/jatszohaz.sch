@@ -1,13 +1,10 @@
-{% extends "base.html" %}
+{% extends "stats/base.html" %}
 {% load i18n %}
 
-{% block title-page %}{% trans "Statistics" %}{% endblock %}
-
-{% block content %}
-    <h1>{% trans "Statistics" %}</h1>
-
+{% block stats_content %}
     <h2>{% trans "Monthly rents" %}</h2>
     <p>{% trans "(This table is based on date from field.)" %}</p>
+
     <table class="table table-hover table-condensed">
         <tr>
             <th>{% trans 'Month' %}</th>

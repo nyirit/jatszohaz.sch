@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-13 19:19+0200\n"
-"PO-Revision-Date: 2018-10-13 19:21+0116\n"
+"POT-Creation-Date: 2018-10-13 20:03+0200\n"
+"PO-Revision-Date: 2018-10-13 20:05+0116\n"
 "Last-Translator: b'Admin Elek <test@jh.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -651,7 +651,12 @@ msgstr "Naptár"
 msgid "Admin rules"
 msgstr "Admin szabályok"
 
-#: templates/_navbar.html:54
+#: templates/_navbar.html:54 templates/stats/base.html:4
+#: templates/stats/base.html:7
+msgid "Statistics"
+msgstr "Statisztikák"
+
+#: templates/_navbar.html:57
 msgid "Admin"
 msgstr "Admin"
 
@@ -1052,27 +1057,49 @@ msgstr ""
 "\n"
 "</ol>"
 
-#: templates/stats/overview.html:4 templates/stats/overview.html:7
-#| msgid "Status"
-msgid "Statistics"
-msgstr "Statisztikák"
+#: templates/stats/base.html:10
+msgid "Overview"
+msgstr "Áttekintés"
 
-#: templates/stats/overview.html:9
-#| msgid "My rents"
+#: templates/stats/base.html:11 templates/stats/members.html:5
+msgid "By members"
+msgstr "Körtagok"
+
+#: templates/stats/members.html:7
+msgid ""
+"\n"
+"\n"
+"            Shows how many rents were managed by the user. Managed: changed its status, added/removed games...<br/>\n"
+"            Only commenting doesn't matter. Rents are excluded, where the renter is the same user.\n"
+"        "
+msgstr ""
+"\n"
+"Az adott tag által intézett kölcsönzések, azaz amelynek módosította a státuszát, hozzáadott/töröl játékot, stb.<br/>\n"
+"Azok a kölcsönzések nem számítanak, ahol csak kommentelt a felhasználó, illetve azok sem, amelyeket saját magának adott ki."
+
+#: templates/stats/members.html:16
+msgid "Member"
+msgstr "Tag"
+
+#: templates/stats/members.html:17 templates/stats/overview.html:11
+msgid "Count"
+msgstr "Darab"
+
+#: templates/stats/overview.html:5
 msgid "Monthly rents"
 msgstr "Kölcsönzések havonta"
 
-#: templates/stats/overview.html:10
+#: templates/stats/overview.html:6
 msgid "(This table is based on date from field.)"
 msgstr "(A kölcsönzés kezdő dátuma alapján.)"
 
-#: templates/stats/overview.html:13
+#: templates/stats/overview.html:10
 msgid "Month"
 msgstr "Hónap"
 
-#: templates/stats/overview.html:14
-msgid "Count"
-msgstr "Darab"
+#, fuzzy
+#~ msgid "By user"
+#~ msgstr "Nincs felhasználó."
 
 #~ msgid "Example: 20 mins"
 #~ msgstr "Példa: 20 perc"

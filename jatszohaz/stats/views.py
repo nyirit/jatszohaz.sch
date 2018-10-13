@@ -1,12 +1,15 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.db.models import Count
+from django.db.models import Count, F
 from django.db.models.functions import TruncMonth
 from django.views.generic import TemplateView
-from rent.models import Rent
+from rent.models import Rent, RentHistory
 
 
-class StatsView(PermissionRequiredMixin, TemplateView):
+class StatBase(PermissionRequiredMixin, TemplateView):
     permission_required = 'rent.view_stat'
+
+
+class StatsView(StatBase):
     template_name = 'stats/overview.html'
 
     def get_context_data(self, **kwargs):
@@ -17,6 +20,23 @@ class StatsView(PermissionRequiredMixin, TemplateView):
             .values('month')\
             .annotate(count=Count('id'))\
             .order_by('-month')\
+            .all()
+
+        return context
+
+
+class MembersView(StatBase):
+    permission_required = 'rent.view_stat'
+    template_name = 'stats/members.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        context['rents_users'] = RentHistory.objects\
+            .exclude(user=F('rent__renter'))\
+            .values('user__first_name', 'user__last_name')\
+            .annotate(count=Count('id'))\
+            .order_by('-count')\
             .all()
 
         return context

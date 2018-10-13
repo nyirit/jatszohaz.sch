@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title-page %}{% trans "Statistics" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Statistics" %}</h1>
+
+    <ul class="nav nav-tabs">
+      <li><a href="{% url 'stats:overview' %}">{% trans 'Overview' %}</a></li>
+      <li><a href="{% url 'stats:members' %}">{% trans 'By members' %}</a></li>
+    </ul>
+
+    {% block stats_content %}
+    {% endblock %}
+{% endblock %}
