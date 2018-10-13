@@ -116,6 +116,7 @@ LOCAL_APPS = (
     'jatszohaz',
     'rent',
     'news',
+    'stats',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

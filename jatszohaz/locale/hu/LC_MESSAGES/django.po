@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-17 18:48+0200\n"
-"PO-Revision-Date: 2018-08-17 18:48+0116\n"
+"POT-Creation-Date: 2018-10-13 19:19+0200\n"
+"PO-Revision-Date: 2018-10-13 19:21+0116\n"
 "Last-Translator: b'Admin Elek <test@jh.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -197,7 +197,7 @@ msgstr "Kölcsönzési statisztika megtekintése"
 msgid "Group leader rights"
 msgstr ""
 
-#: jatszohaz/settings/base.py:196
+#: jatszohaz/settings/base.py:197
 msgid "Hungarian"
 msgstr "Magyar"
 
@@ -1051,6 +1051,28 @@ msgstr ""
 "<ul><li>Mindig szólj a kölcsönzés visszaadásakor, vagy még előtte írj kommentet a kölcsönzésedhez, segítünk megoldani a problémát.</li></ul>\n"
 "\n"
 "</ol>"
+
+#: templates/stats/overview.html:4 templates/stats/overview.html:7
+#| msgid "Status"
+msgid "Statistics"
+msgstr "Statisztikák"
+
+#: templates/stats/overview.html:9
+#| msgid "My rents"
+msgid "Monthly rents"
+msgstr "Kölcsönzések havonta"
+
+#: templates/stats/overview.html:10
+msgid "(This table is based on date from field.)"
+msgstr "(A kölcsönzés kezdő dátuma alapján.)"
+
+#: templates/stats/overview.html:13
+msgid "Month"
+msgstr "Hónap"
+
+#: templates/stats/overview.html:14
+msgid "Count"
+msgstr "Darab"
 
 #~ msgid "Example: 20 mins"
 #~ msgstr "Példa: 20 perc"

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title-page %}{% trans "Statistics" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Statistics" %}</h1>
+
+    <h2>{% trans "Monthly rents" %}</h2>
+    <p>{% trans "(This table is based on date from field.)" %}</p>
+    <table class="table table-hover table-condensed">
+        <tr>
+            <th>{% trans 'Month' %}</th>
+            <th>{% trans 'Count' %}</th>
+        </tr>
+        {% for d in monthly_rents %}
+            <tr>
+                <td>{{ d.month|date:'Y. m.' }}</td>
+                <td>{{ d.count }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

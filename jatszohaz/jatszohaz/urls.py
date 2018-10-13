@@ -35,6 +35,7 @@ urlpatterns = [
 
     url(r'^news/', include('news.urls')),
     url(r'^cron/', include('cron.urls')),
+    url(r'^stats/', include('stats.urls')),
 
     url(r'^token-login/(?P<token>.*)/$', TokenLogin.as_view(), name="token-login"),
 
