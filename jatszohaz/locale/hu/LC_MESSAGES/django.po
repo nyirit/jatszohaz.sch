@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-13 20:03+0200\n"
-"PO-Revision-Date: 2018-10-13 20:05+0116\n"
+"POT-Creation-Date: 2018-10-13 20:31+0200\n"
+"PO-Revision-Date: 2018-10-13 20:32+0116\n"
 "Last-Translator: b'Admin Elek <test@jh.hu>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -1077,13 +1077,17 @@ msgstr ""
 "Az adott tag által intézett kölcsönzések, azaz amelynek módosította a státuszát, hozzáadott/töröl játékot, stb.<br/>\n"
 "Azok a kölcsönzések nem számítanak, ahol csak kommentelt a felhasználó, illetve azok sem, amelyeket saját magának adott ki."
 
-#: templates/stats/members.html:16
+#: templates/stats/members.html:17
 msgid "Member"
 msgstr "Tag"
 
-#: templates/stats/members.html:17 templates/stats/overview.html:11
+#: templates/stats/members.html:18 templates/stats/overview.html:11
 msgid "Count"
 msgstr "Darab"
+
+#: templates/stats/members.html:28
+msgid "No data to display."
+msgstr "Nincs megjeleníthető adat."
 
 #: templates/stats/overview.html:5
 msgid "Monthly rents"

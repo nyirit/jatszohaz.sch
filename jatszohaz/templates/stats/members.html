@@ -11,16 +11,29 @@
         {% endblocktrans %}
     </p>
 
-    <table class="table table-hover table-condensed">
-        <tr>
-            <th>{% trans 'Member' %}</th>
-            <th>{% trans 'Count' %}</th>
-        </tr>
-        {% for d in rents_users %}
+    <form method="get" action="">
+        <label for="from">{% trans 'From' %}:</label><br/>
+        <input class="datetimepicker" name="from" type="text" value="{{ date_from|default_if_none:'' }}" /><br/>
+
+        <label for="to">{% trans 'To' %}:</label><br/>
+        <input class="datetimepicker" name="to" type="text" value="{{ date_to|default_if_none:'' }}" /><br/>
+        <input type="submit" class="btn btn-primary" />
+    </form>
+    <br/>
+    {% if rents_users %}
+        <table class="table table-hover table-condensed">
             <tr>
-                <td>{{ d.user__last_name }} {{ d.user__first_name }}</td>
-                <td>{{ d.count }}</td>
+                <th>{% trans 'Member' %}</th>
+                <th>{% trans 'Count' %}</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for d in rents_users %}
+                <tr>
+                    <td>{{ d.user__last_name }} {{ d.user__first_name }}</td>
+                    <td>{{ d.count }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h3>{% trans 'No data to display.' %}</h3>
+    {% endif %}
 {% endblock %}
