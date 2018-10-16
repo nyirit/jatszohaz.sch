@@ -20,9 +20,10 @@ RUN chown -R app:app .
 # Change to the app user.
 USER app
 
-COPY base_7df49a6.txt base_req.txt
+COPY base_283d59e.txt base_req.txt
+COPY prod_dfcc0f5.txt prod_req.txt
 RUN virtualenv jh
-RUN /bin/bash -c "source jh/bin/activate; pip install -r base_req.txt"
+RUN /bin/bash -c "source jh/bin/activate; pip install -r base_req.txt -r prod_req.txt"
 
 # Start init script
 EXPOSE 8000
