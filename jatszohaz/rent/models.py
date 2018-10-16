@@ -74,6 +74,9 @@ class Rent(TimeStampedModel):
                                    edited_date_from=edited_date_from,
                                    edited_date_to=edited_date_to)
 
+    def get_last_history(self):
+        return self.histories.last()
+
     def is_past_due(self):
         return ((self.date_to < datetime.now() and self.status == Rent.STATUS_GAVE_OUT[0])
                 or (self.date_from < datetime.now() and

@@ -16,6 +16,7 @@
 
         <br/>
 
+        {% trans 'Last edit by' %}: {{ rent.get_last_history.user.full_name2 }} <br/>
         {% trans 'Status' %}: {{ rent.get_status_display }}<br/>
     </div>
     <div class="panel-footer">

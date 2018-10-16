@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-13 20:31+0200\n"
-"PO-Revision-Date: 2018-10-13 20:32+0116\n"
-"Last-Translator: b'Admin Elek <test@jh.hu>'\n"
+"POT-Creation-Date: 2018-10-16 20:21+0200\n"
+"PO-Revision-Date: 2018-10-16 20:22+0116\n"
+"Last-Translator: b'Tamas Nyiri <info@nyiritamas.huasd>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -375,16 +375,16 @@ msgid "Games"
 msgstr "Játékok"
 
 #: rent/models.py:48 templates/inventory/list_game.html:17
-#: templates/jatszohaz/profile_detail.html:44
+#: templates/jatszohaz/profile_detail.html:44 templates/stats/members.html:15
 msgid "From"
 msgstr "Dátum kezdete"
 
 #: rent/models.py:49 templates/inventory/list_game.html:18
-#: templates/jatszohaz/profile_detail.html:45
+#: templates/jatszohaz/profile_detail.html:45 templates/stats/members.html:18
 msgid "To"
 msgstr "Dátum vége"
 
-#: rent/models.py:50 rent/models.py:177 templates/inventory/list_game.html:19
+#: rent/models.py:50 rent/models.py:180 templates/inventory/list_game.html:19
 #: templates/jatszohaz/profile_detail.html:46 templates/rent/_rent.html:19
 #: templates/rent/rent_detail.html:17
 msgid "Status"
@@ -402,7 +402,7 @@ msgstr "Kölcsönzések kezelése"
 msgid "View rent statistics"
 msgstr "Kölcsönzés statisztika megtekintése"
 
-#: rent/models.py:91
+#: rent/models.py:94
 #, python-format
 msgid ""
 "You can check your rent here: <a href=\"%s\">%s<a><br/>Please do not reply "
@@ -411,22 +411,22 @@ msgstr ""
 "Kölcsönzésed megtekintéséhez katt ide: <a href=\"%s\">%s<a><br/><br/>Kérlek "
 "ne válaszolj erre a levélre!<br/><br/>Üdv,<br/>Játszóház"
 
-#: rent/models.py:103
+#: rent/models.py:106
 msgid "new status"
 msgstr "új státusz"
 
-#: rent/models.py:104
+#: rent/models.py:107
 #, python-format
 msgid "Hi!<br/><br/>Status of your rent was changed to %s.<br/><br/>"
 msgstr ""
 "Szia!<br/><br/>Kölcsönzésed státusza megváltozott.<br/>Új státusz: "
 "%s.<br/><br/>"
 
-#: rent/models.py:109
+#: rent/models.py:112
 msgid "new comment"
 msgstr "új komment"
 
-#: rent/models.py:110
+#: rent/models.py:113
 #, python-format
 msgid ""
 "Hi!<br/><br/>There is a new comment to your rent.<br/><br/>User: "
@@ -435,38 +435,38 @@ msgstr ""
 "Szia!<br/><br/>Új komment érkezett a kölcsönzésedhez.<br/><br/>Felhasználó: "
 "%s<br/>Üzenet:<br/>%s<br/><br/>"
 
-#: rent/models.py:116
+#: rent/models.py:119
 msgid "date changed"
 msgstr "dátum módosult"
 
-#: rent/models.py:117
+#: rent/models.py:120
 #, python-format
 msgid "Hi!<br/><br/>Your rent date changed.<br/><br/>New dates: %s - %s<br/>"
 msgstr ""
 "Szia!<br/><br/>Megváltozott a kölcsönzésed időpontja!<br/><br/>Új dátumok: "
 "%s - %s<br/>"
 
-#: rent/models.py:181 templates/rent/rent_detail_admin.html:51
+#: rent/models.py:184 templates/rent/rent_detail_admin.html:51
 msgid "New renter"
 msgstr "Új kölcsönző"
 
-#: rent/models.py:186
+#: rent/models.py:189
 msgid "New game piece"
 msgstr "Hozzáadott játék"
 
-#: rent/models.py:191
+#: rent/models.py:194
 msgid "Deleted game piece"
 msgstr "Törölt játék"
 
-#: rent/models.py:193
+#: rent/models.py:196
 msgid "Edited from"
 msgstr "Módosított kezdődátum"
 
-#: rent/models.py:194
+#: rent/models.py:197
 msgid "Edited to"
 msgstr "Módosított végdátum"
 
-#: rent/models.py:201
+#: rent/models.py:204
 msgid "Message"
 msgstr "Üzenet"
 
@@ -692,7 +692,7 @@ msgstr "Nincs leltári bejegyzés."
 
 #: templates/inventory/list-inventory.html:24
 #: templates/inventory/list_game.html:8
-#: templates/jatszohaz/profile_detail.html:54 templates/rent/_rent.html:22
+#: templates/jatszohaz/profile_detail.html:54 templates/rent/_rent.html:23
 msgid "Details"
 msgstr "Részletek"
 
@@ -842,6 +842,11 @@ msgstr "Ez a bejegyzés nincs publikálva! Csak adminok számára látható!"
 #: templates/news.html:40
 msgid "Last edit:"
 msgstr "Utolsó módosítás:"
+
+#: templates/rent/_rent.html:20
+#| msgid "Last edit:"
+msgid "Last edit by"
+msgstr "Utoljára piszkálta"
 
 #: templates/rent/new_rent.html:10
 msgid "Renting"
@@ -1077,15 +1082,15 @@ msgstr ""
 "Az adott tag által intézett kölcsönzések, azaz amelynek módosította a státuszát, hozzáadott/töröl játékot, stb.<br/>\n"
 "Azok a kölcsönzések nem számítanak, ahol csak kommentelt a felhasználó, illetve azok sem, amelyeket saját magának adott ki."
 
-#: templates/stats/members.html:17
+#: templates/stats/members.html:26
 msgid "Member"
 msgstr "Tag"
 
-#: templates/stats/members.html:18 templates/stats/overview.html:11
+#: templates/stats/members.html:27 templates/stats/overview.html:11
 msgid "Count"
 msgstr "Darab"
 
-#: templates/stats/members.html:28
+#: templates/stats/members.html:37
 msgid "No data to display."
 msgstr "Nincs megjeleníthető adat."
 
