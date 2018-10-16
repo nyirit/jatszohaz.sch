@@ -28,7 +28,7 @@
             </tr>
             {% for d in rents_users %}
                 <tr>
-                    <td>{{ d.user__last_name }} {{ d.user__first_name }}</td>
+                    <td>{{ d.user }}</td>
                     <td>{{ d.count }}</td>
                 </tr>
             {% endfor %}

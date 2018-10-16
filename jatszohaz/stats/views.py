@@ -4,6 +4,7 @@ from django.db.models.functions import TruncMonth
 from django.http import Http404
 from django.utils.dateparse import parse_date
 from django.views.generic import TemplateView
+from jatszohaz.models import JhUser
 from rent.models import Rent, RentHistory
 
 
@@ -54,11 +55,17 @@ class MembersView(StatBase):
             # handle datetime format exceptions
             raise Http404()
 
-        context['rents_users'] = queryset\
-            .values('user__first_name', 'user__last_name')\
-            .annotate(count=Count('id'))\
-            .order_by('-count')\
-            .all()
+        # todo solve this with a much faster subquery
+        rents_users = []
+        for user in JhUser.objects.order_by('last_name', 'first_name').all():
+            rents_count = queryset.filter(user=user).values('rent').distinct().count()
+            if rents_count > 0:
+                rents_users.append({
+                    'user': user.full_name2(),
+                    'count': rents_count,
+                })
+
+        context['rents_users'] = sorted(rents_users, key=lambda e: e['count'], reverse=True)
         context['date_from'] = get_date_from
         context['date_to'] = get_date_to
 
