@@ -203,6 +203,10 @@ class NewCommentView(LoginRequiredMixin, FormView):
 
         return redirect(rent.get_absolute_url())
 
+    def form_invalid(self, form):
+        messages.error(self.request, _("Invalid form!"))
+        return redirect(self.get_object().get_absolute_url())
+
 
 class EditView(PermissionRequiredMixin, UpdateView):
     model = Rent
