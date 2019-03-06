@@ -7,7 +7,7 @@
        data-game-name="{{ widget.label.name|lower }}"
        {% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>
 
-    <img src="{{widget.label.image.url}}" alt="" />
+    <img src="{{widget.label.image.url}}" alt="" onerror="this.onerror=null;this.src='/static/img/game_no_picture.jpg';" />
 
     <input type="{{ widget.type }}"
         name="{{ widget.name }}"
