@@ -9,6 +9,7 @@
     <ul class="nav nav-tabs">
       <li><a href="{% url 'stats:overview' %}">{% trans 'Overview' %}</a></li>
       <li><a href="{% url 'stats:members' %}">{% trans 'By members' %}</a></li>
+      <li><a href="{% url 'stats:games' %}">{% trans 'By games' %}</a></li>
     </ul>
 
     {% block stats_content %}

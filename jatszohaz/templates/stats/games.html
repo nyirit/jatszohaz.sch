@@ -1,0 +1,38 @@
+{% extends "stats/base.html" %}
+{% load i18n %}
+
+{% block stats_content %}
+    <h2>{% trans "By games" %}</h2>
+    <p>
+        {% blocktrans %}
+            Shows how many times games were rented in the given period based on the first day of the rent.<br/>
+            Cancelled and rejected rents are not included.
+        {% endblocktrans %}
+    </p>
+
+    <form method="get" action="">
+        <label for="from">{% trans 'From' %}:</label><br/>
+        <input class="datetimepicker" name="from" type="text" value="{{ date_from|default_if_none:'' }}" /><br/>
+
+        <label for="to">{% trans 'To' %}:</label><br/>
+        <input class="datetimepicker" name="to" type="text" value="{{ date_to|default_if_none:'' }}" /><br/>
+        <input type="submit" class="btn btn-primary" />
+    </form>
+    <br/>
+    {% if stat_data %}
+        <table class="table table-hover table-condensed">
+            <tr>
+                <th>{% trans 'Game' %}</th>
+                <th>{% trans 'Count' %}</th>
+            </tr>
+            {% for d in stat_data %}
+                <tr>
+                    <td>{{ d.name }}</td>
+                    <td>{{ d.rcount }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h3>{% trans 'No data to display.' %}</h3>
+    {% endif %}
+{% endblock %}
