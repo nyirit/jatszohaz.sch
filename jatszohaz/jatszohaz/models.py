@@ -67,7 +67,7 @@ class JhUser(AbstractUser):
         """
         entls = self.get_entitlements()
         if entls:
-            if 'title' not in entls or settings.EDU_PERSON_ENTITLEMENT_IGNORE_STATUS == entls['title']:
+            if entls.get('title') == settings.EDU_PERSON_ENTITLEMENT_IGNORE_STATUS:
                 logger.warning("Permission update for user with pk %d aborted, because has '%s' title." % (
                     self.pk, entls.get('title')))
                 return
