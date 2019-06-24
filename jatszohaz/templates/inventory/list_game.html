@@ -6,8 +6,10 @@
 
     <h1>{{ game_piece }}</h1>
     <h2>{% trans 'Details' %}</h2>
-    {% trans 'Buying date' %}: {{ game_piece.buying_date|default:"?" }}<br/>
+    {% trans 'Owner' %}: {{ game_piece.owner }}<br/>
+    {% trans 'Notes' %}: {{ game_piece.notes }}<br/>
     {% trans 'Place' %}: {{ game_piece.place }}<br/>
+    {% trans 'Buying date' %}: {{ game_piece.buying_date|default:"?" }}<br/>
     {% trans 'Original price' %}: {{ game_piece.price|intcomma }} Ft<br/>
     {% trans 'Base game' %}: {{ game_piece.game_group.base_game|default:'-' }}
 

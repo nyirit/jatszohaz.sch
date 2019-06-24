@@ -73,12 +73,19 @@ class NewGameWithGroupView(InventoryPermissionRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
-        owner = form.cleaned_data['owner']
-        notes = form.cleaned_data['notes']
-        priority = form.cleaned_data['priority']
-        GamePiece.objects.create(game_group=form.instance, owner=owner, notes=notes, priority=priority).save()
+        data = dict(
+            owner=form.cleaned_data['owner'],
+            notes=form.cleaned_data['notes'],
+            priority=form.cleaned_data['priority'],
+            rentable=form.cleaned_data['rentable'],
+            buying_date=form.cleaned_data['buying_date'],
+            place=form.cleaned_data['place'],
+            price=form.cleaned_data['price'],
+
+        )
+        GamePiece.objects.create(game_group=form.instance, **data).save()
         messages.success(self.request, "Successfully created game and gamegroup!")
-        return HttpResponseRedirect("")
+        return HttpResponseRedirect(reverse_lazy('inventory:new-game-with-group'))
 
 
 class NewGameView(InventoryPermissionRequiredMixin, CreateView):
