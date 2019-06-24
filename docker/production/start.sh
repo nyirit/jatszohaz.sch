@@ -7,7 +7,7 @@ git clone https://github.com/bubi24/jatszohaz.sch.git
 source jh/bin/activate
 
 cd jatszohaz.sch
-pip install -r requirements.txt
+pip install -r requirements.txt --upgrade
 
 cd jatszohaz
 python3 manage.py migrate

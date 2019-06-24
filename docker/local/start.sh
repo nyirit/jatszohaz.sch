@@ -5,7 +5,7 @@ set -o xtrace
 source jh/bin/activate
 
 cd jatszohaz.sch
-pip install -r requirements.txt -r requirements/dev.txt
+pip install -r requirements.txt -r requirements/dev.txt --upgrade
 
 cd jatszohaz
 python3 manage.py migrate
