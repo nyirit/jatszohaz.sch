@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  web:
+    image: nyirit/jatszohaz.sch.dev:1.0
+    depends_on:
+      - database
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/home/app/jatszohaz.sch
+    environment:
+      - DJANGO_SETTINGS_MODULE=jatszohaz.settings.local
+      - DJANGO_DB_TYPE=postgresql_psycopg2
+      - DJANGO_DB_NAME=postgres
+      - DJANGO_DB_USER=postgres
+      - DJANGO_DB_PASSWORD=
+      - DJANGO_DB_HOST=database
+      - DJANGO_DB_PORT=
+      - DJANGO_LANGUAGE_CODE=hu
+
+  database:
+    image: postgres
+

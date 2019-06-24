@@ -17,14 +17,10 @@ env:
       - DJANGO_DB_PASSWORD=''
       - DJANGO_DB_HOST='localhost'
       - DJANGO_DB_PORT=''
-# Last two for OS X, courtesy of stackoverflow.com/a/22697917/419005
-# - CFLAGS=-Qunused-arguments
-# - CPPFLAGS=-Qunused-arguments
 
 install:
   - pip install -r requirements.txt
   - pip install flake8
-    #  - pip install coveralls radon
 
 before_script:
   - psql -c "CREATE DATABASE travisdb;" -U postgres
@@ -35,8 +31,6 @@ script:
 
 after_success:
   - pip freeze
-  #- echo Uploading code coverage data ...; coveralls
-  #- echo Code complexity scores:; radon cc --min B ../jatszohaz
 
 notifications:
   email:
