@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth import logout
+from django.contrib.auth.views import LogoutView
 from . import views
 from django.views.generic import RedirectView
 from jatszohaz.views import TokenLogin
@@ -24,7 +24,7 @@ urlpatterns = [
     # Games and renting related pages
     url(r'^games/$', views.GamesView.as_view(), name="games"),
     url(r'', include('social_django.urls', namespace='social')),
-    url(r'^logout/', logout, {'next_page': '/'}, name='logout'),
+    url(r'^logout/', LogoutView.as_view(), name='logout'),
 
     url(r'^rent/', include('rent.urls')),
     url(r'^inventory/', include('inventory.urls')),
