@@ -29,7 +29,7 @@ $(document).ready(function(){
                 var name_val = game_name_filter.val().toLowerCase();
                 var playtime = !(length == "all" || $(this).attr('data-playtime-category') == length);
                 var players = parseInt($(this).attr('data-min-players')) > max_value || parseInt($(this).attr('data-max-players')) < min_value;
-                var name = !$(this).attr('data-game-name').includes(name_val);
+                var name = $(this).attr('data-game-name').indexOf(name_val) == -1;
                 return players || playtime || name;
             }).fadeOut(500);
 
@@ -38,7 +38,7 @@ $(document).ready(function(){
                 var name_val = game_name_filter.val().toLowerCase();
                 var playtime = length == "all" || $(this).attr('data-playtime-category') == length;
                 var players = !(parseInt($(this).attr('data-min-players')) > max_value || parseInt($(this).attr('data-max-players')) < min_value);
-                var name = $(this).attr('data-game-name').includes(name_val);
+                var name = $(this).attr('data-game-name').indexOf(name_val) > -1
                 return players && playtime && name;
             }).fadeIn(500);
     };
