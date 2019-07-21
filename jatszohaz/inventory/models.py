@@ -11,6 +11,14 @@ logger = logging.getLogger(__name__)
 
 
 class GameGroup(TimeStampedModel):
+    """
+    Represents a board game.
+
+    Not the physical copy itself, but the board game as a category.
+    For example an instance can represent the game Bang, but since we have multiple physical copies of this game, there
+    will be multiple GamePiece objects connected to this instance.
+    """
+
     LENGTH_SHORT = ("short", _("short (20 mins)"))
     LENGTH_MEDIUM = ("medium", _("medium (20-60 mins)"))
     LENGTH_LONG = ("long", _("long (60+ mins)"))
@@ -51,12 +59,20 @@ class GameGroup(TimeStampedModel):
         ordering = ['name', ]
 
     def get_game_piece(self, date_from, date_to):
+        """
+        Returns a connected GamePiece which is free during the given time period.
+        If multiple available the one with the lowest priority will be returned.
+
+        :raises GameGroup.DoesNotExist if there is no free connected GamePiece object.
+        """
         for piece in self.game_pieces.order_by('priority'):
             if piece.is_free(date_from, date_to):
                 return piece
         raise GameGroup.DoesNotExist("No free piece available!")
 
     def has_free_piece(self, date_from, date_to):
+        """Returns True if there is a connected GamePiece object that is not rented out in the given time period."""
+
         for piece in self.game_pieces.all():
             if piece.is_free(date_from, date_to):
                 return True
@@ -64,6 +80,7 @@ class GameGroup(TimeStampedModel):
 
     @property
     def players(self):
+        """Returns string representation of the needed players to play this game or None if not available."""
         if self.min_players and self.max_players:
             if self.min_players == self.max_players:
                 return self.min_players
@@ -76,6 +93,8 @@ class GameGroup(TimeStampedModel):
 
 
 class GamePiece(TimeStampedModel):
+    """Represents the physical copy of a board game."""
+
     owner = models.ForeignKey(
         JhUser,
         on_delete=models.PROTECT,  # do not delete users, who owns a game
@@ -97,6 +116,7 @@ class GamePiece(TimeStampedModel):
         ordering = ['game_group__name', ]
 
     def is_free(self, date_from, date_to, ignored_rent_pk=None):
+        """Returns True if the represented board game is not rented during the given period."""
         from rent.models import Rent
 
         last_inv = self.get_latest_inventory_item()
@@ -120,6 +140,7 @@ class GamePiece(TimeStampedModel):
 
 
 class InventoryItem(TimeStampedModel):
+    """Represents the result of a manual inspection of a physical board game."""
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     game = models.ForeignKey(GamePiece, on_delete=models.CASCADE, related_name="inventories")
     playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False)

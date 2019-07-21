@@ -17,6 +17,12 @@ logger = logging.getLogger(__name__)
 
 
 class Rent(TimeStampedModel):
+    """
+    Represents a rent made by a user.
+
+    Contains all the rented games, dates, current status.
+    """
+
     STATUS_PENDING = ("pending", _("Pending"))
     STATUS_APPROVED = ("approved", _("Approved"))
     STATUS_GAVE_OUT = ("gaveout", _("Gave out"))
@@ -65,6 +71,9 @@ class Rent(TimeStampedModel):
 
     def create_new_history(self, user, new_status=None, new_renter=None, added_game=None, deleted_game=None,
                            edited_date_from=None, edited_date_to=None):
+        """After each modification (e.g. status modification, adding/removing games, etc) a new RentHistory object is
+        created to monitor the process."""
+
         RentHistory.objects.create(user=user,
                                    new_status=new_status,
                                    rent=self,
@@ -78,11 +87,17 @@ class Rent(TimeStampedModel):
         return self.histories.last()
 
     def is_past_due(self):
+        """Returns True if the rent is in an invalid state, e.g. it should have already been returned but it was not."""
         return ((self.date_to < datetime.now() and self.status == Rent.STATUS_GAVE_OUT[0])
                 or (self.date_from < datetime.now() and
                     self.status in (Rent.STATUS_PENDING[0], Rent.STATUS_APPROVED[0])))
 
     def notify_users(self, subject, message, user_exclude):
+        """
+        Send an email notification for all the users connected to this object.
+
+        All users are considered to be connected who made a comment or made any change to this object.
+        """
         recipient_list = set([c.user.email for c in self.comments.all()] +
                              [self.renter.email, ] +
                              [h.user.email for h in self.histories.all()])
@@ -136,6 +151,7 @@ class Rent(TimeStampedModel):
 
     @staticmethod
     def get_count_by_status():
+        """Returns a dict representing the number of Rent object by status."""
         status_counts = dict()
 
         for x in Rent.objects.all().values('status').annotate(total=Count('status')):
@@ -176,6 +192,8 @@ class Rent(TimeStampedModel):
 
 
 class RentHistory(TimeStampedModel):
+    """Represents a change in a Rent object."""
+
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     new_status = models.CharField(verbose_name=_("Status"), choices=Rent.STATUS_CHOICES, max_length=20, null=True)
     new_renter = models.ForeignKey(JhUser,
@@ -199,6 +217,7 @@ class RentHistory(TimeStampedModel):
 
 
 class Comment(TimeStampedModel):
+    """Represents a comment for a rent object made by a user."""
     rent = models.ForeignKey(Rent, on_delete=models.PROTECT, related_name="comments")
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
     message = models.TextField(verbose_name=_("Message"))

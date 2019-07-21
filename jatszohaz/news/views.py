@@ -8,10 +8,12 @@ from .models import News
 
 
 class NewsPermissionRequiredMixin(PermissionRequiredMixin):
+    """Base view for checking permissions."""
     permission_required = 'news.manage_news'
 
 
 class NewsView(ListView):
+    """Displaying news publicly."""
     model = News
     template_name = 'news.html'
     paginate_by = 5
@@ -26,6 +28,7 @@ class NewsView(ListView):
 
 
 class CreateNewsView(SuccessMessageMixin, NewsPermissionRequiredMixin, CreateView):
+    """Admin view for creating new news objects."""
     model = News
     template_name = "default_update.html"
     fields = ['title', 'content', 'image', 'published']
@@ -43,6 +46,7 @@ class CreateNewsView(SuccessMessageMixin, NewsPermissionRequiredMixin, CreateVie
 
 
 class EditNewsEntryView(SuccessMessageMixin, NewsPermissionRequiredMixin, UpdateView):
+    """Admin view for editing existing news objects."""
     model = News
     template_name = "default_update.html"
     fields = ['title', 'content', 'image', 'published']

@@ -11,6 +11,8 @@ logger = logging.getLogger(__name__)
 
 
 class JhUser(AbstractUser):
+    """Custom user model which extends the one provided by Django."""
+
     mobile = models.CharField(
         verbose_name=_('mobile'),
         max_length=100,
@@ -59,6 +61,9 @@ class JhUser(AbstractUser):
 
     @receiver(user_logged_in)
     def user_logged_in(sender, user, request, **kwargs):
+        """
+        Runs every time the user logs in.
+        """
         user.update_permissions()
 
     def update_permissions(self):
@@ -89,6 +94,9 @@ class JhUser(AbstractUser):
         return "%s %s" % (self.last_name, self.first_name)
 
     def get_absolute_url(self):
+        """
+        Returns the url for this user's profile.
+        """
         return reverse_lazy('profile', kwargs={'pk': self.pk})
 
     def __str__(self):

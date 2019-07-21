@@ -14,6 +14,8 @@ class StatBase(PermissionRequiredMixin, TemplateView):
 
 
 class StatsView(StatBase):
+    """Overview page showing the count of rents by month."""
+
     template_name = 'stats/overview.html'
 
     def get_context_data(self, **kwargs):
@@ -30,6 +32,8 @@ class StatsView(StatBase):
 
 
 class MembersView(StatBase):
+    """Showing number of handled rents by users."""
+
     template_name = 'stats/members.html'
 
     def get_context_data(self, **kwargs):
@@ -67,6 +71,8 @@ class MembersView(StatBase):
 
 
 class GamesView(StatBase):
+    """Showing how many times certain games were rented."""
+
     template_name = 'stats/games.html'
 
     def get_context_data(self, **kwargs):

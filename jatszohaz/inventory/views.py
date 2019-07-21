@@ -15,10 +15,12 @@ logger = logging.getLogger(__name__)
 
 
 class InventoryPermissionRequiredMixin(PermissionRequiredMixin):
+    """Base view for checking permissions."""
     permission_required = 'inventory.manage_inventory'
 
 
 class NewInvView(SuccessMessageMixin, InventoryPermissionRequiredMixin, CreateView):
+    """View for creating a new inventory."""
     model = InventoryItem
     fields = ['game', 'playable', 'missing_items', 'rules', ]
     template_name = "inventory/new_inventory.html"
@@ -36,12 +38,14 @@ class NewInvView(SuccessMessageMixin, InventoryPermissionRequiredMixin, CreateVi
 
 
 class InvListView(InventoryPermissionRequiredMixin, ListView):
+    """View for listing all the existing inventories."""
     model = GamePiece
     template_name = "inventory/list-inventory.html"
     ordering = "game_group__name"
 
 
 class InvListGameView(InventoryPermissionRequiredMixin, ListView):
+    """View for listing all existing inventories for a given physical game."""
     model = InventoryItem
     template_name = "inventory/list_game.html"
 
@@ -60,6 +64,7 @@ class InvListGameView(InventoryPermissionRequiredMixin, ListView):
 
 
 class EditView(InventoryPermissionRequiredMixin, UpdateView):
+    """Editing an existing inventory object."""
     model = InventoryItem
     fields = ['user', 'game', 'playable', 'missing_items', ]
     template_name = "inventory/edit-inventory.html"
@@ -67,6 +72,7 @@ class EditView(InventoryPermissionRequiredMixin, UpdateView):
 
 
 class NewGameWithGroupView(InventoryPermissionRequiredMixin, FormView):
+    """Creating a new GameGroup and connected GamePiece objects."""
     model = GamePiece
     template_name = "inventory/new_game.html"
     form_class = GameForm
@@ -89,6 +95,7 @@ class NewGameWithGroupView(InventoryPermissionRequiredMixin, FormView):
 
 
 class NewGameView(InventoryPermissionRequiredMixin, CreateView):
+    """Creating a name GamePiece object connected to an already existing GameGroup."""
     model = GamePiece
     form_class = GamePieceForm
     template_name = "inventory/new_game.html"
@@ -96,6 +103,7 @@ class NewGameView(InventoryPermissionRequiredMixin, CreateView):
 
 
 class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
+    """View for editing an existing GameGroup object."""
     model = GameGroup
     fields = ['name', 'description', 'short_description', 'base_game', 'min_players', 'max_players',
               'playtime', 'playtime_category', 'hide']
@@ -106,6 +114,7 @@ class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, Updat
 
 
 class EditGamePiece(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
+    """View for editing an existing GamePiece object."""
     model = GamePiece
     form_class = GamePieceForm
     template_name = "default_update.html"

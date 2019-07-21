@@ -21,6 +21,17 @@ logger = logging.getLogger(__name__)
 
 
 class NewView(LoginRequiredMixin, SessionWizardView):
+    """
+    View for creating a new rent.
+
+    It contains multiple steps:
+     1) Selecting dates
+     2) Selecting games. Only games available during the given time period are shown.
+     3) Add comment, finalize rent.
+
+    There's a form corresponding to each step.
+    """
+
     template_name = "rent/new_rent.html"
     form_list = [RentFormStep1, RentFormStep2, RentFormStep3]
 
@@ -107,6 +118,8 @@ class NewView(LoginRequiredMixin, SessionWizardView):
 
 
 class MyView(LoginRequiredMixin, ListView):
+    """Showing Rent created by the logged in user."""
+
     model = Rent
     template_name = "rent/my_rents.html"
     ordering = ['-created']
@@ -117,6 +130,8 @@ class MyView(LoginRequiredMixin, ListView):
 
 
 class RentsView(PermissionRequiredMixin, ListView):
+    """Showing all the rents for administrators."""
+
     model = Rent
     template_name = "rent/rents.html"
     permission_required = 'rent.manage_rents'
@@ -156,12 +171,19 @@ class RentsView(PermissionRequiredMixin, ListView):
 
 
 class DetailsView(LoginRequiredMixin, DetailView):
+    """
+    Showing details of one rent object.
+
+    Permission is only granted if the user is an administrator or the owner/creator of the rent object.
+    """
+
     model = Rent
     template_name = "rent/rent_detail.html"
 
     def dispatch(self, request, *args, **kwargs):
         result = super().dispatch(request, *args, **kwargs)
 
+        # Handling permission
         user = request.user
         if user.is_authenticated and not (user.has_perm('rent.manage_rents') or user == self.get_object().renter):
             raise PermissionDenied()
@@ -179,6 +201,7 @@ class DetailsView(LoginRequiredMixin, DetailView):
 
 
 class NewCommentView(LoginRequiredMixin, FormView):
+    """Creating a new comment."""
     form_class = NewCommentForm
 
     def get_object(self):
@@ -209,6 +232,7 @@ class NewCommentView(LoginRequiredMixin, FormView):
 
 
 class EditView(PermissionRequiredMixin, UpdateView):
+    """Admin view for editing a rent object."""
     model = Rent
     form_class = EditRentForm
     permission_required = 'rent.manage_rents'
@@ -253,6 +277,8 @@ class EditView(PermissionRequiredMixin, UpdateView):
 
 
 class ChangeStatusView(LoginRequiredMixin, View):
+    """View for changing the status of the given rent."""
+
     http_method_names = ['get', ]
 
     def get(self, request, *args, **kwargs):
@@ -302,6 +328,8 @@ class ChangeStatusView(LoginRequiredMixin, View):
 
 
 class AddGameView(PermissionRequiredMixin, FormView):
+    """Adding a game to an already existing rent object."""
+
     permission_required = 'rent.manage_rents'
     raise_exception = True
     form_class = AddGameForm
@@ -333,6 +361,8 @@ class AddGameView(PermissionRequiredMixin, FormView):
 
 
 class RemoveGameView(PermissionRequiredMixin, View):
+    """Removing a game from an already existing rent object."""
+
     http_method_names = ['get', ]
     permission_required = 'rent.manage_rents'
     raise_exception = True
@@ -353,4 +383,5 @@ class RemoveGameView(PermissionRequiredMixin, View):
 
 
 class RentRules(TemplateView):
+    """Displaying static page about our rules."""
     template_name = "static_pages/rent_rules.html"

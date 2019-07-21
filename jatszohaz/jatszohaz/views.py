@@ -21,21 +21,15 @@ from .models import JhUser
 logger = logging.getLogger(__name__)
 
 
-class HomeView(TemplateView):
-    template_name = "jatszohaz/home.html"
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data()
-        if not self.request.user.is_anonymous:
-            ctx['username'] = self.request.user.full_name2()
-        return ctx
-
-
 class CalendarView(TemplateView):
+    """Showing our private Google calendar."""
+
     template_name = "jatszohaz/calendar.html"
 
 
 class GamesView(ListView):
+    """Displaying all games available for renting."""
+
     model = GameGroup
     template_name = "jatszohaz/games.html"
     ordering = "name"
@@ -43,6 +37,8 @@ class GamesView(ListView):
 
 
 class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    """View for editing the logged in user's profile."""
+
     model = JhUser
     success_url = reverse_lazy('my-profile')
     success_message = _("Successfully updated!")
@@ -61,6 +57,8 @@ class MyProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
+    """Admin view for editing any user's profile."""
+
     model = JhUser
     template_name = "jatszohaz/profile_detail.html"
     permission_required = 'jatszohaz.view_all'
@@ -76,6 +74,8 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
 
 class ProfileAddRemoveGroups(PermissionRequiredMixin, View):
+    """View for adding and removing groups for a user."""
+
     http_method_names = ['get', ]
     permission_required = 'jatszohaz.leader_admin'
     raise_exception = True
@@ -99,14 +99,17 @@ class ProfileAddRemoveGroups(PermissionRequiredMixin, View):
 
 
 class AboutUsView(TemplateView):
+    """Static view for about us page."""
     template_name = "static_pages/about_us.html"
 
 
 class FaqView(TemplateView):
+    """Static view to answer frequently asked questions."""
     template_name = "static_pages/faq.html"
 
 
 class AfterLoginView(RedirectView):
+    """If a user did not validate their profile, redirect them to the edit view."""
     def get_redirect_url(self, *args, **kwargs):
         if not self.request.user.checked_profile:
             messages.info(self.request, _("Please check your profile data and click the Update button!"))
@@ -116,6 +119,7 @@ class AfterLoginView(RedirectView):
 
 
 class UsersView(PermissionRequiredMixin, ListView):
+    """Showing list of registered users."""
     model = JhUser
     permission_required = 'jatszohaz.view_all'
     template_name = "jatszohaz/user_list.html"
@@ -123,11 +127,18 @@ class UsersView(PermissionRequiredMixin, ListView):
 
 
 class AdminRules(PermissionRequiredMixin, TemplateView):
+    """Static view for administratiors about rules."""
     template_name = "static_pages/admin_rules.html"
     permission_required = 'jatszohaz.basic_admin'
 
 
 class TokenLogin(View):
+    """
+    Token login view, which allowes users to log in with an access token.
+
+    This is only used for development purposes as it provides a possibility for admins to log in as any user
+    without a password.
+    """
     token_max_age = 120  # seconds
 
     @classmethod

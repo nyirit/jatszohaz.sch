@@ -7,6 +7,8 @@ from jatszohaz.models import JhUser
 
 
 class News(TimeStampedModel):
+    """Represents a news object which is publicly displayed to provide information about events."""
+
     title = models.CharField(verbose_name=_('Title'), max_length=100)
     content = models.TextField(verbose_name=_('Content'))
     creator = models.ForeignKey(JhUser, on_delete=models.PROTECT, verbose_name=_('Creator'))
