@@ -122,11 +122,12 @@ class MyView(LoginRequiredMixin, ListView):
 
     model = Rent
     template_name = "rent/my_rents.html"
-    ordering = ['-created']
-    paginate_by = 5
+    ordering = ['-date_from']
+    paginate_by = 10
 
     def get_queryset(self):
-        return self.request.user.rents.all()
+        self.queryset = self.request.user.rents
+        return super().get_queryset()
 
 
 class RentsView(PermissionRequiredMixin, ListView):
@@ -135,7 +136,7 @@ class RentsView(PermissionRequiredMixin, ListView):
     model = Rent
     template_name = "rent/rents.html"
     permission_required = 'rent.manage_rents'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         self.my_todo = Rent.objects.filter(histories__user=self.request.user).distinct().order_by('-created')\
