@@ -17,7 +17,7 @@ class GameForm(forms.ModelForm):
     buying_date = forms.DateField(
         label=_("Buying date"),
         required=False,
-        widget=forms.DateTimeInput(attrs={'class': "datetimepicker"}))
+        widget=forms.DateInput(attrs={'class': "datetimepicker"}))
     place = forms.CharField(label=_("Place"), max_length=20, required=False)
     price = forms.IntegerField(label=_("Price (Ft)"), min_value=0, initial=0)
 
@@ -26,4 +26,4 @@ class GamePieceForm(forms.ModelForm):
     class Meta:
         model = GamePiece
         fields = ['owner', 'game_group', 'notes', 'priority', 'rentable', 'buying_date', 'place', 'price']
-        widgets = {'buying_date': forms.DateTimeInput(attrs={'class': "datetimepicker"})}
+        widgets = {'buying_date': forms.DateInput(attrs={'class': "datetimepicker"})}
