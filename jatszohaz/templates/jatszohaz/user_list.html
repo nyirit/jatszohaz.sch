@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <h1>{% trans 'Users' %} ({{  object_list.count }})</h1>
+    <h1>{% trans 'Users' %} ({{  paginator.count }})</h1>
     {% if object_list.is_empty %}
         {% trans 'No users.' %}
     {% else %}
