@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 from urllib.parse import urljoin
 from django.conf import settings
@@ -145,6 +145,8 @@ class Rent(TimeStampedModel):
             return 'success'
 
         if self.status == Rent.STATUS_PENDING[0]:
+            if datetime.now() - self.created > timedelta(days=1):
+                return 'danger'
             return 'warning'
 
         return 'info'
