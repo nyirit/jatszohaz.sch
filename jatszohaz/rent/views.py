@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import SuspiciousOperation, PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, UpdateView, FormView, View, TemplateView
 from formtools.wizard.views import SessionWizardView
@@ -151,6 +152,8 @@ class RentsView(PermissionRequiredMixin, ListView):
             else:
                 result = result.filter(status=status)
 
+        self.queryset = result
+
         return result
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -167,6 +170,8 @@ class RentsView(PermissionRequiredMixin, ListView):
 
         context['sum_count'] = sum_count
         context['todo_count'] = self.my_todo.count()
+
+        context['rent_pks'] = ','.join([str(r.pk) for r in self.queryset if r.status == Rent.STATUS_IN_MY_ROOM[0]])
 
         return context
 
@@ -282,11 +287,7 @@ class ChangeStatusView(LoginRequiredMixin, View):
 
     http_method_names = ['get', ]
 
-    def get(self, request, *args, **kwargs):
-        rent = get_object_or_404(Rent, pk=kwargs.get('rent_pk'))
-        status = kwargs.get('status')
-        user = self.request.user
-
+    def handle_rent(self, rent, status, user):
         # if has no permission, then can change only his own rent and only to cancelled
         if not user.has_perm('rent.manage_rents') and (
                 user != rent.renter or
@@ -312,6 +313,7 @@ class ChangeStatusView(LoginRequiredMixin, View):
                 return redirect(rent.get_absolute_url())
 
         # save new status
+        old_status = rent.status
         if status == Rent.STATUS_GAVE_OUT[0]:
             rent.date_from = datetime.now()
             if rent.date_to < rent.date_from:
@@ -322,10 +324,37 @@ class ChangeStatusView(LoginRequiredMixin, View):
         rent.save()
         rent.create_new_history(self.request.user, new_status=status)
 
-        if not rent.notify_new_status(self.request.user):
-            messages.error(self.request, _("Failed to send notification email!"))
+        # notify user in case last status is not inmyroom
+        if old_status != Rent.STATUS_IN_MY_ROOM[0]:
+            if not rent.notify_new_status(self.request.user):
+                messages.error(self.request, _("Failed to send notification email!"))
+        else:
+            messages.success(self.request, _("User was not notified about this status change."))
 
-        return redirect(rent.get_absolute_url())
+    def get(self, request, *args, **kwargs):
+        status = kwargs.get('status')
+        user = self.request.user
+
+        # batch processing status change
+        successful = 0
+        pks = kwargs.get('rent_pk').split(',')
+
+        for pk in pks:
+            try:
+                rent = Rent.objects.get(pk=pk)
+                self.handle_rent(rent, status, user)
+                successful += 1
+
+                # if there's only one change, redirect
+                if len(pks) == 1:
+                    return redirect(rent.get_absolute_url())
+            except Rent.DoesNotExist:
+                pass
+
+        if len(pks) != successful:
+            messages.error(self.request, "Only %d change was successful out of %d" % (successful, len(pks)))
+
+        return redirect(reverse_lazy('rent:rents'))
 
 
 class AddGameView(PermissionRequiredMixin, FormView):

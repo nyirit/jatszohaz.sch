@@ -32,6 +32,16 @@
         </div>
     </div>
 
+    {# inmyroom bulk change #}
+    {% if active_status == 'ToDo' and rent_pks %}
+        <a class="btn btn-warning btn-block" href="{% url 'rent:change-status' rent_pks 'back'  %}"
+           onclick="return confirm('{% trans 'Are you sure? ' %}');"
+        >
+            {# TODO translate #}
+            <b>Minden</b> itt található és SZOBÁMBAN kölcsönzés visszahozása.
+        </a><br/>
+    {% endif %}
+
     {% for rent in object_list %}
         {% include 'rent/_rent.html' with rent=rent admin=True %}
     {% empty %}
