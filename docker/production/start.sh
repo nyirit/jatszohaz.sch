@@ -2,7 +2,7 @@
 set -o errexit
 set -o xtrace
 
-git clone https://github.com/bubi24/jatszohaz.sch.git
+git clone https://github.com/nyirit/jatszohaz.sch.git
 
 source jh/bin/activate
 
