@@ -265,3 +265,7 @@ EDU_PERSON_ENTITLEMENT_ID = int(get_env_variable('DJANGO_ENTITLEMENT_ID', '-1'))
 EDU_PERSON_ENTITLEMENT_IGNORE_STATUS = get_env_variable('EDU_PERSON_ENTITLEMENT_IGNORE_STATUS', '')
 
 CRON_TOKEN = get_env_variable('CRON_TOKEN', '')
+
+# number of days while a game cannot be rented again after brought back
+# (due to safety measures regarding COVID-19)
+RENT_RETURN_DELAY_DAYS = 3

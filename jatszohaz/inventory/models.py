@@ -1,4 +1,7 @@
 import logging
+from datetime import timedelta
+
+from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -121,6 +124,12 @@ class GamePiece(TimeStampedModel):
 
         last_inv = self.get_latest_inventory_item()
 
+        # adjust date according to the RENT_RETURN_DELAY_DAYS
+        delay_days = timedelta(days=settings.RENT_RETURN_DELAY_DAYS)
+        date_from -= delay_days
+        date_to += delay_days
+
+        # check if the game piece is rentable and if there's any intersection rents
         return (self.rentable and (last_inv is None or last_inv.playable) and
                 self.rents
                 .exclude(status__in=[Rent.STATUS_CANCELLED[0],

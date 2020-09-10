@@ -45,7 +45,8 @@ class RentFormStep2(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         date_from = kwargs['initial']['date_from']
-        date_to = "%s 23:59:59" % kwargs['initial']['date_to']  # HACK: need to revise rent dates!
+        # HACK: need to revise rent dates!
+        date_to = datetime.combine(kwargs['initial']['date_to'], datetime.max.time())
 
         available_games = [(g.pk, g) for g
                            in GameGroup.objects.all().order_by('name') if g.has_free_piece(date_from, date_to)]

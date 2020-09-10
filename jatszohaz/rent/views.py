@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime
 import logging
 from urllib.parse import urljoin
 from django.conf import settings
@@ -9,6 +9,7 @@ from django.core.exceptions import SuspiciousOperation, PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.utils.dateparse import parse_date
 from django.views.generic import ListView, DetailView, UpdateView, FormView, View, TemplateView
 from formtools.wizard.views import SessionWizardView
 
@@ -42,8 +43,10 @@ class NewView(LoginRequiredMixin, SessionWizardView):
 
         step0_data = self.storage.get_step_data('0')
         if step0_data is not None:
-            data['date_from'] = step0_data['0-date_from']
-            data['date_to'] = step0_data['0-date_to']
+            # let's make sure we have dates instead of string representations,
+            # because at later steps the cleaned_data will provide dates as well.
+            data['date_from'] = parse_date(step0_data['0-date_from'])
+            data['date_to'] = parse_date(step0_data['0-date_to'])
 
         step1_data = self.storage.get_step_data('1')
         if step1_data is not None:
@@ -86,7 +89,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
         rent = Rent.objects.create(
             renter=user,
             date_from=date_from,
-            date_to=datetime.combine(date_to, time(23, 59, 59))
+            date_to=datetime.combine(date_to, datetime.max.time())
         )
 
         if user.has_perm('rent.manage_rents'):
