@@ -1,5 +1,5 @@
 # Jatszohaz.sch
-[![Build Status](https://travis-ci.org/bubi24/jatszohaz.sch.svg?branch=master)](https://travis-ci.org/bubi24/jatszohaz.sch)
+[![Build Status](https://travis-ci.org/nyirit/jatszohaz.sch.svg?branch=master)](https://travis-ci.org/nyirit/jatszohaz.sch)
 
 This Django site is for our university board game group. Main features are keeping inventory of games and administrate their lendings.
 Live site is available at http://jatszohaz.sch.bme.hu
@@ -14,7 +14,7 @@ The installation requires you to have the following tools already installed:
 The developer environment uses Docker hence there is no need to install anything else, except the listed tools above.
 
 First of all, make sure to pull the repository using the following command: 
-`git clone https://github.com/bubi24/jatszohaz.sch.git`
+`git clone https://github.com/nyirit/jatszohaz.sch.git`
 
 After changing the directory to the git root, run the following to set up the and run the containers:
 `docker-compose up`
