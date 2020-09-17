@@ -58,6 +58,9 @@ class NewView(LoginRequiredMixin, SessionWizardView):
     def send_email(self, context):
         """Sends notification email to mailing list"""
 
+        if not settings.NEW_RENT_EMAIL_NOTIFICATION:
+            return
+
         recipient = settings.NOTIFICATION_EMAIL_TO
         if recipient:
             subject = _("%s new rent") % settings.EMAIL_SUBJECT_PREFIX
@@ -73,7 +76,6 @@ class NewView(LoginRequiredMixin, SessionWizardView):
                 jh_send_mail(subject, message, [recipient, ])
             except Exception as e:
                 logger.error("Failed to send email! %s" % e)
-                return False
 
     def done(self, form_list, **kwargs):
         forms = list(form_list)

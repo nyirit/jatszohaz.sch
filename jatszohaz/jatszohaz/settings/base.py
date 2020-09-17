@@ -232,6 +232,9 @@ DEFAULT_FROM_EMAIL = get_env_variable('DEFAULT_FROM_EMAIL', '')
 # email address used by new rent notification.
 NOTIFICATION_EMAIL_TO = get_env_variable('NOTIFICATION_EMAIL_TO', '')
 
+# if True email notification will be sent to NOTIFICATION_EMAIL_TO when receiving a new rent request
+NEW_RENT_EMAIL_NOTIFICATION = False
+
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = get_env_variable("EMAIL_SUBJECT_PREFIX",
                                         '[%s] ' % SITE_NAME)

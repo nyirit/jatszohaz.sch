@@ -29,6 +29,9 @@ EMAIL_HOST_USER = get_env_variable('EMAIL_HOST_USER', '')
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = get_env_variable('EMAIL_PORT', 587)
 
+# See: https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-EMAIL_TIMEOUT
+EMAIL_TIMEOUT = 5
+
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-use-tls
 EMAIL_USE_TLS = True
 
