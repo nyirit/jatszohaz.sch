@@ -101,3 +101,12 @@ class JhUser(AbstractUser):
 
     def __str__(self):
         return "%s - %s" % (self.full_name2(), self.email)
+
+    @staticmethod
+    def reset_all_checked_profile():
+        logger.info("Clearing all user's room data and resetting checked_profile flag.")
+
+        for user in JhUser.objects.all():
+            user.room = ""
+            user.checked_profile = False
+            user.save()
