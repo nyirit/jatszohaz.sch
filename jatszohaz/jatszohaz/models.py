@@ -72,9 +72,9 @@ class JhUser(AbstractUser):
         """
         entls = self.get_entitlements()
         if entls:
-            if entls.get('title') in settings.EDU_PERSON_ENTITLEMENT_IGNORE_STATUS:
-                logger.warning("Permission update for user with pk %d aborted, because has '%s' title." % (
-                    self.pk, entls.get('title')))
+            if entls.get('status') in settings.EDU_PERSON_ENTITLEMENT_IGNORE_STATUS:
+                logger.warning("Permission update for user with pk %d aborted, because has '%s' status." % (
+                    self.pk, entls.get('status')))
                 return
 
             group, created = Group.objects.get_or_create(name='kortag')
