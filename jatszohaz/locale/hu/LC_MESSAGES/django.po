@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-10 14:58+0100\n"
-"PO-Revision-Date: 2019-12-25 17:18+0116\n"
+"POT-Creation-Date: 2020-09-23 22:35+0200\n"
+"PO-Revision-Date: 2020-09-23 22:37+0116\n"
 "Last-Translator: b'  <admin@example.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,189 +19,191 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: inventory/forms.py:13 inventory/models.py:82
+#: inventory/forms.py:13 inventory/models.py:104
+#: templates/inventory/list_game.html:9
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: inventory/forms.py:14 inventory/models.py:87
+#: inventory/forms.py:14 inventory/models.py:109
+#: templates/inventory/list_game.html:10
 #: templates/rent/rent_detail_admin.html:10
 msgid "Notes"
 msgstr "Megjegyzés"
 
-#: inventory/forms.py:15 inventory/models.py:90
+#: inventory/forms.py:15 inventory/models.py:112
 msgid "Priority"
 msgstr "Prioritás"
 
-#: inventory/forms.py:16 inventory/models.py:91
+#: inventory/forms.py:16 inventory/models.py:113
 msgid "Rentable"
 msgstr "Kölcsönözhető"
 
-#: inventory/forms.py:18 inventory/models.py:92
-#: templates/inventory/list_game.html:9
+#: inventory/forms.py:18 inventory/models.py:114
+#: templates/inventory/list_game.html:12
 msgid "Buying date"
 msgstr "Vásárlás ideje"
 
-#: inventory/forms.py:21 inventory/models.py:93
-#: templates/inventory/list_game.html:10
+#: inventory/forms.py:21 inventory/models.py:115
+#: templates/inventory/list_game.html:11
 #: templates/rent/rent_detail_admin.html:11
 msgid "Place"
 msgstr "Helye"
 
-#: inventory/forms.py:22 inventory/models.py:94
+#: inventory/forms.py:22 inventory/models.py:116
 msgid "Price (Ft)"
 msgstr "Vételár (Ft)"
 
-#: inventory/models.py:14
+#: inventory/models.py:25
 msgid "short (20 mins)"
 msgstr "rövid (20 perc)"
 
-#: inventory/models.py:15
+#: inventory/models.py:26
 msgid "medium (20-60 mins)"
 msgstr "közepes (20-60 perc)"
 
-#: inventory/models.py:16
+#: inventory/models.py:27
 msgid "long (60+ mins)"
 msgstr "hosszú (60+ perc)"
 
-#: inventory/models.py:22 templates/_game_filter.html:11
+#: inventory/models.py:33 templates/_game_filter.html:11
 #: templates/jatszohaz/profile.html:8
 #: templates/jatszohaz/profile_detail.html:10
-#: templates/jatszohaz/user_list.html:12
+#: templates/jatszohaz/user_list.html:24
 msgid "Name"
 msgstr "Név"
 
-#: inventory/models.py:23 rent/templates/rent/game_option.html:50
+#: inventory/models.py:34 rent/templates/rent/game_option.html:50
 #: templates/_game.html:42
 msgid "Description"
 msgstr "Leírás"
 
-#: inventory/models.py:24
+#: inventory/models.py:35
 msgid "Short Description"
 msgstr "Rövid leírás"
 
-#: inventory/models.py:26
+#: inventory/models.py:37
 msgid "Min. players"
 msgstr "Min. játékosok"
 
-#: inventory/models.py:27
+#: inventory/models.py:38
 msgid "How many players are needed to play"
 msgstr "Legalább hány játékos szükséges "
 
-#: inventory/models.py:30
+#: inventory/models.py:41
 msgid "Max. players"
 msgstr "Max. játékosok"
 
-#: inventory/models.py:30
+#: inventory/models.py:41
 msgid "How many players can play at most"
 msgstr "Legfeljebb hány játékos játszhat"
 
-#: inventory/models.py:33
+#: inventory/models.py:44
 msgid "Playing time"
 msgstr "Játékidő"
 
-#: inventory/models.py:34
+#: inventory/models.py:45
 msgid "Example: 20 mins (this is directly displayed to the user)"
 msgstr ""
 
-#: inventory/models.py:36
+#: inventory/models.py:47
 msgid "Playtime category"
 msgstr "Játékidő kategória"
 
-#: inventory/models.py:39 templates/inventory/list_game.html:12
+#: inventory/models.py:50 templates/inventory/list_game.html:14
 msgid "Base game"
 msgstr "Alapjáték"
 
-#: inventory/models.py:40
+#: inventory/models.py:51
 msgid "Game needed to play this one."
 msgstr "Az a játék ami nélkül ez nem játszható"
 
-#: inventory/models.py:44
+#: inventory/models.py:55
 msgid "Hide from users"
 msgstr "Felhasználók elől elrejtés"
 
-#: inventory/models.py:45
+#: inventory/models.py:56
 msgid "If true isn't shown in Our games page."
 msgstr "Kipipált esetben nem látják a felhasználók a Játékaink menüpontban"
 
-#: inventory/models.py:125 templates/inventory/list-inventory.html:18
-#: templates/inventory/list_game.html:30
+#: inventory/models.py:155 templates/inventory/list-inventory.html:18
+#: templates/inventory/list_game.html:32
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:126 templates/inventory/list-inventory.html:19
-#: templates/inventory/list_game.html:31
+#: inventory/models.py:156 templates/inventory/list-inventory.html:19
+#: templates/inventory/list_game.html:33
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:127
+#: inventory/models.py:157
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:132
+#: inventory/models.py:162
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
-#: inventory/views.py:26
+#: inventory/views.py:28
 msgid "Inventory created"
 msgstr "Bejegyzés létrehova"
 
-#: inventory/views.py:97 inventory/views.py:106
+#: inventory/views.py:112 inventory/views.py:122
 msgid "Game group successfully edited."
 msgstr "Játék sikeresen létrehozva!"
 
-#: inventory/views.py:98
+#: inventory/views.py:113
 msgid "Edit game group"
 msgstr "Játék módosítása"
 
-#: inventory/views.py:107
+#: inventory/views.py:123
 msgid "Edit game piece"
 msgstr "Játék elem módosítása"
 
-#: jatszohaz/models.py:15
+#: jatszohaz/models.py:17
 msgid "mobile"
 msgstr "mobil"
 
-#: jatszohaz/models.py:17
+#: jatszohaz/models.py:19
 msgid "Mobile number for helping communication if necessary."
 msgstr "Telefonszám a kommunikációhoz szükség esetére."
 
-#: jatszohaz/models.py:21
+#: jatszohaz/models.py:23
 msgid "room"
 msgstr "szoba"
 
-#: jatszohaz/models.py:23
+#: jatszohaz/models.py:25
 msgid "Room number."
 msgstr "Szobaszám."
 
-#: jatszohaz/models.py:27
+#: jatszohaz/models.py:29
 msgid "Checked profile"
 msgstr ""
 
-#: jatszohaz/models.py:28
+#: jatszohaz/models.py:30
 msgid "From time to time everyone is required to check his profile."
 msgstr ""
 
-#: jatszohaz/models.py:34
+#: jatszohaz/models.py:36
 msgid "View all user details"
 msgstr "Minden felhasználó részleteinek megnézése"
 
-#: jatszohaz/models.py:35
+#: jatszohaz/models.py:37
 msgid "Basic admin rights"
 msgstr ""
 
-#: jatszohaz/models.py:36
+#: jatszohaz/models.py:38
 msgid "View statistics for users"
 msgstr "Kölcsönzési statisztika megtekintése"
 
-#: jatszohaz/models.py:37
+#: jatszohaz/models.py:39
 msgid "Group leader rights"
 msgstr ""
 
-#: jatszohaz/settings/base.py:197
+#: jatszohaz/settings/base.py:199
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: jatszohaz/views.py:48
+#: jatszohaz/views.py:44
 msgid "Successfully updated!"
 msgstr "Sikeresen frissítve!"
 
@@ -215,70 +217,70 @@ msgstr "%s törölve a %s csoportból"
 msgid "%s added to group %s"
 msgstr "%s hozzáadva a %s csoporthoz"
 
-#: jatszohaz/views.py:112
+#: jatszohaz/views.py:115
 msgid "Please check your profile data and click the Update button!"
 msgstr "Kérlek ellenőrizd az adataidat, majd kattints a Frissítés gombra!"
 
-#: jatszohaz/views.py:164
+#: jatszohaz/views.py:184
 #, python-format
 msgid "Logged in as user %s."
 msgstr "Bejelentkezve, mint %s."
 
-#: news/models.py:10
+#: news/models.py:12
 msgid "Title"
 msgstr "Cím"
 
-#: news/models.py:11
+#: news/models.py:13
 msgid "Content"
 msgstr "Tartalom"
 
-#: news/models.py:12
+#: news/models.py:14
 msgid "Creator"
 msgstr "Létrehozó"
 
-#: news/models.py:16
+#: news/models.py:18
 msgid "Image"
 msgstr "Kép"
 
-#: news/models.py:21
+#: news/models.py:23
 msgid "Published"
 msgstr "Publikálva"
 
-#: news/models.py:22
+#: news/models.py:24
 msgid "Determines whether everyone sees the post. False: only admins."
 msgstr ""
 "Meghatározza, hogy a hírt minden látogató láthatja-e. Ha nincs kipipálva, "
 "akkor csak adminok láthatják."
 
-#: news/views.py:33
+#: news/views.py:36
 msgid "News created!"
 msgstr "Bejegyzés létrehozva"
 
-#: news/views.py:37
+#: news/views.py:40
 msgid "Create news"
 msgstr "Bejegyzés létrehozása"
 
-#: news/views.py:50
+#: news/views.py:54
 msgid "Entry edited!"
 msgstr "Bejegyzés módosítva!"
 
-#: news/views.py:54 templates/news.html:44
+#: news/views.py:58 templates/news.html:44
 msgid "Edit entry"
 msgstr "Bejegyzés módosítása"
 
-#: rent/forms.py:11 rent/forms.py:57
+#: rent/forms.py:11 rent/forms.py:58
 msgid "Rent from"
 msgstr "Kölcsönzés kezdete"
 
-#: rent/forms.py:16 rent/forms.py:58
+#: rent/forms.py:16 rent/forms.py:59
 msgid "Rent to"
 msgstr "Kölcsönzés vége"
 
-#: rent/forms.py:28 rent/forms.py:96
+#: rent/forms.py:28 rent/forms.py:97
 msgid "Must be in the future!"
 msgstr "Múltbéli dátum nem megadható!"
 
-#: rent/forms.py:31 rent/forms.py:99
+#: rent/forms.py:31 rent/forms.py:100
 msgid "Date from must be before date to!"
 msgstr "A kölcsönzés vége nem lehet korábban, mint az eleje."
 
@@ -288,17 +290,17 @@ msgstr ""
 "Néhány kiválasztott játék sajnos nem elérhető. Valószínűleg épp most "
 "kölcsönözte ki valaki más."
 
-#: rent/forms.py:63
+#: rent/forms.py:64
 msgid "Rent comment"
 msgstr "Megjegyzés"
 
-#: rent/forms.py:64
+#: rent/forms.py:65
 msgid "Rent comment help"
 msgstr ""
 "Kérlek add meg, hogy mikor tudnád átvenni a játékot és minden egyéb kérést, "
 "óhajt és/vagy a kedvenc viccedet."
 
-#: rent/forms.py:67
+#: rent/forms.py:68
 msgid "Responsibility text."
 msgstr ""
 "A kölcsönzés leadásával elfogadom a Kölcsönzési szabályzatot, illetve hogy "
@@ -306,106 +308,106 @@ msgstr ""
 "tartozok. Tudomásul veszem, hogy a 24 órán belül leadott kölcsönzések "
 "kiadása nem garantált és a kiadó személy mérhetetlen kedvességét honorálom."
 
-#: rent/forms.py:108
+#: rent/forms.py:109
 #, python-format
 msgid "Failed to change date. Not available: %s"
 msgstr "Sikertelen dátummódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/forms.py:114 templates/rent/rent_detail_admin.html:52
+#: rent/forms.py:115 templates/rent/rent_detail_admin.html:52
 msgid "New game"
 msgstr "Új játék"
 
-#: rent/models.py:20 rent/models.py:28
+#: rent/models.py:26 rent/models.py:34
 msgid "Pending"
 msgstr "Függőben"
 
-#: rent/models.py:21
+#: rent/models.py:27
 msgid "Approved"
 msgstr "Elfogadva"
 
-#: rent/models.py:22
+#: rent/models.py:28
 msgid "Gave out"
 msgstr "Kiadva"
 
-#: rent/models.py:23 rent/models.py:31
+#: rent/models.py:29 rent/models.py:37
 msgid "In my room"
 msgstr "Szobámban"
 
-#: rent/models.py:24
+#: rent/models.py:30
 msgid "Brought back"
 msgstr "Visszahozva"
 
-#: rent/models.py:25
+#: rent/models.py:31
 msgid "Declined"
 msgstr "Visszautasítva"
 
-#: rent/models.py:26
+#: rent/models.py:32
 msgid "Cancelled"
 msgstr "Visszamondva"
 
-#: rent/models.py:29
+#: rent/models.py:35
 msgid "Approve"
 msgstr "Elfogad"
 
-#: rent/models.py:30
+#: rent/models.py:36
 msgid "Give out"
 msgstr "Kiad"
 
-#: rent/models.py:32
+#: rent/models.py:38
 msgid "Bring back"
 msgstr "Visszahoz"
 
-#: rent/models.py:33
+#: rent/models.py:39
 msgid "Decline"
 msgstr "Elutasít"
 
-#: rent/models.py:34
+#: rent/models.py:40
 msgid "Cancel"
 msgstr "Visszamond"
 
-#: rent/models.py:46 templates/inventory/list_game.html:16
-#: templates/rent/_rent.html:8 templates/rent/rent_detail.html:11
+#: rent/models.py:52 templates/inventory/list_game.html:18
+#: templates/rent/_rent.html:10 templates/rent/rent_detail.html:11
 #: templates/slack/new_rent.html:7
 msgid "Renter"
 msgstr "Kölcsönző"
 
-#: rent/models.py:47 templates/inventory/list-inventory.html:6
-#: templates/jatszohaz/games.html:5 templates/rent/_rent.html:12
+#: rent/models.py:53 templates/inventory/list-inventory.html:6
+#: templates/jatszohaz/games.html:5 templates/rent/_rent.html:14
 #: templates/rent/rent_detail.html:21 templates/slack/new_rent.html:9
 msgid "Games"
 msgstr "Játékok"
 
-#: rent/models.py:48 templates/inventory/list_game.html:17
+#: rent/models.py:54 templates/inventory/list_game.html:19
 #: templates/jatszohaz/profile_detail.html:44 templates/stats/games.html:14
 #: templates/stats/members.html:15
 msgid "From"
 msgstr "Dátum kezdete"
 
-#: rent/models.py:49 templates/inventory/list_game.html:18
+#: rent/models.py:55 templates/inventory/list_game.html:20
 #: templates/jatszohaz/profile_detail.html:45 templates/stats/games.html:17
 #: templates/stats/members.html:18
 msgid "To"
 msgstr "Dátum vége"
 
-#: rent/models.py:50 rent/models.py:180 templates/inventory/list_game.html:19
-#: templates/jatszohaz/profile_detail.html:46 templates/rent/_rent.html:20
+#: rent/models.py:56 rent/models.py:200 templates/inventory/list_game.html:21
+#: templates/jatszohaz/profile_detail.html:46 templates/rent/_rent.html:22
 #: templates/rent/rent_detail.html:17
 msgid "Status"
 msgstr "Státusz"
 
-#: rent/models.py:52
+#: rent/models.py:58
 msgid "Bail"
 msgstr "Kaució"
 
-#: rent/models.py:59
+#: rent/models.py:65
 msgid "Manage rents"
 msgstr "Kölcsönzések kezelése"
 
-#: rent/models.py:60
+#: rent/models.py:66
 msgid "View rent statistics"
 msgstr "Kölcsönzés statisztika megtekintése"
 
-#: rent/models.py:94
+#: rent/models.py:109
 #, python-format
 msgid ""
 "You can check your rent here: <a href=\"%s\">%s<a><br/>Please do not reply "
@@ -414,22 +416,22 @@ msgstr ""
 "Kölcsönzésed megtekintéséhez katt ide: <a href=\"%s\">%s<a><br/><br/>Kérlek "
 "ne válaszolj erre a levélre!<br/><br/>Üdv,<br/>Játszóház"
 
-#: rent/models.py:106
+#: rent/models.py:121
 msgid "new status"
 msgstr "új státusz"
 
-#: rent/models.py:107
+#: rent/models.py:122
 #, python-format
 msgid "Hi!<br/><br/>Status of your rent was changed to %s.<br/><br/>"
 msgstr ""
 "Szia!<br/><br/>Kölcsönzésed státusza megváltozott.<br/>Új státusz: "
 "%s.<br/><br/>"
 
-#: rent/models.py:112
+#: rent/models.py:127
 msgid "new comment"
 msgstr "új komment"
 
-#: rent/models.py:113
+#: rent/models.py:128
 #, python-format
 msgid ""
 "Hi!<br/><br/>There is a new comment to your rent.<br/><br/>User: "
@@ -438,38 +440,38 @@ msgstr ""
 "Szia!<br/><br/>Új komment érkezett a kölcsönzésedhez.<br/><br/>Felhasználó: "
 "%s<br/>Üzenet:<br/>%s<br/><br/>"
 
-#: rent/models.py:119
+#: rent/models.py:134
 msgid "date changed"
 msgstr "dátum módosult"
 
-#: rent/models.py:120
+#: rent/models.py:135
 #, python-format
 msgid "Hi!<br/><br/>Your rent date changed.<br/><br/>New dates: %s - %s<br/>"
 msgstr ""
 "Szia!<br/><br/>Megváltozott a kölcsönzésed időpontja!<br/><br/>Új dátumok: "
 "%s - %s<br/>"
 
-#: rent/models.py:184 templates/rent/rent_detail_admin.html:51
+#: rent/models.py:204 templates/rent/rent_detail_admin.html:51
 msgid "New renter"
 msgstr "Új kölcsönző"
 
-#: rent/models.py:189
+#: rent/models.py:209
 msgid "New game piece"
 msgstr "Hozzáadott játék"
 
-#: rent/models.py:194
+#: rent/models.py:214
 msgid "Deleted game piece"
 msgstr "Törölt játék"
 
-#: rent/models.py:196
+#: rent/models.py:216
 msgid "Edited from"
 msgstr "Módosított kezdődátum"
 
-#: rent/models.py:197
+#: rent/models.py:217
 msgid "Edited to"
 msgstr "Módosított végdátum"
 
-#: rent/models.py:204
+#: rent/models.py:225
 msgid "Message"
 msgstr "Üzenet"
 
@@ -504,16 +506,16 @@ msgstr "Játékidő"
 msgid "We have no available games for this time interval, sorry."
 msgstr "Sajnos nincs egy elérhető játékunk sem erre az időpontra."
 
-#: rent/templates/rent/rent_statuses.html:6
+#: rent/templates/rent/rent_statuses.html:6 templates/rent/rents.html:38
 msgid "Are you sure? "
 msgstr "Biztos vagy benne?"
 
-#: rent/views.py:48
+#: rent/views.py:66
 #, python-format
 msgid "%s new rent"
 msgstr "%s új kölcsönzés"
 
-#: rent/views.py:49
+#: rent/views.py:67
 #, python-format
 msgid ""
 "Hi!<br/><br/>New rent created!<br/><br/>Renter: %(renter)s<br/>Dates: "
@@ -526,61 +528,65 @@ msgstr ""
 "%(games)s<br/>Megjegyzés: %(comment)s<br/>Részletek: <a "
 "href=\"%(url)s\">%(url)s<a><br/><br/>Üdv,<br/>Játszóház"
 
-#: rent/views.py:105
+#: rent/views.py:122
 msgid "Successfully rented!"
 msgstr "Sikeresen kölcsönözve!"
 
-#: rent/views.py:198
+#: rent/views.py:232
 msgid "Successfully sent!"
 msgstr "Sikeresen elküldve!"
 
-#: rent/views.py:200
+#: rent/views.py:234
 msgid "Comment successfully sent, but failed to send notification emails!"
 msgstr ""
 "Komment sikeresen elküldve, de az értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:207
+#: rent/views.py:241
 msgid "Invalid form!"
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:221
+#: rent/views.py:256
 msgid "Rent changed!"
 msgstr "Kölcsönzés megváltoztatva!"
 
-#: rent/views.py:230
+#: rent/views.py:265
 msgid "Failed to send notification emails!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:247 rent/views.py:325
+#: rent/views.py:282 rent/views.py:388
 msgid "Invalid form."
 msgstr "Helytelen adatok!"
 
-#: rent/views.py:271
+#: rent/views.py:304
 msgid "Cannot change rent status to the same!"
 msgstr "Nem módosítható ugyan arra a státusz!"
 
-#: rent/views.py:283
+#: rent/views.py:316
 #, python-format
 msgid "Failed to change status! Following games are not available anymore: %s"
 msgstr "Sikertelen státuszmódosítás. Nem elérhető játék(ok): %s"
 
-#: rent/views.py:292
+#: rent/views.py:326
 msgid "End date is in the past! Please set a correct end date!"
 msgstr "Múltbeli a kölcsönzés vége időpont, korrigáld!"
 
-#: rent/views.py:299
+#: rent/views.py:335
 msgid "Failed to send notification email!"
 msgstr "Értesítési emailek küldése sikertelen!"
 
-#: rent/views.py:318
+#: rent/views.py:337
+msgid "User was not notified about this status change."
+msgstr ""
+
+#: rent/views.py:381
 msgid "Game added."
 msgstr "Játék hozzáadva!"
 
-#: rent/views.py:320
+#: rent/views.py:383
 msgid "Game is already rented for this time."
 msgstr "A játék erre az időre már ki van kölcsönözve."
 
-#: rent/views.py:349
+#: rent/views.py:414
 msgid "Given game is not in the rent!"
 msgstr "A játék nincs benne a kölcsönzésben!"
 
@@ -685,7 +691,7 @@ msgid "Latest inventory"
 msgstr "Legutóbbi leltár"
 
 #: templates/inventory/list-inventory.html:17
-#: templates/inventory/list_game.html:29 templates/rent/rent_detail.html:45
+#: templates/inventory/list_game.html:31 templates/rent/rent_detail.html:45
 msgid "Date"
 msgstr "Dátum"
 
@@ -699,12 +705,12 @@ msgstr "Nincs leltári bejegyzés."
 
 #: templates/inventory/list-inventory.html:24
 #: templates/inventory/list_game.html:8
-#: templates/jatszohaz/profile_detail.html:54 templates/rent/_rent.html:23
+#: templates/jatszohaz/profile_detail.html:54 templates/rent/_rent.html:28
 msgid "Details"
 msgstr "Részletek"
 
 #: templates/inventory/list-inventory.html:25
-#: templates/inventory/list_game.html:38
+#: templates/inventory/list_game.html:40
 msgid "Create new inventory"
 msgstr "Új leltár "
 
@@ -720,31 +726,31 @@ msgstr "Játék példány módosítása"
 msgid "No games."
 msgstr "Nincsenek játékok."
 
-#: templates/inventory/list_game.html:11
+#: templates/inventory/list_game.html:13
 msgid "Original price"
 msgstr "Vételár"
 
-#: templates/inventory/list_game.html:14
+#: templates/inventory/list_game.html:16
 msgid "Rent history"
 msgstr "Előzmények"
 
-#: templates/inventory/list_game.html:20
+#: templates/inventory/list_game.html:22
 msgid "Last rent history"
 msgstr "Utolsó előzmény"
 
-#: templates/inventory/list_game.html:23
+#: templates/inventory/list_game.html:25
 msgid "No one rented this game."
 msgstr "Senki sem kölcsönözte ezt a játékot."
 
-#: templates/inventory/list_game.html:26
+#: templates/inventory/list_game.html:28
 msgid "Inventories"
 msgstr "Leltár bejegyzések"
 
-#: templates/inventory/list_game.html:32
+#: templates/inventory/list_game.html:34
 msgid "Edit"
 msgstr "Módosítás"
 
-#: templates/inventory/list_game.html:36
+#: templates/inventory/list_game.html:38
 msgid "No inventories."
 msgstr "Nincs leltár bejegyzés."
 
@@ -766,10 +772,6 @@ msgstr "Vissza"
 msgid "Games page info"
 msgstr "Itt megtalálod az összes játékunkat és leírásaikat."
 
-#: templates/jatszohaz/home.html:4
-msgid "Home"
-msgstr ""
-
 #: templates/jatszohaz/profile.html:6
 msgid "Profil"
 msgstr "Profil"
@@ -787,17 +789,17 @@ msgid "Basic info"
 msgstr "Alap információk"
 
 #: templates/jatszohaz/profile_detail.html:11
-#: templates/jatszohaz/user_list.html:13
+#: templates/jatszohaz/user_list.html:25
 msgid "Email"
 msgstr "Email"
 
 #: templates/jatszohaz/profile_detail.html:14
-#: templates/jatszohaz/user_list.html:14
+#: templates/jatszohaz/user_list.html:26
 msgid "Room"
 msgstr "Szoba"
 
 #: templates/jatszohaz/profile_detail.html:15
-#: templates/jatszohaz/user_list.html:15
+#: templates/jatszohaz/user_list.html:27
 msgid "Mobile"
 msgstr "Telefon"
 
@@ -806,7 +808,7 @@ msgid "First login"
 msgstr "Első bejelentkezés"
 
 #: templates/jatszohaz/profile_detail.html:17
-#: templates/jatszohaz/user_list.html:16
+#: templates/jatszohaz/user_list.html:28
 msgid "Last login"
 msgstr "Utolsó bejelentkezés"
 
@@ -824,11 +826,34 @@ msgid "Click on the buttons to add or remove user to or from the group."
 msgstr "Kattints a gombra a felhasználó csoporthoz adásához/törléséhez."
 
 #: templates/jatszohaz/profile_detail.html:59 templates/rent/my_rents.html:9
-#: templates/rent/rents.html:38
+#: templates/rent/rents.html:48
 msgid "No rents yet."
 msgstr "Nincs kölcsönzés."
 
 #: templates/jatszohaz/user_list.html:8
+msgid "All user"
+msgstr "Mindenki"
+
+#: templates/jatszohaz/user_list.html:9
+#| msgid "Member"
+msgid "Members"
+msgstr "Körtagok"
+
+#: templates/jatszohaz/user_list.html:10
+msgid "Leaders"
+msgstr "Körvezetők"
+
+#: templates/jatszohaz/user_list.html:14
+#, python-format
+msgid ""
+"\n"
+"            Found %(count)s user entries.\n"
+"        "
+msgstr ""
+"\n"
+"%(count)s felhasználó a megadott szűréssel."
+
+#: templates/jatszohaz/user_list.html:20
 msgid "No users."
 msgstr "Nincs felhasználó."
 
@@ -850,9 +875,13 @@ msgstr "Ez a bejegyzés nincs publikálva! Csak adminok számára látható!"
 msgid "Last edit:"
 msgstr "Utolsó módosítás:"
 
-#: templates/rent/_rent.html:19
+#: templates/rent/_rent.html:21
 msgid "Last edit by"
 msgstr "Utoljára piszkálta"
+
+#: templates/rent/_rent.html:24
+msgid "Time since submission"
+msgstr ""
 
 #: templates/rent/new_rent.html:10
 msgid "Renting"
@@ -1076,8 +1105,7 @@ msgstr "Áttekintés"
 msgid "By members"
 msgstr "Körtagok"
 
-#: templates/stats/base.html:12 templates/stats/games.html:5
-#| msgid "Our games"
+#: templates/stats/games.html:5
 msgid "By games"
 msgstr "Játékok"
 
@@ -1128,10 +1156,6 @@ msgstr "(A kölcsönzés kezdő dátuma alapján.)"
 #: templates/stats/overview.html:10
 msgid "Month"
 msgstr "Hónap"
-
-#, fuzzy
-#~ msgid "By user"
-#~ msgstr "Nincs felhasználó."
 
 #~ msgid "Example: 20 mins"
 #~ msgstr "Példa: 20 perc"

@@ -10,6 +10,7 @@ from jatszohaz.views import TokenLogin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^users/$', views.UsersView.as_view(), name="users"),
+    url(r'^users/(?P<group_name>\w+)/$', views.UsersView.as_view(), name="users"),
     url(r'^after-login/', views.AfterLoginView.as_view()),
 
     url(r'^$', RedirectView.as_view(pattern_name="news:news"), name="home"),

@@ -123,7 +123,16 @@ class UsersView(PermissionRequiredMixin, ListView):
     model = JhUser
     permission_required = 'jatszohaz.view_all'
     template_name = "jatszohaz/user_list.html"
-    paginate_by = 50
+    paginate_by = 100
+
+    def get_queryset(self):
+        objects = super().get_queryset()
+
+        filter_group = self.kwargs.get('group_name', None)
+        if filter_group:
+            objects = objects.filter(groups__name=filter_group)
+
+        return objects
 
 
 class AdminRules(PermissionRequiredMixin, TemplateView):

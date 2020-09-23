@@ -3,7 +3,19 @@
 
 {% block content %}
 
-    <h1>{% trans 'Users' %} ({{  paginator.count }})</h1>
+    <h1>{% trans 'Users' %}</h1>
+
+    <a class="btn btn-success" href="{% url 'users' %}">{% trans 'All user' %}</a>
+    <a class="btn btn-warning" href="{% url 'users' group_name='kortag' %}">{% trans 'Members' %}</a>
+    <a class="btn btn-warning" href="{% url 'users' group_name='leader' %}">{% trans 'Leaders' %}</a>
+    <br/><br/>
+
+    <p>
+        {% blocktrans with count=paginator.count %}
+            Found {{ count }} user entries.
+        {% endblocktrans %}
+    </p>
+
     {% if object_list.is_empty %}
         {% trans 'No users.' %}
     {% else %}
