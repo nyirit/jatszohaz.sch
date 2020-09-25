@@ -77,7 +77,7 @@ class EditRentForm(forms.ModelForm):
 
     class Meta:
         model = Rent
-        fields = ['renter', 'date_from', 'date_to', 'bail', ]
+        fields = ['renter', 'date_from', 'date_to', ]
         widgets = {'date_from': forms.DateTimeInput(attrs={'class': "datetimepicker"}),
                    'date_to': forms.DateTimeInput(attrs={'class': "datetimepicker"})}
 
