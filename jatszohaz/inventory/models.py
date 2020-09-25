@@ -121,7 +121,8 @@ class GamePiece(TimeStampedModel):
     rentable = models.BooleanField(verbose_name=_("Rentable"), null=False, blank=False, default=True,
                                    help_text=_("If true, the game cannot be rented."))
     buying_date = models.DateField(verbose_name=_("Buying date"), null=True, blank=True)
-    place = models.CharField(verbose_name=_("Place"), max_length=20, blank=True, help_text=_("Where the game should be."))
+    place = models.CharField(verbose_name=_("Place"), max_length=20, blank=True,
+                             help_text=_("Where the game should be."))
     price = models.IntegerField(verbose_name=_("Price (Ft)"), validators=[MinValueValidator(0)], default=0)
 
     class Meta:
