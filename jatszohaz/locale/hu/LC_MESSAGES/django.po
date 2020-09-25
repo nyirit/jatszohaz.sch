@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-23 22:35+0200\n"
-"PO-Revision-Date: 2020-09-23 22:37+0116\n"
+"POT-Creation-Date: 2020-09-25 15:08+0200\n"
+"PO-Revision-Date: 2020-09-25 15:09+0116\n"
 "Last-Translator: b'  <admin@example.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,37 +19,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: inventory/forms.py:13 inventory/models.py:104
+#: inventory/forms.py:13 inventory/models.py:106
 #: templates/inventory/list_game.html:9
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: inventory/forms.py:14 inventory/models.py:109
+#: inventory/forms.py:14 inventory/models.py:113
 #: templates/inventory/list_game.html:10
 #: templates/rent/rent_detail_admin.html:10
 msgid "Notes"
 msgstr "Megjegyzés"
 
-#: inventory/forms.py:15 inventory/models.py:112
+#: inventory/forms.py:15 inventory/models.py:117
 msgid "Priority"
 msgstr "Prioritás"
 
-#: inventory/forms.py:16 inventory/models.py:113
+#: inventory/forms.py:16 inventory/models.py:121
 msgid "Rentable"
 msgstr "Kölcsönözhető"
 
-#: inventory/forms.py:18 inventory/models.py:114
+#: inventory/forms.py:18 inventory/models.py:123
 #: templates/inventory/list_game.html:12
 msgid "Buying date"
 msgstr "Vásárlás ideje"
 
-#: inventory/forms.py:21 inventory/models.py:115
+#: inventory/forms.py:21 inventory/models.py:124
 #: templates/inventory/list_game.html:11
 #: templates/rent/rent_detail_admin.html:11
 msgid "Place"
-msgstr "Helye"
+msgstr "A játék helye"
 
-#: inventory/forms.py:22 inventory/models.py:116
+#: inventory/forms.py:22 inventory/models.py:125
 msgid "Price (Ft)"
 msgstr "Vételár (Ft)"
 
@@ -78,86 +78,135 @@ msgid "Description"
 msgstr "Leírás"
 
 #: inventory/models.py:35
+msgid "Detailed description of the game, which is visible to the users."
+msgstr ""
+"Részletes leírás a játékról, ami a felhasználók számára is látható lesz."
+
+#: inventory/models.py:36
 msgid "Short Description"
 msgstr "Rövid leírás"
 
 #: inventory/models.py:37
+msgid "Short description, which will show up in tooltips."
+msgstr ""
+"Rövid, kb. egy mondatos leírás ami a súgóban fog megjelenni a "
+"felhasználóknak."
+
+#: inventory/models.py:39
 msgid "Min. players"
 msgstr "Min. játékosok"
 
-#: inventory/models.py:38
+#: inventory/models.py:40
 msgid "How many players are needed to play"
 msgstr "Legalább hány játékos szükséges "
 
-#: inventory/models.py:41
+#: inventory/models.py:43
 msgid "Max. players"
 msgstr "Max. játékosok"
 
-#: inventory/models.py:41
+#: inventory/models.py:43
 msgid "How many players can play at most"
 msgstr "Legfeljebb hány játékos játszhat"
 
-#: inventory/models.py:44
+#: inventory/models.py:46
 msgid "Playing time"
 msgstr "Játékidő"
 
-#: inventory/models.py:45
+#: inventory/models.py:47
 msgid "Example: 20 mins (this is directly displayed to the user)"
 msgstr ""
+"Pl. \"20 perc\", vagy bármi komplikáltabb. Ez követlenül meg fog jelenni a "
+"felhasználónak."
 
-#: inventory/models.py:47
+#: inventory/models.py:49
 msgid "Playtime category"
 msgstr "Játékidő kategória"
 
-#: inventory/models.py:50 templates/inventory/list_game.html:14
+#: inventory/models.py:52 templates/inventory/list_game.html:14
 msgid "Base game"
 msgstr "Alapjáték"
 
-#: inventory/models.py:51
+#: inventory/models.py:53
 msgid "Game needed to play this one."
-msgstr "Az a játék ami nélkül ez nem játszható"
+msgstr "Az a játék ami nélkül ez nem játszható (ha van ilyen)."
 
-#: inventory/models.py:55
+#: inventory/models.py:57
 msgid "Hide from users"
 msgstr "Felhasználók elől elrejtés"
 
-#: inventory/models.py:56
+#: inventory/models.py:58
 msgid "If true isn't shown in Our games page."
-msgstr "Kipipált esetben nem látják a felhasználók a Játékaink menüpontban"
+msgstr ""
+"Kipipált esetben nem látják a felhasználók a Játékaink menüpontban és "
+"kölcsönözni sem lehet."
 
-#: inventory/models.py:155 templates/inventory/list-inventory.html:18
+#: inventory/models.py:109
+msgid "Owner of the game or empty if it belongs to the group."
+msgstr "Játék tulajdonosa. Üres, ha a kör tulajdona."
+
+#: inventory/models.py:112
+msgid "Game group"
+msgstr "Játék csoport"
+
+#: inventory/models.py:118
+msgid ""
+"If more then one game piece belongs to the game group, the one with lower "
+"priority will be rented first."
+msgstr ""
+"Ha több mint egy játék példány van, akkor a kisebb prioritással rendelkező "
+"lesz először kölcsönözve."
+
+#: inventory/models.py:122
+msgid "If true, the game cannot be rented."
+msgstr "Kipipált esetben a játék sosem lesz kölcsönözhető."
+
+#: inventory/models.py:124
+msgid "Where the game should be."
+msgstr "A játék helye, pl. \"725\", \"1825\""
+
+#: inventory/models.py:164
+msgid "Game piece"
+msgstr "Játék példány"
+
+#: inventory/models.py:165 templates/inventory/list-inventory.html:21
 #: templates/inventory/list_game.html:32
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:156 templates/inventory/list-inventory.html:19
+#: inventory/models.py:166
+msgid "If the game is still playable, so there's no major parts missing."
+msgstr ""
+"Igen, ha a játék játszható, azaz nem hiányoznak/rongálódtak meg "
+"kulcsfontosságú elemek."
+
+#: inventory/models.py:167 templates/inventory/list-inventory.html:22
 #: templates/inventory/list_game.html:33
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:157
+#: inventory/models.py:168
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:162
+#: inventory/models.py:173
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
-#: inventory/views.py:28
+#: inventory/views.py:29
 msgid "Inventory created"
 msgstr "Bejegyzés létrehova"
 
-#: inventory/views.py:112 inventory/views.py:122
+#: inventory/views.py:112 inventory/views.py:121
 msgid "Game group successfully edited."
-msgstr "Játék sikeresen létrehozva!"
+msgstr "Játék sikeresen módosítva!"
 
 #: inventory/views.py:113
 msgid "Edit game group"
 msgstr "Játék módosítása"
 
-#: inventory/views.py:123
+#: inventory/views.py:122
 msgid "Edit game piece"
-msgstr "Játék elem módosítása"
+msgstr "Játék példány módosítása"
 
 #: jatszohaz/models.py:17
 msgid "mobile"
@@ -252,19 +301,19 @@ msgstr ""
 "Meghatározza, hogy a hírt minden látogató láthatja-e. Ha nincs kipipálva, "
 "akkor csak adminok láthatják."
 
-#: news/views.py:36
+#: news/views.py:38
 msgid "News created!"
 msgstr "Bejegyzés létrehozva"
 
-#: news/views.py:40
+#: news/views.py:42
 msgid "Create news"
 msgstr "Bejegyzés létrehozása"
 
-#: news/views.py:54
+#: news/views.py:55
 msgid "Entry edited!"
 msgstr "Bejegyzés módosítva!"
 
-#: news/views.py:58 templates/news.html:44
+#: news/views.py:56 templates/news.html:44
 msgid "Edit entry"
 msgstr "Bejegyzés módosítása"
 
@@ -371,9 +420,9 @@ msgstr "Visszamond"
 msgid "Renter"
 msgstr "Kölcsönző"
 
-#: rent/models.py:53 templates/inventory/list-inventory.html:6
-#: templates/jatszohaz/games.html:5 templates/rent/_rent.html:14
-#: templates/rent/rent_detail.html:21 templates/slack/new_rent.html:9
+#: rent/models.py:53 templates/jatszohaz/games.html:5
+#: templates/rent/_rent.html:14 templates/rent/rent_detail.html:21
+#: templates/slack/new_rent.html:9
 msgid "Games"
 msgstr "Játékok"
 
@@ -648,7 +697,8 @@ msgstr ""
 msgid "Rents"
 msgstr "Kölcsönzések"
 
-#: templates/_navbar.html:44 templates/rent/rent_detail_admin.html:20
+#: templates/_navbar.html:44 templates/inventory/list-inventory.html:6
+#: templates/rent/rent_detail_admin.html:20
 msgid "Inventory"
 msgstr "Leltár"
 
@@ -673,56 +723,93 @@ msgstr "Statisztikák"
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/default_update.html:11 templates/inventory/edit-inventory.html:9
+#: templates/default_update.html:11 templates/inventory/edit-inventory.html:10
 #: templates/rent/rent_detail_admin.html:44
 msgid "Save"
 msgstr "Mentés"
 
+#: templates/default_update.html:16 templates/inventory/edit-inventory.html:14
+#: templates/inventory/new_game.html:16
+#: templates/inventory/new_inventory.html:17
+msgid "Back"
+msgstr "Vissza"
+
 #: templates/inventory/list-inventory.html:8
+msgid "INVENTORY_HELP_TEXT"
+msgstr ""
+"<p><b>Mielőtt belefognál a leltár szerkesztésébe, legalább egyszer olvasd el az alábbi instrukciókat!</b></p>\n"
+"\n"
+"<p>\n"
+"A leltárban található minden játékunk és azokról kellően sok információ, mint pl. hogy az adott játék kölcsönzését engedélyezzük-e, vannak-e hiányzó elemek, a játék leírása, stb. Ezek szerkesztésénél elővigyázatosan járj el, mert nem lehet korábbi állapotot visszatölteni, viszont a felhasználók azonnal látni fogják a módosított tartalmat!\n"
+"</p>\n"
+"\n"
+"<p>\n"
+"A leltárban megkülönböztetünk <b>játékot</b> (a.k.a. játék csoport, game group) és <b>játék példányt</b> (a.k.a. game piece). Előbbi egy típust ad meg (pl. Bang), utóbbi pedig a Bang játékból létező fizikai példányainkat (pl. Bang 1-es doboz, Bang 2-es doboz, stb.). Minden közös tulajdonság (leírás, játékosok száma, stb.) a játékhoz tartozik, de a konkrét kölcsönzésekhez már a játék fizikai példányai tartoznak.\n"
+"</p>\n"
+"\n"
+"<p>\n"
+"A játék példányokhoz tartozik egy ú.n. leltári bejegyzés is. Ez arra szolgál, hogy ha az adott játékot időről időre átnézzük, feljegyezhessük az esetleges problémákat, hiányzó lapokat. Ezeknek megfelelően egy játék példányhoz több leltárbejegyzés is társulhat, így a historikus adatok is megvannak.\n"
+"</p>\n"
+"\n"
+"<p>\n"
+"<b>A lenti listában</b> láthatod a játék példányokat. A <b>Részletek</b> gombra kattintva megtekinthetsz minden információt az adott játékról, beleérve a korábbi kölcsönzéseket is és leltári bejegyzéseket. <b>Új leltár</b> gombbal új leltárbejegyzést készíthetsz a játékhoz, ahol akár azt is jelölheted, hogy ha valamilyen kulcsfontosságú elem hiánya miatt a játék már nem játszható (ilyenkor nem is lesz kölcsönözhető). Végül pedig tudod a játékot (azaz a játék csoporthoz tartozó információkat), illetve a játék példányt is módosítani.\n"
+"</p>\n"
+"\n"
+"<p>\n"
+"<b>Törölni</b> jelenleg nem lehet, ha erre igény merül fel, akkor először a játékot át lehet állítani nem kölcsönözhetőre, majd valamely weblap admin megoldja a törlést.\n"
+"</p>"
+
+#: templates/inventory/list-inventory.html:10
 msgid "Add new game with gamegroup"
 msgstr "Új játék hozzáadása (ha egy teljesen új játékot veszel fel)"
 
-#: templates/inventory/list-inventory.html:9
+#: templates/inventory/list-inventory.html:11
 msgid "Add new game for existing gamegroup"
-msgstr "Új játék példány hozzáadása"
+msgstr ""
+"Új játék példány hozzáadása (ha már van ilyen típusú játékunk, de vettünk "
+"még egyet)"
 
-#: templates/inventory/list-inventory.html:16
+#: templates/inventory/list-inventory.html:13
+msgid "Game pieces"
+msgstr "Játék példányok"
+
+#: templates/inventory/list-inventory.html:19
 msgid "Latest inventory"
 msgstr "Legutóbbi leltár"
 
-#: templates/inventory/list-inventory.html:17
+#: templates/inventory/list-inventory.html:20
 #: templates/inventory/list_game.html:31 templates/rent/rent_detail.html:45
 msgid "Date"
 msgstr "Dátum"
 
-#: templates/inventory/list-inventory.html:20
+#: templates/inventory/list-inventory.html:23
 msgid "Edit latest inventory"
 msgstr "Legutóbbi leltár módosítása"
 
-#: templates/inventory/list-inventory.html:22
+#: templates/inventory/list-inventory.html:25
 msgid "No inventory."
 msgstr "Nincs leltári bejegyzés."
 
-#: templates/inventory/list-inventory.html:24
+#: templates/inventory/list-inventory.html:27
 #: templates/inventory/list_game.html:8
 #: templates/jatszohaz/profile_detail.html:54 templates/rent/_rent.html:28
 msgid "Details"
 msgstr "Részletek"
 
-#: templates/inventory/list-inventory.html:25
+#: templates/inventory/list-inventory.html:28
 #: templates/inventory/list_game.html:40
 msgid "Create new inventory"
 msgstr "Új leltár "
 
-#: templates/inventory/list-inventory.html:26
+#: templates/inventory/list-inventory.html:29
 msgid "Edit gamegroup"
 msgstr "Játék módosítása"
 
-#: templates/inventory/list-inventory.html:27
+#: templates/inventory/list-inventory.html:30
 msgid "Edit gamepiece"
 msgstr "Játék példány módosítása"
 
-#: templates/inventory/list-inventory.html:31
+#: templates/inventory/list-inventory.html:34
 msgid "No games."
 msgstr "Nincsenek játékok."
 
@@ -759,14 +846,13 @@ msgid "Add new game"
 msgstr "Új játék hozzáadása"
 
 #: templates/inventory/new_game.html:11
-#: templates/inventory/new_inventory.html:9
+#: templates/inventory/new_inventory.html:12
 msgid "Create"
 msgstr "Létrehozás"
 
-#: templates/inventory/new_game.html:14
-#: templates/inventory/new_inventory.html:12
-msgid "Back"
-msgstr "Vissza"
+#: templates/inventory/new_inventory.html:7
+msgid "New inventory entry"
+msgstr "Új leltári bejegyzés létrehozása"
 
 #: templates/jatszohaz/games.html:7
 msgid "Games page info"
@@ -835,7 +921,6 @@ msgid "All user"
 msgstr "Mindenki"
 
 #: templates/jatszohaz/user_list.html:9
-#| msgid "Member"
 msgid "Members"
 msgstr "Körtagok"
 

@@ -31,8 +31,10 @@ class GameGroup(TimeStampedModel):
         LENGTH_LONG
     )
     name = models.CharField(verbose_name=_("Name"), blank=False, unique=True, max_length=100)
-    description = models.TextField(verbose_name=_("Description"), blank=False)
-    short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100)
+    description = models.TextField(verbose_name=_("Description"), blank=False,
+                                   help_text=_("Detailed description of the game, which is visible to the users."))
+    short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100,
+                                         help_text=_("Short description, which will show up in tooltips."))
     image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image")
     min_players = models.IntegerField(verbose_name=_("Min. players"),
                                       help_text=_("How many players are needed to play"),
@@ -103,16 +105,23 @@ class GamePiece(TimeStampedModel):
         on_delete=models.PROTECT,  # do not delete users, who owns a game
         verbose_name=_("Owner"),
         null=True,
-        blank=True
+        blank=True,
+        help_text=_("Owner of the game or empty if it belongs to the group.")
     )
-    game_group = models.ForeignKey(GameGroup, on_delete=models.CASCADE, related_name='game_pieces')
+    game_group = models.ForeignKey(GameGroup, on_delete=models.CASCADE, related_name='game_pieces',
+                                   verbose_name=_("Game group"))
     notes = models.CharField(verbose_name=_("Notes"), max_length=100, blank=True)
     # Priority: which GamePiece should be rented first from same GameGroup.
     # Lower number will be rented first.
-    priority = models.PositiveSmallIntegerField(verbose_name=_("Priority"), default=0)
-    rentable = models.BooleanField(verbose_name=_("Rentable"), null=False, blank=False, default=True)
+    priority = models.PositiveSmallIntegerField(
+        verbose_name=_("Priority"), default=0,
+        help_text=_("If more then one game piece belongs to the game group, "
+                    "the one with lower priority will be rented first.")
+    )
+    rentable = models.BooleanField(verbose_name=_("Rentable"), null=False, blank=False, default=True,
+                                   help_text=_("If true, the game cannot be rented."))
     buying_date = models.DateField(verbose_name=_("Buying date"), null=True, blank=True)
-    place = models.CharField(verbose_name=_("Place"), max_length=20, blank=True)
+    place = models.CharField(verbose_name=_("Place"), max_length=20, blank=True, help_text=_("Where the game should be."))
     price = models.IntegerField(verbose_name=_("Price (Ft)"), validators=[MinValueValidator(0)], default=0)
 
     class Meta:
@@ -151,8 +160,10 @@ class GamePiece(TimeStampedModel):
 class InventoryItem(TimeStampedModel):
     """Represents the result of a manual inspection of a physical board game."""
     user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
-    game = models.ForeignKey(GamePiece, on_delete=models.CASCADE, related_name="inventories")
-    playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False)
+    game = models.ForeignKey(GamePiece, on_delete=models.CASCADE, related_name="inventories",
+                             verbose_name=_("Game piece"))
+    playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False,
+                                   help_text=_("If the game is still playable, so there's no major parts missing."))
     missing_items = models.CharField(verbose_name=_("Missing items"), max_length=100, blank=True)
     rules = models.CharField(verbose_name=_("Rules"), max_length=100, default='-')
 

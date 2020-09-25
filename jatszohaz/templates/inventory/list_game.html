@@ -6,7 +6,7 @@
 
     <h1>{{ game_piece }}</h1>
     <h2>{% trans 'Details' %}</h2>
-    {% trans 'Owner' %}: {{ game_piece.owner }}<br/>
+    {% trans 'Owner' %}: {{ game_piece.owner|default:"" }}<br/>
     {% trans 'Notes' %}: {{ game_piece.notes }}<br/>
     {% trans 'Place' %}: {{ game_piece.place }}<br/>
     {% trans 'Buying date' %}: {{ game_piece.buying_date|default:"?" }}<br/>
@@ -29,7 +29,7 @@
     {% for inv in object_list %}
         <ul>
             {% trans 'Date' %}: {{ inv.created }}<br/>
-            {% trans 'Playable' %}: {{ inv.playable }}<br/>
+            {% trans 'Playable' %}: {{ inv.playable|yesno }}<br/>
             {% trans 'Missing items' %}: {{ inv.missing_items }}<br/>
             <a href="{% url 'inventory:edit' inv.pk %}">{% trans 'Edit' %}</a><br/>
             <hr/>

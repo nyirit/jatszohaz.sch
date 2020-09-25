@@ -3,11 +3,14 @@
 
 {% block content %}
 
-    <h1>{% trans 'Games' %}</h1>
+    <h1>{% trans 'Inventory' %}</h1>
+
+    {% trans 'INVENTORY_HELP_TEXT' %}
 
     <a href="{% url 'inventory:new-game-with-group' %}" >{% trans 'Add new game with gamegroup' %}</a><br/>
     <a href="{% url 'inventory:new-game' %}" >{% trans 'Add new game for existing gamegroup' %}</a><br/>
 
+    <h2>{% trans 'Game pieces' %}</h2>
     <ul>
         {% for game in object_list %}
             <h3>{{ game }}</h3>

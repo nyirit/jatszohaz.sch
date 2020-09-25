@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, CreateView, UpdateView
 
+from jatszohaz.utils import DefaultUpdateView
+
 from .models import News
 
 
@@ -45,15 +47,10 @@ class CreateNewsView(SuccessMessageMixin, NewsPermissionRequiredMixin, CreateVie
         return super().form_valid(form)
 
 
-class EditNewsEntryView(SuccessMessageMixin, NewsPermissionRequiredMixin, UpdateView):
+class EditNewsEntryView(SuccessMessageMixin, NewsPermissionRequiredMixin, DefaultUpdateView):
     """Admin view for editing existing news objects."""
     model = News
-    template_name = "default_update.html"
     fields = ['title', 'content', 'image', 'published']
     success_url = reverse_lazy('news:news')
     success_message = _("Entry edited!")
-
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['title'] = _("Edit entry")
-        return data
+    title = _("Edit entry")

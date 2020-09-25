@@ -10,6 +10,7 @@ from django.views.generic import CreateView, ListView, UpdateView, FormView
 from inventory.forms import GameForm, GamePieceForm
 
 from .models import InventoryItem, GamePiece, GameGroup
+from jatszohaz.utils import DefaultUpdateView
 
 logger = logging.getLogger(__name__)
 
@@ -102,22 +103,20 @@ class NewGameView(InventoryPermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('inventory:list')
 
 
-class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
+class EditGameGroup(SuccessMessageMixin, InventoryPermissionRequiredMixin, DefaultUpdateView):
     """View for editing an existing GameGroup object."""
     model = GameGroup
     fields = ['name', 'description', 'short_description', 'base_game', 'min_players', 'max_players',
               'playtime', 'playtime_category', 'hide']
-    template_name = "default_update.html"
     success_url = reverse_lazy("inventory:list")
     success_message = _("Game group successfully edited.")
     title = _("Edit game group")
 
 
-class EditGamePiece(SuccessMessageMixin, InventoryPermissionRequiredMixin, UpdateView):
+class EditGamePiece(SuccessMessageMixin, InventoryPermissionRequiredMixin, DefaultUpdateView):
     """View for editing an existing GamePiece object."""
     model = GamePiece
     form_class = GamePieceForm
-    template_name = "default_update.html"
     success_url = reverse_lazy("inventory:list")
     success_message = _("Game group successfully edited.")
     title = _("Edit game piece")

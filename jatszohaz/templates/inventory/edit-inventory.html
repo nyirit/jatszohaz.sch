@@ -6,8 +6,10 @@
 
     <form action="" method="post">{% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="{% trans 'Save' %}" />
+        <br/>
+        <input class="btn btn-success" type="submit" value="{% trans 'Save' %}" />
     </form>
 
-    <a href="{% url 'inventory:list' %}">{% trans Back %}</a>
+    <br/>
+    <a class="btn btn-danger" href="{% url 'inventory:list' %}">{% trans 'Back' %}</a>
 {% endblock %}

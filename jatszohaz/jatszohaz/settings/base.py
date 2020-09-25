@@ -272,3 +272,5 @@ CRON_TOKEN = get_env_variable('CRON_TOKEN', '')
 # number of days while a game cannot be rented again after brought back
 # (due to safety measures regarding COVID-19)
 RENT_RETURN_DELAY_DAYS = 3
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

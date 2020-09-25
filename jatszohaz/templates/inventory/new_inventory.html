@@ -4,11 +4,16 @@
 
 {% block content %}
 
+    <h1>{% trans 'New inventory entry' %}</h1>
+
     <form action="" method="post">{% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="{% trans 'Create' %}" />
+        <br/>
+        <input class="btn btn-success" type="submit" value="{% trans 'Create' %}" />
     </form>
 
-    <a href="{% url 'inventory:list' %}">{% trans 'Back' %}</a>
+    <br/>
+
+    <a class="btn btn-danger" href="{% url 'inventory:list' %}">{% trans 'Back' %}</a>
 
 {% endblock %}
