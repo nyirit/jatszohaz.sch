@@ -4,6 +4,8 @@
 
 {% block content %}
 
+    <h1>{% trans 'Edit inventory' %}</h1>
+
     <form action="" method="post">{% csrf_token %}
         {{ form|crispy }}
         <br/>

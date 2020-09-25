@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-25 15:08+0200\n"
-"PO-Revision-Date: 2020-09-25 15:09+0116\n"
+"POT-Creation-Date: 2020-09-25 15:22+0200\n"
+"PO-Revision-Date: 2020-09-25 15:23+0116\n"
 "Last-Translator: b'  <admin@example.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -49,7 +49,7 @@ msgstr "Vásárlás ideje"
 msgid "Place"
 msgstr "A játék helye"
 
-#: inventory/forms.py:22 inventory/models.py:125
+#: inventory/forms.py:22 inventory/models.py:126
 msgid "Price (Ft)"
 msgstr "Vételár (Ft)"
 
@@ -160,35 +160,39 @@ msgstr ""
 msgid "If true, the game cannot be rented."
 msgstr "Kipipált esetben a játék sosem lesz kölcsönözhető."
 
-#: inventory/models.py:124
+#: inventory/models.py:125
 msgid "Where the game should be."
 msgstr "A játék helye, pl. \"725\", \"1825\""
 
-#: inventory/models.py:164
+#: inventory/models.py:163 templates/rent/rent_detail.html:44
+msgid "User"
+msgstr "Felhasználó"
+
+#: inventory/models.py:165
 msgid "Game piece"
 msgstr "Játék példány"
 
-#: inventory/models.py:165 templates/inventory/list-inventory.html:21
+#: inventory/models.py:166 templates/inventory/list-inventory.html:21
 #: templates/inventory/list_game.html:32
 msgid "Playable"
 msgstr "Játszható"
 
-#: inventory/models.py:166
+#: inventory/models.py:167
 msgid "If the game is still playable, so there's no major parts missing."
 msgstr ""
 "Igen, ha a játék játszható, azaz nem hiányoznak/rongálódtak meg "
 "kulcsfontosságú elemek."
 
-#: inventory/models.py:167 templates/inventory/list-inventory.html:22
+#: inventory/models.py:168 templates/inventory/list-inventory.html:22
 #: templates/inventory/list_game.html:33
 msgid "Missing items"
 msgstr "Hiányzó elemek"
 
-#: inventory/models.py:168
+#: inventory/models.py:169
 msgid "Rules"
 msgstr "Szabályok"
 
-#: inventory/models.py:173
+#: inventory/models.py:174
 msgid "Manage Inventory"
 msgstr "Leltár kezelés"
 
@@ -723,16 +727,21 @@ msgstr "Statisztikák"
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/default_update.html:11 templates/inventory/edit-inventory.html:10
+#: templates/default_update.html:11 templates/inventory/edit-inventory.html:12
 #: templates/rent/rent_detail_admin.html:44
 msgid "Save"
 msgstr "Mentés"
 
-#: templates/default_update.html:16 templates/inventory/edit-inventory.html:14
+#: templates/default_update.html:16 templates/inventory/edit-inventory.html:16
 #: templates/inventory/new_game.html:16
 #: templates/inventory/new_inventory.html:17
 msgid "Back"
 msgstr "Vissza"
+
+#: templates/inventory/edit-inventory.html:7
+#| msgid "Edit entry"
+msgid "Edit inventory"
+msgstr "Leltárbejegyzés módosítása"
 
 #: templates/inventory/list-inventory.html:8
 msgid "INVENTORY_HELP_TEXT"
@@ -1032,10 +1041,6 @@ msgstr "Dátumok"
 #: templates/rent/rent_detail.html:40
 msgid "Comments"
 msgstr "Kommentek"
-
-#: templates/rent/rent_detail.html:44
-msgid "User"
-msgstr "Felhasználó"
 
 #: templates/rent/rent_detail.html:53
 msgid "New comment"

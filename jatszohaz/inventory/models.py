@@ -160,7 +160,7 @@ class GamePiece(TimeStampedModel):
 
 class InventoryItem(TimeStampedModel):
     """Represents the result of a manual inspection of a physical board game."""
-    user = models.ForeignKey(JhUser, on_delete=models.PROTECT)
+    user = models.ForeignKey(JhUser, on_delete=models.PROTECT, verbose_name=_("User"))
     game = models.ForeignKey(GamePiece, on_delete=models.CASCADE, related_name="inventories",
                              verbose_name=_("Game piece"))
     playable = models.BooleanField(verbose_name=_("Playable"), null=False, blank=False,
