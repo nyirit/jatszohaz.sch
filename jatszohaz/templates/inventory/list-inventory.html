@@ -18,7 +18,7 @@
                 {% if inv %}
                     {% trans 'Latest inventory' %}:<br/>
                     {% trans 'Date' %}: {{ inv.created }}<br/>
-                    {% trans 'Playable' %}: {{ inv.playable }}<br/>
+                    {% trans 'Playable' %}: {{ inv.playable|yesno }}<br/>
                     {% trans 'Missing items' %}: {{ inv.missing_items }}<br/>
                     <a href="{% url 'inventory:edit' inv.pk %}">{% trans 'Edit latest inventory' %}</a><br/>
                 {% else %}

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-25 15:22+0200\n"
-"PO-Revision-Date: 2020-09-25 15:23+0116\n"
+"POT-Creation-Date: 2020-10-12 21:57+0200\n"
+"PO-Revision-Date: 2020-10-12 21:58+0116\n"
 "Last-Translator: b'  <admin@example.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -157,8 +157,8 @@ msgstr ""
 "lesz először kölcsönözve."
 
 #: inventory/models.py:122
-msgid "If true, the game cannot be rented."
-msgstr "Kipipált esetben a játék sosem lesz kölcsönözhető."
+msgid "The game can only be rented if this option is true."
+msgstr "A játék csak akkor kölcsönözhető, ha ez az opció ki van pipálva."
 
 #: inventory/models.py:125
 msgid "Where the game should be."
@@ -739,7 +739,6 @@ msgid "Back"
 msgstr "Vissza"
 
 #: templates/inventory/edit-inventory.html:7
-#| msgid "Edit entry"
 msgid "Edit inventory"
 msgstr "Leltárbejegyzés módosítása"
 
@@ -1195,7 +1194,7 @@ msgstr "Áttekintés"
 msgid "By members"
 msgstr "Körtagok"
 
-#: templates/stats/games.html:5
+#: templates/stats/base.html:12 templates/stats/games.html:5
 msgid "By games"
 msgstr "Játékok"
 
@@ -1246,6 +1245,9 @@ msgstr "(A kölcsönzés kezdő dátuma alapján.)"
 #: templates/stats/overview.html:10
 msgid "Month"
 msgstr "Hónap"
+
+#~ msgid "If true, the game cannot be rented."
+#~ msgstr "Kipipált esetben a játék sosem lesz kölcsönözhető."
 
 #~ msgid "Example: 20 mins"
 #~ msgstr "Példa: 20 perc"

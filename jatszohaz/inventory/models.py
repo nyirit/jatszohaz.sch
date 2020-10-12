@@ -119,7 +119,7 @@ class GamePiece(TimeStampedModel):
                     "the one with lower priority will be rented first.")
     )
     rentable = models.BooleanField(verbose_name=_("Rentable"), null=False, blank=False, default=True,
-                                   help_text=_("If true, the game cannot be rented."))
+                                   help_text=_("The game can only be rented if this option is true."))
     buying_date = models.DateField(verbose_name=_("Buying date"), null=True, blank=True)
     place = models.CharField(verbose_name=_("Place"), max_length=20, blank=True,
                              help_text=_("Where the game should be."))
