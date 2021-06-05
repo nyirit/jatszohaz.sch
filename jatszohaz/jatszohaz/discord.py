@@ -21,9 +21,10 @@ def send_message(message: str):
         return
 
     logger.info(f"Sending message to Discord: {message[:50]}...")
-    resp = requests.post(url,
-                         data=json.dumps({'content': message}),
-                         headers={'Content-Type': 'application/json'}
+    resp = requests.post(
+        url,
+        data=json.dumps({'content': message}),
+        headers={'Content-Type': 'application/json'}
     )
 
     if resp.status_code not in (200, 204):
