@@ -15,7 +15,7 @@ from formtools.wizard.views import SessionWizardView
 
 from .forms import RentFormStep1, RentFormStep2, RentFormStep3, NewCommentForm, EditRentForm, AddGameForm
 from inventory.models import GameGroup
-from jatszohaz.utils import jh_send_mail, send_slack_message
+from jatszohaz.utils import jh_send_mail, send_message_to_members
 from .models import Rent, Comment, GamePiece
 
 
@@ -117,7 +117,7 @@ class NewView(LoginRequiredMixin, SessionWizardView):
                 'comment': comment.message
             }
             self.send_email(context)
-            send_slack_message('slack/new_rent.html', context)
+            send_message_to_members('slack/new_rent.html', context)
 
         messages.success(self.request, _("Successfully rented!"))
         return redirect(rent.get_absolute_url())

@@ -259,8 +259,9 @@ LOGIN_URL = "/login/%s/" % SOCIAL_AUTH_BACKEND
 SLACK_TOKEN = get_env_variable("SLACK_TOKEN", "")
 SLACK_CHANNEL = get_env_variable("SLACK_CHANNEL", "")
 SLACK_AS_USER = True
-
 # ######## END SLACK CONFIGURATION
+
+DISCORD_WEBHOOK_URL = get_env_variable("DISCORD_WEBHOOK_URL", "")
 
 EDU_PERSON_ENTITLEMENT_ID = int(get_env_variable('DJANGO_ENTITLEMENT_ID', '-1'))
 

@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% block text %}
+    {% trans 'New rent created!' %}
+    {% trans 'Renter' %}: {{ renter }}
+    {% trans 'Dates' %}: {{ date_from }} - {{ date_to }}
+    {% trans 'Games' %}: {{ games }}
+    {% trans 'Comment' %}: {{ comment }}
+    {{ url }}
+{% endblock %}

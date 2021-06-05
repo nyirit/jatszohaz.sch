@@ -4,8 +4,8 @@ from urllib.parse import urljoin
 from django.conf import settings
 from django.http import HttpResponse
 from django.views import View
-from jatszohaz.utils import send_slack_message
 from rent.models import Rent
+from jatszohaz.utils import send_message_to_members
 
 
 logger = logging.getLogger(__name__)
@@ -48,9 +48,9 @@ class Run(View):
             context = {'rents': [urljoin(settings.SITE_DOMAIN, str(r.get_absolute_url()))
                                  for r in rents.all()]}
             if debug:
-                logger.info("Slack message context: %s" % context)
+                logger.info("Message context: %s" % context)
             else:
-                send_slack_message('slack/pending_rents.html', context)
+                send_message_to_members('slack/pending_rents.html', context)
             logger.info("Pending rents processed.")
 
         logger.info("Finished.")

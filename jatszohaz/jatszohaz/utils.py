@@ -2,8 +2,11 @@ import logging
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django_slack import slack_message
+from django.template.loader import get_template
 from django.views.generic import UpdateView
+from django_slack import slack_message
+
+from .discord import send_message as discord_send_message
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +24,21 @@ def send_slack_message(template, context=None):
         slack_message(template, context, fail_silently=False)
     except Exception as e:
         logger.error("Failed to send slack message: %s" % e)
+
+
+def send_message_to_members(template_path, context=None):
+    """
+    Sends out appropriate messages to notify group members.
+    """
+    # send out the message on Slack
+    # template will get rendered in the lib
+    send_slack_message(template_path, context)
+
+    # render template manually and send out the message on Discord
+    template_path = template_path.replace('slack', 'discord')  # fixme hack: remove this after dropping Slack...
+    template = get_template(template_path)
+    rendered_message = template.render(context)
+    discord_send_message(rendered_message)
 
 
 class DefaultUpdateView(UpdateView):
