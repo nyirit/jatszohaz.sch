@@ -17,7 +17,8 @@ class News(TimeStampedModel):
         crop=['middle', 'center'],
         verbose_name=_("Image"),
         blank=True,
-        null=True
+        null=True,
+        quality=100
     )
     published = models.BooleanField(
         verbose_name=_("Published"),
