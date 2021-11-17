@@ -35,7 +35,7 @@ class GameGroup(TimeStampedModel):
                                    help_text=_("Detailed description of the game, which is visible to the users."))
     short_description = models.CharField(verbose_name=_("Short Description"), blank=False, max_length=100,
                                          help_text=_("Short description, which will show up in tooltips."))
-    image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image")
+    image = ResizedImageField(size=[130, 100], crop=['middle', 'center'], verbose_name="Image", quality=100)
     min_players = models.IntegerField(verbose_name=_("Min. players"),
                                       help_text=_("How many players are needed to play"),
                                       validators=[MinValueValidator(1)],
