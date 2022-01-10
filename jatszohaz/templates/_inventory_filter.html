@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<div class="panel">
+    <div class="collapse in" id="inventory-filter">
+        <div class="panel-heading">
+            <h2>{% trans 'Filters' %}</h2>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <h4>{% trans 'Name' %}</h4>
+                    <input type="text" id="inventory-name-filter" value="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#inventory-filter" aria-expanded="false" aria-controls="inventory-filter">
+        {% trans 'Show/hide filters' %}
+        </button>
+    </div>
+</div>

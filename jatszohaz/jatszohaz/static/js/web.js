@@ -46,3 +46,25 @@ $(document).ready(function(){
     slider_playtime_filter.on('change', refreshFilters);
     game_name_filter.on('input', refreshFilters);
 });
+
+$(document).ready(function(){
+    inventory_name_filter = $('#inventory-name-filter');
+
+    var refreshInventoryFilters = function(){
+        $(".inventory_item_container")
+            .filter(function(){
+                var item_name = inventory_name_filter.val().toLowerCase();
+                var name = $(this).attr('data-game-name').indexOf(item_name) > -1;
+                return name;
+            }).fadeIn(500);
+
+        $(".inventory_item_container")
+            .filter(function(){
+                var item_name = inventory_name_filter.val().toLowerCase();
+                var name = $(this).attr('data-game-name').indexOf(item_name) == -1;
+                return name;
+            }).fadeOut(500);
+    };
+
+    inventory_name_filter.on('input', refreshInventoryFilters);
+});
