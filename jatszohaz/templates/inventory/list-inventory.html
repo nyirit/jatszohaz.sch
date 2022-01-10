@@ -17,6 +17,9 @@
             <div class="inventory_item_container" data-game-name="{{ game }}">
                 <h3>{{ game }}</h3>
                 {% with inv=game.get_latest_inventory_item %}
+                    {% if game.place %}
+                        {% trans 'Place' %}: {{ game.place }}<br/>
+                    {% endif %}
                     {% if inv %}
                         {% trans 'Latest inventory' %}:<br/>
                         {% trans 'Date' %}: {{ inv.created }}<br/>
@@ -26,6 +29,7 @@
                     {% else %}
                         {% trans 'No inventory.' %}<br/>
                     {% endif %}
+
                     <a href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Details' %}</a><br/>
                     <a href="{% url 'inventory:new' game.pk %}">{% trans 'Create new inventory' %}</a><br/>
                     <a href="{% url 'inventory:edit-gamegroup' game.game_group.pk %}">{% trans 'Edit gamegroup' %}</a><br/>
