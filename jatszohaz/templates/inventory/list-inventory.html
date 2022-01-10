@@ -11,25 +11,28 @@
     <a href="{% url 'inventory:new-game' %}" >{% trans 'Add new game for existing gamegroup' %}</a><br/>
 
     <h2>{% trans 'Game pieces' %}</h2>
+    {% include "_inventory_filter.html" %}
     <ul>
         {% for game in object_list %}
-            <h3>{{ game }}</h3>
-            {% with inv=game.get_latest_inventory_item %}
-                {% if inv %}
-                    {% trans 'Latest inventory' %}:<br/>
-                    {% trans 'Date' %}: {{ inv.created }}<br/>
-                    {% trans 'Playable' %}: {{ inv.playable|yesno }}<br/>
-                    {% trans 'Missing items' %}: {{ inv.missing_items }}<br/>
-                    <a href="{% url 'inventory:edit' inv.pk %}">{% trans 'Edit latest inventory' %}</a><br/>
-                {% else %}
-                    {% trans 'No inventory.' %}<br/>
-                {% endif %}
-                <a href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Details' %}</a><br/>
-                <a href="{% url 'inventory:new' game.pk %}">{% trans 'Create new inventory' %}</a><br/>
-                <a href="{% url 'inventory:edit-gamegroup' game.game_group.pk %}">{% trans 'Edit gamegroup' %}</a><br/>
-                <a href="{% url 'inventory:edit-gamepiece' game.pk %}">{% trans 'Edit gamepiece' %}</a><br/>
-            {% endwith %}
-            <hr/>
+            <div class="inventory_item_container" data-game-name="{{ game }}">
+                <h3>{{ game }}</h3>
+                {% with inv=game.get_latest_inventory_item %}
+                    {% if inv %}
+                        {% trans 'Latest inventory' %}:<br/>
+                        {% trans 'Date' %}: {{ inv.created }}<br/>
+                        {% trans 'Playable' %}: {{ inv.playable|yesno }}<br/>
+                        {% trans 'Missing items' %}: {{ inv.missing_items }}<br/>
+                        <a href="{% url 'inventory:edit' inv.pk %}">{% trans 'Edit latest inventory' %}</a><br/>
+                    {% else %}
+                        {% trans 'No inventory.' %}<br/>
+                    {% endif %}
+                    <a href="{% url 'inventory:gamepiece' game.pk %}">{% trans 'Details' %}</a><br/>
+                    <a href="{% url 'inventory:new' game.pk %}">{% trans 'Create new inventory' %}</a><br/>
+                    <a href="{% url 'inventory:edit-gamegroup' game.game_group.pk %}">{% trans 'Edit gamegroup' %}</a><br/>
+                    <a href="{% url 'inventory:edit-gamepiece' game.pk %}">{% trans 'Edit gamepiece' %}</a><br/>
+                {% endwith %}
+                <hr/>
+            </div>
         {% empty %}
             <li>{% trans 'No games.' %}</li>
         {% endfor %}
