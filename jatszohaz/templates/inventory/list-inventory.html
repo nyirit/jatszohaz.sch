@@ -14,7 +14,8 @@
     {% include "_inventory_filter.html" %}
     <ul>
         {% for game in object_list %}
-            <div class="inventory_item_container" data-game-name="{{ game }}">
+            <div class="inventory_item_container" data-game-name="{{ game|lower }}">
+
                 <h3>{{ game }}</h3>
                 {% with inv=game.get_latest_inventory_item %}
                     {% if game.place %}
