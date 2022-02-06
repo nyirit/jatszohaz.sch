@@ -56,10 +56,10 @@
             <a target="_blank" href="{% url 'rent:rules' %}">{% trans "Rent rules" %}</a><br/><br/>
         {% endif %}
         {% if wizard.steps.prev %}
-            <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.first }}">{% trans "Different date" %}</button>
+            <button formnovalidate name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.first }}">{% trans "Different date" %}</button>
         {% endif %}
         {% if wizard.steps.step1 == 3 %}
-            <button name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.prev }}">{% trans "Different games" %}</button>
+            <button formnovalidate name="wizard_goto_step" type="submit" class="btn btn-warning" value="{{ wizard.steps.prev }}">{% trans "Different games" %}</button>
             <input type="submit" class="btn btn-primary" value="{% trans "Finish" %}"/>
         {% else %}
             <input type="submit" class="btn btn-primary" value="{% trans "Next" %}"/>
