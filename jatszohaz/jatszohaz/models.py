@@ -115,7 +115,7 @@ class JhUser(AbstractUser):
 
 class Comment(TimeStampedModel):
     """Represents a comment for a user object made by a member (who is also a user but with permissions)."""
-    user = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name='user') #hack, nem tudom miért működik, https://stackoverflow.com/questions/22538563/django-reverse-accessors-for-foreign-keys-clashing
+    user = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name='user')
     member = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name="member")
     message = models.TextField(verbose_name=_("Message"))
 
