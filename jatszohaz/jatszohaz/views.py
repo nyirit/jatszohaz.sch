@@ -190,7 +190,9 @@ class TokenLogin(View):
         return redirect("/")
 
 
-class NewCommentView(LoginRequiredMixin, FormView):
+class NewCommentView(PermissionRequiredMixin, FormView):
+    permission_required = 'jatszohaz.view_all'
+    raise_exception = True
     form_class = NewCommentForm
 
     def get_object(self):
