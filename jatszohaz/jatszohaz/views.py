@@ -18,7 +18,7 @@ from .forms import JhUserForm
 from .forms import NewCommentForm
 from inventory.models import GameGroup
 from .models import JhUser
-from .models import Comment
+from .models import UserComment
 
 logger = logging.getLogger(__name__)
 
@@ -69,7 +69,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.user.has_perm('jatszohaz.view_all'):
             context['comment_form'] = NewCommentForm()
-            context['comments'] = Comment.objects.all().order_by('created').filter(user=self.get_object())
+            context['comments'] = UserComment.objects.all().order_by('created').filter(user=self.get_object())
         context['rents'] = self.object.rents.all()
         context['user_groups'] = ','.join([g.name for g in self.object.groups.all()])
         context['allowed_groups'] = ProfileAddRemoveGroups.allowed_groups
@@ -201,10 +201,10 @@ class NewCommentView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = self.get_object()
-        member = self.request.user
+        creator = self.request.user
         message = form.cleaned_data['comment']
 
-        comment = Comment.objects.create(user=user, member=member, message=message)
+        UserComment.objects.create(user=user, creator=creator, message=message)
 
         return redirect(user.get_absolute_url())
 

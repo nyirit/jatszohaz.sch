@@ -64,7 +64,7 @@
         {% for comment in comments %}
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {% trans 'User' %}: <a href="{{ comment.user.get_absolute_url }}">{{ comment.user.full_name2 }}</a><br/>
+                    {% trans 'User' %}: <a href="{{ comment.creator.get_absolute_url }}">{{ comment.creator.full_name2 }}</a><br/>
                     {% trans 'Date' %}: {{ comment.created }}<br/>
                 </div>
                 <div class="panel-body">
