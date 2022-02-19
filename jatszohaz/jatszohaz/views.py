@@ -67,8 +67,9 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comment_form'] = NewCommentForm()
-        context['comments'] = Comment.objects.all().order_by('created').filter(user=self.get_object())
+        if self.request.user.has_perm('jatszohaz.view_all'):
+            context['comment_form'] = NewCommentForm()
+            context['comments'] = Comment.objects.all().order_by('created').filter(user=self.get_object())
         context['rents'] = self.object.rents.all()
         context['user_groups'] = ','.join([g.name for g in self.object.groups.all()])
         context['allowed_groups'] = ProfileAddRemoveGroups.allowed_groups
