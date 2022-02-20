@@ -115,7 +115,7 @@ class JhUser(AbstractUser):
 
 class UserComment(TimeStampedModel):
     """Represents a comment for a user object made by a member (who is also a user but with permissions)."""
-    user = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name='user')
-    creator = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name="creator")
+    user = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name='comments')
+    creator = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name='created_user_comments')
     message = models.TextField(verbose_name=_("Message"))
 
