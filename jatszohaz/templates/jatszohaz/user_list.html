@@ -11,6 +11,16 @@
     <br/><br/>
 
     <p>
+        <form method="get" class="form-inline">
+            <div class="form-group">
+                <label for="userFilter">{% trans 'Name' %}:</label>
+                <input type="text" name="name" id="userfilter" class="form-control" value="{{ name }}" />
+            </div>
+            <input type="submit" class="btn btn-default" value="{% trans 'Search' %}" />
+        </form>
+    </p>
+
+    <p>
         {% blocktrans with count=paginator.count %}
             Found {{ count }} user entries.
         {% endblocktrans %}
