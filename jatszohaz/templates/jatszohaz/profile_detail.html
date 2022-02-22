@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -58,5 +59,27 @@
         {% else %}
             {% trans "No rents yet." %}
         {% endif %}
+
+        <h3>{% trans 'Comments' %}</h3>
+        <p>Ezeket a kommenteket csak körtagok látják és csak ők tudnak újat létrehozni.
+            Ha egy kölcsönzőtől nehéz volt visszaszerezni a játékokat vagy hasonló akkor azt itt lehet jelezni, hogy a későbbi kölcsönzéseinél jobban oda kell majd figyelni.</p>
+        {% for comment in comments %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {% trans 'User' %}: <a href="{{ comment.creator.get_absolute_url }}">{{ comment.creator.full_name2 }}</a><br/>
+                    {% trans 'Date' %}: {{ comment.created }}<br/>
+                </div>
+                <div class="panel-body">
+                    <p class="comment-message">{{ comment.message|linebreaks }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h3>{% trans 'New comment' %}</h3>
+        <form action="{% url 'user-new-comment' object.pk %}" method="post">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+            <input type="submit" value="{% trans "Send" %}" class="btn btn-success" />
+        </form>
     {% endif %}
 {% endblock %}

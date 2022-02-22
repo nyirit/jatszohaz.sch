@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^profile/(?P<pk>\d+)/$', views.ProfileView.as_view(), name="profile"),
     url(r'^profile/toggle-group/(?P<user_pk>\d+)/(?P<group_name>\w+)/',
         views.ProfileAddRemoveGroups.as_view(), name="toggle-user-group"),
+    url(r'^profile/new-comment/(?P<user_pk>\d+)/$', views.NewCommentView.as_view(),
+        name="user-new-comment"),
 
     # Games and renting related pages
     url(r'^games/$', views.GamesView.as_view(), name="games"),

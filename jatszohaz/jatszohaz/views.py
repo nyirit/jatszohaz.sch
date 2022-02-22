@@ -10,13 +10,15 @@ from django.core.exceptions import SuspiciousOperation, PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView, ListView, DetailView, UpdateView, RedirectView, View
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, RedirectView, View, FormView
 
 from braces.views import PermissionRequiredMixin
 
 from .forms import JhUserForm
+from .forms import NewCommentForm
 from inventory.models import GameGroup
 from .models import JhUser
+from .models import UserComment
 
 logger = logging.getLogger(__name__)
 
@@ -65,6 +67,9 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.user.has_perm('jatszohaz.view_all'):
+            context['comment_form'] = NewCommentForm()
+            context['comments'] = UserComment.objects.all().order_by('created').filter(user=self.get_object())
         context['rents'] = self.object.rents.all()
         context['user_groups'] = ','.join([g.name for g in self.object.groups.all()])
         context['allowed_groups'] = ProfileAddRemoveGroups.allowed_groups
@@ -183,3 +188,28 @@ class TokenLogin(View):
         login(request, user)
         messages.info(request, _("Logged in as user %s.") % str(user))
         return redirect("/")
+
+
+class NewCommentView(PermissionRequiredMixin, FormView):
+    permission_required = 'jatszohaz.view_all'
+    raise_exception = True
+    form_class = NewCommentForm
+
+    def get_object(self):
+        return get_object_or_404(JhUser, pk=self.kwargs['user_pk'])
+
+    def get(self, request, *args, **kwargs):
+        return redirect(self.get_object().get_absolute_url())
+
+    def form_valid(self, form):
+        user = self.get_object()
+        creator = self.request.user
+        message = form.cleaned_data['comment']
+
+        UserComment.objects.create(user=user, creator=creator, message=message)
+
+        return redirect(user.get_absolute_url())
+
+    def form_invalid(self, form):
+        messages.error(self.request, _("Invalid form!"))
+        return redirect(self.get_object().get_absolute_url())

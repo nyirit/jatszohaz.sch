@@ -6,6 +6,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
+from model_utils.models import TimeStampedModel
 
 logger = logging.getLogger(__name__)
 
@@ -110,3 +111,11 @@ class JhUser(AbstractUser):
             user.room = ""
             user.checked_profile = False
             user.save()
+
+
+class UserComment(TimeStampedModel):
+    """Represents a comment for a user object made by a member (who is also a user but with permissions)."""
+    user = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name='comments')
+    creator = models.ForeignKey(JhUser, on_delete=models.PROTECT, related_name='created_user_comments')
+    message = models.TextField(verbose_name=_("Message"))
+

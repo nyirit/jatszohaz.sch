@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import JhUser
+from .models import JhUser, UserComment
 
 
 class JhUserAdmin(UserAdmin):
@@ -9,3 +9,4 @@ class JhUserAdmin(UserAdmin):
 
 JhUserAdmin.fieldsets += ('Custom fields', {'fields': ('room', 'mobile', 'checked_profile')}),
 admin.site.register(JhUser, JhUserAdmin)
+admin.site.register(UserComment)
