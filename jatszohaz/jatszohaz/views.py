@@ -7,6 +7,8 @@ from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import signing
 from django.core.exceptions import SuspiciousOperation, PermissionDenied
+from django.db.models import Value
+from django.db.models.functions import Concat
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -137,7 +139,23 @@ class UsersView(PermissionRequiredMixin, ListView):
         if filter_group:
             objects = objects.filter(groups__name=filter_group)
 
+        # filter for user full name
+        filter_name = self.request.GET.get('name', None)
+        if filter_name:
+            # concat first_name + last_name + first_name so the order won't matter
+            objects = objects \
+                .annotate(full_name=Concat('first_name', Value(' '), 'last_name', Value(' '), 'first_name')) \
+                .filter(full_name__icontains=filter_name)
+
         return objects
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        # pass the name filter to show it in the filter field
+        context['name'] = self.request.GET.get('name', '')
+
+        return context
 
 
 class AdminRules(PermissionRequiredMixin, TemplateView):
