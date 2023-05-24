@@ -8,6 +8,7 @@ class AuthSCHOAuth2(BaseOAuth2):
     AUTHORIZATION_URL = 'https://auth.sch.bme.hu/site/login'
     ACCESS_TOKEN_URL = 'https://auth.sch.bme.hu/oauth2/token'
     ACCESS_TOKEN_METHOD = 'POST'
+    REDIRECT_STATE = False
     REFRESH_TOKEN_URL = 'https://auth.sch.bme.hu/oauth2/token'
     DEFAULT_SCOPE = ['basic', 'mail', 'givenName', 'sn', 'eduPersonEntitlement', 'mobile']
     EXTRA_DATA = [
