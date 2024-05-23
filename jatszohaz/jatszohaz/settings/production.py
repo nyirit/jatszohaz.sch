@@ -42,3 +42,5 @@ SERVER_EMAIL = get_env_variable('SERVER_EMAIL', DEFAULT_FROM_EMAIL)
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = get_env_variable('DJANGO_SECRET_KEY')
 # ######### END SECRET CONFIGURATION
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
